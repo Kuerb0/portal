@@ -44,7 +44,6 @@ function tarjeta(w, i) {
     </div>
     <div class="cuerpo">
       <div class="titulo"><span class="ico" aria-hidden="true">${svg(w.icono, 22)}</span><h2>${esc(w.titulo)}</h2></div>
-      <p>${esc(w.descripcion)}</p>
       <div class="etiquetas">${etiquetas}</div>
       <div class="pie-tarjeta">${w.url ? `<span class="boton">Abrir ${svg("flecha", 18)}</span>` : ""}${estado}</div>
     </div>`;
