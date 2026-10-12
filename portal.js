@@ -43,6 +43,7 @@ function tarjeta(w, i) {
     ? `<img src="${esc(w.imagen)}" alt="Vista previa de ${esc(w.titulo)}" loading="lazy">`
     : `<div class="sin-imagen" aria-hidden="true">${svg(w.icono, 56)}</div>`;
   const etiquetas = (w.etiquetas || []).map(e => `<span class="etiqueta">${esc(e)}</span>`).join("");
+  const destino = w.abrir || w.url;       // «abrir»: la tarjeta lleva al envoltorio instalable; «url» sigue siendo la web de verdad (barra de direcciones)
   const repo = w.tipo === "repo";           // un proyecto de GitHub: se enlaza el repositorio, no una web
   const estado = !w.url ? `<span class="estado">En preparación</span>`
     : repo ? `<span class="estado repo">Repositorio</span>` : `<span class="estado activa">Activa</span>`;
@@ -54,7 +55,7 @@ function tarjeta(w, i) {
       <div class="titulo"><span class="ico" aria-hidden="true">${svg(w.icono, 22)}</span><h2>${esc(w.titulo)}</h2></div>
       <div class="etiquetas">${etiquetas}</div>
       <details class="mas"><summary>${svg("chevron", 20)}Descripción</summary><p>${esc(w.descripcion)}</p></details>
-      <div class="pie-tarjeta">${w.url ? `<a class="boton" href="${esc(w.url)}" target="_blank" rel="noopener" aria-label="${repo ? "Ver en GitHub" : "Abrir"}: ${esc(w.titulo)}">${repo ? "Ver en GitHub" : "Abrir"} ${svg("flecha", 18)}</a>` : ""}${estado}</div>
+      <div class="pie-tarjeta">${w.url ? `<a class="boton" href="${esc(destino)}" target="_blank" rel="noopener" aria-label="${repo ? "Ver en GitHub" : "Abrir"}: ${esc(w.titulo)}">${repo ? "Ver en GitHub" : "Abrir"} ${svg("flecha", 18)}</a>` : ""}${estado}</div>
     </div>`;
   return a;
 }

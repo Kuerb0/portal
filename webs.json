@@ -15,7 +15,8 @@
     "estado": "activa",
     "tipo": "web",
     "instalar": "vuelos/",
-    "icono_app": "vuelos/icon-192.png"
+    "icono_app": "vuelos/icon-192.png",
+    "abrir": "vuelos/"
   },
   {
     "id": "estadistica",
@@ -34,7 +35,8 @@
     "estado": "activa",
     "tipo": "web",
     "instalar": "estadistica/",
-    "icono_app": "estadistica/icon-192.png"
+    "icono_app": "estadistica/icon-192.png",
+    "abrir": "estadistica/"
   },
   {
     "id": "finanzas",
@@ -52,7 +54,8 @@
     "estado": "activa",
     "tipo": "web",
     "instalar": "finanzas/",
-    "icono_app": "finanzas/icon-192.png"
+    "icono_app": "finanzas/icon-192.png",
+    "abrir": "finanzas/"
   },
   {
     "id": "comidas",
