@@ -2,7 +2,7 @@
   {
     "id": "viajes",
     "titulo": "Vuelos, hoteles y trenes",
-    "icono": "✈️",
+    "icono": "avion",
     "descripcion": "Elige origen, destinos y fechas y compara vuelos, hoteles y trenes de todos los días: mapa con tarjetas, gráficos de precios y una barra de filtros.",
     "etiquetas": [
       "viajes",
@@ -17,7 +17,7 @@
   {
     "id": "estadistica",
     "titulo": "Estadística básica",
-    "icono": "📊",
+    "icono": "grafico",
     "descripcion": "Estadística con simulaciones que se mueven: normal, juegos de probabilidad, intervalos de confianza, contrastes, una regresión que se acerca sola y GLM (convertir Y y X).",
     "etiquetas": [
       "estadística",
@@ -33,7 +33,7 @@
   {
     "id": "finanzas",
     "titulo": "Finanzas personales",
-    "icono": "💶",
+    "icono": "euro",
     "descripcion": "Planificador financiero: hipoteca, cartera de inversión con Monte Carlo, comparador, ahorro, asignación de activos y test de tolerancia al riesgo.",
     "etiquetas": [
       "finanzas",
@@ -48,7 +48,7 @@
   {
     "id": "matematicas",
     "titulo": "Matemáticas visuales",
-    "icono": "📐",
+    "icono": "funciones",
     "descripcion": "Funciones, derivadas e integrales que se ven moviéndose.",
     "etiquetas": [
       "matemáticas",
@@ -62,7 +62,7 @@
   {
     "id": "python-excel",
     "titulo": "Python y Excel desde cero",
-    "icono": "🐍",
+    "icono": "codigo",
     "descripcion": "Mini-curso práctico: las mismas tareas hechas en Excel y en Python, lado a lado.",
     "etiquetas": [
       "python",

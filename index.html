@@ -5,11 +5,19 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Mario · webs</title>
 <meta name="description" content="Pequeñas webs interactivas para aprender y hacer cuentas: viajes, estadística básica, finanzas personales y más.">
+<meta name="theme-color" content="#0e1320">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mario · webs">
+<meta property="og:description" content="Pequeñas webs interactivas para entender cosas con números.">
+<meta property="og:image" content="https://kuerb0.github.io/portal/img/viajes.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%233f5a99'/%3E%3Cpath fill='white' d='M5 9.2h3V19H5zM10.6 5h2.8v14h-2.8zm5.6 8H19v6h-2.8z'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
 <header class="cabecera">
-  <button id="tema" class="tema" type="button" aria-label="Cambiar entre tema claro y oscuro">🌓</button>
+  <button id="tema" class="tema" type="button" title="Cambiar entre tema claro y oscuro" aria-label="Cambiar entre tema claro y oscuro">
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18V4c4.41 0 8 3.59 8 8s-3.59 8-8 8z"/></svg>
+  </button>
   <a class="perfil" href="https://github.com/Kuerb0" target="_blank" rel="noopener" aria-label="Perfil de GitHub">
     <img class="avatar" src="https://github.com/Kuerb0.png?size=200" alt="Foto de perfil" width="104" height="104" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'avatar sin',textContent:'M'}))">
   </a>
@@ -20,12 +28,16 @@
 
 <main>
   <div class="buscador"><input id="buscar" type="search" placeholder="Buscar una web…" aria-label="Buscar una web"></div>
+  <p class="aviso">
+    <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+    Si una web lleva un rato sin visitas se duerme: la primera carga puede tardar medio minuto.
+  </p>
   <section id="rejilla" class="rejilla" aria-live="polite"></section>
   <p id="vacio" class="vacio" hidden>Ninguna web coincide con la búsqueda.</p>
 </main>
 
 <footer class="pie">
-  <p>Hecho con Python y Streamlit. Las webs gratuitas se duermen si nadie las visita: la primera carga puede tardar medio minuto.</p>
+  <p>Hecho con Python y Streamlit.</p>
 </footer>
 <script src="portal.js"></script>
 </body>
