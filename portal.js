@@ -1,23 +1,38 @@
-// Dibuja una tarjeta por cada web de webs.json. Para añadir una web basta con añadirla a ese fichero.
+// Dibuja una tarjeta con miniatura por cada web de webs.json. Para añadir una web basta con añadirla a ese fichero
+// (y una captura en img/). Sin url, la tarjeta sale como «En preparación».
 const rejilla = document.getElementById("rejilla");
 const vacio = document.getElementById("vacio");
 const buscar = document.getElementById("buscar");
 let webs = [];
 
-function tarjeta(w) {
-  const a = document.createElement(w.url ? "a" : "div");
-  a.className = "tarjeta" + (w.url ? "" : " apagada");
-  if (w.url) { a.href = w.url; a.target = "_blank"; a.rel = "noopener"; }
-  const etiquetas = (w.etiquetas || []).map(e => `<span class="etiqueta">${esc(e)}</span>`).join("");
-  a.innerHTML = `<div class="icono" aria-hidden="true">${esc(w.icono || "🌐")}</div>
-    <h2>${esc(w.titulo)}</h2><p>${esc(w.descripcion)}</p>
-    <div class="etiquetas">${etiquetas}</div>
-    <span class="boton">${w.url ? "Abrir →" : "En preparación"}</span>`;
-  return a;
-}
-
 function esc(s) {
   return String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+
+function dominio(url) {
+  try { return new URL(url).host; } catch (e) { return "próximamente"; }
+}
+
+function tarjeta(w, i) {
+  const a = document.createElement(w.url ? "a" : "div");
+  a.className = "tarjeta" + (w.url ? "" : " apagada");
+  a.style.animationDelay = `${i * 80}ms`;
+  if (w.url) { a.href = w.url; a.target = "_blank"; a.rel = "noopener"; }
+  const miniatura = w.imagen
+    ? `<img src="${esc(w.imagen)}" alt="Vista previa de ${esc(w.titulo)}" loading="lazy">`
+    : `<div class="sin-imagen" aria-hidden="true">${esc(w.icono || "🌐")}</div>`;
+  const etiquetas = (w.etiquetas || []).map(e => `<span class="etiqueta">${esc(e)}</span>`).join("");
+  a.innerHTML = `<div class="marco" aria-hidden="true">
+      <div class="barra"><i></i><i></i><i></i><span>${esc(dominio(w.url))}</span></div>
+      <div class="vista">${miniatura}</div>
+    </div>
+    <div class="cuerpo">
+      <h2><span aria-hidden="true">${esc(w.icono || "")}</span> ${esc(w.titulo)}</h2>
+      <p>${esc(w.descripcion)}</p>
+      <div class="etiquetas">${etiquetas}</div>
+      <span class="boton">${w.url ? "Abrir →" : "En preparación"}</span>
+    </div>`;
+  return a;
 }
 
 function pintar() {

@@ -1,10 +1,21 @@
 [
   {
+    "id": "viajes",
+    "titulo": "Vuelos, hoteles y trenes",
+    "icono": "✈️",
+    "descripcion": "Elige origen, destinos y fechas y compara vuelos, hoteles y trenes de todos los días: mapa con tarjetas, gráficos de precios y una barra de filtros.",
+    "etiquetas": ["viajes", "vuelos", "mapas", "precios"],
+    "imagen": "img/viajes.jpg",
+    "url": "https://kuerb0-viajes-pyapp-web-iufxrb.streamlit.app/",
+    "estado": "activa"
+  },
+  {
     "id": "estadistica",
     "titulo": "Estadística básica",
     "icono": "📊",
-    "descripcion": "Los principios de la estadística explicados con simulaciones que se mueven: media y dispersión, la distribución normal, el teorema central del límite y más.",
+    "descripcion": "Los principios de la estadística explicados con simulaciones que se mueven: media y dispersión, la distribución normal, el teorema central del límite y probabilidad.",
     "etiquetas": ["estadística", "simulaciones", "aprender"],
+    "imagen": "img/estadistica.jpg",
     "url": "",
     "estado": "preparacion"
   },
@@ -14,6 +25,7 @@
     "icono": "💶",
     "descripcion": "Planificador financiero: hipoteca, cartera de inversión con Monte Carlo, comparador, ahorro, asignación de activos y test de tolerancia al riesgo.",
     "etiquetas": ["finanzas", "inversión", "hipoteca", "ahorro"],
+    "imagen": "img/finanzas.jpg",
     "url": "",
     "estado": "preparacion"
   }
