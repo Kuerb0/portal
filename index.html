@@ -11,11 +11,7 @@
 <meta property="og:description" content="Sin datos, solo eres otra persona más dando su opinión.">
 <meta property="og:image" content="https://kuerb0.github.io/portal/img/viajes.jpg">
 <link rel="icon" type="image/png" href="icon-192.png">
-<link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Mario">
 <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
@@ -44,10 +40,7 @@
   <section id="instalar" class="instalar" aria-labelledby="t-instalar">
     <h2 id="t-instalar" class="seccion">Instálame</h2>
     <p class="inst-intro">Añade el portal y tus webs a la pantalla de inicio del móvil: se abren como una app, a pantalla completa y sin la barra del navegador.</p>
-    <div class="inst-accion">
-      <button id="btn-instalar" type="button" hidden>Instalar el portal</button>
-      <p id="inst-estado" class="inst-estado"></p>
-    </div>
+    <p id="inst-estado" class="inst-estado"></p>
     <div class="inst-pasos">
       <div id="pasos-android">
         <h3>Android (Chrome)</h3>
@@ -66,7 +59,7 @@
         </ol>
       </div>
     </div>
-    <h3 class="inst-sub">Instala cada web como una app</h3>
+    <h3 class="inst-sub">Instala cada web (y este portal) como una app</h3>
     <ul id="inst-apps" class="inst-apps"></ul>
   </section>
 </main>
@@ -74,7 +67,7 @@
 <footer class="pie">
   <p>Proyectos propios hechos con Python, Streamlit, Excel y web.</p>
 </footer>
-<script src="instalar.js" data-aviso="Mario · webs"></script>
+<script src="instalar.js"></script>
 <script src="portal.js"></script>
 <script src="fondo.js"></script>
 </body>

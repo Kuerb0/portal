@@ -70,9 +70,6 @@ main{max-width:72rem;margin:0 auto;padding:1.6rem 1.2rem 3rem}
 .instalar{margin-top:2.6rem;padding:1.4rem 1.4rem 1.6rem;border:1px solid var(--borde);border-radius:14px;background:var(--tarjeta);box-shadow:var(--sombra)}
 .instalar .seccion{margin:0 0 .6rem;font-size:1.25rem;color:var(--texto)}
 .inst-intro{margin:0 0 1rem;color:var(--suave)}
-.inst-accion{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem 1rem;margin-bottom:1.1rem}
-#btn-instalar{padding:.7rem 1.4rem;border:0;border-radius:10px;background:var(--acento);color:var(--tarjeta);font-size:1rem;font-weight:700;cursor:pointer}
-#btn-instalar:hover{filter:brightness(1.1)}
 .inst-estado{margin:0;font-size:.92rem;color:var(--suave)}
 .inst-pasos{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1rem;margin-bottom:1.4rem}
 .inst-pasos>div{padding:.9rem 1.1rem;border:1px solid var(--borde);border-radius:12px;background:var(--fondo)}

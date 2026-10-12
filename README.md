@@ -23,4 +23,6 @@ GitHub Pages: en el repositorio, *Settings → Pages → Deploy from a branch �
 (`manifest.webmanifest`, `sw.js` e iconos PNG). La app sigue en su dirección de Streamlit; esto solo la enmarca. Para cambiar
 la dirección de la app, editar `URL_APP` en `vuelos/index.html`. Dirección: <https://kuerb0.github.io/portal/vuelos/>.
 
-Los envoltorios de estadistica/ y inanzas/ son iguales que el de uelos/ (copiar la carpeta, cambiar URL_APP, los textos, el manifiesto y los iconos). instalar.js da el bot�n y el aviso de instalaci�n; el portal muestra la secci�n �Inst�lame� y es instalable (manifest.webmanifest, sw.js).
+Los envoltorios de estadistica/ y inanzas/ son iguales que el de uelos/ (copiar la carpeta, cambiar URL_APP, los textos, el manifiesto y los iconos). instalar.js da el botón y el aviso de instalación; el portal muestra la sección «Instálame» y es instalable (manifest.webmanifest, sw.js).
+
+`inicio/` es el envoltorio instalable del propio portal (muestra `../` en un marco y tiene su manifiesto, icono y service worker). La raíz (`/portal/`) ya no lleva manifiesto: así los ámbitos de todas las apps instalables quedan al mismo nivel.

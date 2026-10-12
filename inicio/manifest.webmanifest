@@ -9,6 +9,7 @@
   "background_color": "#0e1320",
   "theme_color": "#0e1320",
   "lang": "es",
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "icon-192.png",
@@ -28,6 +29,5 @@
       "type": "image/png",
       "purpose": "maskable"
     }
-  ],
-  "prefer_related_applications": false
+  ]
 }

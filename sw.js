@@ -1,7 +1,7 @@
 // Guarda el portal para que abra aunque no haya red. Red primero (así llegan los cambios); caché si no hay conexión.
 // Todas las apps comparten dominio: cada una borra solo las cachés con su prefijo.
-const V = "portal-v3";
-const ARCHIVOS = ["./", "index.html", "estilo.css", "portal.js", "fondo.js", "instalar.js", "webs.json", "manifest.webmanifest",
+const V = "portal-v4";
+const ARCHIVOS = ["./", "index.html", "estilo.css", "portal.js", "fondo.js", "instalar.js", "webs.json",
                   "icon-192.png", "icon-512.png", "apple-touch-icon.png"];
 
 self.addEventListener("install", e => {
