@@ -69,14 +69,14 @@
     "titulo": "Atlas del conocimiento",
     "icono": "arbol",
     "tipo": "repo",
-    "descripcion": "Árbol de funciones de estadística, actuarial, finanzas y aprendizaje automático, con visor 3D, demos interactivas y guía para aprender. Para Windows.",
+    "descripcion": "Árbol de funciones de estadística, actuarial, finanzas y aprendizaje automático (más de 300), con un visor 3D en forma de galaxias, demos interactivas y una guía para aprender desde cero. Para Windows.",
     "etiquetas": [
       "estadística",
       "Python",
       "Windows",
       "aprender"
     ],
-    "imagen": "",
+    "imagen": "img/atlas.jpg",
     "url": "https://github.com/Kuerb0/Atlas_del_conocimiento",
     "estado": "activa"
   },
@@ -85,13 +85,13 @@
     "titulo": "Excel avanzado",
     "icono": "tabla",
     "tipo": "repo",
-    "descripcion": "Libro de Excel, datos de ejemplo y una guía en presentación sobre Excel avanzado.",
+    "descripcion": "Libro de Excel para practicar funciones avanzadas (FILTRAR, ORDENARPOR, ÚNICOS, búsquedas y operaciones con tablas), con unos 160.000 registros de precios de vuelos como datos de práctica y una guía en presentación.",
     "etiquetas": [
       "Excel",
       "guía",
       "datos"
     ],
-    "imagen": "",
+    "imagen": "img/excel.jpg",
     "url": "https://github.com/Kuerb0/Excel",
     "estado": "activa"
   }

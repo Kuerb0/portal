@@ -26,8 +26,8 @@ main{max-width:72rem;margin:0 auto;padding:1.6rem 1.2rem 3rem}
 .aviso{display:flex;align-items:center;justify-content:center;gap:.4rem;margin:0 auto 1.8rem;max-width:40rem;text-align:center;font-size:.85rem;color:var(--suave)}
 .aviso svg{flex:none}
 .rejilla{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(20rem,100%),1fr));gap:1.5rem}
-.tarjeta{display:flex;flex-direction:column;overflow:hidden;border-radius:14px;background:var(--tarjeta);border:1px solid var(--borde);box-shadow:var(--sombra);color:inherit;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;animation:entra .5s ease both}
-a.tarjeta:hover,a.tarjeta:focus-visible{transform:translateY(-3px);border-color:var(--acento);box-shadow:0 10px 24px rgba(30,40,70,.16)}
+.tarjeta{position:relative;display:flex;flex-direction:column;overflow:hidden;border-radius:14px;background:var(--tarjeta);border:1px solid var(--borde);box-shadow:var(--sombra);color:inherit;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;animation:entra .5s ease both}
+.tarjeta.viva:hover,.tarjeta.viva:focus-within{transform:translateY(-3px);border-color:var(--acento);box-shadow:0 10px 24px rgba(30,40,70,.16)}
 .tarjeta.apagada{opacity:.75}
 .marco{margin:.9rem .9rem 0;border-radius:10px;overflow:hidden;border:1px solid var(--borde);background:var(--marco)}
 .barra{display:flex;align-items:center;gap:.35rem;padding:.4rem .6rem}
@@ -36,7 +36,7 @@ a.tarjeta:hover,a.tarjeta:focus-visible{transform:translateY(-3px);border-color:
 .barra span{margin-left:.5rem;flex:1;font-size:.7rem;color:var(--suave);background:var(--tarjeta);border-radius:6px;padding:.1rem .6rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .vista{aspect-ratio:16/9;overflow:hidden;background:var(--tarjeta)}
 .vista img{display:block;width:100%;height:100%;object-fit:cover;object-position:top left;transition:transform .5s ease}
-a.tarjeta:hover .vista img{transform:scale(1.04)}
+.tarjeta.viva:hover .vista img{transform:scale(1.04)}
 .sin-imagen{display:grid;place-items:center;height:100%;color:var(--acento);opacity:.35}
 .cuerpo{display:flex;flex-direction:column;gap:.55rem;padding:1rem 1.2rem 1.3rem;flex:1}
 .titulo{display:flex;align-items:center;gap:.6rem}
@@ -48,12 +48,20 @@ a.tarjeta:hover .vista img{transform:scale(1.04)}
 .estado.repo{background:var(--tinte);color:var(--acento)}
 .estado.activa{background:var(--ok-fondo);color:var(--ok)}
 .etiquetas{display:flex;flex-wrap:wrap;align-content:flex-start;gap:.35rem;flex:1}
+.mas{position:relative;z-index:2;margin-top:.1rem;border-top:1px solid var(--borde);padding-top:.35rem}
+.mas summary{display:flex;align-items:center;gap:.25rem;cursor:pointer;list-style:none;font-size:.88rem;font-weight:600;color:var(--suave);padding:.2rem 0;border-radius:6px}
+.mas summary::-webkit-details-marker{display:none}
+.mas summary:hover{color:var(--acento)}
+.mas summary svg{transition:transform .2s ease}
+.mas[open] summary svg{transform:rotate(180deg)}
+.mas p{margin:.3rem 0 .2rem;font-size:.9rem;color:var(--suave)}
 .etiqueta{font-size:.75rem;padding:.12rem .6rem;border-radius:999px;border:1px solid var(--borde);color:var(--suave)}
 .pie-tarjeta{display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-top:.3rem}
-.boton{display:inline-flex;align-items:center;gap:.3rem;font-weight:600;color:var(--acento)}
+.boton::after{content:"";position:absolute;inset:0;z-index:1}
+.boton{color:var(--acento);text-decoration:none;display:inline-flex;align-items:center;gap:.3rem;font-weight:600;color:var(--acento)}
 .boton svg{transition:transform .2s ease}
-a.tarjeta:hover .boton svg{transform:translateX(3px)}
+.tarjeta.viva:hover .boton svg{transform:translateX(3px)}
 .vacio,.pie{text-align:center;color:var(--suave)}
 .pie{padding:1.5rem 1rem 2.5rem;font-size:.9rem}
 @keyframes entra{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){body::before{animation:none}.tarjeta,.vista img,.perfil,.boton svg{animation:none;transition:none}}
+@media (prefers-reduced-motion:reduce){body::before{animation:none}.tarjeta,.vista img,.perfil,.boton svg,.mas summary svg{animation:none;transition:none}}

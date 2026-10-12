@@ -16,6 +16,7 @@ const ICONOS = {
   cubiertos: "M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z",
   arbol: "M22 11V3h-7v3H9V3H2v8h7V8h2v10h4v3h7v-8h-7v3h-2V8h2v3z",
   tabla: "M10 10.02h5V21h-5zM17 21h3c1.1 0 2-.9 2-2v-9h-5v11zm3-18H5c-1.1 0-2 .9-2 2v3h19V5c0-1.1-.9-2-2-2zM3 19c0 1.1.9 2 2 2h3V10H3v9z",
+  chevron: "M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z",
   flecha: "M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z",
 };
 
@@ -35,10 +36,9 @@ function dominio(url) {
 }
 
 function tarjeta(w, i) {
-  const a = document.createElement(w.url ? "a" : "div");
-  a.className = "tarjeta" + (w.url ? "" : " apagada");
+  const a = document.createElement("article");
+  a.className = "tarjeta " + (w.url ? "viva" : "apagada");
   a.style.animationDelay = `${i * 80}ms`;
-  if (w.url) { a.href = w.url; a.target = "_blank"; a.rel = "noopener"; }
   const miniatura = w.imagen
     ? `<img src="${esc(w.imagen)}" alt="Vista previa de ${esc(w.titulo)}" loading="lazy">`
     : `<div class="sin-imagen" aria-hidden="true">${svg(w.icono, 56)}</div>`;
@@ -53,7 +53,8 @@ function tarjeta(w, i) {
     <div class="cuerpo">
       <div class="titulo"><span class="ico" aria-hidden="true">${svg(w.icono, 22)}</span><h2>${esc(w.titulo)}</h2></div>
       <div class="etiquetas">${etiquetas}</div>
-      <div class="pie-tarjeta">${w.url ? `<span class="boton">${repo ? "Ver en GitHub" : "Abrir"} ${svg("flecha", 18)}</span>` : ""}${estado}</div>
+      <details class="mas"><summary>${svg("chevron", 20)}Descripción</summary><p>${esc(w.descripcion)}</p></details>
+      <div class="pie-tarjeta">${w.url ? `<a class="boton" href="${esc(w.url)}" target="_blank" rel="noopener" aria-label="${repo ? "Ver en GitHub" : "Abrir"}: ${esc(w.titulo)}">${repo ? "Ver en GitHub" : "Abrir"} ${svg("flecha", 18)}</a>` : ""}${estado}</div>
     </div>`;
   return a;
 }
