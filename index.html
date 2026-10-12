@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mario · webs</title>
+<meta name="description" content="Pequeñas webs interactivas para aprender y hacer cuentas: estadística básica, finanzas personales y más.">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<header class="cabecera">
+  <h1>Mis webs</h1>
+  <p>Pequeñas herramientas interactivas para entender cosas con números. Cada una es independiente: elige la que te interese.</p>
+  <button id="tema" class="tema" type="button" aria-label="Cambiar entre tema claro y oscuro">🌓</button>
+</header>
+
+<main>
+  <div class="buscador"><input id="buscar" type="search" placeholder="Buscar una web…" aria-label="Buscar una web"></div>
+  <section id="rejilla" class="rejilla" aria-live="polite"></section>
+  <p id="vacio" class="vacio" hidden>Ninguna web coincide con la búsqueda.</p>
+</main>
+
+<footer class="pie">
+  <p>Hecho con Python y Streamlit. Las webs gratuitas se duermen si nadie las visita: la primera carga puede tardar medio minuto.</p>
+</footer>
+<script src="portal.js"></script>
+</body>
+</html>
