@@ -1,6 +1,7 @@
 // Solo guarda el envoltorio (la página y los iconos) para que abra aunque no haya red. La app de Streamlit no se guarda:
 // vive en su propio servidor. Red primero, para que las actualizaciones lleguen; caché si no hay conexión.
-const V = "vuelos-v1";
+// Todas las apps comparten dominio: cada una borra solo las cachés con su prefijo.
+const V = "vuelos-v2";
 const ARCHIVOS = ["./", "index.html", "manifest.webmanifest", "icon-192.png", "icon-512.png", "apple-touch-icon.png"];
 
 self.addEventListener("install", e => {
@@ -9,7 +10,7 @@ self.addEventListener("install", e => {
 });
 
 self.addEventListener("activate", e => {
-  e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== V).map(k => caches.delete(k)))).then(() => self.clients.claim()));
+  e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k.startsWith("vuelos-") && k !== V).map(k => caches.delete(k)))).then(() => self.clients.claim()));
 });
 
 self.addEventListener("fetch", e => {
