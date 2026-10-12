@@ -4,7 +4,12 @@
     "titulo": "Vuelos, hoteles y trenes",
     "icono": "✈️",
     "descripcion": "Elige origen, destinos y fechas y compara vuelos, hoteles y trenes de todos los días: mapa con tarjetas, gráficos de precios y una barra de filtros.",
-    "etiquetas": ["viajes", "vuelos", "mapas", "precios"],
+    "etiquetas": [
+      "viajes",
+      "vuelos",
+      "mapas",
+      "precios"
+    ],
     "imagen": "img/viajes.jpg",
     "url": "https://kuerb0-viajes-pyapp-web-iufxrb.streamlit.app/",
     "estado": "activa"
@@ -13,8 +18,14 @@
     "id": "estadistica",
     "titulo": "Estadística básica",
     "icono": "📊",
-    "descripcion": "Los principios de la estadística explicados con simulaciones que se mueven: media y dispersión, la distribución normal, el teorema central del límite y probabilidad.",
-    "etiquetas": ["estadística", "simulaciones", "aprender"],
+    "descripcion": "Estadística con simulaciones que se mueven: normal, juegos de probabilidad, intervalos de confianza, contrastes, una regresión que se acerca sola y GLM (convertir Y y X).",
+    "etiquetas": [
+      "estadística",
+      "simulaciones",
+      "regresión",
+      "GLM",
+      "aprender"
+    ],
     "imagen": "img/estadistica.jpg",
     "url": "",
     "estado": "preparacion"
@@ -24,8 +35,41 @@
     "titulo": "Finanzas personales",
     "icono": "💶",
     "descripcion": "Planificador financiero: hipoteca, cartera de inversión con Monte Carlo, comparador, ahorro, asignación de activos y test de tolerancia al riesgo.",
-    "etiquetas": ["finanzas", "inversión", "hipoteca", "ahorro"],
+    "etiquetas": [
+      "finanzas",
+      "inversión",
+      "hipoteca",
+      "ahorro"
+    ],
     "imagen": "img/finanzas.jpg",
+    "url": "",
+    "estado": "preparacion"
+  },
+  {
+    "id": "matematicas",
+    "titulo": "Matemáticas visuales",
+    "icono": "📐",
+    "descripcion": "Funciones, derivadas e integrales que se ven moviéndose.",
+    "etiquetas": [
+      "matemáticas",
+      "visual",
+      "aprender"
+    ],
+    "imagen": "",
+    "url": "",
+    "estado": "preparacion"
+  },
+  {
+    "id": "python-excel",
+    "titulo": "Python y Excel desde cero",
+    "icono": "🐍",
+    "descripcion": "Mini-curso práctico: las mismas tareas hechas en Excel y en Python, lado a lado.",
+    "etiquetas": [
+      "python",
+      "excel",
+      "aprender"
+    ],
+    "imagen": "",
     "url": "",
     "estado": "preparacion"
   }
