@@ -1,0 +1,20 @@
+[
+  {
+    "id": "estadistica",
+    "titulo": "Estadística básica",
+    "icono": "📊",
+    "descripcion": "Los principios de la estadística explicados con simulaciones que se mueven: media y dispersión, la distribución normal, el teorema central del límite y más.",
+    "etiquetas": ["estadística", "simulaciones", "aprender"],
+    "url": "",
+    "estado": "preparacion"
+  },
+  {
+    "id": "finanzas",
+    "titulo": "Finanzas personales",
+    "icono": "💶",
+    "descripcion": "Planificador financiero: hipoteca, cartera de inversión con Monte Carlo, comparador, ahorro, asignación de activos y test de tolerancia al riesgo.",
+    "etiquetas": ["finanzas", "inversión", "hipoteca", "ahorro"],
+    "url": "",
+    "estado": "preparacion"
+  }
+]
