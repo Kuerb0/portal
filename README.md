@@ -16,3 +16,9 @@ y abrir <http://localhost:8000>.
 ## Publicar
 
 GitHub Pages: en el repositorio, *Settings → Pages → Deploy from a branch → `main` / `(root)`*. El fichero `.nojekyll` evita que GitHub procese la carpeta.
+
+## Webs instalables (envoltorios)
+
+`vuelos/` es una página mínima que muestra la app de Streamlit de Vuelos a pantalla completa y la hace instalable en el móvil
+(`manifest.webmanifest`, `sw.js` e iconos PNG). La app sigue en su dirección de Streamlit; esto solo la enmarca. Para cambiar
+la dirección de la app, editar `URL_APP` en `vuelos/index.html`. Dirección: <https://kuerb0.github.io/portal/vuelos/>.
