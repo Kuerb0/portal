@@ -3,29 +3,46 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Mario · webs</title>
-<meta name="description" content="Pequeñas webs interactivas para aprender y hacer cuentas: viajes, estadística básica, finanzas personales y más.">
+<title>Mario Espinosa · Kuerb0</title>
+<meta name="description" content="Mario Espinosa (Kuerb0). Pequeñas webs interactivas para entender cosas con números: viajes, estadística, finanzas y más.">
+<meta property="og:title" content="Mario Espinosa · Kuerb0">
+<meta property="og:description" content="Pequeñas webs interactivas para entender cosas con números.">
+<meta property="og:image" content="https://github.com/Kuerb0.png?size=400">
+<link rel="icon" href="https://github.com/Kuerb0.png?size=64">
 <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
+<div class="luz" aria-hidden="true"></div>
+<button id="tema" class="tema" type="button" aria-label="Cambiar entre tema claro y oscuro">🌓</button>
+
 <header class="cabecera">
-  <button id="tema" class="tema" type="button" aria-label="Cambiar entre tema claro y oscuro">🌓</button>
   <a class="perfil" href="https://github.com/Kuerb0" target="_blank" rel="noopener" aria-label="Perfil de GitHub">
-    <img class="avatar" src="https://github.com/Kuerb0.png?size=200" alt="Foto de perfil" width="104" height="104" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'avatar sin',textContent:'M'}))">
+    <img class="avatar" src="https://github.com/Kuerb0.png?size=240" alt="Foto de perfil de Mario Espinosa" width="120" height="120" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'avatar sin',textContent:'M'}))">
   </a>
-  <h1>Mario</h1>
-  <p class="lema">Pequeñas webs interactivas para entender cosas con números.</p>
-  <p class="enlaces"><a href="https://github.com/Kuerb0" target="_blank" rel="noopener">GitHub · Kuerb0</a></p>
+  <p class="usuario">@Kuerb0</p>
+  <h1>Mario Espinosa</h1>
+  <p class="lema">Pequeñas webs interactivas para <strong>entender cosas con números</strong>: mueves un control y ves qué pasa.</p>
+  <p class="enlaces">
+    <a class="btn" href="https://github.com/Kuerb0" target="_blank" rel="noopener">
+      <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.33c-2.23.48-2.7-1.07-2.7-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.8.06 1.23.83 1.23.83.72 1.22 1.88.87 2.34.66.07-.52.28-.87.5-1.07-1.78-.2-3.65-.89-3.65-3.96 0-.87.31-1.59.83-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.52.56.83 1.28.83 2.15 0 3.08-1.88 3.76-3.66 3.96.29.25.54.74.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0 0 8 0z"/></svg>
+      GitHub
+    </a>
+  </p>
+  <ul class="cifras" id="cifras" aria-label="Resumen"></ul>
 </header>
 
 <main>
-  <div class="buscador"><input id="buscar" type="search" placeholder="Buscar una web…" aria-label="Buscar una web"></div>
+  <div class="barra-filtro">
+    <div class="buscador"><input id="buscar" type="search" placeholder="Buscar una web…" aria-label="Buscar una web"></div>
+    <div id="chips" class="chips" role="group" aria-label="Filtrar por etiqueta"></div>
+  </div>
   <section id="rejilla" class="rejilla" aria-live="polite"></section>
   <p id="vacio" class="vacio" hidden>Ninguna web coincide con la búsqueda.</p>
 </main>
 
 <footer class="pie">
   <p>Hecho con Python y Streamlit. Las webs gratuitas se duermen si nadie las visita: la primera carga puede tardar medio minuto.</p>
+  <p class="firma">© Mario Espinosa · <a href="https://github.com/Kuerb0" target="_blank" rel="noopener">Kuerb0</a></p>
 </footer>
 <script src="portal.js"></script>
 </body>
