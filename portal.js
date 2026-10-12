@@ -78,7 +78,7 @@ function pintar() {
   vacio.hidden = ver.length > 0;
 }
 
-fetch("webs.json").then(r => r.json()).then(d => { webs = d; pintar(); })
+fetch("webs.json").then(r => r.json()).then(d => { webs = d; pintar(); pintarApps(); })
   .catch(() => { rejilla.textContent = "No se han podido cargar las webs."; });
 buscar.addEventListener("input", pintar);
 
@@ -91,3 +91,32 @@ document.getElementById("tema").addEventListener("click", () => {
   raiz.dataset.tema = oscuro ? "claro" : "oscuro";
   try { localStorage.setItem("tema", raiz.dataset.tema); } catch (e) { /* sin almacenamiento: no pasa nada */ }
 });
+
+// ---- sección «Instálame»: botón de instalar el portal, ayuda según el aparato y una ficha por cada web instalable
+function pintarApps() {
+  const lista = document.getElementById("inst-apps");
+  lista.replaceChildren(...webs.filter(w => w.instalar).map(w => {
+    const li = document.createElement("li");
+    li.innerHTML = `<a class="inst-app" href="${esc(w.instalar)}">
+      <img src="${esc(w.icono_app)}" alt="" width="48" height="48" loading="lazy">
+      <span><strong>${esc(w.titulo)}</strong><small>Abrir e instalar</small></span>${svg("flecha", 18)}</a>`;
+    return li;
+  }));
+}
+
+function pintarInstalar() {
+  const boton = document.getElementById("btn-instalar"), texto = document.getElementById("inst-estado");
+  const I = window.Instalar;
+  boton.hidden = !I.puede();
+  document.getElementById("pasos-ios").classList.toggle("resalta", I.ios);
+  document.getElementById("pasos-android").classList.toggle("resalta", !I.ios && !I.puede() && !I.instalada);
+  texto.textContent = I.instalada ? "Ya estás usando el portal como app."
+    : I.puede() ? "Pulsa el botón para añadir el portal a tu pantalla de inicio."
+    : I.ios ? "En iPhone no hay botón: sigue los pasos de Safari que ves abajo."
+    : "Tu navegador no ofrece botón: usa el menú del navegador, como en los pasos de abajo.";
+}
+document.getElementById("btn-instalar").addEventListener("click", () => window.Instalar.instalar());
+addEventListener("instalar-cambio", pintarInstalar);
+pintarInstalar();
+
+if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});

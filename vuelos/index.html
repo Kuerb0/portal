@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Vuelos</title>
-<meta name="description" content="Vuelos, hoteles y trenes de todos los días: mapa, gráficos y filtros.">
+<meta name="description" content="Compara vuelos, hoteles y trenes de todos los días: mapa, gráficos y filtros.">
 <meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#eef3fb" media="(prefers-color-scheme: light)">
 <link rel="manifest" href="manifest.webmanifest">
@@ -46,7 +46,7 @@ body{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-i
 <div id="sin-red" class="centro" hidden role="alert">
   <img src="icon-192.png" alt="" width="84" height="84">
   <p><strong>Sin conexión</strong></p>
-  <p class="suave">Vuelos necesita internet para buscar precios. Conéctate y vuelve a intentarlo.</p>
+  <p class="suave">Vuelos necesita internet para funcionar. Conéctate y vuelve a intentarlo.</p>
   <button id="reintentar" type="button">Reintentar</button>
 </div>
 
@@ -68,5 +68,6 @@ abrir();
 
 if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
 </script>
+<script src="../instalar.js" data-aviso="Vuelos"></script>
 </body>
 </html>

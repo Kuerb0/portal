@@ -11,6 +11,11 @@
 <meta property="og:description" content="Sin datos, solo eres otra persona más dando su opinión.">
 <meta property="og:image" content="https://kuerb0.github.io/portal/img/viajes.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%233f5a99'/%3E%3Cpath fill='white' d='M5 9.2h3V19H5zM10.6 5h2.8v14h-2.8zm5.6 8H19v6h-2.8z'/%3E%3C/svg%3E">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Mario">
 <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
@@ -35,11 +40,41 @@
   </p>
   <section id="rejilla" class="rejilla" aria-live="polite"></section>
   <p id="vacio" class="vacio" hidden>Ninguna web coincide con la búsqueda.</p>
+
+  <section id="instalar" class="instalar" aria-labelledby="t-instalar">
+    <h2 id="t-instalar" class="seccion">Instálame</h2>
+    <p class="inst-intro">Añade el portal y tus webs a la pantalla de inicio del móvil: se abren como una app, a pantalla completa y sin la barra del navegador.</p>
+    <div class="inst-accion">
+      <button id="btn-instalar" type="button" hidden>Instalar el portal</button>
+      <p id="inst-estado" class="inst-estado"></p>
+    </div>
+    <div class="inst-pasos">
+      <div id="pasos-android">
+        <h3>Android (Chrome)</h3>
+        <ol>
+          <li>Abre la web en Chrome.</li>
+          <li>Pulsa el menú <strong>⋮</strong> de arriba a la derecha.</li>
+          <li>Elige <strong>Instalar aplicación</strong> (o «Añadir a la pantalla de inicio»).</li>
+        </ol>
+      </div>
+      <div id="pasos-ios">
+        <h3>iPhone (Safari)</h3>
+        <ol>
+          <li>Abre la web en Safari.</li>
+          <li>Pulsa <strong>Compartir</strong> (el cuadrado con la flecha hacia arriba).</li>
+          <li>Elige <strong>Añadir a pantalla de inicio</strong> y luego <strong>Añadir</strong>.</li>
+        </ol>
+      </div>
+    </div>
+    <h3 class="inst-sub">Instala cada web como una app</h3>
+    <ul id="inst-apps" class="inst-apps"></ul>
+  </section>
 </main>
 
 <footer class="pie">
   <p>Proyectos propios hechos con Python, Streamlit, Excel y web.</p>
 </footer>
+<script src="instalar.js"></script>
 <script src="portal.js"></script>
 <script src="fondo.js"></script>
 </body>

@@ -13,7 +13,9 @@
     "imagen": "img/viajes.jpg",
     "url": "https://kuerb0-viajes-pyapp-web-iufxrb.streamlit.app/",
     "estado": "activa",
-    "tipo": "web"
+    "tipo": "web",
+    "instalar": "vuelos/",
+    "icono_app": "vuelos/icon-192.png"
   },
   {
     "id": "estadistica",
@@ -30,7 +32,9 @@
     "imagen": "img/estadistica.jpg",
     "url": "https://estadistica-9madheayvfbwktizomxstz.streamlit.app/",
     "estado": "activa",
-    "tipo": "web"
+    "tipo": "web",
+    "instalar": "estadistica/",
+    "icono_app": "estadistica/icon-192.png"
   },
   {
     "id": "finanzas",
@@ -46,7 +50,9 @@
     "imagen": "img/finanzas.jpg",
     "url": "https://planificador-financiero-ebptettnct3wpthqbtssct.streamlit.app/",
     "estado": "activa",
-    "tipo": "web"
+    "tipo": "web",
+    "instalar": "finanzas/",
+    "icono_app": "finanzas/icon-192.png"
   },
   {
     "id": "comidas",
@@ -62,7 +68,9 @@
     ],
     "imagen": "img/comidas.jpg",
     "url": "https://kuerb0.github.io/comidas/",
-    "estado": "activa"
+    "estado": "activa",
+    "instalar": "https://kuerb0.github.io/comidas/",
+    "icono_app": "https://kuerb0.github.io/comidas/icon-192.png"
   },
   {
     "id": "atlas",

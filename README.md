@@ -22,3 +22,5 @@ GitHub Pages: en el repositorio, *Settings â†’ Pages â†’ Deploy from a branch â†
 `vuelos/` es una pÃ¡gina mÃ­nima que muestra la app de Streamlit de Vuelos a pantalla completa y la hace instalable en el mÃ³vil
 (`manifest.webmanifest`, `sw.js` e iconos PNG). La app sigue en su direcciÃ³n de Streamlit; esto solo la enmarca. Para cambiar
 la direcciÃ³n de la app, editar `URL_APP` en `vuelos/index.html`. DirecciÃ³n: <https://kuerb0.github.io/portal/vuelos/>.
+
+Los envoltorios de estadistica/ y inanzas/ son iguales que el de uelos/ (copiar la carpeta, cambiar URL_APP, los textos, el manifiesto y los iconos). instalar.js da el botón y el aviso de instalación; el portal muestra la sección «Instálame» y es instalable (manifest.webmanifest, sw.js).
