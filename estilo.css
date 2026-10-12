@@ -43,6 +43,9 @@ a.tarjeta:hover .vista img{transform:scale(1.04)}
 .ico{flex:none;display:grid;place-items:center;width:2.2rem;height:2.2rem;border-radius:10px;background:var(--tinte);color:var(--acento)}
 .cuerpo h2{margin:0;font-size:1.15rem;line-height:1.25;flex:1}
 .estado{flex:none;font-size:.7rem;font-weight:600;padding:.15rem .55rem;border-radius:999px;background:var(--marco);color:var(--suave)}
+.seccion{grid-column:1/-1;display:flex;align-items:center;gap:.8rem;margin:.6rem 0 -.3rem;font-size:1rem;font-weight:650;color:var(--suave)}
+.seccion::after{content:"";flex:1;height:1px;background:var(--borde)}
+.estado.repo{background:var(--tinte);color:var(--acento)}
 .estado.activa{background:var(--ok-fondo);color:var(--ok)}
 .etiquetas{display:flex;flex-wrap:wrap;align-content:flex-start;gap:.35rem;flex:1}
 .etiqueta{font-size:.75rem;padding:.12rem .6rem;border-radius:999px;border:1px solid var(--borde);color:var(--suave)}

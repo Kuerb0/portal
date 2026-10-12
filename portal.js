@@ -13,6 +13,9 @@ const ICONOS = {
   funciones: "M18 4H6v2l6.5 6L6 18v2h12v-3h-7l5-5-5-5h7z",
   codigo: "M9.4 16.6 4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0 4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z",
   apps: "M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z",
+  cubiertos: "M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z",
+  arbol: "M22 11V3h-7v3H9V3H2v8h7V8h2v10h4v3h7v-8h-7v3h-2V8h2v3z",
+  tabla: "M10 10.02h5V21h-5zM17 21h3c1.1 0 2-.9 2-2v-9h-5v11zm3-18H5c-1.1 0-2 .9-2 2v3h19V5c0-1.1-.9-2-2-2zM3 19c0 1.1.9 2 2 2h3V10H3v9z",
   flecha: "M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z",
 };
 
@@ -25,7 +28,10 @@ function esc(s) {
 }
 
 function dominio(url) {
-  try { return new URL(url).host; } catch (e) { return "próximamente"; }
+  try {
+    const u = new URL(url);
+    return u.host === "github.com" || u.host.endsWith(".github.io") ? u.host + u.pathname.replace(/\/$/, "") : u.host;   // en GitHub se ve la ruta
+  } catch (e) { return "próximamente"; }
 }
 
 function tarjeta(w, i) {
@@ -37,7 +43,9 @@ function tarjeta(w, i) {
     ? `<img src="${esc(w.imagen)}" alt="Vista previa de ${esc(w.titulo)}" loading="lazy">`
     : `<div class="sin-imagen" aria-hidden="true">${svg(w.icono, 56)}</div>`;
   const etiquetas = (w.etiquetas || []).map(e => `<span class="etiqueta">${esc(e)}</span>`).join("");
-  const estado = w.url ? `<span class="estado activa">Activa</span>` : `<span class="estado">En preparación</span>`;
+  const repo = w.tipo === "repo";           // un proyecto de GitHub: se enlaza el repositorio, no una web
+  const estado = !w.url ? `<span class="estado">En preparación</span>`
+    : repo ? `<span class="estado repo">Repositorio</span>` : `<span class="estado activa">Activa</span>`;
   a.innerHTML = `<div class="marco" aria-hidden="true">
       <div class="barra"><i></i><i></i><i></i><span>${esc(dominio(w.url))}</span></div>
       <div class="vista">${miniatura}</div>
@@ -45,15 +53,27 @@ function tarjeta(w, i) {
     <div class="cuerpo">
       <div class="titulo"><span class="ico" aria-hidden="true">${svg(w.icono, 22)}</span><h2>${esc(w.titulo)}</h2></div>
       <div class="etiquetas">${etiquetas}</div>
-      <div class="pie-tarjeta">${w.url ? `<span class="boton">Abrir ${svg("flecha", 18)}</span>` : ""}${estado}</div>
+      <div class="pie-tarjeta">${w.url ? `<span class="boton">${repo ? "Ver en GitHub" : "Abrir"} ${svg("flecha", 18)}</span>` : ""}${estado}</div>
     </div>`;
   return a;
+}
+
+function titulo(texto) {
+  const h = document.createElement("h2");
+  h.className = "seccion";
+  h.textContent = texto;
+  return h;
 }
 
 function pintar() {
   const q = buscar.value.trim().toLowerCase();
   const ver = webs.filter(w => !q || [w.titulo, w.descripcion, ...(w.etiquetas || [])].join(" ").toLowerCase().includes(q));
-  rejilla.replaceChildren(...ver.map(tarjeta));
+  const sitios = ver.filter(w => w.tipo !== "repo"), repos = ver.filter(w => w.tipo === "repo");
+  const nodos = [];
+  if (sitios.length && repos.length) nodos.push(titulo("Webs interactivas"));
+  nodos.push(...sitios.map(tarjeta));
+  if (repos.length) nodos.push(titulo("Proyectos en GitHub"), ...repos.map(tarjeta));
+  rejilla.replaceChildren(...nodos);
   vacio.hidden = ver.length > 0;
 }
 

@@ -12,7 +12,8 @@
     ],
     "imagen": "img/viajes.jpg",
     "url": "https://kuerb0-viajes-pyapp-web-iufxrb.streamlit.app/",
-    "estado": "activa"
+    "estado": "activa",
+    "tipo": "web"
   },
   {
     "id": "estadistica",
@@ -28,7 +29,8 @@
     ],
     "imagen": "img/estadistica.jpg",
     "url": "https://estadistica-9madheayvfbwktizomxstz.streamlit.app/",
-    "estado": "activa"
+    "estado": "activa",
+    "tipo": "web"
   },
   {
     "id": "finanzas",
@@ -43,6 +45,54 @@
     ],
     "imagen": "img/finanzas.jpg",
     "url": "https://planificador-financiero-ebptettnct3wpthqbtssct.streamlit.app/",
+    "estado": "activa",
+    "tipo": "web"
+  },
+  {
+    "id": "comidas",
+    "titulo": "Comidas",
+    "icono": "cubiertos",
+    "tipo": "web",
+    "descripcion": "Planificador de platos de comida y cena con ingredientes, cantidades y alérgenos.",
+    "etiquetas": [
+      "comidas",
+      "menús",
+      "ingredientes",
+      "alérgenos"
+    ],
+    "imagen": "img/comidas.jpg",
+    "url": "https://kuerb0.github.io/comidas/",
+    "estado": "activa"
+  },
+  {
+    "id": "atlas",
+    "titulo": "Atlas del conocimiento",
+    "icono": "arbol",
+    "tipo": "repo",
+    "descripcion": "Árbol de funciones de estadística, actuarial, finanzas y aprendizaje automático, con visor 3D, demos interactivas y guía para aprender. Para Windows.",
+    "etiquetas": [
+      "estadística",
+      "Python",
+      "Windows",
+      "aprender"
+    ],
+    "imagen": "",
+    "url": "https://github.com/Kuerb0/Atlas_del_conocimiento",
+    "estado": "activa"
+  },
+  {
+    "id": "excel",
+    "titulo": "Excel avanzado",
+    "icono": "tabla",
+    "tipo": "repo",
+    "descripcion": "Libro de Excel, datos de ejemplo y una guía en presentación sobre Excel avanzado.",
+    "etiquetas": [
+      "Excel",
+      "guía",
+      "datos"
+    ],
+    "imagen": "",
+    "url": "https://github.com/Kuerb0/Excel",
     "estado": "activa"
   }
 ]
