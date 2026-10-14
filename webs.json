@@ -58,37 +58,19 @@
     "abrir": "finanzas/"
   },
   {
-    "id": "comidas",
-    "titulo": "Comidas",
-    "icono": "cubiertos",
-    "tipo": "web",
-    "descripcion": "Planificador de platos de comida y cena con ingredientes, cantidades y alérgenos.",
-    "etiquetas": [
-      "comidas",
-      "menús",
-      "ingredientes",
-      "alérgenos"
-    ],
-    "imagen": "img/comidas.jpg",
-    "url": "https://kuerb0.github.io/comidas/",
-    "estado": "activa",
-    "instalar": "https://kuerb0.github.io/comidas/",
-    "icono_app": "https://kuerb0.github.io/comidas/icon-192.png"
-  },
-  {
-    "id": "atlas",
-    "titulo": "Atlas del conocimiento",
-    "icono": "arbol",
+    "id": "calendario",
+    "titulo": "Calendario",
+    "icono": "calendario",
     "tipo": "repo",
-    "descripcion": "Árbol de funciones de estadística, actuarial, finanzas y aprendizaje automático (más de 300), con un visor 3D en forma de galaxias, demos interactivas y una guía para aprender desde cero. Para Windows.",
+    "descripcion": "Widget de calendario de Outlook para el escritorio de Windows: rejilla por horas, lista o mes completo, avisos y alarmas con sonido por evento, festivos, correo en el widget y opción de mostrarlo solo en un escritorio virtual. Software libre (GPL-3.0).",
     "etiquetas": [
-      "estadística",
-      "Python",
+      "calendario",
+      "Outlook",
       "Windows",
-      "aprender"
+      "Python"
     ],
-    "imagen": "img/atlas.jpg",
-    "url": "https://github.com/Kuerb0/Atlas_del_conocimiento",
+    "imagen": "img/calendario.jpg",
+    "url": "https://github.com/Kuerb0/Calendario",
     "estado": "activa"
   },
   {
@@ -104,6 +86,22 @@
     ],
     "imagen": "img/excel.jpg",
     "url": "https://github.com/Kuerb0/Excel",
+    "estado": "activa"
+  },
+  {
+    "id": "atlas",
+    "titulo": "Atlas del conocimiento",
+    "icono": "arbol",
+    "tipo": "repo",
+    "descripcion": "Árbol de funciones de estadística, actuarial, finanzas y aprendizaje automático (más de 300), con un visor 3D en forma de galaxias, demos interactivas y una guía para aprender desde cero. Para Windows.",
+    "etiquetas": [
+      "estadística",
+      "Python",
+      "Windows",
+      "aprender"
+    ],
+    "imagen": "img/atlas.jpg",
+    "url": "https://github.com/Kuerb0/Atlas_del_conocimiento",
     "estado": "activa"
   }
 ]
