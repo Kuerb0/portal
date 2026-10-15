@@ -1,5 +1,5 @@
 // Dibuja una tarjeta con miniatura por cada web de webs.json. Para añadir una web basta con añadirla a ese fichero
-// (y una captura en img/). Sin url, la tarjeta sale como «En preparación». «icono» es el nombre de uno de ICONOS (o «icono_img»: el icono propio del proyecto, una imagen).
+// (y una captura en img/, o varias en «imagenes» para una galería que va cambiando). Sin url, la tarjeta sale como «En preparación». «icono» es el nombre de uno de ICONOS (o «icono_img»: el icono propio del proyecto, una imagen).
 const rejilla = document.getElementById("rejilla");
 const vacio = document.getElementById("vacio");
 const buscar = document.getElementById("buscar");
@@ -40,16 +40,21 @@ function dominio(url) {
 
 function tarjeta(w, i) {
   const a = document.createElement("article");
-  a.className = "tarjeta " + (w.url ? "viva" : "apagada");
+  a.className = "tarjeta " + (w.url || w.tipo === "app" ? "viva" : "apagada");
   a.style.animationDelay = `${i * 80}ms`;
-  const miniatura = w.imagen
-    ? `<img src="${esc(w.imagen)}" alt="Vista previa de ${esc(w.titulo)}" loading="lazy">`
+  const fotos = (w.imagenes && w.imagenes.length ? w.imagenes : w.imagen ? [w.imagen] : []);
+  const miniatura = fotos.length > 1
+    ? `<div class="galeria">${fotos.map((s, k) => `<img class="${k ? "" : "on"}" src="${esc(s)}" alt="Vista previa ${k + 1} de ${esc(w.titulo)}" loading="lazy">`).join("")}
+        <div class="puntos">${fotos.map((_, k) => `<button type="button" class="${k ? "" : "on"}" aria-label="Ver captura ${k + 1}"></button>`).join("")}</div></div>`
+    : fotos.length
+    ? `<img src="${esc(fotos[0])}" alt="Vista previa de ${esc(w.titulo)}" loading="lazy">`
     : `<div class="sin-imagen" aria-hidden="true">${svg(w.icono, 56)}</div>`;
   const etiquetas = (w.etiquetas || []).map(e => `<span class="etiqueta">${esc(e)}</span>`).join("");
   const destino = w.abrir || w.url;       // «abrir»: la tarjeta lleva al envoltorio instalable; «url» sigue siendo la web de verdad (barra de direcciones)
   const repo = w.tipo === "repo";           // un proyecto de GitHub: se enlaza el repositorio, no una web
   const estado = !w.url ? `<span class="estado">En preparación</span>`
     : repo ? `<span class="estado repo">Repositorio</span>` : `<span class="estado activa">Activa</span>`;
+  const insignia = w.tipo === "app" && !w.url ? `<span class="estado repo">App de escritorio</span>` : estado;
   a.innerHTML = `<div class="marco" aria-hidden="true">
       <div class="barra"><i></i><i></i><i></i><span>${esc(dominio(w.url))}</span></div>
       <div class="vista">${miniatura}</div>
@@ -58,9 +63,29 @@ function tarjeta(w, i) {
       <div class="titulo"><span class="ico${w.icono_img ? " propio" : ""}" aria-hidden="true">${w.icono_img ? `<img src="${esc(w.icono_img)}" alt="" width="36" height="36" loading="lazy">` : svg(w.icono, 22)}</span><h2>${esc(w.titulo)}</h2></div>
       <div class="etiquetas">${etiquetas}</div>
       <details class="mas"><summary>${svg("chevron", 20)}Descripción</summary><p>${esc(w.descripcion)}</p></details>
-      <div class="pie-tarjeta">${w.url ? `<a class="boton" href="${esc(destino)}" target="_blank" rel="noopener" aria-label="${repo ? "Ver en GitHub" : "Abrir"}: ${esc(w.titulo)}">${repo ? "Ver en GitHub" : "Abrir"} ${svg("flecha", 18)}</a>` : ""}${estado}</div>
+      <div class="pie-tarjeta">${w.url ? `<a class="boton" href="${esc(destino)}" target="_blank" rel="noopener" aria-label="${repo ? "Ver en GitHub" : "Abrir"}: ${esc(w.titulo)}">${repo ? "Ver en GitHub" : "Abrir"} ${svg("flecha", 18)}</a>` : ""}${insignia}</div>
     </div>`;
   return a;
+}
+
+// Galería de capturas: cambia sola cada pocos segundos (se pausa al pasar el ratón o si el sistema pide menos movimiento).
+function mostrar(g, k) {
+  const fotos = [...g.querySelectorAll("img")], pts = [...g.querySelectorAll(".puntos button")];
+  g.dataset.i = k = (k + fotos.length) % fotos.length;
+  fotos.forEach((f, j) => f.classList.toggle("on", j === k));
+  pts.forEach((p, j) => p.classList.toggle("on", j === k));
+}
+document.addEventListener("click", e => {
+  const p = e.target.closest(".galeria .puntos button");
+  if (p) { const g = p.closest(".galeria"); mostrar(g, [...p.parentNode.children].indexOf(p)); g.dataset.pausa = "1"; }
+});
+document.addEventListener("mouseover", e => { const g = e.target.closest(".galeria"); if (g) g.dataset.sobre = "1"; });
+document.addEventListener("mouseout", e => { const g = e.target.closest(".galeria"); if (g && !g.contains(e.relatedTarget)) delete g.dataset.sobre; });
+if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  setInterval(() => {
+    if (document.hidden) return;
+    document.querySelectorAll(".galeria").forEach(g => { if (!g.dataset.sobre && !g.dataset.pausa) mostrar(g, +(g.dataset.i || 0) + 1); });
+  }, 3500);
 }
 
 function titulo(texto) {
@@ -73,10 +98,11 @@ function titulo(texto) {
 function pintar() {
   const q = buscar.value.trim().toLowerCase();
   const ver = webs.filter(w => !q || [w.titulo, w.descripcion, ...(w.etiquetas || [])].join(" ").toLowerCase().includes(q));
-  const sitios = ver.filter(w => w.tipo !== "repo"), repos = ver.filter(w => w.tipo === "repo");
+  const sitios = ver.filter(w => w.tipo !== "repo" && w.tipo !== "app"), apps = ver.filter(w => w.tipo === "app"), repos = ver.filter(w => w.tipo === "repo");
   const nodos = [];
-  if (sitios.length && repos.length) nodos.push(titulo("Webs interactivas"));
+  if (sitios.length && (apps.length || repos.length)) nodos.push(titulo("Webs interactivas"));
   nodos.push(...sitios.map(tarjeta));
+  if (apps.length) nodos.push(titulo("Apps de escritorio"), ...apps.map(tarjeta));
   if (repos.length) nodos.push(titulo("Proyectos en GitHub"), ...repos.map(tarjeta));
   rejilla.replaceChildren(...nodos);
   vacio.hidden = ver.length > 0;

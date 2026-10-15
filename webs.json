@@ -78,6 +78,52 @@
     "icono_img": "img/iconos/comidas.svg"
   },
   {
+    "id": "viajes-app",
+    "titulo": "Viajes (App)",
+    "icono": "avion",
+    "icono_img": "img/iconos/viajes.png",
+    "tipo": "app",
+    "descripcion": "App de escritorio para Windows que descarga y compara precios de vuelos, hoteles y trenes desde Madrid: resumen, buscador, favoritos, evolución, calendario, mapa, maletas y gestión de datos. Se ejecuta en tu propio equipo.",
+    "etiquetas": [
+      "app",
+      "viajes",
+      "vuelos",
+      "Windows"
+    ],
+    "imagen": "img/galeria/viajes-app-1.jpg",
+    "url": "",
+    "estado": "activa",
+    "imagenes": [
+      "img/galeria/viajes-app-1.jpg",
+      "img/galeria/viajes-app-2.jpg",
+      "img/galeria/viajes-app-3.jpg",
+      "img/galeria/viajes-app-4.jpg"
+    ]
+  },
+  {
+    "id": "finanzas-app",
+    "titulo": "Finanzas personales (App)",
+    "icono": "euro",
+    "icono_img": "img/iconos/finanzas.png",
+    "tipo": "app",
+    "descripcion": "App de escritorio para Windows del planificador financiero: hipoteca, cartera con Monte Carlo, comparador, mercado, plazos y riesgo, ahorrador, asignador y test de riesgo.",
+    "etiquetas": [
+      "app",
+      "finanzas",
+      "inversión",
+      "Windows"
+    ],
+    "imagen": "img/galeria/finanzas-app-1.jpg",
+    "url": "",
+    "estado": "activa",
+    "imagenes": [
+      "img/galeria/finanzas-app-1.jpg",
+      "img/galeria/finanzas-app-2.jpg",
+      "img/galeria/finanzas-app-3.jpg",
+      "img/galeria/finanzas-app-4.jpg"
+    ]
+  },
+  {
     "id": "calendario",
     "titulo": "Calendario",
     "icono": "calendario",
