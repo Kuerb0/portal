@@ -58,6 +58,22 @@
     "abrir": "finanzas/"
   },
   {
+    "id": "comidas",
+    "titulo": "Comidas",
+    "icono": "cubiertos",
+    "tipo": "web",
+    "descripcion": "Planificador de platos de comida y cena con ingredientes, cantidades y alérgenos.",
+    "etiquetas": [
+      "comidas",
+      "menús",
+      "ingredientes",
+      "alérgenos"
+    ],
+    "imagen": "",
+    "url": "https://kuerb0.github.io/comidas/",
+    "estado": "activa"
+  },
+  {
     "id": "calendario",
     "titulo": "Calendario",
     "icono": "calendario",
