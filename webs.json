@@ -70,7 +70,7 @@
       "Python"
     ],
     "imagen": "img/calendario.jpg",
-    "url": "https://github.com/Kuerb0/Calendario",
+    "url": "https://github.com/Kuerb0/Calendario-App",
     "estado": "activa"
   },
   {
@@ -101,7 +101,37 @@
       "aprender"
     ],
     "imagen": "img/atlas.jpg",
-    "url": "https://github.com/Kuerb0/Atlas_del_conocimiento",
+    "url": "https://github.com/Kuerb0/Atlas-del-Conocimiento-App",
+    "estado": "activa"
+  },
+  {
+    "id": "apagador",
+    "titulo": "Apagador",
+    "icono": "apagar",
+    "tipo": "repo",
+    "descripcion": "Programador de apagado de Windows: elige una duración en minutos o una hora exacta, con cuenta atrás y opción de cancelar en cualquier momento.",
+    "etiquetas": [
+      "apagado",
+      "Windows",
+      "Python"
+    ],
+    "imagen": "",
+    "url": "https://github.com/Kuerb0/Apagador-App",
+    "estado": "activa"
+  },
+  {
+    "id": "post-it",
+    "titulo": "Post-It",
+    "icono": "nota",
+    "tipo": "repo",
+    "descripcion": "Notas adhesivas de escritorio para Windows: tareas repetibles, posición y translucidez a elección, líneas periódicas por fechas y modo columnas.",
+    "etiquetas": [
+      "notas",
+      "Windows",
+      "Electron"
+    ],
+    "imagen": "",
+    "url": "https://github.com/Kuerb0/Post-It-App",
     "estado": "activa"
   }
 ]
