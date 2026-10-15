@@ -170,7 +170,17 @@
     "imagen": "img/atlas.jpg",
     "url": "https://github.com/Kuerb0/Atlas-del-Conocimiento-App",
     "estado": "activa",
-    "icono_img": "img/iconos/atlas.png"
+    "icono_img": "img/iconos/atlas.png",
+    "descargas": [
+      {
+        "texto": "Instalador",
+        "archivo": "descargas/Atlas 1.15.1 - Instalador.bat"
+      },
+      {
+        "texto": "Actualizador",
+        "archivo": "descargas/Atlas 1.15.1 - Actualizar.bat"
+      }
+    ]
   },
   {
     "id": "apagador",
@@ -202,6 +212,16 @@
     "imagen": "img/post-it.jpg",
     "url": "https://github.com/Kuerb0/Post-It-App",
     "estado": "activa",
-    "icono_img": "img/iconos/post-it.png"
+    "icono_img": "img/iconos/post-it.png",
+    "descargas": [
+      {
+        "texto": "Instalador",
+        "archivo": "descargas/Post-It - Instalador.bat"
+      },
+      {
+        "texto": "Actualizador",
+        "archivo": "descargas/Post-It - Actualizar.bat"
+      }
+    ]
   }
 ]

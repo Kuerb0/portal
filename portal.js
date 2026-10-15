@@ -1,5 +1,5 @@
 // Dibuja una tarjeta con miniatura por cada web de webs.json. Para añadir una web basta con añadirla a ese fichero
-// (y una captura en img/, o varias en «imagenes» para una galería que va cambiando). Sin url, la tarjeta sale como «En preparación». «icono» es el nombre de uno de ICONOS (o «icono_img»: el icono propio del proyecto, una imagen).
+// (y una captura en img/, o varias en «imagenes» para una galería que va cambiando; «descargas»: lista de {texto, archivo} con botones de descarga, ficheros en descargas/). Sin url, la tarjeta sale como «En preparación». «icono» es el nombre de uno de ICONOS (o «icono_img»: el icono propio del proyecto, una imagen).
 const rejilla = document.getElementById("rejilla");
 const vacio = document.getElementById("vacio");
 const buscar = document.getElementById("buscar");
@@ -19,6 +19,7 @@ const ICONOS = {
   tabla: "M10 10.02h5V21h-5zM17 21h3c1.1 0 2-.9 2-2v-9h-5v11zm3-18H5c-1.1 0-2 .9-2 2v3h19V5c0-1.1-.9-2-2-2zM3 19c0 1.1.9 2 2 2h3V10H3v9z",
   apagar: "M13 3h-2v10h2V3zm4.83 2.17-1.42 1.42C17.99 7.86 19 9.81 19 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.19 1.01-4.14 2.58-5.42L6.17 5.17C4.23 6.82 3 9.26 3 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z",
   nota: "M5 3h14a2 2 0 0 1 2 2v10l-6 6H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm9 16.5V15h4.5L14 19.5zM7 8h10v2H7V8zm0 4h6v2H7v-2z",
+  descarga: "M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z",
   chevron: "M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z",
   flecha: "M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z",
 };
@@ -63,6 +64,7 @@ function tarjeta(w, i) {
       <div class="titulo"><span class="ico${w.icono_img ? " propio" : ""}" aria-hidden="true">${w.icono_img ? `<img src="${esc(w.icono_img)}" alt="" width="36" height="36" loading="lazy">` : svg(w.icono, 22)}</span><h2>${esc(w.titulo)}</h2></div>
       <div class="etiquetas">${etiquetas}</div>
       <details class="mas"><summary>${svg("chevron", 20)}Descripción</summary><p>${esc(w.descripcion)}</p></details>
+      ${(w.descargas || []).length ? `<div class="descargas">${w.descargas.map(d => `<a class="boton sec" href="${esc(d.archivo)}" download="${esc(d.archivo.split("/").pop())}" title="Descarga un .bat; Windows puede avisar al abrirlo (Más información → Ejecutar de todas formas)">${svg("descarga", 18)} ${esc(d.texto)}</a>`).join("")}</div>` : ""}
       <div class="pie-tarjeta">${w.url ? `<a class="boton" href="${esc(destino)}" target="_blank" rel="noopener" aria-label="${repo ? "Ver en GitHub" : "Abrir"}: ${esc(w.titulo)}">${repo ? "Ver en GitHub" : "Abrir"} ${svg("flecha", 18)}</a>` : ""}${insignia}</div>
     </div>`;
   return a;
