@@ -196,7 +196,17 @@
     "imagen": "img/apagador.jpg",
     "url": "https://github.com/Kuerb0/Apagador-App",
     "estado": "activa",
-    "icono_img": "img/iconos/apagador.png"
+    "icono_img": "img/iconos/apagador.png",
+    "descargas": [
+      {
+        "texto": "Instalador",
+        "archivo": "descargas/Apagador 1.0.0 - Instalador.bat"
+      },
+      {
+        "texto": "Actualizador",
+        "archivo": "descargas/Apagador 1.0.0 - Actualizar.bat"
+      }
+    ]
   },
   {
     "id": "post-it",
