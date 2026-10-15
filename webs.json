@@ -16,7 +16,8 @@
     "tipo": "web",
     "instalar": "vuelos/",
     "icono_app": "vuelos/icon-192.png",
-    "abrir": "vuelos/"
+    "abrir": "vuelos/",
+    "icono_img": "img/iconos/viajes.png"
   },
   {
     "id": "estadistica",
@@ -36,7 +37,8 @@
     "tipo": "web",
     "instalar": "estadistica/",
     "icono_app": "estadistica/icon-192.png",
-    "abrir": "estadistica/"
+    "abrir": "estadistica/",
+    "icono_img": "img/iconos/estadistica.png"
   },
   {
     "id": "finanzas",
@@ -55,7 +57,8 @@
     "tipo": "web",
     "instalar": "finanzas/",
     "icono_app": "finanzas/icon-192.png",
-    "abrir": "finanzas/"
+    "abrir": "finanzas/",
+    "icono_img": "img/iconos/finanzas.png"
   },
   {
     "id": "comidas",
@@ -69,9 +72,10 @@
       "ingredientes",
       "alérgenos"
     ],
-    "imagen": "",
+    "imagen": "img/comidas.jpg",
     "url": "https://kuerb0.github.io/comidas/",
-    "estado": "activa"
+    "estado": "activa",
+    "icono_img": "img/iconos/comidas.svg"
   },
   {
     "id": "calendario",
@@ -87,7 +91,8 @@
     ],
     "imagen": "img/calendario.jpg",
     "url": "https://github.com/Kuerb0/Calendario-App",
-    "estado": "activa"
+    "estado": "activa",
+    "icono_img": "img/iconos/calendario.png"
   },
   {
     "id": "excel",
@@ -118,7 +123,8 @@
     ],
     "imagen": "img/atlas.jpg",
     "url": "https://github.com/Kuerb0/Atlas-del-Conocimiento-App",
-    "estado": "activa"
+    "estado": "activa",
+    "icono_img": "img/iconos/atlas.png"
   },
   {
     "id": "apagador",
@@ -131,9 +137,10 @@
       "Windows",
       "Python"
     ],
-    "imagen": "",
+    "imagen": "img/apagador.jpg",
     "url": "https://github.com/Kuerb0/Apagador-App",
-    "estado": "activa"
+    "estado": "activa",
+    "icono_img": "img/iconos/apagador.png"
   },
   {
     "id": "post-it",
@@ -146,8 +153,9 @@
       "Windows",
       "Electron"
     ],
-    "imagen": "",
+    "imagen": "img/post-it.jpg",
     "url": "https://github.com/Kuerb0/Post-It-App",
-    "estado": "activa"
+    "estado": "activa",
+    "icono_img": "img/iconos/post-it.png"
   }
 ]
