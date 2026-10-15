@@ -138,7 +138,17 @@
     "imagen": "img/calendario.jpg",
     "url": "https://github.com/Kuerb0/Calendario-App",
     "estado": "activa",
-    "icono_img": "img/iconos/calendario.png"
+    "icono_img": "img/iconos/calendario.png",
+    "descargas": [
+      {
+        "texto": "Instalador",
+        "archivo": "descargas/Calendario 2.0 - Instalador.bat"
+      },
+      {
+        "texto": "Actualizador",
+        "archivo": "descargas/Calendario 2.0 - Actualizar.bat"
+      }
+    ]
   },
   {
     "id": "excel",
