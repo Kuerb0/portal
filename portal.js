@@ -52,10 +52,10 @@ function tarjeta(w, i) {
     : `<div class="sin-imagen" aria-hidden="true">${svg(w.icono, 56)}</div>`;
   const etiquetas = (w.etiquetas || []).map(e => `<span class="etiqueta">${esc(e)}</span>`).join("");
   const destino = w.abrir || w.url;       // «abrir»: la tarjeta lleva al envoltorio instalable; «url» sigue siendo la web de verdad (barra de direcciones)
-  const repo = w.tipo === "repo";           // un proyecto de GitHub: se enlaza el repositorio, no una web
+  const repo = w.tipo === "repo" || (w.tipo === "app" && /github\.com/.test(w.url || ""));           // un proyecto de GitHub: se enlaza el repositorio, no una web
   const estado = !w.url ? `<span class="estado">En preparación</span>`
     : repo ? `<span class="estado repo">Repositorio</span>` : `<span class="estado activa">Activa</span>`;
-  const insignia = w.tipo === "app" && !w.url ? `<span class="estado repo">App de escritorio</span>` : estado;
+  const insignia = w.tipo === "app" ? `<span class="estado repo">App de escritorio</span>` : estado;
   a.innerHTML = `<div class="marco" aria-hidden="true">
       <div class="barra"><i></i><i></i><i></i><span>${esc(dominio(w.url))}</span></div>
       <div class="vista">${miniatura}</div>

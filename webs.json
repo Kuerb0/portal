@@ -127,7 +127,7 @@
     "id": "calendario",
     "titulo": "Calendario",
     "icono": "calendario",
-    "tipo": "repo",
+    "tipo": "app",
     "descripcion": "Widget de calendario de Outlook para el escritorio de Windows: rejilla por horas, lista o mes completo, avisos y alarmas con sonido por evento, festivos, correo en el widget y opción de mostrarlo solo en un escritorio virtual. Software libre (GPL-3.0).",
     "etiquetas": [
       "calendario",
@@ -169,7 +169,7 @@
     "id": "atlas",
     "titulo": "Atlas del conocimiento",
     "icono": "arbol",
-    "tipo": "repo",
+    "tipo": "app",
     "descripcion": "Árbol de funciones de estadística, actuarial, finanzas y aprendizaje automático (más de 300), con un visor 3D en forma de galaxias, demos interactivas y una guía para aprender desde cero. Para Windows.",
     "etiquetas": [
       "estadística",
@@ -196,7 +196,7 @@
     "id": "apagador",
     "titulo": "Apagador",
     "icono": "apagar",
-    "tipo": "repo",
+    "tipo": "app",
     "descripcion": "Programador de apagado de Windows: elige una duración en minutos o una hora exacta, con cuenta atrás y opción de cancelar en cualquier momento.",
     "etiquetas": [
       "apagado",
@@ -222,7 +222,7 @@
     "id": "post-it",
     "titulo": "Post-It",
     "icono": "nota",
-    "tipo": "repo",
+    "tipo": "app",
     "descripcion": "Notas adhesivas de escritorio para Windows: tareas repetibles, posición y translucidez a elección, líneas periódicas por fechas y modo columnas.",
     "etiquetas": [
       "notas",
