@@ -98,6 +98,16 @@
       "img/galeria/viajes-app-2.jpg",
       "img/galeria/viajes-app-3.jpg",
       "img/galeria/viajes-app-4.jpg"
+    ],
+    "descargas": [
+      {
+        "texto": "Instalador",
+        "archivo": "descargas/Viajes 1.7.0 - Instalador.bat"
+      },
+      {
+        "texto": "Actualizador",
+        "archivo": "descargas/Viajes 1.7.0 - Actualizar.bat"
+      }
     ]
   },
   {
@@ -121,6 +131,16 @@
       "img/galeria/finanzas-app-2.jpg",
       "img/galeria/finanzas-app-3.jpg",
       "img/galeria/finanzas-app-4.jpg"
+    ],
+    "descargas": [
+      {
+        "texto": "Instalador",
+        "archivo": "descargas/Planificador 1.3.0 - Instalador.bat"
+      },
+      {
+        "texto": "Actualizador",
+        "archivo": "descargas/Planificador 1.3.0 - Actualizar.bat"
+      }
     ]
   },
   {
