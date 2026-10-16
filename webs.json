@@ -147,7 +147,7 @@
     "descargas": [
       {
         "texto": "Instalador",
-        "archivo": "descargas/Planificador 1.3.0 - Instalador.bat"
+        "archivo": "descargas/Planificador 1.3.0 - Instalador.exe"
       },
       {
         "texto": "Actualizador",
@@ -186,7 +186,7 @@
     "descargas": [
       {
         "texto": "Instalador",
-        "archivo": "descargas/Calendario 2.0 - Instalador.bat"
+        "archivo": "descargas/Calendario 2.0 - Instalador.exe"
       },
       {
         "texto": "Actualizador",
@@ -278,7 +278,7 @@
     "descargas": [
       {
         "texto": "Instalador",
-        "archivo": "descargas/Apagador 1.0.0 - Instalador.bat"
+        "archivo": "descargas/Apagador 1.0.0 - Instalador.exe"
       },
       {
         "texto": "Actualizador",
