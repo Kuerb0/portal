@@ -255,8 +255,11 @@ $cVerde = [Drawing.Color]::FromArgb(61, 220, 132); $cRojo = [Drawing.Color]::Fro
 $fMono = { param($t, $s) New-Object Drawing.Font('Consolas', [single]$t, [Drawing.FontStyle]$s) }
 
 $f = New-Object Windows.Forms.Form
-$f.Text = "Instalador de $($App.Nombre) $($App.Version)"; $f.ClientSize = New-Object Drawing.Size(780, 640); $f.StartPosition = 'CenterScreen'
-$f.FormBorderStyle = 'Sizable'; $f.MaximizeBox = $true; $f.MinimumSize = $f.Size; $f.BackColor = $cFondo; $f.ForeColor = $cGris; $f.Font = & $fMono 10 'Regular'
+$f.Text = "Instalador de $($App.Nombre) $($App.Version)"; $DW = 780; $DH = 570                                  # tamano de diseno: todo se dibuja a este tamano y se escala segun la ventana
+$pantalla = [Windows.Forms.Screen]::PrimaryScreen.WorkingArea
+$s0 = [Math]::Min(2.0, [Math]::Min($pantalla.Width * 0.92 / $DW, $pantalla.Height * 0.92 / $DH))      # al abrir: lo mas grande que cabe (hasta el doble)
+$f.ClientSize = New-Object Drawing.Size([int]($DW * $s0), [int]($DH * $s0)); $f.StartPosition = 'CenterScreen'
+$f.FormBorderStyle = 'Sizable'; $f.MaximizeBox = $true; $f.MinimumSize = New-Object Drawing.Size(($DW + $f.Width - $f.ClientSize.Width), ($DH + $f.Height - $f.ClientSize.Height)); $f.BackColor = $cFondo; $f.ForeColor = $cGris; $f.Font = & $fMono 10 'Regular'
 $ico = Join-Path (Split-Path -Parent $Self) $App.Icono
 if (Test-Path -LiteralPath $ico) { try { $f.Icon = New-Object Drawing.Icon($ico) } catch { } }
 
@@ -265,7 +268,7 @@ function Etiqueta($texto, $x, $y, $w, $h, $color, $fuente) {
     $l.ForeColor = $color; $l.BackColor = [Drawing.Color]::Transparent; if ($fuente) { $l.Font = $fuente }; return $l
 }
 function Boton($texto, $x) {
-    $b = New-Object Windows.Forms.Button; $b.Text = $texto; $b.Size = New-Object Drawing.Size(130, 34); $b.Location = New-Object Drawing.Point($x, 592)
+    $b = New-Object Windows.Forms.Button; $b.Text = $texto; $b.Size = New-Object Drawing.Size(130, 34); $b.Location = New-Object Drawing.Point($x, 530)
     $b.FlatStyle = 'Flat'; $b.FlatAppearance.BorderColor = $cCian; $b.BackColor = $cFondo; $b.ForeColor = $cCian; $b.Cursor = 'Hand'
     $b.FlatAppearance.MouseOverBackColor = [Drawing.Color]::FromArgb(20, 44, 48); return $b
 }
@@ -273,7 +276,7 @@ function Boton($texto, $x) {
 # cabecera: el cuervo a la izquierda; a la derecha el nombre en letras grandes, que es el instalador y la version
 function Imagen($b64, $x, $y) {
     $i = [Drawing.Image]::FromStream((New-Object IO.MemoryStream(, [Convert]::FromBase64String($b64))))
-    $p = New-Object Windows.Forms.PictureBox; $p.Image = $i; $p.SizeMode = 'AutoSize'; $p.Location = New-Object Drawing.Point($x, $y); $p.BackColor = $cFondo; $f.Controls.Add($p); return $i
+    $p = New-Object Windows.Forms.PictureBox; $p.Image = $i; $p.SizeMode = 'Zoom'; $p.Size = $i.Size; $p.Location = New-Object Drawing.Point($x, $y); $p.BackColor = $cFondo; $f.Controls.Add($p); return $i
 }
 $iCuervo = Imagen $CuervoPng 18 10
 $xd = 18 + $iCuervo.Width + 26
@@ -283,7 +286,7 @@ $f.Controls.Add((Etiqueta "V E R S I Ó N   $($App.Version)" ($xd + 200) 150 300
 $f.Controls.Add((Etiqueta "KUERB0  ·  Without data, you’re just another person with an opinion" $xd 178 (762 - $xd) 18 $cGris (& $fMono 8.5 'Italic')))
 $linea = New-Object Windows.Forms.Panel; $linea.Location = New-Object Drawing.Point(18, 202); $linea.Size = New-Object Drawing.Size(744, 2); $linea.BackColor = $cCian; $linea.Anchor = 'Top,Left,Right'; $f.Controls.Add($linea)
 
-function Pagina { $p = New-Object Windows.Forms.Panel; $p.Location = New-Object Drawing.Point(18, 214); $p.Size = New-Object Drawing.Size(744, 352); $p.BackColor = $cFondo; $p.Anchor = 'Top,Left,Right,Bottom'; $p.Visible = $false; $f.Controls.Add($p); return $p }
+function Pagina { $p = New-Object Windows.Forms.Panel; $p.Location = New-Object Drawing.Point(18, 214); $p.Size = New-Object Drawing.Size(744, 300); $p.BackColor = $cFondo; $p.Anchor = 'Top,Left,Right,Bottom'; $p.Visible = $false; $f.Controls.Add($p); return $p }
 $p1 = Pagina; $p2 = Pagina; $p3 = Pagina; $p4 = Pagina
 
 # pagina 1: bienvenida
@@ -310,7 +313,7 @@ for ($k = 0; $k -lt $Pasos.Count; $k++) { $l = Etiqueta "" 4 (4 + 26 * $k) 730 2
 $pista = New-Object Windows.Forms.Panel; $pista.Location = New-Object Drawing.Point(4, 168); $pista.Size = New-Object Drawing.Size(690, 16); $pista.BackColor = $cPanel; $pista.Anchor = 'Top,Left,Right'; $p3.Controls.Add($pista)
 $relleno = New-Object Windows.Forms.Panel; $relleno.Location = New-Object Drawing.Point(0, 0); $relleno.Size = New-Object Drawing.Size(0, 16); $relleno.BackColor = $cCian; $pista.Controls.Add($relleno)
 $lbPct = Etiqueta '0 %' 700 166 44 20 $cCian $null; $lbPct.Anchor = 'Top,Right'; $p3.Controls.Add($lbPct)
-$rtLog = New-Object Windows.Forms.RichTextBox; $rtLog.Location = New-Object Drawing.Point(4, 196); $rtLog.Size = New-Object Drawing.Size(730, 152); $rtLog.ReadOnly = $true
+$rtLog = New-Object Windows.Forms.RichTextBox; $rtLog.Location = New-Object Drawing.Point(4, 196); $rtLog.Size = New-Object Drawing.Size(730, 100); $rtLog.ReadOnly = $true
 $rtLog.BackColor = [Drawing.Color]::FromArgb(7, 10, 14); $rtLog.ForeColor = $cGris; $rtLog.Font = & $fMono 8.5 'Regular'; $rtLog.BorderStyle = 'None'; $rtLog.Anchor = 'Top,Left,Right,Bottom'; $p3.Controls.Add($rtLog)
 
 # pagina 4: fin
@@ -323,7 +326,30 @@ $bAtras = Boton '< Atrás' 328; $bSig = Boton 'Siguiente >' 468; $bCan = Boton '
 foreach ($b in $bAtras, $bSig, $bCan) { $b.Anchor = 'Bottom,Right' }
 $f.Controls.AddRange(@($bAtras, $bSig, $bCan))
 $estado = @{ pagina = 1; pyw = $null; trabajando = $false; pct = 0 }
-$pista.Add_Resize({ $relleno.Width = [int]($pista.Width * $estado.pct / 100) })
+$pista.Add_Resize({ $relleno.Size = New-Object Drawing.Size([int]($pista.Width * $estado.pct / 100), $pista.Height) })
+
+# escalado: cada control guarda su tamano de diseno; al cambiar la ventana todo se redimensiona por igual (letra incluida) y se centra
+function Registrar($c) { foreach ($h in $c.Controls) { if ($h -eq $relleno) { continue }; $h.Tag = @{ B = $h.Bounds; F = $h.Font.Size }; $h.Anchor = 'Top,Left'; Registrar $h } }
+function Escalar($c, $s, $ox) {
+    foreach ($h in $c.Controls) {
+        if ($h.Tag -isnot [hashtable]) { continue }
+        $b = $h.Tag.B
+        $x = [int]($b.X * $s) + $(if ($c -eq $f) { $ox } else { 0 })
+        $h.Bounds = New-Object Drawing.Rectangle($x, [int]($b.Y * $s), [int]($b.Width * $s), [int]($b.Height * $s))
+        $tam = [single]($h.Tag.F * $s)
+        if ([Math]::Abs($h.Font.Size - $tam) -gt 0.05) { $h.Font = New-Object Drawing.Font($h.Font.FontFamily, $tam, $h.Font.Style) }
+        Escalar $h $s 0
+    }
+}
+function Reajustar {
+    $w = $f.ClientSize.Width; $h = $f.ClientSize.Height
+    if ($w -lt 50 -or $h -lt 50) { return }
+    $s = [Math]::Min($w / $DW, $h / $DH)
+    $f.SuspendLayout(); Escalar $f $s ([int](($w - $DW * $s) / 2)); $f.ResumeLayout()
+}
+Registrar $f
+$f.Add_Resize({ Reajustar })
+$f.Add_Shown({ Reajustar })
 
 function Pintar-Paso($k, $e) {
     $glifo, $col = switch ($e) { 'ok' { '[ OK ]', $cVerde } 'curso' { '[ >> ]', $cCian } 'fallo' { '[FAIL]', $cRojo } 'aviso' { '[WARN]', $cOro } default { '[    ]', $cGris } }
