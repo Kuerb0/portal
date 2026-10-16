@@ -113,13 +113,13 @@
     "guia": {
       "requisitos": "Windows 10 u 11 e internet para descargar los precios. No hace falta tener Python: el instalador lo busca o lo instala dentro de su carpeta.",
       "pasos": [
-        "Descarga el Instalador y haz doble clic en él, en una carpeta donde puedas escribir. Si Windows avisa, pulsa «Más información → Ejecutar de todas formas».",
+        "Descarga el Instalador (.exe) y ábrelo: sale una ventana que te deja elegir la carpeta y los accesos directos. Si Windows avisa, pulsa «Más información → Ejecutar de todas formas».",
         "Cuando acabe, abre la app desde el acceso directo del Escritorio: sale una ventana y un icono en la bandeja.",
         "Elige origen, destinos y fechas y descarga los precios de vuelos, hoteles y trenes desde Madrid.",
         "Compara en Resumen, Buscador, Favoritos, Evolución, Calendario y Mapa.",
         "Para una versión nueva, ejecuta el Actualizador en la misma carpeta: cambia el programa y respeta tus datos."
       ],
-      "datos": "Tus descargas y ajustes se quedan en la carpeta de la app; no se envían a ningún sitio."
+      "datos": "Tus descargas y ajustes se quedan en la carpeta de la app; no se envían a ningún sitio. Para quitarlo, usa «Aplicaciones» de Windows (queda registrado un desinstalador)."
     }
   },
   {
@@ -158,13 +158,13 @@
     "guia": {
       "requisitos": "Windows 10 u 11. Internet para los datos de mercado (si falla, usa la última copia guardada). No hace falta tener Python.",
       "pasos": [
-        "Descarga el Instalador y haz doble clic en él. Si Windows avisa, pulsa «Más información → Ejecutar de todas formas».",
+        "Descarga el Instalador (.exe) y ábrelo: sale una ventana que te deja elegir la carpeta y los accesos directos. Si Windows avisa, pulsa «Más información → Ejecutar de todas formas».",
         "Abre la app desde el acceso directo del Escritorio (te pregunta si quieres que arranque con Windows).",
         "Elige una página: Hipoteca, Cartera, Comparador, Mercado, Plazos y riesgo, Ahorrador, Asignador o Test de riesgo.",
         "Rellena tus datos: los resultados se recalculan solos. «Actualizar datos», en la barra lateral, trae los últimos precios.",
         "Para una versión nueva, ejecuta el Actualizador en la misma carpeta."
       ],
-      "datos": "Perfiles, ajustes y copias de los datos de mercado se guardan en la carpeta de la app."
+      "datos": "Perfiles, ajustes y copias de los datos de mercado se guardan en la carpeta de la app. Para quitarlo, usa «Aplicaciones» de Windows (queda registrado un desinstalador)."
     }
   },
   {
@@ -197,13 +197,13 @@
     "guia": {
       "requisitos": "Windows 10 u 11 y una fuente de eventos: Outlook clásico instalado o el enlace ICS de tu calendario de Outlook web. No hace falta tener Python.",
       "pasos": [
-        "Descarga el Instalador y haz doble clic en él, en una carpeta tuya (por ejemplo Documentos\\Calendario). Si Windows avisa, pulsa «Más información → Ejecutar de todas formas».",
+        "Descarga el Instalador (.exe) y ábrelo: sale una ventana que te deja elegir la carpeta y los accesos directos. Si Windows avisa, pulsa «Más información → Ejecutar de todas formas».",
         "Se abre el asistente: elige de dónde leer los eventos, tus festivos y cómo verlo. Al guardar, aparece el widget en el escritorio.",
         "Cambia de vista (horas, lista, mes) desde la barra. El botón ⚙ abre el Panel de control y Ctrl+K la paleta de comandos.",
         "Clic derecho en un evento para ponerle una alarma, editarlo o abrirlo en Outlook.",
         "Para una versión nueva, ejecuta el Actualizador en la misma carpeta: conserva tu configuración y tus perfiles."
       ],
-      "datos": "Todo queda en la carpeta elegida (datos\\config.json). No se envía ningún dato."
+      "datos": "Todo queda en la carpeta elegida (datos\\config.json). No se envía ningún dato. Para quitarlo, usa «Aplicaciones» de Windows (queda registrado un desinstalador)."
     }
   },
   {
@@ -289,13 +289,13 @@
     "guia": {
       "requisitos": "Windows 10 u 11. No hace falta tener Python: el instalador lo busca o lo instala dentro de su carpeta.",
       "pasos": [
-        "Descarga el Instalador y haz doble clic en él. Si Windows avisa, pulsa «Más información → Ejecutar de todas formas».",
+        "Descarga el Instalador (.exe) y ábrelo: sale una ventana que te deja elegir la carpeta y los accesos directos. Si Windows avisa, pulsa «Más información → Ejecutar de todas formas».",
         "Abre el Apagador desde el acceso directo del Escritorio.",
         "Elige «duración» (minutos) o «hora exacta» y pulsa Programar.",
         "Verás la cuenta atrás. Pulsa Cancelar en cualquier momento para anular el apagado.",
         "Para una versión nueva, ejecuta el Actualizador en la misma carpeta."
       ],
-      "datos": "No guarda datos personales."
+      "datos": "No guarda datos personales. Para quitarlo, usa «Aplicaciones» de Windows (queda registrado un desinstalador)."
     }
   },
   {
@@ -316,7 +316,7 @@
     "descargas": [
       {
         "texto": "Instalador",
-        "archivo": "descargas/Post-It - Instalador.bat"
+        "archivo": "descargas/Post-It 1.0.0 - Instalador.exe"
       },
       {
         "texto": "Actualizador",
@@ -325,15 +325,15 @@
     ],
     "flujograma": "flujogramas/post-it.svg",
     "guia": {
-      "requisitos": "Windows 10 u 11 y Node.js (nodejs.org). Descarga Electron, unos 300 MB, en tu carpeta de datos locales.",
+      "requisitos": "Windows 10 u 11 e internet la primera vez (descarga Electron, unos 150 MB). No hace falta Node.js.",
       "pasos": [
-        "Instala Node.js si no lo tienes y ejecuta el Instalador. Si Windows avisa, pulsa «Más información → Ejecutar de todas formas».",
-        "Se crea el acceso directo «Post-its» y la app arranca sola con Windows; vive en la bandeja.",
+        "Descarga el Instalador (.exe) y ábrelo: sale una ventana que te deja elegir la carpeta y los accesos directos. Si Windows avisa, pulsa «Más información → Ejecutar de todas formas».",
+        "Se crea el acceso directo «Post-it» y la app arranca sola con Windows; vive en la bandeja.",
         "Una nota por ventana: cambia su color, hazla translúcida o ponla encima o debajo del resto.",
         "Las tareas llevan casilla; con @diario, @semanal o @lunes… vuelven a salir al marcarlas.",
         "Para una versión nueva, ejecuta el Actualizador."
       ],
-      "datos": "Las notas están en notes.json, en OneDrive: se sincronizan entre tus equipos."
+      "datos": "Las notas están en notes.json, en OneDrive: se sincronizan entre tus equipos. Para quitarlo, usa «Aplicaciones» de Windows (queda registrado un desinstalador)."
     }
   }
 ]
