@@ -4,12 +4,6 @@ setlocal EnableExtensions
 title Viajes 1.7.0 - Instalador
 color 0F
 
-powershell -NoProfile -ExecutionPolicy Bypass -Command "[Console]::OutputEncoding=[Text.Encoding]::UTF8; $l=[IO.File]::ReadAllLines('%~f0',[Text.Encoding]::UTF8); $a=[Array]::IndexOf($l,':::BANNERSTART'); $b=[Array]::IndexOf($l,':::BANNEREND'); foreach($t in $l[($a+1)..($b-1)]){ $p=$t.Split([char]0xA7); Write-Host -NoNewline $p[0] -ForegroundColor DarkCyan; if($p.Length -gt 1){ Write-Host -NoNewline 'O' -ForegroundColor DarkYellow; Write-Host $p[1] -ForegroundColor DarkCyan } else { Write-Host '' } }; $a=[Array]::IndexOf($l,':::TITULOSTART'); $b=[Array]::IndexOf($l,':::TITULOEND'); $l[($a+1)..($b-1)] | ForEach-Object { Write-Host $_ -ForegroundColor White }"
-echo.
-echo   Abriendo el asistente de instalacion...
-echo   ^(si no aparece, mira detras de esta ventana; con -Silencioso se instala sin ventana^)
-echo.
-
 set "SELF=%~f0"
 set "SELF_DIR=%~dp0"
 if "%SELF_DIR:~-1%"=="\" set "SELF_DIR=%SELF_DIR:~0,-1%"
@@ -26,6 +20,15 @@ if not exist "%WORKDIR%\instalador.ps1" (
     exit /b 1
 )
 
+rem Con ventana (lo normal): el asistente se abre solo y esta consola se cierra; el cuervo va en la ventana.
+rem Con -Silencioso se instala aqui mismo, en la consola, con el banner.
+echo %* | findstr /i /c:"-Silencioso" >nul && goto :consola
+start "" powershell -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -STA -File "%WORKDIR%\instalador.ps1" -Self "%SELF%" -DirPorDefecto "%INSTALL_DIR%" -LimpiarTemp %*
+exit /b 0
+
+:consola
+powershell -NoProfile -ExecutionPolicy Bypass -Command "[Console]::OutputEncoding=[Text.Encoding]::UTF8; $l=[IO.File]::ReadAllLines('%~f0',[Text.Encoding]::UTF8); $a=[Array]::IndexOf($l,':::BANNERSTART'); $b=[Array]::IndexOf($l,':::BANNEREND'); foreach($t in $l[($a+1)..($b-1)]){ $p=$t.Split([char]0xA7); Write-Host -NoNewline $p[0] -ForegroundColor DarkCyan; if($p.Length -gt 1){ Write-Host -NoNewline 'O' -ForegroundColor DarkYellow; Write-Host $p[1] -ForegroundColor DarkCyan } else { Write-Host '' } }; $a=[Array]::IndexOf($l,':::TITULOSTART'); $b=[Array]::IndexOf($l,':::TITULOEND'); $l[($a+1)..($b-1)] | ForEach-Object { Write-Host $_ -ForegroundColor White }"
+echo.
 powershell -NoProfile -ExecutionPolicy Bypass -STA -File "%WORKDIR%\instalador.ps1" -Self "%SELF%" -DirPorDefecto "%INSTALL_DIR%" %*
 set "RC=%ERRORLEVEL%"
 rmdir /s /q "%WORKDIR%" >nul 2>&1
@@ -40,10 +43,11 @@ exit /b %RC%
 #   -SinRed       no descarga Python ni instala librerias      -SinAccesos   ni accesos directos ni desinstalador
 #   -NombreAcceso <texto>   nombre de los accesos directos (por defecto, el del programa)
 #   -Captura <carpeta>      guarda una imagen de cada pagina de la ventana y sale
+#   -LimpiarTemp            (lo pone el .bat) borra al terminar la carpeta temporal donde esta este script
 param(
     [string]$Self, [string]$DirPorDefecto, [string]$Destino,
     [switch]$Silencioso, [switch]$SinRed, [switch]$SinAccesos,
-    [string]$NombreAcceso, [string]$Captura)
+    [string]$NombreAcceso, [string]$Captura, [switch]$LimpiarTemp)
 
 $App = @{ Nombre = 'Viajes'; Version = '1.7.0'; Comprueba = 'py\app_vuelos.py'; Lanzador = 'py\vuelos_app.pyw'
           Reqs = 'py\requirements.txt'; Icono = 'assets\vuelos.ico'; Imports = 'streamlit, plotly, pandas, pyarrow, fast_flights, primp, pystray, PIL, selectolax'; PipExtra = 'pywebview'; ExtraImport = 'webview'
@@ -380,6 +384,7 @@ if ($Captura) {
 }
 Ir 1
 [void]$f.ShowDialog()
+if ($LimpiarTemp) { Remove-Item -LiteralPath (Split-Path -Parent $PSCommandPath) -Recurse -Force -ErrorAction SilentlyContinue }   # el .bat ya se ha cerrado: limpia su carpeta temporal
 :::PSEND
 
 :::BANNERSTART
