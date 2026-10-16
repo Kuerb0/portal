@@ -6,20 +6,9 @@ color 0F
 
 powershell -NoProfile -ExecutionPolicy Bypass -Command "[Console]::OutputEncoding=[Text.Encoding]::UTF8; $l=[IO.File]::ReadAllLines('%~f0',[Text.Encoding]::UTF8); $a=[Array]::IndexOf($l,':::BANNERSTART'); $b=[Array]::IndexOf($l,':::BANNEREND'); foreach($t in $l[($a+1)..($b-1)]){ $p=$t.Split([char]0xA7); Write-Host -NoNewline $p[0] -ForegroundColor DarkCyan; if($p.Length -gt 1){ Write-Host -NoNewline 'O' -ForegroundColor DarkYellow; Write-Host $p[1] -ForegroundColor DarkCyan } else { Write-Host '' } }; $a=[Array]::IndexOf($l,':::TITULOSTART'); $b=[Array]::IndexOf($l,':::TITULOEND'); $l[($a+1)..($b-1)] | ForEach-Object { Write-Host $_ -ForegroundColor White }"
 echo.
-echo Esto va a:
-echo   1. Copiar el programa en esta carpeta ^(subcarpetas py, assets...^)
-echo   2. Buscar Python o, si no hay, instalar uno EN ESTA CARPETA
-echo      ^(no hace falta ser administrador^)
-echo   3. Instalar las librerias que necesita el programa
-echo   4. Crear un acceso directo en el Escritorio
-echo   5. Preguntarte si quieres que arranque solo con Windows
-echo   6. Abrir la app
+echo   Abriendo el asistente de instalacion...
+echo   ^(si no aparece, mira detras de esta ventana; con -Silencioso se instala sin ventana^)
 echo.
-echo Tus datos ^(csv\, config_vuelos.json...^) no se tocan si ya existen.
-echo Todo se queda dentro de esta carpeta. No se manda ni se guarda
-echo ningun dato tuyo en ningun sitio ajeno.
-echo.
-pause
 
 set "SELF=%~f0"
 set "SELF_DIR=%~dp0"
@@ -28,172 +17,369 @@ for %%I in ("%SELF_DIR%") do set "SELF_NAME=%%~nxI"
 set "INSTALL_DIR=%SELF_DIR%"
 if /i "%SELF_NAME%"=="instaladores" for %%I in ("%SELF_DIR%\..") do set "INSTALL_DIR=%%~fI"
 set "WORKDIR=%TEMP%\viajes_instalador_%RANDOM%"
+mkdir "%WORKDIR%" >nul 2>&1
 
-echo prueba > "%INSTALL_DIR%\.prueba_escritura" 2>nul
-if not exist "%INSTALL_DIR%\.prueba_escritura" (
-    echo.
-    echo No puedo escribir en esta carpeta:
-    echo   %INSTALL_DIR%
-    echo Mueve este instalador a una carpeta tuya ^(por ejemplo, tu carpeta
-    echo "Vuelos" de OneDrive^) y vuelve a ejecutarlo.
-    pause
-    exit /b 1
-)
-del /f /q "%INSTALL_DIR%\.prueba_escritura" >nul 2>&1
-
-if not exist "%WORKDIR%" mkdir "%WORKDIR%" >nul 2>&1
-
-echo.
-echo [1/6] Extrayendo los ficheros del programa...
-
-powershell -NoProfile -ExecutionPolicy Bypass -Command "$l=Get-Content -LiteralPath '%SELF%' -Encoding UTF8; $s=($l | Select-String -SimpleMatch ':::PSSTART' | Select-Object -Last 1).LineNumber; $e=($l | Select-String -SimpleMatch ':::PSEND' | Select-Object -Last 1).LineNumber; $l[$s..($e-2)] | Set-Content -LiteralPath '%WORKDIR%\extraer.ps1' -Encoding UTF8"
-if not exist "%WORKDIR%\extraer.ps1" (
+powershell -NoProfile -ExecutionPolicy Bypass -Command "$l=Get-Content -LiteralPath '%SELF%' -Encoding UTF8; $s=($l | Select-String -SimpleMatch ':::PSSTART' | Select-Object -Last 1).LineNumber; $e=($l | Select-String -SimpleMatch ':::PSEND' | Select-Object -Last 1).LineNumber; $l[$s..($e-2)] | Set-Content -LiteralPath '%WORKDIR%\instalador.ps1' -Encoding UTF8"
+if not exist "%WORKDIR%\instalador.ps1" (
     echo No se ha podido preparar el instalador ^(fallo al extraer el script^).
     pause
     exit /b 1
 )
 
-powershell -NoProfile -ExecutionPolicy Bypass -File "%WORKDIR%\extraer.ps1" "%SELF%" "%INSTALL_DIR%"
-if not exist "%INSTALL_DIR%\py\app_vuelos.py" (
-    echo No se ha podido extraer py\app_vuelos.py.
-    pause
-    exit /b 1
-)
-if not exist "%INSTALL_DIR%\py\vuelos_app.pyw" (
-    echo No se ha podido extraer py\vuelos_app.pyw.
-    pause
-    exit /b 1
-)
-if not exist "%INSTALL_DIR%\csv" mkdir "%INSTALL_DIR%\csv" >nul 2>&1
-
-echo.
-echo [2/6] Buscando Python ^(3.10 o superior^)...
-
-set "PYEXE="
-if exist "%INSTALL_DIR%\python\python.exe" call :probar "%INSTALL_DIR%\python\python.exe"
-if not defined PYEXE for /f "delims=" %%P in ('py -3 -c "import sys; print(sys.executable)" 2^>nul') do if not defined PYEXE call :probar "%%P"
-if not defined PYEXE for /f "delims=" %%P in ('python -c "import sys; print(sys.executable)" 2^>nul') do if not defined PYEXE call :probar "%%P"
-
-if defined PYEXE goto :python_encontrado
-
-echo       No hay un Python valido: se va a descargar e instalar DENTRO
-echo       DE ESTA CARPETA ^(subcarpeta "python"^).
-echo       ^(puede tardar 1-2 minutos; se necesita conexion a internet^)
-set "PYINSTALLER=%WORKDIR%\python-instalador.exe"
-powershell -NoProfile -ExecutionPolicy Bypass -File "%INSTALL_DIR%\herramientas\descargar_python.ps1" "%PYINSTALLER%"
-if not exist "%PYINSTALLER%" goto :error_descarga_python
-
-"%PYINSTALLER%" /quiet TargetDir="%INSTALL_DIR%\python" InstallAllUsers=0 PrependPath=0 Include_pip=1 Include_tcltk=1 Include_test=0 Include_launcher=0
-if exist "%INSTALL_DIR%\python\python.exe" set "PYEXE=%INSTALL_DIR%\python\python.exe"
-if not defined PYEXE goto :error_instalacion_python
-echo       Python instalado en esta carpeta.
-goto :python_encontrado
-
-:error_descarga_python
-echo.
-echo No se ha podido descargar Python. Revisa la conexion a internet
-echo e intentalo de nuevo, o instala Python tu mismo desde python.org
-echo ^(marcando "Add python.exe to PATH"^) y vuelve a ejecutar este instalador.
-pause
-exit /b 1
-
-:error_instalacion_python
-echo.
-echo Algo ha fallado instalando Python en esta carpeta. Cierra esta
-echo ventana y vuelve a ejecutar el instalador: si Python quedo a
-echo medias, borra la subcarpeta "python" antes de reintentar.
-pause
-exit /b 1
-
-:python_encontrado
-set "PYWEXE=%PYEXE:python.exe=pythonw.exe%"
-echo       Python: %PYEXE%
-
-echo.
-echo [3/6] Instalando las librerias necesarias ^(puede tardar un minuto^)...
-"%PYEXE%" -m pip install --upgrade pip >nul 2>&1
-"%PYEXE%" -m pip install --disable-pip-version-check --no-warn-script-location -r "%INSTALL_DIR%\py\requirements.txt"
-if errorlevel 1 (
-    echo.
-    echo Alguna libreria no se ha podido instalar. Revisa el mensaje de
-    echo arriba ^(suele ser falta de conexion a internet^) y vuelve a
-    echo ejecutar este instalador: lo que ya se instalo no se repite.
-    pause
-    exit /b 1
-)
-
-echo       Comprobando que todo carga...
-"%PYEXE%" -c "import streamlit, plotly, pandas, pyarrow, fast_flights, primp, pystray, PIL, selectolax" >nul 2>&1
-if errorlevel 1 (
-    echo.
-    echo AVISO: alguna libreria no carga bien. El programa puede arrancar,
-    echo pero conviene volver a ejecutar el instalador.
-    echo.
-)
-"%PYEXE%" -c "import webview" >nul 2>&1
-if errorlevel 1 (
-    echo       Instalando pywebview ^(ventana propia; si falla, se usara Edge^)...
-    "%PYEXE%" -m pip install --disable-pip-version-check --no-warn-script-location pywebview >nul 2>&1
-)
-
-echo.
-echo [4/6] Creando el acceso directo del Escritorio...
-powershell -NoProfile -ExecutionPolicy Bypass -Command "$w=New-Object -ComObject WScript.Shell; $s=$w.CreateShortcut((Join-Path $w.SpecialFolders('Desktop') 'Viajes.lnk')); $s.TargetPath='%PYWEXE%'; $s.Arguments='\"%INSTALL_DIR%\py\vuelos_app.pyw\"'; $s.WorkingDirectory='%INSTALL_DIR%\py'; $s.IconLocation='%INSTALL_DIR%\assets\vuelos.ico'; $s.Description='Viajes 1.7.0'; $s.Save()"
-
-echo.
-echo [5/6] Arranque con Windows
-choice /c SN /n /m "Quieres que Viajes arranque solo al encender el ordenador? [S/N] "
-if errorlevel 2 goto :sin_arranque
-powershell -NoProfile -ExecutionPolicy Bypass -Command "$w=New-Object -ComObject WScript.Shell; $s=$w.CreateShortcut((Join-Path $w.SpecialFolders('Startup') 'Viajes.lnk')); $s.TargetPath='%PYWEXE%'; $s.Arguments='\"%INSTALL_DIR%\py\vuelos_app.pyw\"'; $s.WorkingDirectory='%INSTALL_DIR%\py'; $s.IconLocation='%INSTALL_DIR%\assets\vuelos.ico'; $s.WindowStyle=7; $s.Description='Viajes 1.7.0'; $s.Save()"
-echo       Hecho: arrancara solo al iniciar sesion.
-:sin_arranque
-
-echo.
-echo [6/6] Instalacion terminada. Todo ha quedado en esta carpeta:
-echo   %INSTALL_DIR%
-echo.
-pause
-start "" "%PYWEXE%" "%INSTALL_DIR%\py\vuelos_app.pyw"
-
+powershell -NoProfile -ExecutionPolicy Bypass -STA -File "%WORKDIR%\instalador.ps1" -Self "%SELF%" -DirPorDefecto "%INSTALL_DIR%" %*
+set "RC=%ERRORLEVEL%"
 rmdir /s /q "%WORKDIR%" >nul 2>&1
-exit /b 0
-
-:probar
-"%~1" -c "import sys; sys.exit(0 if sys.version_info >= (3, 10) else 1)" >nul 2>&1
-if not errorlevel 1 set "PYEXE=%~1"
-exit /b 0
+if not "%RC%"=="0" pause
+exit /b %RC%
 
 :::PSSTART
-param([string]$self, [string]$dest)
-$enc = New-Object System.Text.UTF8Encoding($false)
-$lines = [System.IO.File]::ReadAllLines($self, $enc)
-$i = 0
-while ($i -lt $lines.Length) {
-    $l = $lines[$i]
-    if ($l.StartsWith(':::BEGIN ')) {
-        $partes = $l.Substring(9).Trim().Split('|')
-        $rel = $partes[0]
-        $modo = $partes[1]
-        $j = $i + 1
-        $buf = New-Object System.Collections.Generic.List[string]
-        while ($j -lt $lines.Length -and -not $lines[$j].StartsWith(':::END')) {
-            $buf.Add($lines[$j])
-            $j++
-        }
-        $destino = Join-Path $dest $rel
-        $carpeta = Split-Path -Parent $destino
-        if (-not (Test-Path -LiteralPath $carpeta)) {
-            New-Item -ItemType Directory -Path $carpeta -Force | Out-Null
-        }
-        if ($modo -eq 'b64') {
-            [System.IO.File]::WriteAllBytes($destino, [Convert]::FromBase64String(($buf -join '')))
-        } else {
-            [System.IO.File]::WriteAllText($destino, (($buf -join "`r`n") + "`r`n"), $enc)
-        }
-        $i = $j
-    }
-    $i++
+# Asistente de instalacion de Viajes 1.7.0 (Windows PowerShell 5.1, ventana WinForms).
+# Lo arranca el .bat con:  -Self <ruta del .bat> -DirPorDefecto <carpeta>   (el .bat lleva los ficheros del programa dentro).
+# Opciones para pruebas o instalacion sin ventana:
+#   -Silencioso -Destino <carpeta>   instala sin ventana, con las opciones por defecto
+#   -SinRed       no descarga Python ni instala librerias      -SinAccesos   ni accesos directos ni desinstalador
+#   -NombreAcceso <texto>   nombre de los accesos directos (por defecto, el del programa)
+#   -Captura <carpeta>      guarda una imagen de cada pagina de la ventana y sale
+param(
+    [string]$Self, [string]$DirPorDefecto, [string]$Destino,
+    [switch]$Silencioso, [switch]$SinRed, [switch]$SinAccesos,
+    [string]$NombreAcceso, [string]$Captura)
+
+$App = @{ Nombre = 'Viajes'; Version = '1.7.0'; Comprueba = 'py\app_vuelos.py'; Lanzador = 'py\vuelos_app.pyw'
+          Reqs = 'py\requirements.txt'; Icono = 'assets\vuelos.ico'; Imports = 'streamlit, plotly, pandas, pyarrow, fast_flights, primp, pystray, PIL, selectolax'; PipExtra = 'pywebview'; ExtraImport = 'webview'
+          Datos = 'csv\, config_vuelos.json...'; Carpetas = @('csv'); Programa = @('py', 'assets', 'herramientas') }
+if (-not $NombreAcceso) { $NombreAcceso = $App.Nombre }
+$CuervoPng = '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'      # el cuervo del banner (lo dibuja generar_instaladores.py a partir de plantillas/cuervo.txt)
+$NombrePng = 'iVBORw0KGgoAAAANSUhEUgAAAYoAAABgCAYAAAAD1jVAAAAEnElEQVR42u3dMW4cNxQG4F+GuvgqEVIG0AKB2611C7lwZx/BPsCewqnVRgEkwKWxp0mXFJIBx1CysndmyUd+XyMVAobz9GbfEuTwnV3c3fyd47zab7a3aaT1+HuP3wLjW1vT/GltgPzNyPklPg9eBAAUCgAUCgAUCgAUCgA6c7bSqv79frPdpMaukaPG33v8iu7aOFn+pP6upx7zd5j8Ep8H51l4e9XF3c1Vkjcpuj2swfirx8/9i5/4DB6fJQrFHxd3N19+3yW5LRao1uOvHj/3L37iM3h8XixUkc6SfChcUVuOv3r83L/4ic/g8bGYDUAUCgAUCgAUCgAaWGLX0y95WCn/LclPSf5K8nOhGLQe/1HXH2Cf99e7LpLk+pv7mvp02Qmev1MRnyPiY0YBwOozis+PP/9M8jLJpyS/FopB6/G3vv7s/TCqGzp/FiQ+R8THjAKAWMwGQKEAQKEAQKEAIAPueiJD9EV4n+Rt+n/PIpmoX4X8WdROfH4sPgoF/0qU/Wb7urPtsfoJTJw/K3xgX4nP98dHoeCpRPmonwCD5M9T7sXn++KjUNB7K9ZX+8329nHq/tK/Ritb8YnFbAAUCgAUCgAUCgDiPYroRzHB9Q/1g9BvQf62zJ/q/Uh6f76eFV8zCgD0o9CPIvotiA/EGgUACgUACgUACgUACgUAsesJIPqRzBBfhQLomX4kHcRXoQCqfOPVj6RRfK1RAL1/4z1L8kEo2sVXoQAgCgUACgUACgUAqfkexaHz1o86T/6E57bP2o8iI/dbWCB/eu+HMEv+eD4a5o8ZBQD/P6N43BqVi7ub93k4z/42yZsvb+Z11Ilp7W+Es/ajWPUb8wL5o9/CxPnT+vk89PnY2qmeLzMKAGIxGwCFAgCFAgCFAoAUeY/icsHdTl2cJ/+4a+HtgT/bzZoIz4wPtMyfXp7PywF2gx5XKPab7e9JztZ6YanxefK7/Wb7+kDCX038vB+MT8cvTDJg/vT2fH77+TjA9tgfKhTXF3c31xn4PPnHRPt44M/uJ/5m+Jz4QMv8afV8rvH5WGtGsd9s3yV5t9YRCF+9sNIDrRRPFB8zCvkzgv/6fJxlRmExGwCFAgCFAgCFAoAU7UeRI/tVZPLz7Fv3E+i9n0Hr8T31HlD0a+ju+c4ap9tOsBlDPwoATjCjKNCvovd+E+m8n8DnkeMzQL+V6vlN6vczMaMAIBazAVAoAFAoAFAoAMgg71F0dx67fhOM3E9Afqd0P5zpCsUK/Sqi3wRp1E+gWMGQ3yndD2eaQtH9eez6TTByPwH5XbsfzvCFYsV+FXEePq36CRQ9okF+1+6HE4vZACgUACgUAKBQAJAu+lFk8n4TVcbfe/yq/3/dv/iVjY8ZBQDrzigOnfd/Qk3O41/w/lfpt9A6fhONr2R+F7r/JvETHzMKAGIxGwCFAgCFAgCFAoBM9R5Fq/P+d8X7HewGuf6s4xslvy+LHpbY+/NVNj7na5/3nzbHMKeXfgenHn/r688+vur53fv9t47frPE5H/S8//vi/Q7ui17f+Grnd/l+HUWer1nzCwAAAAAAAAAAAAB68A8hTQQ+ifwm1wAAAABJRU5ErkJggg=='      # el nombre del programa en letras grandes
+$Pasos = @('Extraer los ficheros del programa', 'Buscar Python 3.10+ (o instalarlo en la carpeta)', 'Instalar las librerías necesarias',
+           'Comprobar que todo carga', 'Crear los accesos directos', 'Registrar el desinstalador')
+
+# ---- desinstalador: se escribe en %LOCALAPPDATA% al instalar (con @DIR@ etc. ya sustituidos), asi no ensucia la carpeta del programa
+$PlantillaDes = @'
+param([switch]$Silencioso, [switch]$ConDatos)
+Add-Type -AssemblyName System.Windows.Forms
+$Dir = '@DIR@'; $Nombre = '@NOMBRE@'; $Acceso = '@ACCESO@'; $Programa = @(@PROGRAMA@); $Reg = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\@NOMBRE@'
+$git = Test-Path -LiteralPath (Join-Path $Dir '.git')
+if (-not $Silencioso) {
+    $t = "Se van a quitar los accesos directos de $Nombre y su entrada en Aplicaciones de Windows."
+    if ($git) { $t += "`n`nEsta carpeta es de desarrollo (tiene git): sus ficheros no se borran." } else { $t += "`n`nTambién se borrará el programa de:`n$Dir`n`nTus datos se conservan salvo que lo pidas en la siguiente pregunta." }
+    if ([Windows.Forms.MessageBox]::Show($t + "`n`n¿Desinstalar?", "Desinstalar $Nombre", 'YesNo', 'Question') -ne 'Yes') { return }
+    if (-not $git -and [Windows.Forms.MessageBox]::Show("¿Borrar también tus datos (descargas, ajustes...)?`nSi dices que no, se quedan en la carpeta.", "Desinstalar $Nombre", 'YesNo', 'Warning') -eq 'Yes') { $ConDatos = $true }
 }
+Get-CimInstance Win32_Process -ErrorAction SilentlyContinue | Where-Object { $_.ProcessId -ne $PID -and $_.CommandLine -and $_.CommandLine -like "*$Dir*" } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
+$w = New-Object -ComObject WScript.Shell
+foreach ($c in 'Desktop', 'Programs', 'Startup') { $f = Join-Path $w.SpecialFolders($c) "$Acceso.lnk"; if (Test-Path -LiteralPath $f) { Remove-Item -LiteralPath $f -Force } }
+Remove-Item -Path $Reg -Recurse -Force -ErrorAction SilentlyContinue
+if (-not $git -and (Test-Path -LiteralPath $Dir)) {
+    if ($ConDatos) { Remove-Item -LiteralPath $Dir -Recurse -Force -ErrorAction SilentlyContinue }
+    else {
+        foreach ($p in $Programa + 'python') { $r = Join-Path $Dir $p; if (Test-Path -LiteralPath $r) { Remove-Item -LiteralPath $r -Recurse -Force -ErrorAction SilentlyContinue } }
+        if (-not (Get-ChildItem -LiteralPath $Dir -Force)) { Remove-Item -LiteralPath $Dir -Force -ErrorAction SilentlyContinue }
+    }
+}
+if (-not $Silencioso) { [void][Windows.Forms.MessageBox]::Show("$Nombre se ha desinstalado.", "Desinstalar $Nombre", 'OK', 'Information') }
+'@
+
+# ---- el trabajo de instalar corre en otro hilo (runspace) y avisa a la ventana por una cola
+$Trabajo = {
+    param($Q, $O, $App, $Self, $PlantillaDes, $Acceso)
+    $ErrorActionPreference = 'Continue'
+    $ProgressPreference = 'SilentlyContinue'
+    try { [Console]::OutputEncoding = [Text.Encoding]::UTF8 } catch { }
+    $env:PYTHONIOENCODING = 'utf-8'
+    $R = @{ rc = 0 }
+    function Msg($t, $a, $b) { $Q.Enqueue([pscustomobject]@{ T = $t; A = $a; B = $b }) }
+    function Log($s) { Msg 'log' $s }
+    function Paso($i, $e) { Msg 'paso' $i $e }
+    function Prog($p) { Msg 'prog' $p }
+    function Ejecutar($exe, [string[]]$a) { & $exe @a 2>&1 | ForEach-Object { $s = "$_".TrimEnd(); if ($s) { Log $s } }; $R.rc = $LASTEXITCODE }
+    function Probar($e) { if (-not $e -or -not (Test-Path -LiteralPath $e)) { return $false }; try { & $e -c "import sys; sys.exit(0 if sys.version_info >= (3, 10) else 1)" 2>$null | Out-Null; return ($LASTEXITCODE -eq 0) } catch { return $false } }
+    $dest = $O.Dest
+    $paso = 0
+    try {
+        # 1. extraer
+        Paso 0 'curso'; Prog 3
+        New-Item -ItemType Directory -Path $dest -Force | Out-Null
+        $prueba = Join-Path $dest '.prueba_escritura'
+        Set-Content -LiteralPath $prueba -Value 'x' -ErrorAction Stop; Remove-Item -LiteralPath $prueba -Force
+        $enc = New-Object Text.UTF8Encoding($false)
+        $lineas = [IO.File]::ReadAllLines($Self, $enc)
+        $i = 0; $n = 0
+        while ($i -lt $lineas.Length) {
+            $l = $lineas[$i]
+            if ($l.StartsWith(':::BEGIN ')) {
+                $p = $l.Substring(9).Trim().Split('|'); $rel = $p[0]; $modo = $p[1]
+                $j = $i + 1; $buf = New-Object System.Collections.Generic.List[string]
+                while ($j -lt $lineas.Length -and -not $lineas[$j].StartsWith(':::END')) { $buf.Add($lineas[$j]); $j++ }
+                $d = Join-Path $dest $rel
+                $c = Split-Path -Parent $d
+                if (-not (Test-Path -LiteralPath $c)) { New-Item -ItemType Directory -Path $c -Force | Out-Null }
+                if ($modo -eq 'b64') { [IO.File]::WriteAllBytes($d, [Convert]::FromBase64String(($buf -join ''))) }
+                else { [IO.File]::WriteAllText($d, (($buf -join "`r`n") + "`r`n"), $enc) }
+                $n++; Log "  $rel"
+                $i = $j
+            }
+            $i++
+        }
+        if (-not (Test-Path -LiteralPath (Join-Path $dest $App.Comprueba))) { throw "No se ha podido extraer $($App.Comprueba)." }
+        foreach ($c in $App.Carpetas) { New-Item -ItemType Directory -Path (Join-Path $dest $c) -Force | Out-Null }
+        Log "$n ficheros en $dest"; Paso 0 'ok'; Prog 15
+
+        # 2. python
+        $paso = 1; Paso 1 'curso'
+        $py = $null
+        $cand = @(Join-Path $dest 'python\python.exe')
+        if (Get-Command py -ErrorAction SilentlyContinue) { $cand += ("$(& py -3 -c 'import sys; print(sys.executable)' 2>$null)").Trim() }
+        if (Get-Command python -ErrorAction SilentlyContinue) { $cand += ("$(& python -c 'import sys; print(sys.executable)' 2>$null)").Trim() }
+        foreach ($e in $cand) { if (-not $py -and (Probar $e)) { $py = $e } }
+        if (-not $py) {
+            if ($O.SinRed) { throw 'No hay un Python 3.10 o superior (y está activado -SinRed).' }
+            Log 'No hay un Python válido: se descarga e instala DENTRO de la carpeta (subcarpeta python).'
+            Log '(puede tardar 1-2 minutos; hace falta internet)'
+            $inst = Join-Path $env:TEMP 'python-instalador.exe'
+            & powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $dest 'herramientas\descargar_python.ps1') $inst 2>&1 | ForEach-Object { Log "$_" }
+            if (-not (Test-Path -LiteralPath $inst)) { throw 'No se ha podido descargar Python. Revisa la conexión a internet y vuelve a intentarlo.' }
+            Start-Process -FilePath $inst -ArgumentList @('/quiet', "TargetDir=$dest\python", 'InstallAllUsers=0', 'PrependPath=0', 'Include_pip=1', 'Include_tcltk=1', 'Include_test=0', 'Include_launcher=0') -Wait
+            $py = Join-Path $dest 'python\python.exe'
+            if (-not (Test-Path -LiteralPath $py)) { throw 'Ha fallado la instalación de Python en la carpeta. Borra la subcarpeta python y vuelve a intentarlo.' }
+        }
+        Log "Python: $py"; Paso 1 'ok'; Prog 30
+
+        # 3. librerias
+        $paso = 2; Paso 2 'curso'
+        if ($O.SinRed) { Log 'Omitido (-SinRed).'; Paso 2 'aviso' }
+        else {
+            Ejecutar $py @('-m', 'pip', 'install', '--upgrade', 'pip', '--disable-pip-version-check', '-q')
+            Ejecutar $py @('-m', 'pip', 'install', '--disable-pip-version-check', '--no-warn-script-location', '-r', (Join-Path $dest $App.Reqs))
+            if ($R.rc -ne 0) { throw 'Alguna librería no se ha podido instalar (suele ser falta de conexión). Vuelve a ejecutar el instalador: lo ya instalado no se repite.' }
+            Paso 2 'ok'
+        }
+        Prog 70
+
+        # 4. comprobar
+        $paso = 3; Paso 3 'curso'
+        Ejecutar $py @('-c', "import $($App.Imports)")
+        if ($R.rc -ne 0) { Log 'Alguna librería no carga bien: el programa puede arrancar, pero conviene volver a ejecutar el instalador.'; Paso 3 'aviso' }
+        elseif ($App.PipExtra) {
+            Ejecutar $py @('-c', "import $($App.ExtraImport)")
+            if ($R.rc -ne 0 -and -not $O.SinRed) { Log "Instalando $($App.PipExtra) (ventana propia; si falla se usará Edge)..."; Ejecutar $py @('-m', 'pip', 'install', '--disable-pip-version-check', '--no-warn-script-location', $App.PipExtra) }
+            Paso 3 'ok'
+        } else { Paso 3 'ok' }
+        Prog 80
+
+        # 5. accesos
+        $paso = 4; Paso 4 'curso'
+        $pyw = $py -replace 'python\.exe$', 'pythonw.exe'
+        $lanza = Join-Path $dest $App.Lanzador
+        if ($O.SinAccesos) { Log 'Omitido (-SinAccesos).'; Paso 4 'aviso' }
+        else {
+            $w = New-Object -ComObject WScript.Shell
+            function Acceso($carpeta, $oculto) {
+                $s = $w.CreateShortcut((Join-Path $w.SpecialFolders($carpeta) "$Acceso.lnk"))
+                $s.TargetPath = $pyw; $s.Arguments = '"' + $lanza + '"'; $s.WorkingDirectory = (Split-Path -Parent $lanza)
+                $s.IconLocation = (Join-Path $dest $App.Icono); $s.Description = "$($App.Nombre) $($App.Version)"
+                if ($oculto) { $s.WindowStyle = 7 }
+                $s.Save(); Log "Acceso: $carpeta\$Acceso.lnk"
+            }
+            if ($O.Escritorio) { Acceso 'Desktop' $false }
+            if ($O.Inicio) { Acceso 'Programs' $false }
+            if ($O.Arranque) { Acceso 'Startup' $true }
+            Paso 4 'ok'
+        }
+        Prog 92
+
+        # 6. desinstalador (en %LOCALAPPDATA%) y entrada en Aplicaciones de Windows
+        $paso = 5; Paso 5 'curso'
+        if ($O.SinAccesos) { Paso 5 'aviso' }
+        else {
+            $dd = Join-Path $env:LOCALAPPDATA "$($App.Nombre)\Desinstalar"
+            New-Item -ItemType Directory -Path $dd -Force | Out-Null
+            $prog = ($App.Programa | ForEach-Object { "'$_'" }) -join ', '
+            $txt = $PlantillaDes.Replace('@DIR@', $dest).Replace('@NOMBRE@', $App.Nombre).Replace('@ACCESO@', $Acceso).Replace('@PROGRAMA@', $prog)
+            [IO.File]::WriteAllText((Join-Path $dd 'desinstalar.ps1'), $txt, (New-Object Text.UTF8Encoding($true)))
+            [IO.File]::WriteAllText((Join-Path $dd 'Desinstalar.bat'), "@echo off`r`npowershell -NoProfile -ExecutionPolicy Bypass -STA -File `"%~dp0desinstalar.ps1`" %*`r`n", (New-Object Text.UTF8Encoding($false)))
+            $k = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\$($App.Nombre)"
+            New-Item -Path $k -Force | Out-Null
+            $v = @{ DisplayName = "$($App.Nombre) $($App.Version)"; DisplayVersion = $App.Version; Publisher = 'Kuerb0'; InstallLocation = $dest
+                    DisplayIcon = (Join-Path $dest $App.Icono); UninstallString = '"' + (Join-Path $dd 'Desinstalar.bat') + '"' }
+            foreach ($nombre in $v.Keys) { Set-ItemProperty -Path $k -Name $nombre -Value $v[$nombre] }
+            Set-ItemProperty -Path $k -Name NoModify -Value 1 -Type DWord; Set-ItemProperty -Path $k -Name NoRepair -Value 1 -Type DWord
+            Log "Desinstalador: $dd"; Paso 5 'ok'
+        }
+        Prog 100
+        Msg 'fin' $true $pyw
+    } catch {
+        Log "ERROR: $($_.Exception.Message)"
+        Paso $paso 'fallo'
+        Msg 'fin' $false $null
+    }
+}
+
+# ---- opciones de partida
+$dir0 = if ($Destino) { $Destino } else { $DirPorDefecto }
+$Opc = @{ Dest = $dir0; Escritorio = $true; Inicio = $true; Arranque = $false; SinRed = [bool]$SinRed; SinAccesos = [bool]$SinAccesos }
+$Q = New-Object 'System.Collections.Concurrent.ConcurrentQueue[object]'
+
+function Lanzar-Trabajo {
+    $script:ps = [powershell]::Create()
+    [void]$script:ps.AddScript($Trabajo.ToString()).AddArgument($Q).AddArgument($Opc).AddArgument($App).AddArgument($Self).AddArgument($PlantillaDes).AddArgument($NombreAcceso)
+    $script:h = $script:ps.BeginInvoke()
+}
+
+if ($Silencioso) {
+    Lanzar-Trabajo
+    $ok = $false
+    while (-not $h.IsCompleted -or -not $Q.IsEmpty) {
+        $m = $null
+        while ($Q.TryDequeue([ref]$m)) {
+            switch ($m.T) { 'log' { Write-Host "  $($m.A)" } 'paso' { if ($m.B -ne 'curso') { Write-Host ("[{0}] {1}" -f $m.B, $Pasos[$m.A]) } } 'fin' { $ok = $m.A } }
+        }
+        Start-Sleep -Milliseconds 150
+    }
+    exit $(if ($ok) { 0 } else { 1 })
+}
+
+# ---- ventana
+Add-Type -AssemblyName System.Windows.Forms, System.Drawing
+[Windows.Forms.Application]::EnableVisualStyles()
+$cFondo = [Drawing.Color]::FromArgb(11, 15, 20); $cPanel = [Drawing.Color]::FromArgb(17, 23, 30); $cCian = [Drawing.Color]::FromArgb(46, 196, 182)
+$cOro = [Drawing.Color]::FromArgb(224, 165, 38); $cBlanco = [Drawing.Color]::FromArgb(242, 245, 247); $cGris = [Drawing.Color]::FromArgb(139, 152, 165)
+$cVerde = [Drawing.Color]::FromArgb(61, 220, 132); $cRojo = [Drawing.Color]::FromArgb(255, 92, 92)
+$fMono = { param($t, $s) New-Object Drawing.Font('Consolas', [single]$t, [Drawing.FontStyle]$s) }
+
+$f = New-Object Windows.Forms.Form
+$f.Text = "Instalador de $($App.Nombre) $($App.Version)"; $f.ClientSize = New-Object Drawing.Size(780, 640); $f.StartPosition = 'CenterScreen'
+$f.FormBorderStyle = 'FixedDialog'; $f.MaximizeBox = $false; $f.BackColor = $cFondo; $f.ForeColor = $cGris; $f.Font = & $fMono 10 'Regular'
+$ico = Join-Path (Split-Path -Parent $Self) $App.Icono
+if (Test-Path -LiteralPath $ico) { try { $f.Icon = New-Object Drawing.Icon($ico) } catch { } }
+
+function Etiqueta($texto, $x, $y, $w, $h, $color, $fuente) {
+    $l = New-Object Windows.Forms.Label; $l.Text = $texto; $l.Location = New-Object Drawing.Point($x, $y); $l.Size = New-Object Drawing.Size($w, $h)
+    $l.ForeColor = $color; $l.BackColor = [Drawing.Color]::Transparent; if ($fuente) { $l.Font = $fuente }; return $l
+}
+function Boton($texto, $x) {
+    $b = New-Object Windows.Forms.Button; $b.Text = $texto; $b.Size = New-Object Drawing.Size(130, 34); $b.Location = New-Object Drawing.Point($x, 592)
+    $b.FlatStyle = 'Flat'; $b.FlatAppearance.BorderColor = $cCian; $b.BackColor = $cFondo; $b.ForeColor = $cCian; $b.Cursor = 'Hand'
+    $b.FlatAppearance.MouseOverBackColor = [Drawing.Color]::FromArgb(20, 44, 48); return $b
+}
+
+# cabecera: el cuervo a la izquierda; a la derecha el nombre en letras grandes, que es el instalador y la version
+function Imagen($b64, $x, $y) {
+    $i = [Drawing.Image]::FromStream((New-Object IO.MemoryStream(, [Convert]::FromBase64String($b64))))
+    $p = New-Object Windows.Forms.PictureBox; $p.Image = $i; $p.SizeMode = 'AutoSize'; $p.Location = New-Object Drawing.Point($x, $y); $p.BackColor = $cFondo; $f.Controls.Add($p); return $i
+}
+$iCuervo = Imagen $CuervoPng 18 10
+$xd = 18 + $iCuervo.Width + 26
+$null = Imagen $NombrePng $xd 28
+$f.Controls.Add((Etiqueta 'INSTALADOR' $xd 142 200 30 $cBlanco (& $fMono 18 'Bold')))
+$f.Controls.Add((Etiqueta "V E R S I Ó N   $($App.Version)" ($xd + 200) 150 300 22 $cCian (& $fMono 11 'Regular')))
+$f.Controls.Add((Etiqueta "KUERB0  ·  Without data, you’re just another person with an opinion" $xd 178 (762 - $xd) 18 $cGris (& $fMono 8.5 'Italic')))
+$linea = New-Object Windows.Forms.Panel; $linea.Location = New-Object Drawing.Point(18, 202); $linea.Size = New-Object Drawing.Size(744, 2); $linea.BackColor = $cCian; $f.Controls.Add($linea)
+
+function Pagina { $p = New-Object Windows.Forms.Panel; $p.Location = New-Object Drawing.Point(18, 214); $p.Size = New-Object Drawing.Size(744, 352); $p.BackColor = $cFondo; $p.Visible = $false; $f.Controls.Add($p); return $p }
+$p1 = Pagina; $p2 = Pagina; $p3 = Pagina; $p4 = Pagina
+
+# pagina 1: bienvenida
+$p1.Controls.Add((Etiqueta "Bienvenido al instalador de $($App.Nombre). Esto va a:" 4 4 730 24 $cBlanco (& $fMono 11 'Bold')))
+$p1.Controls.Add((Etiqueta ("  [1] Copiar el programa en la carpeta que elijas`r`n  [2] Buscar Python 3.10+ o, si no hay, instalar uno EN ESA CARPETA`r`n        (no hace falta ser administrador)`r`n  [3] Instalar las librerías que necesita el programa`r`n  [4] Crear los accesos directos que quieras`r`n  [5] Dejar un desinstalador en «Aplicaciones» de Windows") 4 44 730 130 $cGris $null))
+$p1.Controls.Add((Etiqueta ("Tus datos ($($App.Datos)) no se tocan si ya existen.`r`nTodo se queda en la carpeta elegida. No se manda ni se guarda`r`nningún dato tuyo en ningún sitio ajeno.") 4 200 730 70 $cVerde $null))
+
+# pagina 2: opciones
+$p2.Controls.Add((Etiqueta 'Carpeta de instalación' 4 4 730 24 $cBlanco (& $fMono 11 'Bold')))
+$tbDir = New-Object Windows.Forms.TextBox; $tbDir.Location = New-Object Drawing.Point(4, 38); $tbDir.Size = New-Object Drawing.Size(590, 26); $tbDir.Text = $Opc.Dest
+$tbDir.BackColor = $cPanel; $tbDir.ForeColor = $cBlanco; $tbDir.BorderStyle = 'FixedSingle'; $p2.Controls.Add($tbDir)
+$bExam = Boton 'Examinar...' 604; $bExam.Location = New-Object Drawing.Point(604, 34); $bExam.Size = New-Object Drawing.Size(130, 30); $p2.Controls.Add($bExam)
+$bExam.Add_Click({ $d = New-Object Windows.Forms.FolderBrowserDialog; $d.SelectedPath = $tbDir.Text; if ($d.ShowDialog() -eq 'OK') { $tbDir.Text = $d.SelectedPath } })
+$p2.Controls.Add((Etiqueta 'Elige una carpeta donde puedas escribir (una de OneDrive también vale).' 4 70 730 20 $cGris (& $fMono 9 'Italic')))
+$p2.Controls.Add((Etiqueta 'Accesos directos' 4 118 730 24 $cBlanco (& $fMono 11 'Bold')))
+function Casilla($texto, $y, $marcada) { $c = New-Object Windows.Forms.CheckBox; $c.Text = $texto; $c.Location = New-Object Drawing.Point(8, $y); $c.Size = New-Object Drawing.Size(720, 26); $c.Checked = $marcada; $c.ForeColor = $cBlanco; $c.FlatStyle = 'Flat'; $c.Cursor = 'Hand'; $p2.Controls.Add($c); return $c }
+$ckEsc = Casilla 'Acceso directo en el Escritorio' 150 $true
+$ckIni = Casilla 'Entrada en el menú Inicio' 180 $true
+$ckArr = Casilla "Arrancar $($App.Nombre) solo al encender el ordenador" 210 $false
+
+# pagina 3: instalando
+$lbPasos = @()
+for ($k = 0; $k -lt $Pasos.Count; $k++) { $l = Etiqueta "" 4 (4 + 26 * $k) 730 22 $cGris $null; $p3.Controls.Add($l); $lbPasos += $l }
+$pista = New-Object Windows.Forms.Panel; $pista.Location = New-Object Drawing.Point(4, 168); $pista.Size = New-Object Drawing.Size(690, 16); $pista.BackColor = $cPanel; $p3.Controls.Add($pista)
+$relleno = New-Object Windows.Forms.Panel; $relleno.Location = New-Object Drawing.Point(0, 0); $relleno.Size = New-Object Drawing.Size(0, 16); $relleno.BackColor = $cCian; $pista.Controls.Add($relleno)
+$lbPct = Etiqueta '0 %' 700 166 44 20 $cCian $null; $p3.Controls.Add($lbPct)
+$rtLog = New-Object Windows.Forms.RichTextBox; $rtLog.Location = New-Object Drawing.Point(4, 196); $rtLog.Size = New-Object Drawing.Size(730, 152); $rtLog.ReadOnly = $true
+$rtLog.BackColor = [Drawing.Color]::FromArgb(7, 10, 14); $rtLog.ForeColor = $cGris; $rtLog.Font = & $fMono 8.5 'Regular'; $rtLog.BorderStyle = 'None'; $p3.Controls.Add($rtLog)
+
+# pagina 4: fin
+$lbFin = Etiqueta '' 4 4 730 30 $cVerde (& $fMono 14 'Bold'); $p4.Controls.Add($lbFin)
+$lbFin2 = Etiqueta '' 4 50 730 120 $cGris $null; $p4.Controls.Add($lbFin2)
+$ckAbrir = New-Object Windows.Forms.CheckBox; $ckAbrir.Text = "Abrir $($App.Nombre) al terminar"; $ckAbrir.Location = New-Object Drawing.Point(8, 190); $ckAbrir.Size = New-Object Drawing.Size(500, 26)
+$ckAbrir.Checked = $true; $ckAbrir.ForeColor = $cBlanco; $ckAbrir.FlatStyle = 'Flat'; $ckAbrir.Cursor = 'Hand'; $p4.Controls.Add($ckAbrir)
+
+$bAtras = Boton '< Atrás' 328; $bSig = Boton 'Siguiente >' 468; $bCan = Boton 'Cancelar' 632
+$f.Controls.AddRange(@($bAtras, $bSig, $bCan))
+$estado = @{ pagina = 1; pyw = $null; trabajando = $false }
+
+function Pintar-Paso($k, $e) {
+    $glifo, $col = switch ($e) { 'ok' { '[ OK ]', $cVerde } 'curso' { '[ >> ]', $cCian } 'fallo' { '[FAIL]', $cRojo } 'aviso' { '[WARN]', $cOro } default { '[    ]', $cGris } }
+    $lbPasos[$k].Text = "$glifo  $($Pasos[$k])"; $lbPasos[$k].ForeColor = $col
+}
+function Ir($n) {
+    $estado.pagina = $n
+    $p1.Visible = ($n -eq 1); $p2.Visible = ($n -eq 2); $p3.Visible = ($n -eq 3); $p4.Visible = ($n -eq 4)
+    $bAtras.Visible = ($n -eq 2); $bCan.Visible = ($n -le 2); $bSig.Enabled = ($n -ne 3)
+    $bSig.Text = switch ($n) { 2 { 'Instalar' } 4 { 'Terminar' } default { 'Siguiente >' } }
+}
+for ($k = 0; $k -lt $Pasos.Count; $k++) { Pintar-Paso $k 'pend' }
+
+function Terminar-Pagina($ok) {
+    if ($ok) {
+        $lbFin.Text = '[ OK ]  Instalación terminada'; $lbFin.ForeColor = $cVerde
+        $lbFin2.Text = "$($App.Nombre) $($App.Version) está instalado en:`r`n  $($Opc.Dest)`r`n`r`nPuedes desinstalarlo desde «Aplicaciones» de Windows."; $ckAbrir.Visible = $true
+    } else {
+        $lbFin.Text = '[FAIL]  La instalación no se ha completado'; $lbFin.ForeColor = $cRojo
+        $lbFin2.Text = "Mira el registro de la página anterior (última línea ERROR).`r`nSuele bastar con volver a ejecutar el instalador: lo ya hecho no se repite."; $ckAbrir.Visible = $false
+    }
+    Ir 4
+}
+
+$timer = New-Object Windows.Forms.Timer; $timer.Interval = 120
+$timer.Add_Tick({
+    $m = $null
+    while ($Q.TryDequeue([ref]$m)) {
+        switch ($m.T) {
+            'log' { $rtLog.AppendText("$($m.A)`r`n"); $rtLog.ScrollToCaret() }
+            'paso' { Pintar-Paso $m.A $m.B }
+            'prog' { $relleno.Width = [int](690 * $m.A / 100); $lbPct.Text = "$($m.A) %" }
+            'fin' { $estado.trabajando = $false; $estado.pyw = $m.B; $timer.Stop(); Terminar-Pagina $m.A }
+        }
+    }
+})
+
+$bCan.Add_Click({ $f.Close() })
+$bAtras.Add_Click({ Ir 1 })
+$bSig.Add_Click({
+    switch ($estado.pagina) {
+        1 { Ir 2 }
+        2 {
+            $d = $tbDir.Text.Trim()
+            if (-not $d -or -not [IO.Path]::IsPathRooted($d)) { [void][Windows.Forms.MessageBox]::Show('Escribe o elige una carpeta (ruta completa).', 'Carpeta', 'OK', 'Warning'); return }
+            $Opc.Dest = $d; $Opc.Escritorio = $ckEsc.Checked; $Opc.Inicio = $ckIni.Checked; $Opc.Arranque = $ckArr.Checked
+            $estado.trabajando = $true; Ir 3; $timer.Start(); Lanzar-Trabajo
+        }
+        4 { if ($ckAbrir.Checked -and $ckAbrir.Visible -and $estado.pyw) { Start-Process -FilePath $estado.pyw -ArgumentList ('"' + (Join-Path $Opc.Dest $App.Lanzador) + '"') }; $f.Close() }
+    }
+})
+$f.Add_FormClosing({ if ($estado.trabajando) { $_.Cancel = $true } })
+
+if ($Captura) {
+    New-Item -ItemType Directory -Path $Captura -Force | Out-Null
+    $f.Show(); [Windows.Forms.Application]::DoEvents()
+    function Foto($nombre) { [Windows.Forms.Application]::DoEvents(); $b = New-Object Drawing.Bitmap($f.Width, $f.Height); $f.DrawToBitmap($b, (New-Object Drawing.Rectangle(0, 0, $f.Width, $f.Height))); $b.Save((Join-Path $Captura "$nombre.png")); $b.Dispose() }
+    Ir 1; Foto '1-bienvenida'; Ir 2; Foto '2-opciones'
+    Ir 3; 0..5 | ForEach-Object { Pintar-Paso $_ $(if ($_ -lt 3) { 'ok' } elseif ($_ -eq 3) { 'curso' } else { 'pend' }) }; $relleno.Width = 380; $lbPct.Text = '55 %'
+    $rtLog.Text = "  py\app_vuelos.py`r`n  py\vuelos_app.pyw`r`n12 ficheros en C:\Programas\$($App.Nombre)`r`nPython: C:\Programas\$($App.Nombre)\python\python.exe`r`nCollecting streamlit`r`nSuccessfully installed streamlit-1.50.0"
+    Foto '3-instalando'; Terminar-Pagina $true; Foto '4-fin'; Terminar-Pagina $false; Foto '5-error'
+    $f.Dispose(); exit 0
+}
+Ir 1
+[void]$f.ShowDialog()
 :::PSEND
 
 :::BANNERSTART
