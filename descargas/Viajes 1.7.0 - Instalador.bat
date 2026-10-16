@@ -12,19 +12,22 @@ set "INSTALL_DIR=%SELF_DIR%"
 if /i "%SELF_NAME%"=="instaladores" for %%I in ("%SELF_DIR%\..") do set "INSTALL_DIR=%%~fI"
 set "WORKDIR=%TEMP%\viajes_instalador_%RANDOM%"
 mkdir "%WORKDIR%" >nul 2>&1
+set "VJ_WORK=%WORKDIR%"
+set "VJ_SELF=%SELF%"
+set "VJ_DIR=%INSTALL_DIR%"
+rem Con ventana (lo normal): PowerShell extrae el asistente y lo abre oculto; esta consola se cierra y el cuervo va en la ventana.
+rem Con -Silencioso se instala aqui mismo, en la consola, con el banner.
+set "VJ_GUI=1"
+echo %* | findstr /i /c:"-Silencioso" >nul && set "VJ_GUI="
 
-powershell -NoProfile -ExecutionPolicy Bypass -Command "$l=Get-Content -LiteralPath '%SELF%' -Encoding UTF8; $s=($l | Select-String -SimpleMatch ':::PSSTART' | Select-Object -Last 1).LineNumber; $e=($l | Select-String -SimpleMatch ':::PSEND' | Select-Object -Last 1).LineNumber; $l[$s..($e-2)] | Set-Content -LiteralPath '%WORKDIR%\instalador.ps1' -Encoding UTF8"
+powershell -NoProfile -ExecutionPolicy Bypass -Command "$l=Get-Content -LiteralPath '%SELF%' -Encoding UTF8; $s=($l | Select-String -SimpleMatch ':::PSSTART' | Select-Object -Last 1).LineNumber; $e=($l | Select-String -SimpleMatch ':::PSEND' | Select-Object -Last 1).LineNumber; $l[$s..($e-2)] | Set-Content -LiteralPath '%WORKDIR%\instalador.ps1' -Encoding UTF8; if ($env:VJ_GUI) { $q=[char]34; $a=('-NoProfile -ExecutionPolicy Bypass -STA -File '+$q+$env:VJ_WORK+'\instalador.ps1'+$q+' -Self '+$q+$env:VJ_SELF+$q+' -DirPorDefecto '+$q+$env:VJ_DIR+$q+' -LimpiarTemp'); $i=New-Object Diagnostics.ProcessStartInfo('powershell',$a); $i.UseShellExecute=$false; $i.CreateNoWindow=$true; [void][Diagnostics.Process]::Start($i) }"
 if not exist "%WORKDIR%\instalador.ps1" (
     echo No se ha podido preparar el instalador ^(fallo al extraer el script^).
     pause
     exit /b 1
 )
 
-rem Con ventana (lo normal): el asistente se abre solo y esta consola se cierra; el cuervo va en la ventana.
-rem Con -Silencioso se instala aqui mismo, en la consola, con el banner.
-echo %* | findstr /i /c:"-Silencioso" >nul && goto :consola
-start "" powershell -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -STA -File "%WORKDIR%\instalador.ps1" -Self "%SELF%" -DirPorDefecto "%INSTALL_DIR%" -LimpiarTemp %*
-exit /b 0
+if defined VJ_GUI exit /b 0
 
 :consola
 powershell -NoProfile -ExecutionPolicy Bypass -Command "[Console]::OutputEncoding=[Text.Encoding]::UTF8; $l=[IO.File]::ReadAllLines('%~f0',[Text.Encoding]::UTF8); $a=[Array]::IndexOf($l,':::BANNERSTART'); $b=[Array]::IndexOf($l,':::BANNEREND'); foreach($t in $l[($a+1)..($b-1)]){ $p=$t.Split([char]0xA7); Write-Host -NoNewline $p[0] -ForegroundColor DarkCyan; if($p.Length -gt 1){ Write-Host -NoNewline 'O' -ForegroundColor DarkYellow; Write-Host $p[1] -ForegroundColor DarkCyan } else { Write-Host '' } }; $a=[Array]::IndexOf($l,':::TITULOSTART'); $b=[Array]::IndexOf($l,':::TITULOEND'); $l[($a+1)..($b-1)] | ForEach-Object { Write-Host $_ -ForegroundColor White }"
@@ -253,7 +256,7 @@ $fMono = { param($t, $s) New-Object Drawing.Font('Consolas', [single]$t, [Drawin
 
 $f = New-Object Windows.Forms.Form
 $f.Text = "Instalador de $($App.Nombre) $($App.Version)"; $f.ClientSize = New-Object Drawing.Size(780, 640); $f.StartPosition = 'CenterScreen'
-$f.FormBorderStyle = 'FixedDialog'; $f.MaximizeBox = $false; $f.BackColor = $cFondo; $f.ForeColor = $cGris; $f.Font = & $fMono 10 'Regular'
+$f.FormBorderStyle = 'Sizable'; $f.MaximizeBox = $true; $f.MinimumSize = $f.Size; $f.BackColor = $cFondo; $f.ForeColor = $cGris; $f.Font = & $fMono 10 'Regular'
 $ico = Join-Path (Split-Path -Parent $Self) $App.Icono
 if (Test-Path -LiteralPath $ico) { try { $f.Icon = New-Object Drawing.Icon($ico) } catch { } }
 
@@ -278,9 +281,9 @@ $null = Imagen $NombrePng $xd 28
 $f.Controls.Add((Etiqueta 'INSTALADOR' $xd 142 200 30 $cBlanco (& $fMono 18 'Bold')))
 $f.Controls.Add((Etiqueta "V E R S I Ó N   $($App.Version)" ($xd + 200) 150 300 22 $cCian (& $fMono 11 'Regular')))
 $f.Controls.Add((Etiqueta "KUERB0  ·  Without data, you’re just another person with an opinion" $xd 178 (762 - $xd) 18 $cGris (& $fMono 8.5 'Italic')))
-$linea = New-Object Windows.Forms.Panel; $linea.Location = New-Object Drawing.Point(18, 202); $linea.Size = New-Object Drawing.Size(744, 2); $linea.BackColor = $cCian; $f.Controls.Add($linea)
+$linea = New-Object Windows.Forms.Panel; $linea.Location = New-Object Drawing.Point(18, 202); $linea.Size = New-Object Drawing.Size(744, 2); $linea.BackColor = $cCian; $linea.Anchor = 'Top,Left,Right'; $f.Controls.Add($linea)
 
-function Pagina { $p = New-Object Windows.Forms.Panel; $p.Location = New-Object Drawing.Point(18, 214); $p.Size = New-Object Drawing.Size(744, 352); $p.BackColor = $cFondo; $p.Visible = $false; $f.Controls.Add($p); return $p }
+function Pagina { $p = New-Object Windows.Forms.Panel; $p.Location = New-Object Drawing.Point(18, 214); $p.Size = New-Object Drawing.Size(744, 352); $p.BackColor = $cFondo; $p.Anchor = 'Top,Left,Right,Bottom'; $p.Visible = $false; $f.Controls.Add($p); return $p }
 $p1 = Pagina; $p2 = Pagina; $p3 = Pagina; $p4 = Pagina
 
 # pagina 1: bienvenida
@@ -291,8 +294,8 @@ $p1.Controls.Add((Etiqueta ("Tus datos ($($App.Datos)) no se tocan si ya existen
 # pagina 2: opciones
 $p2.Controls.Add((Etiqueta 'Carpeta de instalación' 4 4 730 24 $cBlanco (& $fMono 11 'Bold')))
 $tbDir = New-Object Windows.Forms.TextBox; $tbDir.Location = New-Object Drawing.Point(4, 38); $tbDir.Size = New-Object Drawing.Size(590, 26); $tbDir.Text = $Opc.Dest
-$tbDir.BackColor = $cPanel; $tbDir.ForeColor = $cBlanco; $tbDir.BorderStyle = 'FixedSingle'; $p2.Controls.Add($tbDir)
-$bExam = Boton 'Examinar...' 604; $bExam.Location = New-Object Drawing.Point(604, 34); $bExam.Size = New-Object Drawing.Size(130, 30); $p2.Controls.Add($bExam)
+$tbDir.BackColor = $cPanel; $tbDir.ForeColor = $cBlanco; $tbDir.BorderStyle = 'FixedSingle'; $tbDir.Anchor = 'Top,Left,Right'; $p2.Controls.Add($tbDir)
+$bExam = Boton 'Examinar...' 604; $bExam.Location = New-Object Drawing.Point(604, 34); $bExam.Size = New-Object Drawing.Size(130, 30); $bExam.Anchor = 'Top,Right'; $p2.Controls.Add($bExam)
 $bExam.Add_Click({ $d = New-Object Windows.Forms.FolderBrowserDialog; $d.SelectedPath = $tbDir.Text; if ($d.ShowDialog() -eq 'OK') { $tbDir.Text = $d.SelectedPath } })
 $p2.Controls.Add((Etiqueta 'Elige una carpeta donde puedas escribir (una de OneDrive también vale).' 4 70 730 20 $cGris (& $fMono 9 'Italic')))
 $p2.Controls.Add((Etiqueta 'Accesos directos' 4 118 730 24 $cBlanco (& $fMono 11 'Bold')))
@@ -304,11 +307,11 @@ $ckArr = Casilla "Arrancar $($App.Nombre) solo al encender el ordenador" 210 $fa
 # pagina 3: instalando
 $lbPasos = @()
 for ($k = 0; $k -lt $Pasos.Count; $k++) { $l = Etiqueta "" 4 (4 + 26 * $k) 730 22 $cGris $null; $p3.Controls.Add($l); $lbPasos += $l }
-$pista = New-Object Windows.Forms.Panel; $pista.Location = New-Object Drawing.Point(4, 168); $pista.Size = New-Object Drawing.Size(690, 16); $pista.BackColor = $cPanel; $p3.Controls.Add($pista)
+$pista = New-Object Windows.Forms.Panel; $pista.Location = New-Object Drawing.Point(4, 168); $pista.Size = New-Object Drawing.Size(690, 16); $pista.BackColor = $cPanel; $pista.Anchor = 'Top,Left,Right'; $p3.Controls.Add($pista)
 $relleno = New-Object Windows.Forms.Panel; $relleno.Location = New-Object Drawing.Point(0, 0); $relleno.Size = New-Object Drawing.Size(0, 16); $relleno.BackColor = $cCian; $pista.Controls.Add($relleno)
-$lbPct = Etiqueta '0 %' 700 166 44 20 $cCian $null; $p3.Controls.Add($lbPct)
+$lbPct = Etiqueta '0 %' 700 166 44 20 $cCian $null; $lbPct.Anchor = 'Top,Right'; $p3.Controls.Add($lbPct)
 $rtLog = New-Object Windows.Forms.RichTextBox; $rtLog.Location = New-Object Drawing.Point(4, 196); $rtLog.Size = New-Object Drawing.Size(730, 152); $rtLog.ReadOnly = $true
-$rtLog.BackColor = [Drawing.Color]::FromArgb(7, 10, 14); $rtLog.ForeColor = $cGris; $rtLog.Font = & $fMono 8.5 'Regular'; $rtLog.BorderStyle = 'None'; $p3.Controls.Add($rtLog)
+$rtLog.BackColor = [Drawing.Color]::FromArgb(7, 10, 14); $rtLog.ForeColor = $cGris; $rtLog.Font = & $fMono 8.5 'Regular'; $rtLog.BorderStyle = 'None'; $rtLog.Anchor = 'Top,Left,Right,Bottom'; $p3.Controls.Add($rtLog)
 
 # pagina 4: fin
 $lbFin = Etiqueta '' 4 4 730 30 $cVerde (& $fMono 14 'Bold'); $p4.Controls.Add($lbFin)
@@ -317,8 +320,10 @@ $ckAbrir = New-Object Windows.Forms.CheckBox; $ckAbrir.Text = "Abrir $($App.Nomb
 $ckAbrir.Checked = $true; $ckAbrir.ForeColor = $cBlanco; $ckAbrir.FlatStyle = 'Flat'; $ckAbrir.Cursor = 'Hand'; $p4.Controls.Add($ckAbrir)
 
 $bAtras = Boton '< Atrás' 328; $bSig = Boton 'Siguiente >' 468; $bCan = Boton 'Cancelar' 632
+foreach ($b in $bAtras, $bSig, $bCan) { $b.Anchor = 'Bottom,Right' }
 $f.Controls.AddRange(@($bAtras, $bSig, $bCan))
-$estado = @{ pagina = 1; pyw = $null; trabajando = $false }
+$estado = @{ pagina = 1; pyw = $null; trabajando = $false; pct = 0 }
+$pista.Add_Resize({ $relleno.Width = [int]($pista.Width * $estado.pct / 100) })
 
 function Pintar-Paso($k, $e) {
     $glifo, $col = switch ($e) { 'ok' { '[ OK ]', $cVerde } 'curso' { '[ >> ]', $cCian } 'fallo' { '[FAIL]', $cRojo } 'aviso' { '[WARN]', $cOro } default { '[    ]', $cGris } }
@@ -350,7 +355,7 @@ $timer.Add_Tick({
         switch ($m.T) {
             'log' { $rtLog.AppendText("$($m.A)`r`n"); $rtLog.ScrollToCaret() }
             'paso' { Pintar-Paso $m.A $m.B }
-            'prog' { $relleno.Width = [int](690 * $m.A / 100); $lbPct.Text = "$($m.A) %" }
+            'prog' { $estado.pct = $m.A; $relleno.Width = [int]($pista.Width * $m.A / 100); $lbPct.Text = "$($m.A) %" }
             'fin' { $estado.trabajando = $false; $estado.pyw = $m.B; $timer.Stop(); Terminar-Pagina $m.A }
         }
     }
