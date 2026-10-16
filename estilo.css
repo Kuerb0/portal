@@ -98,3 +98,23 @@ main{max-width:72rem;margin:0 auto;padding:1.6rem 1.2rem 3rem}
 .inst-app strong{font-size:.97rem}
 .inst-app small{color:var(--suave);font-size:.8rem}
 .inst-app svg{flex:none;color:var(--acento)}
+
+/* ---- flujograma de las apps de escritorio (se despliega en la tarjeta y se amplía en un visor) */
+button.boton.sec{font:inherit;font-size:.85rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:.3rem}
+.boton.sec[aria-expanded=true]{background:var(--tinte)}
+.panel-flujo{position:relative;z-index:2;border:1px solid var(--borde);border-radius:10px;overflow:hidden;background:#fff}
+.panel-flujo[hidden]{display:none}
+.visor-mini{height:13rem;overflow:auto;background:#fff}
+.visor-mini img{display:block;width:150%;max-width:none}
+.barra-flujo{display:flex;align-items:center;justify-content:space-between;padding:.3rem .6rem;background:var(--marco);font-size:.78rem;color:var(--suave)}
+.barra-flujo button{display:inline-flex;align-items:center;gap:.25rem;font:inherit;font-size:.8rem;border:0;background:none;color:var(--acento);font-weight:600;cursor:pointer}
+.visor-modal{position:fixed;inset:0;z-index:50;display:none;flex-direction:column;background:rgba(10,14,24,.78);backdrop-filter:blur(3px)}
+.visor-modal.on{display:flex}
+.visor-modal header{display:flex;align-items:center;gap:.6rem;padding:.7rem 1rem;background:var(--tarjeta);border-bottom:1px solid var(--borde)}
+.visor-modal h2{margin:0;font-size:1.05rem;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.visor-modal .btn{display:grid;place-items:center;min-width:2.1rem;height:2.1rem;padding:0 .6rem;border:1px solid var(--borde);background:var(--fondo);color:var(--texto);border-radius:8px;font:inherit;text-decoration:none;cursor:pointer}
+.visor-modal .btn:hover{border-color:var(--acento);color:var(--acento)}
+.lienzo{flex:1;overflow:hidden;position:relative;background:#fff;cursor:grab;touch-action:none}
+.lienzo.arrastra{cursor:grabbing}
+.lienzo img{position:absolute;left:0;top:0;transform-origin:0 0;user-select:none;-webkit-user-drag:none;max-width:none}
+.visor-modal footer{padding:.4rem 1rem;background:var(--tarjeta);border-top:1px solid var(--borde);font-size:.8rem;color:var(--suave)}

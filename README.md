@@ -26,3 +26,7 @@ la dirección de la app, editar `URL_APP` en `vuelos/index.html`. Dirección: <h
 Los envoltorios de estadistica/ y inanzas/ son iguales que el de uelos/ (copiar la carpeta, cambiar URL_APP, los textos, el manifiesto y los iconos). instalar.js da el botón y el aviso de instalación; el portal muestra la sección «Instálame» y es instalable (manifest.webmanifest, sw.js).
 
 `inicio/` es el envoltorio instalable del propio portal (muestra `../` en un marco y tiene su manifiesto, icono y service worker). La raíz (`/portal/`) ya no lleva manifiesto: así los ámbitos de todas las apps instalables quedan al mismo nivel.
+
+## Flujogramas de las apps de escritorio
+
+Las tarjetas con `"flujograma": "flujogramas/<app>.svg"` en `webs.json` llevan un tercer botón, «Flujograma», junto a Instalador y Actualizador: despliega el esquema en la tarjeta y «Ampliar» lo abre en un visor con zoom y arrastre. El de Viajes (App) es el `Flujograma.svg` de su repositorio; los demás se generan con `python herramientas/generar_flujogramas.py` (cada app se describe en `APPS`, dentro de ese fichero: columnas de cajas y flechas).

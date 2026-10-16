@@ -1,5 +1,5 @@
 // Dibuja una tarjeta con miniatura por cada web de webs.json. Para añadir una web basta con añadirla a ese fichero
-// (y una captura en img/, o varias en «imagenes» para una galería que va cambiando; «descargas»: lista de {texto, archivo} con botones de descarga, ficheros en descargas/). Sin url, la tarjeta sale como «En preparación». «icono» es el nombre de uno de ICONOS (o «icono_img»: el icono propio del proyecto, una imagen).
+// (y una captura en img/, o varias en «imagenes» para una galería que va cambiando; «descargas»: lista de {texto, archivo} con botones de descarga, ficheros en descargas/; «flujograma»: un SVG de flujogramas/ que se despliega en la tarjeta). Sin url, la tarjeta sale como «En preparación». «icono» es el nombre de uno de ICONOS (o «icono_img»: el icono propio del proyecto, una imagen).
 const rejilla = document.getElementById("rejilla");
 const vacio = document.getElementById("vacio");
 const buscar = document.getElementById("buscar");
@@ -21,6 +21,7 @@ const ICONOS = {
   nota: "M5 3h14a2 2 0 0 1 2 2v10l-6 6H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm9 16.5V15h4.5L14 19.5zM7 8h10v2H7V8zm0 4h6v2H7v-2z",
   descarga: "M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z",
   chevron: "M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z",
+  ampliar: "M21 11V3h-8l3.29 3.29-10 10L3 13v8h8l-3.29-3.29 10-10z",
   flecha: "M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z",
 };
 
@@ -64,7 +65,9 @@ function tarjeta(w, i) {
       <div class="titulo"><span class="ico${w.icono_img ? " propio" : ""}" aria-hidden="true">${w.icono_img ? `<img src="${esc(w.icono_img)}" alt="" width="36" height="36" loading="lazy">` : svg(w.icono, 22)}</span><h2>${esc(w.titulo)}</h2></div>
       <div class="etiquetas">${etiquetas}</div>
       <details class="mas"><summary>${svg("chevron", 20)}Descripción</summary><p>${esc(w.descripcion)}</p></details>
-      ${(w.descargas || []).length ? `<div class="descargas">${w.descargas.map(d => `<a class="boton sec" href="${esc(d.archivo)}" download="${esc(d.archivo.split("/").pop())}" title="Descarga un .bat; Windows puede avisar al abrirlo (Más información → Ejecutar de todas formas)">${svg("descarga", 18)} ${esc(d.texto)}</a>`).join("")}</div>` : ""}
+      ${(w.descargas || []).length || w.flujograma ? `<div class="descargas">${(w.descargas || []).map(d => `<a class="boton sec" href="${esc(d.archivo)}" download="${esc(d.archivo.split("/").pop())}" title="Descarga un .bat; Windows puede avisar al abrirlo (Más información → Ejecutar de todas formas)">${svg("descarga", 18)} ${esc(d.texto)}</a>`).join("")}${w.flujograma ? `<button type="button" class="boton sec flujo" data-flujo aria-expanded="false" title="Esquema de cómo funciona la app">${svg("arbol", 18)} Flujograma</button>` : ""}</div>` : ""}
+      ${w.flujograma ? `<div class="panel-flujo" hidden><div class="visor-mini"><img alt="Flujograma de ${esc(w.titulo)}" data-src="${esc(w.flujograma)}"></div>
+        <div class="barra-flujo"><span>Desplázate para ver el resto</span><button type="button" data-ampliar="${esc(w.flujograma)}" data-titulo="${esc(w.titulo)}">Ampliar ${svg("ampliar", 16)}</button></div></div>` : ""}
       <div class="pie-tarjeta">${w.url ? `<a class="boton" href="${esc(destino)}" target="_blank" rel="noopener" aria-label="${repo ? "Ver en GitHub" : "Abrir"}: ${esc(w.titulo)}">${repo ? "Ver en GitHub" : "Abrir"} ${svg("flecha", 18)}</a>` : ""}${insignia}</div>
     </div>`;
   return a;
@@ -148,3 +151,53 @@ function pintarInstalar() {
 pintarInstalar();
 
 if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
+
+// ---- flujogramas de las apps de escritorio: se despliegan en la tarjeta y se amplían en un visor con zoom y arrastre
+const visor = document.getElementById("visor"), lienzo = document.getElementById("visor-lienzo"), vimg = document.getElementById("visor-img");
+let zk = 1, zx = 0, zy = 0, zmin = 1, volver = null;
+const colocar = () => { vimg.style.transform = `translate(${zx}px,${zy}px) scale(${zk})`; };
+function ajustar() {
+  const W = lienzo.clientWidth, H = lienzo.clientHeight, w = vimg.naturalWidth || 1240, h = vimg.naturalHeight || 880;
+  vimg.style.width = w + "px"; vimg.style.height = h + "px";
+  zk = zmin = Math.min(W / w, H / h) * .98; zx = (W - w * zk) / 2; zy = (H - h * zk) / 2; colocar();
+}
+function zoom(f, cx = lienzo.clientWidth / 2, cy = lienzo.clientHeight / 2) {
+  const n = Math.min(6, Math.max(zmin * .5, zk * f)); f = n / zk;
+  zx = cx - (cx - zx) * f; zy = cy - (cy - zy) * f; zk = n; colocar();
+}
+function abrirVisor(url, titulo, opener) {
+  volver = opener;
+  document.getElementById("visor-titulo").textContent = "Flujograma · " + titulo;
+  document.getElementById("visor-abrir").href = url;
+  vimg.alt = "Flujograma de " + titulo;
+  visor.classList.add("on"); document.body.style.overflow = "hidden";
+  if (vimg.getAttribute("src") === url && vimg.complete) ajustar();
+  else { vimg.onload = ajustar; vimg.src = url; }
+  document.getElementById("visor-cerrar").focus();
+}
+function cerrarVisor() {
+  if (!visor.classList.contains("on")) return;
+  visor.classList.remove("on"); document.body.style.overflow = "";
+  if (volver) volver.focus();
+}
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-flujo]");
+  if (b) {
+    const panel = b.closest(".cuerpo").querySelector(".panel-flujo"), abre = b.getAttribute("aria-expanded") !== "true";
+    b.setAttribute("aria-expanded", abre); panel.hidden = !abre;
+    const im = panel.querySelector("img"); if (abre && !im.getAttribute("src")) im.src = im.dataset.src;       // el SVG se descarga al desplegar por primera vez
+  }
+  const a = e.target.closest("[data-ampliar]");
+  if (a) abrirVisor(a.dataset.ampliar, a.dataset.titulo, a);
+});
+document.getElementById("visor-cerrar").addEventListener("click", cerrarVisor);
+document.getElementById("visor-mas").addEventListener("click", () => zoom(1.25));
+document.getElementById("visor-menos").addEventListener("click", () => zoom(.8));
+document.getElementById("visor-ajustar").addEventListener("click", ajustar);
+addEventListener("keydown", e => { if (e.key === "Escape") cerrarVisor(); });
+addEventListener("resize", () => visor.classList.contains("on") && ajustar());
+lienzo.addEventListener("wheel", e => { e.preventDefault(); const r = lienzo.getBoundingClientRect(); zoom(e.deltaY < 0 ? 1.12 : 1 / 1.12, e.clientX - r.left, e.clientY - r.top); }, { passive: false });
+let arrastre = null;
+lienzo.addEventListener("pointerdown", e => { arrastre = { x: e.clientX - zx, y: e.clientY - zy }; lienzo.setPointerCapture(e.pointerId); lienzo.classList.add("arrastra"); });
+lienzo.addEventListener("pointermove", e => { if (arrastre) { zx = e.clientX - arrastre.x; zy = e.clientY - arrastre.y; colocar(); } });
+lienzo.addEventListener("pointerup", () => { arrastre = null; lienzo.classList.remove("arrastra"); });

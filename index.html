@@ -67,6 +67,18 @@
 <footer class="pie">
   <p>Proyectos propios hechos con Python, Streamlit, Excel y web.</p>
 </footer>
+<div class="visor-modal" id="visor" role="dialog" aria-modal="true" aria-labelledby="visor-titulo">
+  <header>
+    <h2 id="visor-titulo">Flujograma</h2>
+    <button class="btn" id="visor-menos" type="button" title="Alejar" aria-label="Alejar">−</button>
+    <button class="btn" id="visor-mas" type="button" title="Acercar" aria-label="Acercar">+</button>
+    <button class="btn" id="visor-ajustar" type="button" title="Ajustar a la ventana">Ajustar</button>
+    <a class="btn" id="visor-abrir" href="#" target="_blank" rel="noopener" title="Abrir el SVG en una pestaña">Abrir SVG</a>
+    <button class="btn" id="visor-cerrar" type="button" title="Cerrar (Esc)" aria-label="Cerrar">✕</button>
+  </header>
+  <div class="lienzo" id="visor-lienzo"><img id="visor-img" alt="" draggable="false"></div>
+  <footer>Rueda del ratón o +/− para ampliar · arrastra para moverte · Esc para cerrar</footer>
+</div>
 <script src="instalar.js"></script>
 <script src="portal.js"></script>
 <script src="fondo.js"></script>

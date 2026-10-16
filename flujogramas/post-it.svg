@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1270" height="466" viewBox="0 0 1270 466" font-family="Segoe UI, Inter, system-ui, sans-serif"><title>Post-It · flujograma v1.0.0</title>
+<defs><marker id="fw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 1 10 5 0 9z" fill="#4b8df8"/></marker><marker id="fr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 1 10 5 0 9z" fill="#1fbf9a"/></marker><marker id="frw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 1 10 5 0 9z" fill="#f5a623"/></marker><marker id="fl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 1 10 5 0 9z" fill="#a78bfa"/></marker><marker id="fc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 1 10 5 0 9z" fill="#64748b"/></marker><marker id="fx" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 1 10 5 0 9z" fill="#9ca3af"/></marker></defs>
+<rect width="1270" height="466" fill="#fff"/>
+<text x="24" y="30" font-size="16" font-weight="700" fill="#9aa3b2">Post-It · flujograma v1.0.0</text>
+<rect x="14" y="64" width="270" height="332" rx="14" fill="none" stroke="#d6dbe5" stroke-width="1.5" stroke-dasharray="6 5"/><text x="149.0" y="54" font-size="15" font-weight="600" text-anchor="middle" fill="#9aa3b2">Instalación</text>
+<rect x="338" y="64" width="270" height="332" rx="14" fill="none" stroke="#d6dbe5" stroke-width="1.5" stroke-dasharray="6 5"/><text x="473.0" y="54" font-size="15" font-weight="600" text-anchor="middle" fill="#9aa3b2">Proceso principal</text>
+<rect x="662" y="64" width="270" height="332" rx="14" fill="none" stroke="#d6dbe5" stroke-width="1.5" stroke-dasharray="6 5"/><text x="797.0" y="54" font-size="15" font-weight="600" text-anchor="middle" fill="#9aa3b2">Cada nota</text>
+<rect x="986" y="64" width="270" height="332" rx="14" fill="none" stroke="#d6dbe5" stroke-width="1.5" stroke-dasharray="6 5"/><text x="1121.0" y="54" font-size="15" font-weight="600" text-anchor="middle" fill="#9aa3b2">Datos</text>
+<path d="M274.0 170.5 C314.0 170.5 308.0 145.7 348.0 145.7" fill="none" stroke="#4b8df8" stroke-width="2"  marker-end="url(#fw)"/>
+<path d="M274.0 320.5 C314.0 320.5 308.0 195.3 348.0 195.3" fill="none" stroke="#f5a623" stroke-width="2"  marker-end="url(#frw)"/>
+<path d="M598.0 133.2 C638.0 133.2 632.0 145.0 672.0 145.0" fill="none" stroke="#a78bfa" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#fl)"/>
+<path d="M797.0 194.0 C797.0 234.0 797.0 172.0 797.0 212.0" fill="none" stroke="#64748b" stroke-width="2"  marker-end="url(#fc)"/>
+<path d="M473.0 245.0 C473.0 285.0 473.0 223.0 473.0 263.0" fill="none" stroke="#64748b" stroke-width="2"  marker-end="url(#fc)"/>
+<path d="M598.0 170.5 C777.1 170.5 816.9 153.5 996.0 153.5" fill="none" stroke="#f5a623" stroke-width="2"  marker-end="url(#frw)"/>
+<path d="M598.0 207.8 C777.1 207.8 816.9 269.5 996.0 269.5" fill="none" stroke="#f5a623" stroke-width="2"  marker-end="url(#frw)"/>
+<rect x="24" y="96" width="250" height="149" rx="10" fill="#0f766e"/>
+<text x="38" y="120" font-size="14.5" font-weight="700" fill="#fff" font-family="Consolas, monospace">instalar.bat</text>
+<text x="38" y="139" font-size="12.5" fill="#fff" opacity=".93">Comprueba que está Node.js</text>
+<text x="38" y="156" font-size="12.5" fill="#fff" opacity=".93">npm install electron en</text>
+<text x="38" y="173" font-size="12.5" fill="#fff" opacity=".93">%LOCALAPPDATA%\PostIt (fuera de</text>
+<text x="38" y="190" font-size="12.5" fill="#fff" opacity=".93">OneDrive, ~300 MB)</text>
+<text x="38" y="207" font-size="12.5" fill="#fff" opacity=".93">Crea el acceso directo «Post-its» y</text>
+<text x="38" y="224" font-size="12.5" fill="#fff" opacity=".93">el arranque con Windows</text>
+<rect x="24" y="263" width="250" height="115" rx="10" fill="#0f766e"/>
+<text x="38" y="287" font-size="14.5" font-weight="700" fill="#fff" font-family="Consolas, monospace">actualizar.bat</text>
+<text x="38" y="306" font-size="12.5" fill="#fff" opacity=".93">git pull del código y reinicia la</text>
+<text x="38" y="323" font-size="12.5" fill="#fff" opacity=".93">app</text>
+<text x="38" y="340" font-size="12.5" fill="#fff" opacity=".93">No toca tus notas: notes.json queda</text>
+<text x="38" y="357" font-size="12.5" fill="#fff" opacity=".93">fuera de git</text>
+<rect x="348" y="96" width="250" height="149" rx="10" fill="#475569"/>
+<text x="362" y="120" font-size="14.5" font-weight="700" fill="#fff">main.js (Electron)</text>
+<text x="362" y="139" font-size="12.5" fill="#fff" opacity=".93">Una sola instancia</text>
+<text x="362" y="156" font-size="12.5" fill="#fff" opacity=".93">Una ventana de 340×340 por nota;</text>
+<text x="362" y="173" font-size="12.5" fill="#fff" opacity=".93">recuerda su posición</text>
+<text x="362" y="190" font-size="12.5" fill="#fff" opacity=".93">Bandeja: Nueva nota · Mostrar todas</text>
+<text x="362" y="207" font-size="12.5" fill="#fff" opacity=".93">· Salir</text>
+<text x="362" y="224" font-size="12.5" fill="#fff" opacity=".93">Arranca con Windows</text>
+<rect x="348" y="263" width="250" height="98" rx="10" fill="#0f766e"/>
+<text x="362" y="287" font-size="14.5" font-weight="700" fill="#fff">PowerShell auxiliar</text>
+<text x="362" y="306" font-size="12.5" fill="#fff" opacity=".93">Electron no tiene «siempre debajo»:</text>
+<text x="362" y="323" font-size="12.5" fill="#fff" opacity=".93">llama a SetWindowPos(HWND_BOTTOM)</text>
+<text x="362" y="340" font-size="12.5" fill="#fff" opacity=".93">con cada ventana</text>
+<rect x="672" y="96" width="250" height="98" rx="10" fill="#2b6bd6"/>
+<text x="686" y="120" font-size="14.5" font-weight="700" fill="#fff" font-family="Consolas, monospace">preload.js</text>
+<text x="686" y="139" font-size="12.5" fill="#fff" opacity=".93">Puente con el proceso principal:</text>
+<text x="686" y="156" font-size="12.5" fill="#fff" opacity=".93">get, save, color, z, glass, cols,</text>
+<text x="686" y="173" font-size="12.5" fill="#fff" opacity=".93">new, del, close</text>
+<rect x="672" y="212" width="250" height="149" rx="10" fill="#1f9a52"/>
+<text x="686" y="236" font-size="14.5" font-weight="700" fill="#fff" font-family="Consolas, monospace">note.html</text>
+<text x="686" y="255" font-size="12.5" fill="#fff" opacity=".93">Editor de la nota con casillas de</text>
+<text x="686" y="272" font-size="12.5" fill="#fff" opacity=".93">tarea</text>
+<text x="686" y="289" font-size="12.5" fill="#fff" opacity=".93">Tareas repetibles: @diario @semanal</text>
+<text x="686" y="306" font-size="12.5" fill="#fff" opacity=".93">@lunes…</text>
+<text x="686" y="323" font-size="12.5" fill="#fff" opacity=".93">Color, cristal (65 %), encima o</text>
+<text x="686" y="340" font-size="12.5" fill="#fff" opacity=".93">debajo, columnas</text>
+<rect x="996" y="96" width="250" height="115" rx="10" fill="#eef1f6" stroke="#c9d1e0" stroke-width="1.5"/>
+<text x="1010" y="120" font-size="14.5" font-weight="700" fill="#1f2937" font-family="Consolas, monospace">notes.json</text>
+<text x="1010" y="139" font-size="12.5" fill="#1f2937" opacity=".93">Las notas, en OneDrive: se</text>
+<text x="1010" y="156" font-size="12.5" fill="#1f2937" opacity=".93">sincronizan entre equipos</text>
+<text x="1010" y="173" font-size="12.5" fill="#1f2937" opacity=".93">Se vigila cada 3 s: si OneDrive trae</text>
+<text x="1010" y="190" font-size="12.5" fill="#1f2937" opacity=".93">cambios, se recargan</text>
+<rect x="996" y="229" width="250" height="81" rx="10" fill="#eef1f6" stroke="#c9d1e0" stroke-width="1.5"/>
+<text x="1010" y="253" font-size="14.5" font-weight="700" fill="#1f2937" font-family="Consolas, monospace">pos.json</text>
+<text x="1010" y="272" font-size="12.5" fill="#1f2937" opacity=".93">Posición y tamaño de cada ventana</text>
+<text x="1010" y="289" font-size="12.5" fill="#1f2937" opacity=".93">(en este equipo)</text>
+<rect x="258.8" y="149.1" width="104.5" height="17" rx="5" fill="#fff" opacity=".92"/><text x="311.0" y="162.1" font-size="11.5" text-anchor="middle" fill="#4b8df8">instala y lanza</text>
+<rect x="277.6" y="248.9" width="66.7" height="17" rx="5" fill="#fff" opacity=".92"/><text x="311.0" y="261.9" font-size="11.5" text-anchor="middle" fill="#f5a623">actualiza</text>
+<rect x="585.9" y="130.1" width="98.2" height="17" rx="5" fill="#fff" opacity=".92"/><text x="635.0" y="143.1" font-size="11.5" text-anchor="middle" fill="#a78bfa">abre cada nota</text>
+<rect x="782.5" y="194.0" width="28.9" height="17" rx="5" fill="#fff" opacity=".92"/><text x="797.0" y="207.0" font-size="11.5" text-anchor="middle" fill="#64748b">IPC</text>
+<rect x="414.4" y="245.0" width="117.1" height="17" rx="5" fill="#fff" opacity=".92"/><text x="473.0" y="258.0" font-size="11.5" text-anchor="middle" fill="#64748b">ventanas «debajo»</text>
+<rect x="741.6" y="153.0" width="110.8" height="17" rx="5" fill="#fff" opacity=".92"/><text x="797.0" y="166.0" font-size="11.5" text-anchor="middle" fill="#f5a623">guarda y recarga</text>
+<line x1="24" y1="438" x2="58" y2="438" stroke="#4b8df8" stroke-width="2.5"/><text x="66" y="442" font-size="12.5" fill="#9aa3b2">escribe / genera</text>
+<line x1="206" y1="438" x2="240" y2="438" stroke="#f5a623" stroke-width="2.5"/><text x="248" y="442" font-size="12.5" fill="#9aa3b2">lee y escribe</text>
+<line x1="367" y1="438" x2="401" y2="438" stroke="#a78bfa" stroke-width="2.5" stroke-dasharray="6 5"/><text x="409" y="442" font-size="12.5" fill="#9aa3b2">lanza / abre</text>
+<line x1="521" y1="438" x2="555" y2="438" stroke="#64748b" stroke-width="2.5"/><text x="563" y="442" font-size="12.5" fill="#9aa3b2">llama a</text>
+</svg>
