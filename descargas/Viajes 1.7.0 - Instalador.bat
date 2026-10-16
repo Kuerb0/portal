@@ -38,7 +38,7 @@ echo.
 powershell -NoProfile -ExecutionPolicy Bypass -STA -File "%WORKDIR%\instalador.ps1" -Self "%SELF%" -DirPorDefecto "%INSTALL_DIR%" %*
 set "RC=%ERRORLEVEL%"
 rmdir /s /q "%WORKDIR%" >nul 2>&1
-if not "%RC%"=="0" pause
+rem (sin pause: -Silencioso es para scripts y no debe quedarse esperando una tecla)
 exit /b %RC%
 
 :::PSSTART
@@ -177,6 +177,10 @@ $Trabajo = {
                 if (-not (Test-Path -LiteralPath $c)) { New-Item -ItemType Directory -Path $c -Force | Out-Null }
                 if ($modo -eq 'b64') { [IO.File]::WriteAllBytes($d, [Convert]::FromBase64String(($buf -join ''))) }
                 else { [IO.File]::WriteAllText($d, (($buf -join "`r`n") + "`r`n"), $enc) }
+                if ($p.Length -gt 2 -and $p[2]) {
+                    $h = (Get-FileHash -LiteralPath $d -Algorithm SHA256).Hash.ToLower()
+                    if ($h -ne $p[2]) { throw "El fichero $rel no coincide con el original (¿descarga incompleta o dañada?). Descarga el instalador otra vez." }
+                }
                 $n++; Log "  $rel"
                 $i = $j
             }
@@ -184,7 +188,7 @@ $Trabajo = {
         }
         if (-not (Test-Path -LiteralPath (Join-Path $dest $App.Comprueba))) { throw "No se ha podido extraer $($App.Comprueba)." }
         foreach ($c in $App.Carpetas) { New-Item -ItemType Directory -Path (Join-Path $dest $c) -Force | Out-Null }
-        Log "$n ficheros en $dest"; Paso 1 'ok'; Prog 18; Cancelado
+        Log "$n ficheros en $dest (verificados con SHA-256)"; Paso 1 'ok'; Prog 18; Cancelado
 
         # 2. python
         $paso = 2; Paso 2 'curso'
@@ -288,7 +292,13 @@ $Trabajo = {
 }
 
 # ---- opciones de partida
-$dir0 = if ($Destino) { $Destino } else { $DirPorDefecto }
+function Carpeta-Por-Defecto {
+    if ($Destino) { return $Destino }
+    if ((Split-Path -Leaf (Split-Path -Parent $Self)) -eq 'instaladores') { return $DirPorDefecto }     # dentro de un repositorio: la carpeta del programa
+    try { $ya = (Get-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\$($App.Nombre)" -ErrorAction Stop).InstallLocation; if ($ya -and (Test-Path -LiteralPath $ya)) { return $ya } } catch { }
+    return (Join-Path $env:LOCALAPPDATA "Programs\$($App.Nombre)")        # no la carpeta de Descargas desde donde se ejecuta el .bat
+}
+$dir0 = Carpeta-Por-Defecto
 $LogPath = Join-Path $env:LOCALAPPDATA "$($App.Nombre)\instalacion.log"
 New-Item -ItemType Directory -Path (Split-Path -Parent $LogPath) -Force | Out-Null; Set-Content -LiteralPath $LogPath -Value '' -Encoding UTF8
 $Opc = @{ Dest = $dir0; Escritorio = $true; Inicio = $true; Arranque = $false; SinRed = [bool]$SinRed; SinAccesos = [bool]$SinAccesos; Log = $LogPath; Cancelar = $false }
@@ -393,6 +403,10 @@ $ckAbrir = New-Object Windows.Forms.CheckBox; $ckAbrir.Text = "Abrir $($App.Nomb
 $ckAbrir.Checked = $true; $ckAbrir.ForeColor = $cBlanco; $ckAbrir.FlatStyle = 'Flat'; $ckAbrir.Cursor = 'Hand'; $p4.Controls.Add($ckAbrir)
 $bVer = Boton 'Ver registro' 4; $bVer.Location = New-Object Drawing.Point(4, 236); $bVer.Size = New-Object Drawing.Size(170, 32); $p4.Controls.Add($bVer)
 $bCopiar = Boton 'Copiar registro' 184; $bCopiar.Location = New-Object Drawing.Point(184, 236); $bCopiar.Size = New-Object Drawing.Size(190, 32); $p4.Controls.Add($bCopiar)
+$bCarp = Boton 'Abrir carpeta' 384; $bCarp.Location = New-Object Drawing.Point(384, 236); $bCarp.Size = New-Object Drawing.Size(170, 32); $p4.Controls.Add($bCarp)
+$bGuia = Boton 'Guía rápida' 564; $bGuia.Location = New-Object Drawing.Point(564, 236); $bGuia.Size = New-Object Drawing.Size(170, 32); $p4.Controls.Add($bGuia)
+$bCarp.Add_Click({ Start-Process explorer.exe -ArgumentList ('"' + $Opc.Dest + '"') })
+$bGuia.Add_Click({ Start-Process 'https://kuerb0.github.io/portal/' })
 $bVer.Add_Click({ Start-Process notepad.exe -ArgumentList ('"' + $LogPath + '"') })
 $bCopiar.Add_Click({ try { Set-Clipboard -Value (Get-Content -LiteralPath $LogPath -Raw -Encoding UTF8); $bCopiar.Text = '¡Copiado!' } catch { $bCopiar.Text = 'No se pudo copiar' } })
 
@@ -463,6 +477,7 @@ function Pedir-Cancelar {
 
 function Terminar-Pagina($ok, $motivo) {
     $bCan.Enabled = $true; $bCan.Text = 'Cancelar'
+    $bCarp.Visible = [bool]$ok; $bGuia.Visible = [bool]$ok
     if ($ok) {
         $lbFin.Text = '[ OK ]  Instalación terminada'; $lbFin.ForeColor = $cVerde
         $lbFin2.Text = "$($App.Nombre) $($App.Version) está instalado en:`r`n  $($Opc.Dest)`r`n`r`nPuedes desinstalarlo desde «Aplicaciones» de Windows."; $ckAbrir.Visible = $true
@@ -494,6 +509,7 @@ $timer.Add_Tick({
 })
 
 $bCan.Add_Click({ if ($estado.trabajando) { Pedir-Cancelar } else { $f.Close() } })
+$f.AcceptButton = $bSig; $f.CancelButton = $bCan      # Intro = siguiente, Esc = cancelar
 $bAtras.Add_Click({ Ir 1 })
 $bSig.Add_Click({
     switch ($estado.pagina) {
@@ -611,7 +627,7 @@ if ($LimpiarTemp) { Remove-Item -LiteralPath (Split-Path -Parent $PSCommandPath)
                                                                     V E R S I Ó N   1.7.0
 :::TITULOEND
 
-:::BEGIN py/app_vuelos.py|text
+:::BEGIN py/app_vuelos.py|text|d6ae394eea91f98077c6b353b584decb59c9114f4e2a4be2b99735a813aaa0ae
 """
 Viajes — app tipo "Power BI" para elaborar presupuestos de viaje (vuelos, trenes y alojamiento)
 
@@ -7395,7 +7411,7 @@ if (_mt := mt_estable(HISTORICO, "mt_hist_fav")) != st.session_state.get("toast_
 
 pg.run()
 :::END
-:::BEGIN py/vuelos_madrid.py|text
+:::BEGIN py/vuelos_madrid.py|text|7ac6dd30f5d8e892e8a256a1c383a54dd265547c1f487b847d2fcd71f7ab4155
 """
 Descarga el precio más barato de vuelo de SOLO IDA para cada día del próximo año:
   - IDA:    Madrid (MAD) -> destino
@@ -8653,7 +8669,7 @@ def main():
 if __name__ == "__main__":
     main()
 :::END
-:::BEGIN py/hoteles_madrid.py|text
+:::BEGIN py/hoteles_madrid.py|text|d0958c0ad05eb1ac4a4d2c9c8eb85ef8ae71a4204480599c098221ba32a6b377
 """
 Descarga precios de alojamiento (Google Hotels) para los mismos destinos que los vuelos.
 
@@ -9314,7 +9330,7 @@ def main():
 if __name__ == "__main__":
     main()
 :::END
-:::BEGIN py/trenes_madrid.py|text
+:::BEGIN py/trenes_madrid.py|text|10809dc361f4dbd4eb88eb1f932b573e7245d7ee307cb36bf519f5b185c044bc
 """
 Descarga precios de tren (Renfe + Ouigo) desde Madrid a destinos nacionales, y la vuelta.
 
@@ -10180,7 +10196,7 @@ def main():
 if __name__ == "__main__":
     main()
 :::END
-:::BEGIN py/modelo_precios.py|text
+:::BEGIN py/modelo_precios.py|text|9c0290e37ac7fe7d16cfae00392ee147b731f6a10d624ab6764ec50ec669e91e
 """
 Modelos para decidir qué días conviene volver a descargar.
 
@@ -10727,7 +10743,7 @@ def mejor_momento(hist, min_vuelos=30, min_consultas=3, min_rango=7):
             "vuelos": int(len(v)), "rango_mediano": float((h.groupby("grupo")["dias"].agg(lambda x: x.max() - x.min())).median())}
     return t.reset_index(), info
 :::END
-:::BEGIN py/vuelos_app.pyw|text
+:::BEGIN py/vuelos_app.pyw|text|d6e646e521a9dc981f6be8b3150c454c1fa1ca870e723fda5453d3c4375794e6
 """
 Viajes — presupuestos de viaje desde Madrid: lanzador de escritorio con icono en la bandeja del sistema.
 
@@ -11147,7 +11163,7 @@ elif __name__ == "__main__":
         mensaje_error(f"Error al abrir la app:\n{e}")
         salir()
 :::END
-:::BEGIN py/mantenimiento.py|text
+:::BEGIN py/mantenimiento.py|text|4db0312413624bc0078826a990d3a09910ece669ef3c2b96a8b6a6d3c2d820df
 """
 Mantenimiento de la carpeta de datos: evita que se acumulen duplicados.
 
@@ -11362,7 +11378,7 @@ def pid_en_marcha(ruta_pid):
         return None
     return pid if pid_vivo(pid) else None
 :::END
-:::BEGIN py/requirements.txt|text
+:::BEGIN py/requirements.txt|text|cd35f275a42b3953f4b025ab160a562a35d986f7337d751e3f5424a710ec5678
 fast-flights==3.1.0
 primp==2.0.1
 selectolax
@@ -11378,10 +11394,10 @@ psutil
 json5
 openpyxl
 :::END
-:::BEGIN py/VERSION.txt|text
+:::BEGIN py/VERSION.txt|text|6f837f6df94a4f15581b7ff8010f059136f17dd5a1c17510129cb4637694bb7b
 1.7.0
 :::END
-:::BEGIN assets/vuelos.ico|b64
+:::BEGIN assets/vuelos.ico|b64|8c4c6c3f63db3e089345f7c815f8f4b590c2057ccfc52a5ecfe77f74f6335e60
 AAABAAcAEBAAAAAAIAB1AgAAdgAAABgYAAAAACAAyQMAAOsCAAAgIAAAAAAgANEEAAC0BgAAMDAA
 AAAAIAD0BgAAhQsAAEBAAAAAACAADQkAAHkSAACAgAAAAAAgALARAACGGwAAAAAAAAAAIADBIwAA
 Ni0AAIlQTkcNChoKAAAADUlIRFIAAAAQAAAAEAgGAAAAH/P/YQAAAjxJREFUeJx1k79rFFEQxz/z
@@ -11747,7 +11763,7 @@ Aik3vHtnA7D1hwDqB/NzAD3PRE+l3eCZl744c3j0h3OsgO0Kq28x1UveelF/AXC0aq9gN/j4rtL5
 Oc4kRzATJn+Z5eK1Srld1vg3EpHLbJtJ6csgDySKWiAFtuYlIjXMzL7S7pPW+n2K0juhsy+Vm3Bw
 fw8VjvmZcFCPUEet/cn8f/OdXjbO8MlTAAAAAElFTkSuQmCC
 :::END
-:::BEGIN assets/vuelos.png|b64
+:::BEGIN assets/vuelos.png|b64|9744c0ce1bedad2e66a2594ef566d0c569ae14b6425904c2d52c4aa910f6dc68
 iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAYAAABccqhmAAAjiElEQVR4nO3de5RdVZ0n8O9v73Pu
 s16pqlSAQBJsBDogLxVkgV1EjFFs25lZnaCrJzouJa62JYkBls4ap29qlj1DRsU81BkSe9kKLW3S
 aOMDxQwkGadFngm2RFE0VCCEVFJJve7rnLP3b/4491blnUrqVtW95/w+axUsKqninHvO77v32Wef
@@ -11910,7 +11926,7 @@ vHtnA7D1hwDqB/NzAD3PRE+l3eCZl744c3j0h3OsgO0Kq28x1UveelF/AXC0aq9gN/j4rtL5Oc4k
 RzATJn+Z5eK1Srld1vg3EpHLbJtJ6csgDySKWiAFtuYlIjXMzL7S7pPW+n2K0juhsy+Vm3Bwfw8V
 jvmZcFCPUEet/cn8f/OdXjbO8MlTAAAAAElFTkSuQmCC
 :::END
-:::BEGIN herramientas/descargar_python.ps1|text
+:::BEGIN herramientas/descargar_python.ps1|text|5fd9695107c90a52315badef90b8f524381b12a42f5b9f15e7fcfc8e3278828f
 # Descarga el instalador de Python para Windows (64 bits) a la ruta indicada.
 # Busca en python.org la version 3.13 mas reciente que tenga instalador y,
 # si no puede, prueba con una lista de versiones conocidas.
