@@ -1,5 +1,5 @@
 // Dibuja una tarjeta con miniatura por cada web de webs.json. Para añadir una web basta con añadirla a ese fichero
-// (y una captura en img/, o varias en «imagenes» para una galería que va cambiando; «descargas»: lista de {texto, archivo} con botones de descarga, ficheros en descargas/; «flujograma»: un SVG de flujogramas/ que se despliega en la tarjeta). Sin url, la tarjeta sale como «En preparación». «icono» es el nombre de uno de ICONOS (o «icono_img»: el icono propio del proyecto, una imagen).
+// (y una captura en img/, o varias en «imagenes» para una galería que va cambiando; «descargas»: lista de {texto, archivo} con botones de descarga, ficheros en descargas/; «flujograma»: un SVG de flujogramas/ que se despliega en la tarjeta; «guia»: {requisitos, pasos[], datos} para el botón «Guía rápida»). Sin url, la tarjeta sale como «En preparación». «icono» es el nombre de uno de ICONOS (o «icono_img»: el icono propio del proyecto, una imagen).
 const rejilla = document.getElementById("rejilla");
 const vacio = document.getElementById("vacio");
 const buscar = document.getElementById("buscar");
@@ -21,6 +21,7 @@ const ICONOS = {
   nota: "M5 3h14a2 2 0 0 1 2 2v10l-6 6H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm9 16.5V15h4.5L14 19.5zM7 8h10v2H7V8zm0 4h6v2H7v-2z",
   descarga: "M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z",
   chevron: "M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z",
+  libro: "M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z",
   ampliar: "M21 11V3h-8l3.29 3.29-10 10L3 13v8h8l-3.29-3.29 10-10z",
   flecha: "M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z",
 };
@@ -65,9 +66,10 @@ function tarjeta(w, i) {
       <div class="titulo"><span class="ico${w.icono_img ? " propio" : ""}" aria-hidden="true">${w.icono_img ? `<img src="${esc(w.icono_img)}" alt="" width="36" height="36" loading="lazy">` : svg(w.icono, 22)}</span><h2>${esc(w.titulo)}</h2></div>
       <div class="etiquetas">${etiquetas}</div>
       <details class="mas"><summary>${svg("chevron", 20)}Descripción</summary><p>${esc(w.descripcion)}</p></details>
-      ${(w.descargas || []).length || w.flujograma ? `<div class="descargas">${(w.descargas || []).map(d => `<a class="boton sec" href="${esc(d.archivo)}" download="${esc(d.archivo.split("/").pop())}" title="Descarga un .bat; Windows puede avisar al abrirlo (Más información → Ejecutar de todas formas)">${svg("descarga", 18)} ${esc(d.texto)}</a>`).join("")}${w.flujograma ? `<button type="button" class="boton sec flujo" data-flujo aria-expanded="false" title="Esquema de cómo funciona la app">${svg("arbol", 18)} Flujograma</button>` : ""}</div>` : ""}
+      ${(w.descargas || []).length || w.flujograma || w.guia ? `<div class="descargas">${(w.descargas || []).map(d => `<a class="boton sec" href="${esc(d.archivo)}" download="${esc(d.archivo.split("/").pop())}" title="Descarga un .bat; Windows puede avisar al abrirlo (Más información → Ejecutar de todas formas)">${svg("descarga", 18)} ${esc(d.texto)}</a>`).join("")}${w.flujograma ? `<button type="button" class="boton sec flujo" data-panel="flujo" aria-expanded="false" title="Esquema de cómo funciona la app">${svg("arbol", 18)} Flujograma</button>` : ""}${w.guia ? `<button type="button" class="boton sec flujo" data-panel="guia" aria-expanded="false" title="Cómo se instala y se usa">${svg("libro", 18)} Guía rápida</button>` : ""}</div>` : ""}
       ${w.flujograma ? `<div class="panel-flujo" hidden><div class="visor-mini"><img alt="Flujograma de ${esc(w.titulo)}" data-src="${esc(w.flujograma)}"></div>
         <div class="barra-flujo"><span>Desplázate para ver el resto</span><button type="button" data-ampliar="${esc(w.flujograma)}" data-titulo="${esc(w.titulo)}">Ampliar ${svg("ampliar", 16)}</button></div></div>` : ""}
+      ${w.guia ? `<div class="panel-guia" hidden><h3>Necesitas</h3><p>${esc(w.guia.requisitos)}</p><h3>Paso a paso</h3><ol>${w.guia.pasos.map(p => `<li>${esc(p)}</li>`).join("")}</ol><h3>Tus datos</h3><p>${esc(w.guia.datos)}</p></div>` : ""}
       <div class="pie-tarjeta">${w.url ? `<a class="boton" href="${esc(destino)}" target="_blank" rel="noopener" aria-label="${repo ? "Ver en GitHub" : "Abrir"}: ${esc(w.titulo)}">${repo ? "Ver en GitHub" : "Abrir"} ${svg("flecha", 18)}</a>` : ""}${insignia}</div>
     </div>`;
   return a;
@@ -181,11 +183,16 @@ function cerrarVisor() {
   if (volver) volver.focus();
 }
 document.addEventListener("click", e => {
-  const b = e.target.closest("[data-flujo]");
+  const b = e.target.closest("[data-panel]");       // flujograma o guía rápida: en cada tarjeta se ve un solo panel a la vez
   if (b) {
-    const panel = b.closest(".cuerpo").querySelector(".panel-flujo"), abre = b.getAttribute("aria-expanded") !== "true";
-    b.setAttribute("aria-expanded", abre); panel.hidden = !abre;
-    const im = panel.querySelector("img"); if (abre && !im.getAttribute("src")) im.src = im.dataset.src;       // el SVG se descarga al desplegar por primera vez
+    const cuerpo = b.closest(".cuerpo"), abre = b.getAttribute("aria-expanded") !== "true";
+    cuerpo.querySelectorAll("[data-panel]").forEach(x => x.setAttribute("aria-expanded", "false"));
+    cuerpo.querySelectorAll(".panel-flujo,.panel-guia").forEach(p => { p.hidden = true; });
+    if (abre) {
+      b.setAttribute("aria-expanded", "true");
+      const panel = cuerpo.querySelector(".panel-" + b.dataset.panel); panel.hidden = false;
+      const im = panel.querySelector("img[data-src]"); if (im && !im.getAttribute("src")) im.src = im.dataset.src;       // el SVG se descarga al desplegar por primera vez
+    }
   }
   const a = e.target.closest("[data-ampliar]");
   if (a) abrirVisor(a.dataset.ampliar, a.dataset.titulo, a);

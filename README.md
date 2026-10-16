@@ -30,3 +30,5 @@ Los envoltorios de estadistica/ y inanzas/ son iguales que el de uelos/ (copia
 ## Flujogramas de las apps de escritorio
 
 Las tarjetas con `"flujograma": "flujogramas/<app>.svg"` en `webs.json` llevan un tercer botón, «Flujograma», junto a Instalador y Actualizador: despliega el esquema en la tarjeta y «Ampliar» lo abre en un visor con zoom y arrastre. El de Viajes (App) es el `Flujograma.svg` de su repositorio; los demás se generan con `python herramientas/generar_flujogramas.py` (cada app se describe en `APPS`, dentro de ese fichero: columnas de cajas y flechas).
+
+El cuarto botón, «Guía rápida», sale con `"guia": {"requisitos": "…", "pasos": […], "datos": "…"}` en `webs.json` y despliega en la tarjeta qué hace falta, el paso a paso y dónde quedan los datos (se cierra el flujograma si estaba abierto: solo se ve un panel a la vez).

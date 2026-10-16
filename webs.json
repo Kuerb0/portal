@@ -109,7 +109,18 @@
         "archivo": "descargas/Viajes 1.7.0 - Actualizar.bat"
       }
     ],
-    "flujograma": "flujogramas/viajes.svg"
+    "flujograma": "flujogramas/viajes.svg",
+    "guia": {
+      "requisitos": "Windows 10 u 11 e internet para descargar los precios. No hace falta tener Python: el instalador lo busca o lo instala dentro de su carpeta.",
+      "pasos": [
+        "Descarga el Instalador y haz doble clic en él, en una carpeta donde puedas escribir. Si Windows avisa, pulsa «Más información → Ejecutar de todas formas».",
+        "Cuando acabe, abre la app desde el acceso directo del Escritorio: sale una ventana y un icono en la bandeja.",
+        "Elige origen, destinos y fechas y descarga los precios de vuelos, hoteles y trenes desde Madrid.",
+        "Compara en Resumen, Buscador, Favoritos, Evolución, Calendario y Mapa.",
+        "Para una versión nueva, ejecuta el Actualizador en la misma carpeta: cambia el programa y respeta tus datos."
+      ],
+      "datos": "Tus descargas y ajustes se quedan en la carpeta de la app; no se envían a ningún sitio."
+    }
   },
   {
     "id": "finanzas-app",
@@ -143,7 +154,18 @@
         "archivo": "descargas/Planificador 1.3.0 - Actualizar.bat"
       }
     ],
-    "flujograma": "flujogramas/planificador.svg"
+    "flujograma": "flujogramas/planificador.svg",
+    "guia": {
+      "requisitos": "Windows 10 u 11. Internet para los datos de mercado (si falla, usa la última copia guardada). No hace falta tener Python.",
+      "pasos": [
+        "Descarga el Instalador y haz doble clic en él. Si Windows avisa, pulsa «Más información → Ejecutar de todas formas».",
+        "Abre la app desde el acceso directo del Escritorio (te pregunta si quieres que arranque con Windows).",
+        "Elige una página: Hipoteca, Cartera, Comparador, Mercado, Plazos y riesgo, Ahorrador, Asignador o Test de riesgo.",
+        "Rellena tus datos: los resultados se recalculan solos. «Actualizar datos», en la barra lateral, trae los últimos precios.",
+        "Para una versión nueva, ejecuta el Actualizador en la misma carpeta."
+      ],
+      "datos": "Perfiles, ajustes y copias de los datos de mercado se guardan en la carpeta de la app."
+    }
   },
   {
     "id": "calendario",
@@ -171,7 +193,18 @@
         "archivo": "descargas/Calendario 2.0 - Actualizar.bat"
       }
     ],
-    "flujograma": "flujogramas/calendario.svg"
+    "flujograma": "flujogramas/calendario.svg",
+    "guia": {
+      "requisitos": "Windows 10 u 11 y una fuente de eventos: Outlook clásico instalado o el enlace ICS de tu calendario de Outlook web. No hace falta tener Python.",
+      "pasos": [
+        "Descarga el Instalador y haz doble clic en él, en una carpeta tuya (por ejemplo Documentos\\Calendario). Si Windows avisa, pulsa «Más información → Ejecutar de todas formas».",
+        "Se abre el asistente: elige de dónde leer los eventos, tus festivos y cómo verlo. Al guardar, aparece el widget en el escritorio.",
+        "Cambia de vista (horas, lista, mes) desde la barra. El botón ⚙ abre el Panel de control y Ctrl+K la paleta de comandos.",
+        "Clic derecho en un evento para ponerle una alarma, editarlo o abrirlo en Outlook.",
+        "Para una versión nueva, ejecuta el Actualizador en la misma carpeta: conserva tu configuración y tus perfiles."
+      ],
+      "datos": "Todo queda en la carpeta elegida (datos\\config.json). No se envía ningún dato."
+    }
   },
   {
     "id": "excel",
@@ -214,7 +247,18 @@
         "archivo": "descargas/Atlas 1.15.1 - Actualizar.bat"
       }
     ],
-    "flujograma": "flujogramas/atlas.svg"
+    "flujograma": "flujogramas/atlas.svg",
+    "guia": {
+      "requisitos": "Windows 10 u 11 e internet la primera vez (librerías y, si quieres, la IA local). Ocupa bastante: la IA local pesa unos 2 GB.",
+      "pasos": [
+        "Descarga el Instalador y haz doble clic en él. Si Windows avisa, pulsa «Más información → Ejecutar de todas formas». Te enseña con ✓ o ✗ qué se ha instalado.",
+        "Abre el Atlas desde el acceso directo del Escritorio.",
+        "En Universo, explora las ramas y pulsa una función para ver su ficha, su equivalente en SAS y sus advertencias.",
+        "Con «Probar» ejecutas un ejemplo de la función con datos simulados. El buscador de arriba encuentra funciones, conceptos y tus libros.",
+        "En Importar, suelta libros, código o apuntes: el Atlas los clasifica solo. Para una versión nueva, ejecuta el Actualizador."
+      ],
+      "datos": "Tu catálogo, tu biblioteca y tus fichas son tuyos: el actualizador no los pisa."
+    }
   },
   {
     "id": "apagador",
@@ -241,7 +285,18 @@
         "archivo": "descargas/Apagador 1.0.0 - Actualizar.bat"
       }
     ],
-    "flujograma": "flujogramas/apagador.svg"
+    "flujograma": "flujogramas/apagador.svg",
+    "guia": {
+      "requisitos": "Windows 10 u 11. No hace falta tener Python: el instalador lo busca o lo instala dentro de su carpeta.",
+      "pasos": [
+        "Descarga el Instalador y haz doble clic en él. Si Windows avisa, pulsa «Más información → Ejecutar de todas formas».",
+        "Abre el Apagador desde el acceso directo del Escritorio.",
+        "Elige «duración» (minutos) o «hora exacta» y pulsa Programar.",
+        "Verás la cuenta atrás. Pulsa Cancelar en cualquier momento para anular el apagado.",
+        "Para una versión nueva, ejecuta el Actualizador en la misma carpeta."
+      ],
+      "datos": "No guarda datos personales."
+    }
   },
   {
     "id": "post-it",
@@ -268,6 +323,17 @@
         "archivo": "descargas/Post-It - Actualizar.bat"
       }
     ],
-    "flujograma": "flujogramas/post-it.svg"
+    "flujograma": "flujogramas/post-it.svg",
+    "guia": {
+      "requisitos": "Windows 10 u 11 y Node.js (nodejs.org). Descarga Electron, unos 300 MB, en tu carpeta de datos locales.",
+      "pasos": [
+        "Instala Node.js si no lo tienes y ejecuta el Instalador. Si Windows avisa, pulsa «Más información → Ejecutar de todas formas».",
+        "Se crea el acceso directo «Post-its» y la app arranca sola con Windows; vive en la bandeja.",
+        "Una nota por ventana: cambia su color, hazla translúcida o ponla encima o debajo del resto.",
+        "Las tareas llevan casilla; con @diario, @semanal o @lunes… vuelven a salir al marcarlas.",
+        "Para una versión nueva, ejecuta el Actualizador."
+      ],
+      "datos": "Las notas están en notes.json, en OneDrive: se sincronizan entre tus equipos."
+    }
   }
 ]
