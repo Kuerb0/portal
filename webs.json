@@ -102,24 +102,20 @@
     "descargas": [
       {
         "texto": "Instalador",
-        "archivo": "descargas/Viajes 1.7.0 - Instalador.exe"
-      },
-      {
-        "texto": "Actualizador",
-        "archivo": "descargas/Viajes 1.7.0 - Actualizar.bat"
+        "archivo": "https://github.com/Kuerb0/Viajes-App/releases/download/v1.7.0/Viajes-1.7.0-Instalador.exe"
       }
     ],
     "flujograma": "flujogramas/viajes.svg",
     "guia": {
-      "requisitos": "Windows 10 u 11 e internet para descargar los precios. No hace falta tener Python: el instalador lo busca o lo instala dentro de su carpeta.",
+      "requisitos": "Windows 10 u 11 e internet para descargar los precios. No hace falta tener Python: el programa lleva el suyo dentro (unos 150 MB).",
       "pasos": [
         "Descarga el Instalador (.exe) y ábrelo: sale una ventana que te deja elegir la carpeta y los accesos directos. Si Windows avisa, pulsa «Más información → Ejecutar de todas formas».",
         "Cuando acabe, abre la app desde el acceso directo del Escritorio: sale una ventana y un icono en la bandeja.",
         "Elige origen, destinos y fechas y descarga los precios de vuelos, hoteles y trenes desde Madrid.",
         "Compara en Resumen, Buscador, Favoritos, Evolución, Calendario y Mapa.",
-        "Para una versión nueva, ejecuta el Actualizador en la misma carpeta: cambia el programa y respeta tus datos."
+        "Para una versión nueva, ejecuta el instalador nuevo: se instala encima y respeta tus descargas y ajustes."
       ],
-      "datos": "Tus descargas y ajustes se quedan en la carpeta de la app; no se envían a ningún sitio. Para quitarlo, usa «Aplicaciones» de Windows (queda registrado un desinstalador)."
+      "datos": "Tus descargas y ajustes se quedan en la carpeta de la app; no se envían a ningún sitio. Para quitarlo, usa «Aplicaciones» de Windows (queda registrado un desinstalador); tus datos se guardan en una carpeta «Viajes_datos» junto a la del programa."
     }
   },
   {
@@ -292,24 +288,20 @@
     "descargas": [
       {
         "texto": "Instalador",
-        "archivo": "descargas/Atlas 1.15.1 - Instalador.bat"
-      },
-      {
-        "texto": "Actualizador",
-        "archivo": "descargas/Atlas 1.15.1 - Actualizar.bat"
+        "archivo": "https://github.com/Kuerb0/Atlas-del-Conocimiento-App/releases/download/v1.15.1/Atlas-1.15.1-Instalador.exe"
       }
     ],
     "flujograma": "flujogramas/atlas.svg",
     "guia": {
-      "requisitos": "Windows 10 u 11 e internet la primera vez (librerías y, si quieres, la IA local). Ocupa bastante: la IA local pesa unos 2 GB.",
+      "requisitos": "Windows 10 u 11. No hace falta tener Python ni internet para instalarlo: lleva el suyo dentro (unos 160 MB). La IA local es opcional y se instala aparte (pesa unos 2 GB).",
       "pasos": [
-        "Descarga el Instalador y haz doble clic en él. Si Windows avisa, pulsa «Más información → Ejecutar de todas formas». Te enseña con ✓ o ✗ qué se ha instalado.",
+        "Descarga el Instalador (.exe) y ábrelo: sale una ventana que te deja elegir la carpeta y los accesos directos. Si Windows avisa, pulsa «Más información → Ejecutar de todas formas».",
         "Abre el Atlas desde el acceso directo del Escritorio.",
         "En Universo, explora las ramas y pulsa una función para ver su ficha, su equivalente en SAS y sus advertencias.",
         "Con «Probar» ejecutas un ejemplo de la función con datos simulados. El buscador de arriba encuentra funciones, conceptos y tus libros.",
-        "En Importar, suelta libros, código o apuntes: el Atlas los clasifica solo. Para una versión nueva, ejecuta el Actualizador."
+        "En Importar, suelta libros, código o apuntes: el Atlas los clasifica solo. Para una versión nueva, ejecuta el instalador nuevo: se instala encima."
       ],
-      "datos": "Tu catálogo, tu biblioteca y tus fichas son tuyos: el actualizador no los pisa."
+      "datos": "Tu catálogo, tu biblioteca y tus fichas son tuyos: al actualizar se conservan."
     }
   },
   {
@@ -330,22 +322,18 @@
     "descargas": [
       {
         "texto": "Instalador",
-        "archivo": "descargas/Apagador 1.0.0 - Instalador.exe"
-      },
-      {
-        "texto": "Actualizador",
-        "archivo": "descargas/Apagador 1.0.0 - Actualizar.bat"
+        "archivo": "https://github.com/Kuerb0/Apagador-App/releases/download/v1.0.0/Apagador-1.0.0-Instalador.exe"
       }
     ],
     "flujograma": "flujogramas/apagador.svg",
     "guia": {
-      "requisitos": "Windows 10 u 11. No hace falta tener Python: el instalador lo busca o lo instala dentro de su carpeta.",
+      "requisitos": "Windows 10 u 11. No hace falta tener Python ni internet: el programa lleva todo dentro.",
       "pasos": [
         "Descarga el Instalador (.exe) y ábrelo: sale una ventana que te deja elegir la carpeta y los accesos directos. Si Windows avisa, pulsa «Más información → Ejecutar de todas formas».",
         "Abre el Apagador desde el acceso directo del Escritorio.",
         "Elige «duración» (minutos) o «hora exacta» y pulsa Programar.",
         "Verás la cuenta atrás. Pulsa Cancelar en cualquier momento para anular el apagado.",
-        "Para una versión nueva, ejecuta el Actualizador en la misma carpeta."
+        "Para una versión nueva, ejecuta el instalador nuevo: se instala encima."
       ],
       "datos": "No guarda datos personales. Para quitarlo, usa «Aplicaciones» de Windows (queda registrado un desinstalador)."
     }
