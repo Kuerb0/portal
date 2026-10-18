@@ -127,7 +127,7 @@
   },
   {
     "id": "finanzas-app",
-    "titulo": "Finanzas personales (App)",
+    "titulo": "Finanzas Personales (App)",
     "icono": "euro",
     "icono_img": "img/iconos/finanzas.png",
     "tipo": "app",
@@ -150,7 +150,7 @@
     "descargas": [
       {
         "texto": "Instalador",
-        "archivo": "descargas/Planificador 1.3.0 - Instalador.exe"
+        "archivo": "https://github.com/Kuerb0/descargas/releases/download/finanzas-v1.3.0/FinanzasPersonales-1.3.0-Instalador.exe"
       },
       {
         "texto": "Instalador móvil",
@@ -161,7 +161,7 @@
     ],
     "flujograma": "flujogramas/planificador.svg",
     "guia": {
-      "requisitos": "Windows 10 u 11. Internet para los datos de mercado (si falla, usa la última copia guardada). No hace falta tener Python.",
+      "requisitos": "Windows 10 u 11. Internet para los datos de mercado (si falla, usa la última copia guardada). No hace falta tener Python: el programa lleva el suyo dentro (unos 150 MB).",
       "pasos": [
         "Descarga el Instalador (.exe) y ábrelo: sale una ventana que te deja elegir la carpeta y los accesos directos. Si Windows avisa, pulsa «Más información → Ejecutar de todas formas».",
         "Abre la app desde el acceso directo del Escritorio (te pregunta si quieres que arranque con Windows).",
@@ -170,7 +170,7 @@
         "Para una versión nueva, ejecuta el instalador nuevo: se instala encima.",
         "En el móvil: pulsa «Instalador móvil» (abre la web del Planificador) y elige «Instalar app» o «Añadir a pantalla de inicio»."
       ],
-      "datos": "Perfiles, ajustes y copias de los datos de mercado se guardan en la carpeta de la app. Para quitarlo, usa «Aplicaciones» de Windows (queda registrado un desinstalador)."
+      "datos": "Perfiles, ajustes y copias de los datos de mercado se guardan en la carpeta de la app y se conservan al actualizar. Para quitarlo, usa «Aplicaciones» de Windows (queda registrado un desinstalador)."
     }
   },
   {
@@ -244,7 +244,7 @@
     "descargas": [
       {
         "texto": "Instalador",
-        "archivo": "descargas/Calendario 2.0 - Instalador.exe"
+        "archivo": "https://github.com/Kuerb0/descargas/releases/download/calendario-v2.0.0/Calendario-2.0.0-Instalador.exe"
       }
     ],
     "flujograma": "flujogramas/calendario.svg",
@@ -257,7 +257,7 @@
         "Clic derecho en un evento para ponerle una alarma, editarlo o abrirlo en Outlook.",
         "Para una versión nueva, ejecuta el instalador nuevo: se instala encima y conserva tu configuración y tus perfiles."
       ],
-      "datos": "Todo queda en la carpeta elegida (datos\\config.json). No se envía ningún dato. Para quitarlo, usa «Aplicaciones» de Windows (queda registrado un desinstalador)."
+      "datos": "Tu configuración y tus perfiles quedan en la carpeta del programa (config.json y perfiles) y se conservan al actualizar. No se envía ningún dato. Para quitarlo, usa «Aplicaciones» de Windows (queda registrado un desinstalador)."
     }
   },
   {
@@ -396,12 +396,12 @@
     "descargas": [
       {
         "texto": "Instalador",
-        "archivo": "descargas/Post-It 1.0.0 - Instalador.exe"
+        "archivo": "https://github.com/Kuerb0/descargas/releases/download/postit-v1.0.0/PostIt-1.0.0-Instalador.exe"
       }
     ],
     "flujograma": "flujogramas/post-it.svg",
     "guia": {
-      "requisitos": "Windows 10 u 11 e internet la primera vez (descarga Electron, unos 150 MB). No hace falta Node.js.",
+      "requisitos": "Windows 10 u 11. No hace falta Node.js ni internet: el programa lleva su propio motor (unos 160 MB).",
       "pasos": [
         "Descarga el Instalador (.exe) y ábrelo: sale una ventana que te deja elegir la carpeta y los accesos directos. Si Windows avisa, pulsa «Más información → Ejecutar de todas formas».",
         "Se crea el acceso directo «Post-it» y la app arranca sola con Windows; vive en la bandeja.",
@@ -409,7 +409,7 @@
         "Las tareas llevan casilla; con @diario, @semanal o @lunes… vuelven a salir al marcarlas.",
         "Para una versión nueva, ejecuta el instalador nuevo: se instala encima."
       ],
-      "datos": "Las notas están en notes.json, en OneDrive: se sincronizan entre tus equipos. Para quitarlo, usa «Aplicaciones» de Windows (queda registrado un desinstalador)."
+      "datos": "Las notas están en notes.json, dentro de la carpeta del programa (no se sincronizan entre equipos) y se conservan al actualizar. Para quitarlo, usa «Aplicaciones» de Windows (queda registrado un desinstalador)."
     }
   }
 ]
