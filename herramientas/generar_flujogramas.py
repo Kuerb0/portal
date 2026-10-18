@@ -236,6 +236,22 @@ APPS = {
                  ("visor", "cuad", "l", "Probar"), ("visor", "conoc", "rw", "buscar / importar"), ("build", "visor", "w", "genera"),
                  ("arbol", "build", "r"), ("cat", "build", "r", "conceptos"), ("fich", "build", "r"),
                  ("llm", "conoc", "x"), ("tel", "conoc", "x"), ("wiki", "conoc", "x"), ("conoc", "idx", "rw")]),
+
+    "estadistica-app": dict(titulo="Estadística (App) · flujograma v1.0.0", cols=[
+        ("Instalación", [
+            ("inst", "tool", "Instalador.exe", ["Asistente con ventana, sin consola, que lleva el programa dentro", "Copia a %LOCALAPPDATA%\\Programs\\Estadistica, crea accesos directos y se registra en Aplicaciones instaladas"]),
+            ("des", "tool", "Desinstalar.exe", ["Quita la carpeta, los accesos directos y el registro", "No borra nada si no tiene Estadistica.exe al lado"])]),
+        ("Ventana", [
+            ("app", "launch", "Estadistica.exe", ["pywebview + WebView2: una ventana nativa de Windows", "El título lleva la versión; icono propio en la barra de tareas"]),
+            ("ui", "ui", "web/ (HTML + JS)", ["12 páginas: Conceptos, Descriptiva, Distribuciones, Contrastes, Bayes, Regresiones, Clasificación, Supervivencia, Clustering, Actuarial, Índice y Apariencia", "Gráficos en canvas con animaciones y buscador global Ctrl+K"])]),
+        ("Cálculo", [
+            ("py", "proc", "py/ (Python)", ["Solo calcula: numpy, scipy y statsmodels", "Un módulo por página: regresiones.py, clustering.py, reservas.py…"]),
+            ("cod", "proc", "Código equivalente", ["Cada resultado trae su código en Python, R y SAS para copiar"])]),
+        ("Datos", [
+            ("csv", "data", "Tu CSV", ["Regresiones, Clustering y Reservas aceptan tus propios datos", "No se envía nada a ningún sitio"]),
+            ("pref", "data", "Apariencia guardada", ["Paleta, estilo y fondo animado se recuerdan al cerrar"])])],
+        flechas=[("inst", "app", "w", "instala"), ("des", "app", "rw", "quita"), ("app", "ui", "l", "carga"), ("ui", "py", "c", "pywebview.api"),
+                 ("py", "cod", "w"), ("csv", "py", "r"), ("ui", "pref", "rw")]),
 }
 
 

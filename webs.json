@@ -168,6 +168,53 @@
     }
   },
   {
+    "id": "estadistica-app",
+    "titulo": "Estadística (App)",
+    "icono": "grafico",
+    "icono_img": "img/iconos/estadistica-app.png",
+    "tipo": "app",
+    "descripcion": "App de escritorio para Windows para aprender y usar estadística viéndola moverse: 23 distribuciones, contrastes, regresiones (de la lineal a la binomial negativa) con el algoritmo animado, Bayes, clasificación, supervivencia, clustering, reservas IBNR, buscador global y 11 paletas. Con código en Python, R y SAS. Se ejecuta en tu propio equipo.",
+    "etiquetas": [
+      "app",
+      "estadística",
+      "regresión",
+      "clustering",
+      "actuarial",
+      "Windows"
+    ],
+    "imagen": "img/galeria/estadistica-app-1.jpg",
+    "url": "",
+    "estado": "activa",
+    "imagenes": [
+      "img/galeria/estadistica-app-1.jpg",
+      "img/galeria/estadistica-app-2.jpg",
+      "img/galeria/estadistica-app-3.jpg",
+      "img/galeria/estadistica-app-4.jpg"
+    ],
+    "descargas": [
+      {
+        "texto": "Instalador",
+        "archivo": "descargas/Estadistica 1.0.0 - Instalador.exe"
+      },
+      {
+        "texto": "Tráiler (vídeo)",
+        "archivo": "descargas/Estadistica 1.0 - Trailer.mp4"
+      }
+    ],
+    "flujograma": "flujogramas/estadistica-app.svg",
+    "guia": {
+      "requisitos": "Windows 10 u 11. No hace falta tener Python ni internet: el programa lleva todo dentro (WebView2 viene con Windows 11 y con Edge).",
+      "pasos": [
+        "Descarga el Instalador (.exe) y ábrelo: sale una ventana que te deja elegir la carpeta y los accesos directos. Si Windows avisa, pulsa «Más información → Ejecutar de todas formas».",
+        "Cuando acabe, abre Estadística desde el acceso directo del Escritorio.",
+        "Elige una página en el menú o pulsa Ctrl+K y escribe lo que buscas (por ejemplo «gompertz» o «dbscan»).",
+        "Mueve los deslizadores, pulsa Reproducir y mira cómo se forma cada resultado; copia el código en Python, R o SAS.",
+        "En Regresiones, Clustering y Reservas puedes cargar tu propio CSV."
+      ],
+      "datos": "Tus archivos no salen de tu equipo y la app no guarda nada salvo la apariencia. Para quitarla, usa «Aplicaciones» de Windows (queda registrado un desinstalador)."
+    }
+  },
+  {
     "id": "calendario",
     "titulo": "Calendario",
     "icono": "calendario",

@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1270" height="483" viewBox="0 0 1270 483" font-family="Segoe UI, Inter, system-ui, sans-serif"><title>Estadística (App) · flujograma v1.0.0</title>
+<defs><marker id="fw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 1 10 5 0 9z" fill="#4b8df8"/></marker><marker id="fr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 1 10 5 0 9z" fill="#1fbf9a"/></marker><marker id="frw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 1 10 5 0 9z" fill="#f5a623"/></marker><marker id="fl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 1 10 5 0 9z" fill="#a78bfa"/></marker><marker id="fc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 1 10 5 0 9z" fill="#64748b"/></marker><marker id="fx" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 1 10 5 0 9z" fill="#9ca3af"/></marker></defs>
+<rect width="1270" height="483" fill="#fff"/>
+<text x="24" y="30" font-size="16" font-weight="700" fill="#9aa3b2">Estadística (App) · flujograma v1.0.0</text>
+<rect x="14" y="64" width="270" height="349" rx="14" fill="none" stroke="#d6dbe5" stroke-width="1.5" stroke-dasharray="6 5"/><text x="149.0" y="54" font-size="15" font-weight="600" text-anchor="middle" fill="#9aa3b2">Instalación</text>
+<rect x="338" y="64" width="270" height="349" rx="14" fill="none" stroke="#d6dbe5" stroke-width="1.5" stroke-dasharray="6 5"/><text x="473.0" y="54" font-size="15" font-weight="600" text-anchor="middle" fill="#9aa3b2">Ventana</text>
+<rect x="662" y="64" width="270" height="349" rx="14" fill="none" stroke="#d6dbe5" stroke-width="1.5" stroke-dasharray="6 5"/><text x="797.0" y="54" font-size="15" font-weight="600" text-anchor="middle" fill="#9aa3b2">Cálculo</text>
+<rect x="986" y="64" width="270" height="349" rx="14" fill="none" stroke="#d6dbe5" stroke-width="1.5" stroke-dasharray="6 5"/><text x="1121.0" y="54" font-size="15" font-weight="600" text-anchor="middle" fill="#9aa3b2">Datos</text>
+<path d="M274.0 170.5 C314.0 170.5 308.0 134.3 348.0 134.3" fill="none" stroke="#4b8df8" stroke-width="2"  marker-end="url(#fw)"/>
+<path d="M274.0 320.5 C314.0 320.5 308.0 172.7 348.0 172.7" fill="none" stroke="#f5a623" stroke-width="2"  marker-end="url(#frw)"/>
+<path d="M473.0 211.0 C473.0 251.0 473.0 189.0 473.0 229.0" fill="none" stroke="#a78bfa" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#fl)"/>
+<path d="M598.0 284.3 C638.0 284.3 632.0 162.0 672.0 162.0" fill="none" stroke="#64748b" stroke-width="2"  marker-end="url(#fc)"/>
+<path d="M797.0 228.0 C797.0 268.0 797.0 206.0 797.0 246.0" fill="none" stroke="#4b8df8" stroke-width="2"  marker-end="url(#fw)"/>
+<path d="M996.0 145.0 C956.0 145.0 962.0 162.0 922.0 162.0" fill="none" stroke="#1fbf9a" stroke-width="2"  marker-end="url(#fr)"/>
+<path d="M598.0 339.7 C777.1 339.7 816.9 252.5 996.0 252.5" fill="none" stroke="#f5a623" stroke-width="2"  marker-end="url(#frw)"/>
+<rect x="24" y="96" width="250" height="149" rx="10" fill="#0f766e"/>
+<text x="38" y="120" font-size="14.5" font-weight="700" fill="#fff" font-family="Consolas, monospace">Instalador.exe</text>
+<text x="38" y="139" font-size="12.5" fill="#fff" opacity=".93">Asistente con ventana, sin consola,</text>
+<text x="38" y="156" font-size="12.5" fill="#fff" opacity=".93">que lleva el programa dentro</text>
+<text x="38" y="173" font-size="12.5" fill="#fff" opacity=".93">Copia a</text>
+<text x="38" y="190" font-size="12.5" fill="#fff" opacity=".93">%LOCALAPPDATA%\Programs\Estadistica,</text>
+<text x="38" y="207" font-size="12.5" fill="#fff" opacity=".93">crea accesos directos y se registra</text>
+<text x="38" y="224" font-size="12.5" fill="#fff" opacity=".93">en Aplicaciones instaladas</text>
+<rect x="24" y="263" width="250" height="115" rx="10" fill="#0f766e"/>
+<text x="38" y="287" font-size="14.5" font-weight="700" fill="#fff" font-family="Consolas, monospace">Desinstalar.exe</text>
+<text x="38" y="306" font-size="12.5" fill="#fff" opacity=".93">Quita la carpeta, los accesos</text>
+<text x="38" y="323" font-size="12.5" fill="#fff" opacity=".93">directos y el registro</text>
+<text x="38" y="340" font-size="12.5" fill="#fff" opacity=".93">No borra nada si no tiene</text>
+<text x="38" y="357" font-size="12.5" fill="#fff" opacity=".93">Estadistica.exe al lado</text>
+<rect x="348" y="96" width="250" height="115" rx="10" fill="#475569"/>
+<text x="362" y="120" font-size="14.5" font-weight="700" fill="#fff" font-family="Consolas, monospace">Estadistica.exe</text>
+<text x="362" y="139" font-size="12.5" fill="#fff" opacity=".93">pywebview + WebView2: una ventana</text>
+<text x="362" y="156" font-size="12.5" fill="#fff" opacity=".93">nativa de Windows</text>
+<text x="362" y="173" font-size="12.5" fill="#fff" opacity=".93">El título lleva la versión; icono</text>
+<text x="362" y="190" font-size="12.5" fill="#fff" opacity=".93">propio en la barra de tareas</text>
+<rect x="348" y="229" width="250" height="166" rx="10" fill="#1f9a52"/>
+<text x="362" y="253" font-size="14.5" font-weight="700" fill="#fff">web/ (HTML + JS)</text>
+<text x="362" y="272" font-size="12.5" fill="#fff" opacity=".93">12 páginas: Conceptos, Descriptiva,</text>
+<text x="362" y="289" font-size="12.5" fill="#fff" opacity=".93">Distribuciones, Contrastes, Bayes,</text>
+<text x="362" y="306" font-size="12.5" fill="#fff" opacity=".93">Regresiones, Clasificación,</text>
+<text x="362" y="323" font-size="12.5" fill="#fff" opacity=".93">Supervivencia, Clustering,</text>
+<text x="362" y="340" font-size="12.5" fill="#fff" opacity=".93">Actuarial, Índice y Apariencia</text>
+<text x="362" y="357" font-size="12.5" fill="#fff" opacity=".93">Gráficos en canvas con animaciones y</text>
+<text x="362" y="374" font-size="12.5" fill="#fff" opacity=".93">buscador global Ctrl+K</text>
+<rect x="672" y="96" width="250" height="132" rx="10" fill="#2b6bd6"/>
+<text x="686" y="120" font-size="14.5" font-weight="700" fill="#fff">py/ (Python)</text>
+<text x="686" y="139" font-size="12.5" fill="#fff" opacity=".93">Solo calcula: numpy, scipy y</text>
+<text x="686" y="156" font-size="12.5" fill="#fff" opacity=".93">statsmodels</text>
+<text x="686" y="173" font-size="12.5" fill="#fff" opacity=".93">Un módulo por página:</text>
+<text x="686" y="190" font-size="12.5" fill="#fff" opacity=".93">regresiones.py, clustering.py,</text>
+<text x="686" y="207" font-size="12.5" fill="#fff" opacity=".93">reservas.py…</text>
+<rect x="672" y="246" width="250" height="81" rx="10" fill="#2b6bd6"/>
+<text x="686" y="270" font-size="14.5" font-weight="700" fill="#fff">Código equivalente</text>
+<text x="686" y="289" font-size="12.5" fill="#fff" opacity=".93">Cada resultado trae su código en</text>
+<text x="686" y="306" font-size="12.5" fill="#fff" opacity=".93">Python, R y SAS para copiar</text>
+<rect x="996" y="96" width="250" height="98" rx="10" fill="#eef1f6" stroke="#c9d1e0" stroke-width="1.5"/>
+<text x="1010" y="120" font-size="14.5" font-weight="700" fill="#1f2937">Tu CSV</text>
+<text x="1010" y="139" font-size="12.5" fill="#1f2937" opacity=".93">Regresiones, Clustering y Reservas</text>
+<text x="1010" y="156" font-size="12.5" fill="#1f2937" opacity=".93">aceptan tus propios datos</text>
+<text x="1010" y="173" font-size="12.5" fill="#1f2937" opacity=".93">No se envía nada a ningún sitio</text>
+<rect x="996" y="212" width="250" height="81" rx="10" fill="#eef1f6" stroke="#c9d1e0" stroke-width="1.5"/>
+<text x="1010" y="236" font-size="14.5" font-weight="700" fill="#1f2937">Apariencia guardada</text>
+<text x="1010" y="255" font-size="12.5" fill="#1f2937" opacity=".93">Paleta, estilo y fondo animado se</text>
+<text x="1010" y="272" font-size="12.5" fill="#1f2937" opacity=".93">recuerdan al cerrar</text>
+<rect x="283.9" y="143.4" width="54.1" height="17" rx="5" fill="#fff" opacity=".92"/><text x="311.0" y="156.4" font-size="11.5" text-anchor="middle" fill="#4b8df8">instala</text>
+<rect x="290.2" y="237.6" width="41.5" height="17" rx="5" fill="#fff" opacity=".92"/><text x="311.0" y="250.6" font-size="11.5" text-anchor="middle" fill="#f5a623">quita</text>
+<rect x="452.2" y="211.0" width="41.5" height="17" rx="5" fill="#fff" opacity=".92"/><text x="473.0" y="224.0" font-size="11.5" text-anchor="middle" fill="#a78bfa">carga</text>
+<rect x="589.0" y="214.2" width="91.9" height="17" rx="5" fill="#fff" opacity=".92"/><text x="635.0" y="227.2" font-size="11.5" text-anchor="middle" fill="#64748b">pywebview.api</text>
+<line x1="24" y1="455" x2="58" y2="455" stroke="#4b8df8" stroke-width="2.5"/><text x="66" y="459" font-size="12.5" fill="#9aa3b2">escribe / genera</text>
+<line x1="206" y1="455" x2="240" y2="455" stroke="#1fbf9a" stroke-width="2.5"/><text x="248" y="459" font-size="12.5" fill="#9aa3b2">lee</text>
+<line x1="297" y1="455" x2="331" y2="455" stroke="#f5a623" stroke-width="2.5"/><text x="339" y="459" font-size="12.5" fill="#9aa3b2">lee y escribe</text>
+<line x1="458" y1="455" x2="492" y2="455" stroke="#a78bfa" stroke-width="2.5" stroke-dasharray="6 5"/><text x="500" y="459" font-size="12.5" fill="#9aa3b2">lanza / abre</text>
+<line x1="612" y1="455" x2="646" y2="455" stroke="#64748b" stroke-width="2.5"/><text x="654" y="459" font-size="12.5" fill="#9aa3b2">llama a</text>
+</svg>
