@@ -197,6 +197,10 @@
         "archivo": "descargas/Estadistica 1.0.0 - Instalador.exe"
       },
       {
+        "texto": "Instalador móvil",
+        "archivo": "descargas/Estadistica 1.0.0 - Instalador movil.apk"
+      },
+      {
         "texto": "Tráiler (vídeo)",
         "archivo": "descargas/Estadistica 1.0 - Trailer.mp4"
       }
@@ -209,7 +213,8 @@
         "Cuando acabe, abre Estadística desde el acceso directo del Escritorio.",
         "Elige una página en el menú o pulsa Ctrl+K y escribe lo que buscas (por ejemplo «gompertz» o «dbscan»).",
         "Mueve los deslizadores, pulsa Reproducir y mira cómo se forma cada resultado; copia el código en Python, R o SAS.",
-        "En Regresiones, Clustering y Reservas puedes cargar tu propio CSV."
+        "En Regresiones, Clustering y Reservas puedes cargar tu propio CSV.",
+        "En un móvil Android: descarga el Instalador móvil (.apk), ábrelo y permite instalar apps de origen desconocido. La primera vez necesita internet para bajar Python."
       ],
       "datos": "Tus archivos no salen de tu equipo y la app no guarda nada salvo la apariencia. Para quitarla, usa «Aplicaciones» de Windows (queda registrado un desinstalador)."
     }
