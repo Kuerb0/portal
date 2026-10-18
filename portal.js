@@ -20,6 +20,8 @@ const ICONOS = {
   apagar: "M13 3h-2v10h2V3zm4.83 2.17-1.42 1.42C17.99 7.86 19 9.81 19 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.19 1.01-4.14 2.58-5.42L6.17 5.17C4.23 6.82 3 9.26 3 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z",
   nota: "M5 3h14a2 2 0 0 1 2 2v10l-6 6H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm9 16.5V15h4.5L14 19.5zM7 8h10v2H7V8zm0 4h6v2H7v-2z",
   descarga: "M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z",
+  pc: "M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7v2H8v2h8v-2h-2v-2h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H3V4h18v12z",
+  movil: "M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z",
   chevron: "M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z",
   libro: "M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z",
   ampliar: "M21 11V3h-8l3.29 3.29-10 10L3 13v8h8l-3.29-3.29 10-10z",
@@ -57,7 +59,11 @@ function tarjeta(w, i) {
   const repo = w.tipo === "repo" || (w.tipo === "app" && /github\.com/.test(w.url || ""));           // un proyecto de GitHub: se enlaza el repositorio, no una web
   const estado = !w.url ? `<span class="estado">En preparación</span>`
     : repo ? `<span class="estado repo">Repositorio</span>` : `<span class="estado activa">Activa</span>`;
-  const insignia = w.tipo === "app" ? `<span class="estado repo">App de escritorio</span>` : estado;
+  // escritorio (.exe, .bat) o móvil (.apk), según lo que se pueda descargar
+  const dispositivo = d => { const f = d.archivo.toLowerCase().split("?")[0]; return f.endsWith(".apk") ? "movil" : [".exe", ".bat", ".msi"].some(x => f.endsWith(x)) ? "pc" : ""; };   // vídeos y demás: sin icono de equipo
+  const dispositivos = ["pc", "movil"].filter(x => (w.descargas || []).some(d => dispositivo(d) === x));
+  const queApp = dispositivos.length === 2 ? "App de escritorio y de móvil" : dispositivos[0] === "movil" ? "App de móvil" : "App de escritorio";
+  const insignia = w.tipo === "app" ? `<span class="estado repo plataformas">${(dispositivos.length ? dispositivos : ["pc"]).map(x => svg(x, 15)).join("")} ${queApp}</span>` : estado;
   a.innerHTML = `<div class="marco" aria-hidden="true">
       <div class="barra"><i></i><i></i><i></i><span>${esc(dominio(w.url))}</span></div>
       <div class="vista">${miniatura}</div>
@@ -66,7 +72,7 @@ function tarjeta(w, i) {
       <div class="titulo"><span class="ico${w.icono_img ? " propio" : ""}" aria-hidden="true">${w.icono_img ? `<img src="${esc(w.icono_img)}" alt="" width="36" height="36" loading="lazy">` : svg(w.icono, 22)}</span><h2>${esc(w.titulo)}</h2></div>
       <div class="etiquetas">${etiquetas}</div>
       <details class="mas"><summary>${svg("chevron", 20)}Descripción</summary><p>${esc(w.descripcion)}</p></details>
-      ${(w.descargas || []).length || w.flujograma || w.guia ? `<div class="descargas">${(w.descargas || []).map(d => `<a class="boton sec" href="${esc(d.archivo)}" download="${esc(d.archivo.split("/").pop())}" title="Windows puede avisar al abrirlo porque el fichero no está firmado (Más información → Ejecutar de todas formas)">${svg("descarga", 18)} ${esc(d.texto)}</a>`).join("")}${w.flujograma ? `<button type="button" class="boton sec flujo" data-panel="flujo" aria-expanded="false" title="Esquema de cómo funciona la app">${svg("arbol", 18)} Flujograma</button>` : ""}${w.guia ? `<button type="button" class="boton sec flujo" data-panel="guia" aria-expanded="false" title="Cómo se instala y se usa">${svg("libro", 18)} Guía rápida</button>` : ""}</div>` : ""}
+      ${(w.descargas || []).length || w.flujograma || w.guia ? `<div class="descargas">${(w.descargas || []).map(d => `<a class="boton sec" href="${esc(d.archivo)}" download="${esc(d.archivo.split("/").pop())}" title="Windows puede avisar al abrirlo porque el fichero no está firmado (Más información → Ejecutar de todas formas)"><span class="par">${svg("descarga", 18)}${dispositivo(d) ? svg(dispositivo(d), 18) : ""}</span> ${esc(d.texto)}</a>`).join("")}${w.flujograma ? `<button type="button" class="boton sec flujo" data-panel="flujo" aria-expanded="false" title="Esquema de cómo funciona la app">${svg("arbol", 18)} Flujograma</button>` : ""}${w.guia ? `<button type="button" class="boton sec flujo" data-panel="guia" aria-expanded="false" title="Cómo se instala y se usa">${svg("libro", 18)} Guía rápida</button>` : ""}</div>` : ""}
       ${w.flujograma ? `<div class="panel-flujo" hidden><div class="visor-mini"><img alt="Flujograma de ${esc(w.titulo)}" data-src="${esc(w.flujograma)}"></div>
         <div class="barra-flujo"><span>Desplázate para ver el resto</span><button type="button" data-ampliar="${esc(w.flujograma)}" data-titulo="${esc(w.titulo)}">Ampliar ${svg("ampliar", 16)}</button></div></div>` : ""}
       ${w.guia ? `<div class="panel-guia" hidden><h3>Necesitas</h3><p>${esc(w.guia.requisitos)}</p><h3>Paso a paso</h3><ol>${w.guia.pasos.map(p => `<li>${esc(p)}</li>`).join("")}</ol><h3>Tus datos</h3><p>${esc(w.guia.datos)}</p></div>` : ""}
