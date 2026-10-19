@@ -116,7 +116,8 @@ button.boton.sec{font:inherit;font-size:.85rem;font-weight:600;cursor:pointer;di
 .lienzo.arrastra{cursor:grabbing}
 .lienzo img{position:absolute;left:0;top:0;transform-origin:0 0;user-select:none;-webkit-user-drag:none;max-width:none}
 .visor-modal footer{padding:.4rem 1rem;background:var(--tarjeta);border-top:1px solid var(--borde);font-size:.8rem;color:var(--suave)}
-.boton.sec .par{display:inline-flex;align-items:center;gap:.2rem}
+.boton.sec .par{display:inline-flex;flex:none;flex-wrap:nowrap;align-items:center;gap:.2rem}
+.boton.sec .par svg{flex:none}
 .estado.plataformas{display:inline-flex;align-items:center;gap:.25rem}
 .estado.plataformas svg{flex:none}
 
