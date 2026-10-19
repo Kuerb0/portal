@@ -123,12 +123,6 @@ button.boton.sec{font:inherit;font-size:.85rem;font-weight:600;cursor:pointer;di
 .lienzo.arrastra{cursor:grabbing}
 .lienzo img{position:absolute;left:0;top:0;transform-origin:0 0;user-select:none;-webkit-user-drag:none;max-width:none}
 .visor-modal footer{padding:.4rem 1rem;background:var(--tarjeta);border-top:1px solid var(--borde);font-size:.8rem;color:var(--suave)}
-.panel-guia{position:relative;z-index:2;border:1px solid var(--borde);border-radius:10px;padding:.2rem .9rem .7rem;background:var(--fondo);font-size:.88rem;max-height:18rem;overflow:auto}
-.panel-guia[hidden]{display:none}
-.panel-guia h3{margin:.7rem 0 .2rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.04em;color:var(--acento)}
-.panel-guia p{margin:0;color:var(--suave)}
-.panel-guia ol{margin:0;padding-left:1.2rem;color:var(--suave)}
-.panel-guia li{margin:.25rem 0}
 .boton.sec .par{display:inline-flex;align-items:center;gap:.2rem}
 .estado.plataformas{display:inline-flex;align-items:center;gap:.25rem}
 .estado.plataformas svg{flex:none}

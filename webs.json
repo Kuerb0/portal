@@ -74,17 +74,7 @@
       }
     ],
     "flujograma": "flujogramas/viajes.svg",
-    "guia": {
-      "requisitos": "Windows 10 u 11 (el programa lleva su propio Python, unos 150 MB) o un móvil Android reciente (WebView 137 o más). Internet para descargar los precios.",
-      "pasos": [
-        "En Windows, descarga el Instalador (.exe) y ábrelo: eliges la carpeta y los accesos directos. Si Windows avisa, pulsa «Más información → Ejecutar de todas formas».",
-        "En Android, descarga el Instalador móvil (.apk), ábrelo y permite instalar apps de origen desconocido. Empieza sin datos: la primera vez descarga los precios desde «Descargas».",
-        "Al abrir la app sale «Tu búsqueda»: elige el aeropuerto de origen, hasta 10 destinos, las fechas, los días de viaje y las personas. Solo se cargan esos destinos y fechas.",
-        "Descarga los precios desde «Descargas» y compara en Resumen, Buscador, Favoritos, Alertas, Evolución, Calendario y Mapa. Puedes cambiar la búsqueda desde el menú.",
-        "Para una versión nueva, ejecuta el instalador nuevo: se instala encima y respeta tus descargas y ajustes. Los trenes solo están disponibles saliendo de Madrid."
-      ],
-      "datos": "Tus descargas y ajustes se quedan en tu equipo o móvil; no se envían a ningún sitio. En Windows, para quitarlo usa «Aplicaciones» (queda registrado un desinstalador); tus datos se guardan en una carpeta «Viajes_datos» junto a la del programa."
-    }
+    "guia": "guias/viajes-app.pdf"
   },
   {
     "id": "finanzas-app",
@@ -115,18 +105,7 @@
       }
     ],
     "flujograma": "flujogramas/planificador.svg",
-    "guia": {
-      "requisitos": "Windows 10 u 11 (o Android para la app móvil). Internet para actualizar los datos de mercado en el ordenador (si falla, usa la última copia guardada). No hace falta tener Python: el programa lleva el suyo dentro (unos 260 MB instalado).",
-      "pasos": [
-        "Descarga el Instalador (.exe) y ábrelo: sale una ventana que te deja elegir la carpeta y los accesos directos. Si Windows avisa, pulsa «Más información → Ejecutar de todas formas».",
-        "Abre la app desde el acceso directo del Escritorio. Cerrar la ventana la deja en la bandeja del sistema; para salir del todo, clic derecho en su icono → Salir.",
-        "Elige una página: Hipoteca, Cartera, Comparador, Mercado, Plazos y riesgo, Ahorrador, Asignador o Test de riesgo.",
-        "Rellena tus datos: los resultados se recalculan solos. «Actualizar datos», en la barra lateral, trae los últimos precios.",
-        "Para una versión nueva, ejecuta el instalador nuevo: se instala encima.",
-        "En el móvil (Android): descarga el «Instalador móvil» (.apk) y ábrelo; Android te pedirá permiso para instalar desde esa fuente. Lleva los datos de mercado de la fecha de la versión y no los actualiza solo."
-      ],
-      "datos": "Perfiles, ajustes y copias de los datos de mercado se guardan en la carpeta de la app y se conservan al actualizar. Para quitarlo, usa «Aplicaciones» de Windows (queda registrado un desinstalador)."
-    }
+    "guia": "guias/finanzas-app.pdf"
   },
   {
     "id": "estadistica-app",
@@ -160,18 +139,7 @@
       }
     ],
     "flujograma": "flujogramas/estadistica-app.svg",
-    "guia": {
-      "requisitos": "Windows 10 u 11. No hace falta tener Python ni internet: el programa lleva todo dentro (WebView2 viene con Windows 11 y con Edge).",
-      "pasos": [
-        "Descarga el Instalador (.exe) y ábrelo: sale una ventana que te deja elegir la carpeta y los accesos directos. Si Windows avisa, pulsa «Más información → Ejecutar de todas formas».",
-        "Cuando acabe, abre Estadística desde el acceso directo del Escritorio.",
-        "Elige una página en el menú o pulsa Ctrl+K y escribe lo que buscas (por ejemplo «gompertz» o «dbscan»).",
-        "Mueve los deslizadores, pulsa Reproducir y mira cómo se forma cada resultado; copia el código en Python, R o SAS.",
-        "En Regresiones, Clustering y Reservas puedes cargar tu propio CSV.",
-        "En un móvil Android: descarga el Instalador móvil (.apk), ábrelo y permite instalar apps de origen desconocido. La primera vez necesita internet para bajar Python."
-      ],
-      "datos": "Tus archivos no salen de tu equipo y la app no guarda nada salvo la apariencia. Para quitarla, usa «Aplicaciones» de Windows (queda registrado un desinstalador)."
-    }
+    "guia": "guias/estadistica-app.pdf"
   },
   {
     "id": "calendario",
@@ -191,17 +159,7 @@
       }
     ],
     "flujograma": "flujogramas/calendario.svg",
-    "guia": {
-      "requisitos": "Windows 10 u 11 y una fuente de eventos: Outlook clásico instalado o el enlace ICS de tu calendario de Outlook web. No hace falta tener Python.",
-      "pasos": [
-        "Descarga el Instalador (.exe) y ábrelo: sale una ventana que te deja elegir la carpeta y los accesos directos. Si Windows avisa, pulsa «Más información → Ejecutar de todas formas».",
-        "Se abre el asistente: elige de dónde leer los eventos, tus festivos y cómo verlo. Al guardar, aparece el widget en el escritorio.",
-        "Cambia de vista (horas, lista, mes) desde la barra. El botón ⚙ abre el Panel de control y Ctrl+K la paleta de comandos.",
-        "Clic derecho en un evento para ponerle una alarma, editarlo o abrirlo en Outlook.",
-        "Para una versión nueva, ejecuta el instalador nuevo: se instala encima y conserva tu configuración y tus perfiles."
-      ],
-      "datos": "Tu configuración y tus perfiles quedan en la carpeta del programa (config.json y perfiles) y se conservan al actualizar. No se envía ningún dato. Para quitarlo, usa «Aplicaciones» de Windows (queda registrado un desinstalador)."
-    }
+    "guia": "guias/calendario.pdf"
   },
   {
     "id": "excel",
@@ -232,17 +190,7 @@
       }
     ],
     "flujograma": "flujogramas/atlas.svg",
-    "guia": {
-      "requisitos": "Windows 10 u 11. No hace falta tener Python ni internet para instalarlo: lleva el suyo dentro (unos 160 MB). La IA local es opcional y se instala aparte (pesa unos 2 GB).",
-      "pasos": [
-        "Descarga el Instalador (.exe) y ábrelo: sale una ventana que te deja elegir la carpeta y los accesos directos. Si Windows avisa, pulsa «Más información → Ejecutar de todas formas».",
-        "Abre el Atlas desde el acceso directo del Escritorio.",
-        "En Universo, explora las ramas y pulsa una función para ver su ficha, su equivalente en SAS y sus advertencias.",
-        "Con «Probar» ejecutas un ejemplo de la función con datos simulados. El buscador de arriba encuentra funciones, conceptos y tus libros.",
-        "En Importar, suelta libros, código o apuntes: el Atlas los clasifica solo. Para una versión nueva, ejecuta el instalador nuevo: se instala encima."
-      ],
-      "datos": "Tu catálogo, tu biblioteca y tus fichas son tuyos: al actualizar se conservan."
-    }
+    "guia": "guias/atlas.pdf"
   },
   {
     "id": "logeador",
@@ -265,17 +213,7 @@
         "archivo": "https://github.com/Kuerb0/descargas/releases/download/logeador-v1.4.0/AdministradorTareas-1.4.0-Instalador.exe"
       }
     ],
-    "guia": {
-      "requisitos": "Windows 10 u 11. No hace falta tener Python ni internet: el programa lleva todo dentro.",
-      "pasos": [
-        "Descarga el Instalador (.exe) y ábrelo: sale una ventana que te deja elegir la carpeta y los accesos directos. Si Windows avisa, pulsa «Más información → Ejecutar de todas formas».",
-        "Abre Administrador de Tareas+ desde el acceso directo del Escritorio: empieza a registrar enseguida.",
-        "En Procesos ves cada programa con su CPU, RAM, entrada/salida y GPU; elige el rango de tiempo y cada cuánto se registra.",
-        "En Distribución y Estadísticas ves qué programas pesan más y cómo evolucionan.",
-        "Para una versión nueva, ejecuta el instalador nuevo: se instala encima y conserva tu registro."
-      ],
-      "datos": "El registro se queda en tu equipo (%LOCALAPPDATA%/Logeador); no se envía a ningún sitio. Para quitarlo, usa «Aplicaciones» de Windows (queda registrado un desinstalador)."
-    }
+    "guia": "guias/logeador.pdf"
   },
   {
     "id": "apagador",
@@ -295,17 +233,7 @@
       }
     ],
     "flujograma": "flujogramas/apagador.svg",
-    "guia": {
-      "requisitos": "Windows 10 u 11. No hace falta tener Python ni internet: el programa lleva todo dentro.",
-      "pasos": [
-        "Descarga el Instalador (.exe) y ábrelo: sale una ventana que te deja elegir la carpeta y los accesos directos. Si Windows avisa, pulsa «Más información → Ejecutar de todas formas».",
-        "Abre el Apagador desde el acceso directo del Escritorio.",
-        "Elige «duración» (minutos) o «hora exacta» y pulsa Programar.",
-        "Verás la cuenta atrás. Pulsa Cancelar en cualquier momento para anular el apagado.",
-        "Para una versión nueva, ejecuta el instalador nuevo: se instala encima."
-      ],
-      "datos": "No guarda datos personales. Para quitarlo, usa «Aplicaciones» de Windows (queda registrado un desinstalador)."
-    }
+    "guia": "guias/apagador.pdf"
   },
   {
     "id": "post-it",
@@ -325,16 +253,6 @@
       }
     ],
     "flujograma": "flujogramas/post-it.svg",
-    "guia": {
-      "requisitos": "Windows 10 u 11. No hace falta Node.js ni internet: el programa lleva su propio motor (unos 160 MB).",
-      "pasos": [
-        "Descarga el Instalador (.exe) y ábrelo: sale una ventana que te deja elegir la carpeta y los accesos directos. Si Windows avisa, pulsa «Más información → Ejecutar de todas formas».",
-        "Se crea el acceso directo «Post-it» y la app arranca sola con Windows; vive en la bandeja.",
-        "Una nota por ventana: cambia su color, hazla translúcida o ponla encima o debajo del resto.",
-        "Las tareas llevan casilla; con @diario, @semanal o @lunes… vuelven a salir al marcarlas.",
-        "Para una versión nueva, ejecuta el instalador nuevo: se instala encima."
-      ],
-      "datos": "Las notas están en notes.json, dentro de la carpeta del programa (no se sincronizan entre equipos) y se conservan al actualizar. Para quitarlo, usa «Aplicaciones» de Windows (queda registrado un desinstalador)."
-    }
+    "guia": "guias/post-it.pdf"
   }
 ]

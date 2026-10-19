@@ -1,5 +1,5 @@
 // Dibuja una tarjeta con miniatura por cada web de webs.json. Para añadir una web basta con añadirla a ese fichero
-// (y una captura en img/, o varias en «imagenes» para una galería que va cambiando; «descargas»: lista de {texto, archivo} con botones de descarga, ficheros en descargas/; «flujograma»: un SVG de flujogramas/ que se despliega en la tarjeta; «guia»: {requisitos, pasos[], datos} para el botón «Guía rápida»). Sin url, la tarjeta sale como «En preparación». «icono» es el nombre de uno de ICONOS (o «icono_img»: el icono propio del proyecto, una imagen).
+// (y una captura en img/, o varias en «imagenes» para una galería que va cambiando; «descargas»: lista de {texto, archivo} con botones de descarga, ficheros en descargas/; «flujograma»: un SVG de flujogramas/ que se despliega en la tarjeta; «guia»: ruta de un PDF en guias/ para el botón «Guía (PDF)»). Sin url, la tarjeta sale como «En preparación». «icono» es el nombre de uno de ICONOS (o «icono_img»: el icono propio del proyecto, una imagen).
 const rejilla = document.getElementById("rejilla");
 const vacio = document.getElementById("vacio");
 const buscar = document.getElementById("buscar");
@@ -71,10 +71,9 @@ function tarjeta(w, i) {
     <div class="cuerpo">
       <div class="titulo"><span class="ico${w.icono_img ? " propio" : ""}" aria-hidden="true">${w.icono_img ? `<img src="${esc(w.icono_img)}" alt="" width="36" height="36" loading="lazy">` : svg(w.icono, 22)}</span><h2>${esc(w.titulo)}</h2></div>
       <details class="mas"><summary>${svg("chevron", 20)}Descripción</summary><p>${esc(w.descripcion)}</p></details>
-      ${(w.descargas || []).length || w.flujograma || w.guia ? `<div class="descargas">${(w.descargas || []).map(d => `<a class="boton sec" href="${esc(d.archivo)}" ${d.pagina ? `target="_blank" rel="noopener" title="Abre la web: ahí sale «Instalar» o «Añadir a pantalla de inicio»"` : `download="${esc(d.archivo.split("/").pop())}" title="Windows puede avisar al abrirlo porque el fichero no está firmado (Más información → Ejecutar de todas formas)"`}><span class="par">${svg("descarga", 18)}${dispositivo(d) ? svg(dispositivo(d), 18) : ""}</span> ${esc(d.texto)}</a>`).join("")}${w.flujograma ? `<button type="button" class="boton sec flujo" data-panel="flujo" aria-expanded="false" title="Esquema de cómo funciona la app">${svg("arbol", 18)} Flujograma</button>` : ""}${w.guia ? `<button type="button" class="boton sec flujo" data-panel="guia" aria-expanded="false" title="Cómo se instala y se usa">${svg("libro", 18)} Guía rápida</button>` : ""}</div>` : ""}
+      ${(w.descargas || []).length || w.flujograma || w.guia ? `<div class="descargas">${(w.descargas || []).map(d => `<a class="boton sec" href="${esc(d.archivo)}" ${d.pagina ? `target="_blank" rel="noopener" title="Abre la web: ahí sale «Instalar» o «Añadir a pantalla de inicio»"` : `download="${esc(d.archivo.split("/").pop())}" title="Windows puede avisar al abrirlo porque el fichero no está firmado (Más información → Ejecutar de todas formas)"`}><span class="par">${svg("descarga", 18)}${dispositivo(d) ? svg(dispositivo(d), 18) : ""}</span> ${esc(d.texto)}</a>`).join("")}${w.flujograma ? `<button type="button" class="boton sec flujo" data-panel="flujo" aria-expanded="false" title="Esquema de cómo funciona la app">${svg("arbol", 18)} Flujograma</button>` : ""}${w.guia ? `<a class="boton sec" href="${esc(w.guia)}" target="_blank" rel="noopener" title="Documentación completa en PDF, con índice">${svg("libro", 18)} Guía (PDF)</a>` : ""}</div>` : ""}
       ${w.flujograma ? `<div class="panel-flujo" hidden><div class="visor-mini"><img alt="Flujograma de ${esc(w.titulo)}" data-src="${esc(w.flujograma)}"></div>
         <div class="barra-flujo"><span>Desplázate para ver el resto</span><button type="button" data-ampliar="${esc(w.flujograma)}" data-titulo="${esc(w.titulo)}">Ampliar ${svg("ampliar", 16)}</button></div></div>` : ""}
-      ${w.guia ? `<div class="panel-guia" hidden><h3>Necesitas</h3><p>${esc(w.guia.requisitos)}</p><h3>Paso a paso</h3><ol>${w.guia.pasos.map(p => `<li>${esc(p)}</li>`).join("")}</ol><h3>Tus datos</h3><p>${esc(w.guia.datos)}</p></div>` : ""}
       <div class="pie-tarjeta">${w.url ? `<a class="boton" href="${esc(destino)}" target="_blank" rel="noopener" aria-label="${repo ? "Ver en GitHub" : "Abrir"}: ${esc(w.titulo)}">${repo ? "Ver en GitHub" : "Abrir"} ${svg("flecha", 18)}</a>` : ""}${insignia}</div>
       ${w.resumen ? `<p class="resumen">${esc(w.resumen)}</p>` : ""}
     </div>`;
@@ -230,7 +229,7 @@ document.addEventListener("click", e => {
   if (b) {
     const cuerpo = b.closest(".cuerpo"), abre = b.getAttribute("aria-expanded") !== "true";
     cuerpo.querySelectorAll("[data-panel]").forEach(x => x.setAttribute("aria-expanded", "false"));
-    cuerpo.querySelectorAll(".panel-flujo,.panel-guia").forEach(p => { p.hidden = true; });
+    cuerpo.querySelectorAll(".panel-flujo").forEach(p => { p.hidden = true; });
     if (abre) {
       b.setAttribute("aria-expanded", "true");
       const panel = cuerpo.querySelector(".panel-" + b.dataset.panel); panel.hidden = false;

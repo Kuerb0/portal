@@ -31,4 +31,4 @@ Los envoltorios de estadistica/ y inanzas/ son iguales que el de uelos/ (copia
 
 Las tarjetas con `"flujograma": "flujogramas/<app>.svg"` en `webs.json` llevan un tercer botón, «Flujograma», junto a Instalador y Actualizador: despliega el esquema en la tarjeta y «Ampliar» lo abre en un visor con zoom y arrastre. El de Viajes (App) es el `Flujograma.svg` de su repositorio; los demás se generan con `python herramientas/generar_flujogramas.py` (cada app se describe en `APPS`, dentro de ese fichero: columnas de cajas y flechas).
 
-El cuarto botón, «Guía rápida», sale con `"guia": {"requisitos": "…", "pasos": […], "datos": "…"}` en `webs.json` y despliega en la tarjeta qué hace falta, el paso a paso y dónde quedan los datos (se cierra el flujograma si estaba abierto: solo se ve un panel a la vez).
+El cuarto botón, «Guía (PDF)», sale con `"guia": "guias/<id>.pdf"` en `webs.json` y abre en otra pestaña la documentación completa de la app, con portada, índice y números de página. Los PDF se hacen con `python guias/construir.py [id]` a partir de `guias/src/<id>.md` (con imágenes en `guias/img/`; hace falta Edge, `markdown`, `PyMuPDF` y `websocket-client`).
