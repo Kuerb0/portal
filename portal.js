@@ -54,7 +54,6 @@ function tarjeta(w, i) {
     : fotos.length
     ? `<img src="${esc(fotos[0])}" alt="Vista previa de ${esc(w.titulo)}" loading="lazy">`
     : `<div class="sin-imagen" aria-hidden="true">${svg(w.icono, 56)}</div>`;
-  const etiquetas = (w.etiquetas || []).map(e => `<span class="etiqueta">${esc(e)}</span>`).join("");
   const destino = w.abrir || w.url;       // «abrir»: la tarjeta lleva al envoltorio instalable; «url» sigue siendo la web de verdad (barra de direcciones)
   const repo = w.tipo === "repo" || (w.tipo === "app" && /github\.com/.test(w.url || ""));           // un proyecto de GitHub: se enlaza el repositorio, no una web
   const estado = !w.url ? `<span class="estado">En preparación</span>`
@@ -70,13 +69,13 @@ function tarjeta(w, i) {
     </div>
     <div class="cuerpo">
       <div class="titulo"><span class="ico${w.icono_img ? " propio" : ""}" aria-hidden="true">${w.icono_img ? `<img src="${esc(w.icono_img)}" alt="" width="36" height="36" loading="lazy">` : svg(w.icono, 22)}</span><h2>${esc(w.titulo)}</h2></div>
-      <div class="etiquetas">${etiquetas}</div>
       <details class="mas"><summary>${svg("chevron", 20)}Descripción</summary><p>${esc(w.descripcion)}</p></details>
       ${(w.descargas || []).length || w.flujograma || w.guia ? `<div class="descargas">${(w.descargas || []).map(d => `<a class="boton sec" href="${esc(d.archivo)}" ${d.pagina ? `target="_blank" rel="noopener" title="Abre la web: ahí sale «Instalar» o «Añadir a pantalla de inicio»"` : `download="${esc(d.archivo.split("/").pop())}" title="Windows puede avisar al abrirlo porque el fichero no está firmado (Más información → Ejecutar de todas formas)"`}><span class="par">${svg("descarga", 18)}${dispositivo(d) ? svg(dispositivo(d), 18) : ""}</span> ${esc(d.texto)}</a>`).join("")}${w.flujograma ? `<button type="button" class="boton sec flujo" data-panel="flujo" aria-expanded="false" title="Esquema de cómo funciona la app">${svg("arbol", 18)} Flujograma</button>` : ""}${w.guia ? `<button type="button" class="boton sec flujo" data-panel="guia" aria-expanded="false" title="Cómo se instala y se usa">${svg("libro", 18)} Guía rápida</button>` : ""}</div>` : ""}
       ${w.flujograma ? `<div class="panel-flujo" hidden><div class="visor-mini"><img alt="Flujograma de ${esc(w.titulo)}" data-src="${esc(w.flujograma)}"></div>
         <div class="barra-flujo"><span>Desplázate para ver el resto</span><button type="button" data-ampliar="${esc(w.flujograma)}" data-titulo="${esc(w.titulo)}">Ampliar ${svg("ampliar", 16)}</button></div></div>` : ""}
       ${w.guia ? `<div class="panel-guia" hidden><h3>Necesitas</h3><p>${esc(w.guia.requisitos)}</p><h3>Paso a paso</h3><ol>${w.guia.pasos.map(p => `<li>${esc(p)}</li>`).join("")}</ol><h3>Tus datos</h3><p>${esc(w.guia.datos)}</p></div>` : ""}
       <div class="pie-tarjeta">${w.url ? `<a class="boton" href="${esc(destino)}" target="_blank" rel="noopener" aria-label="${repo ? "Ver en GitHub" : "Abrir"}: ${esc(w.titulo)}">${repo ? "Ver en GitHub" : "Abrir"} ${svg("flecha", 18)}</a>` : ""}${insignia}</div>
+      ${w.resumen ? `<p class="resumen">${esc(w.resumen)}</p>` : ""}
     </div>`;
   return a;
 }
@@ -110,7 +109,7 @@ function titulo(texto) {
 
 function pintar() {
   const q = buscar.value.trim().toLowerCase();
-  const ver = webs.filter(w => !q || [w.titulo, w.descripcion, ...(w.etiquetas || [])].join(" ").toLowerCase().includes(q));
+  const ver = webs.filter(w => !q || [w.titulo, w.descripcion].join(" ").toLowerCase().includes(q));
   const sitios = ver.filter(w => w.tipo !== "repo" && w.tipo !== "app"), apps = ver.filter(w => w.tipo === "app"), repos = ver.filter(w => w.tipo === "repo");
   const nodos = [];
   if (sitios.length && (apps.length || repos.length)) nodos.push(titulo("Webs interactivas"));
