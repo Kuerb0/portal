@@ -128,3 +128,6 @@ button.boton.sec{font:inherit;font-size:.85rem;font-weight:600;cursor:pointer;di
 .boton.sec .par{display:inline-flex;align-items:center;gap:.2rem}
 .estado.plataformas{display:inline-flex;align-items:center;gap:.25rem}
 .estado.plataformas svg{flex:none}
+
+/* un botón que se queda solo en la última fila de la rejilla de dos columnas ocupa todo el ancho */
+.descargas>:last-child:nth-child(odd){grid-column:1/-1}

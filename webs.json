@@ -20,27 +20,6 @@
     "icono_img": "img/iconos/viajes.png"
   },
   {
-    "id": "estadistica",
-    "titulo": "Estadística básica",
-    "icono": "grafico",
-    "descripcion": "Estadística con simulaciones que se mueven: normal, juegos de probabilidad, intervalos de confianza, contrastes, una regresión que se acerca sola y GLM (convertir Y y X).",
-    "etiquetas": [
-      "estadística",
-      "simulaciones",
-      "regresión",
-      "GLM",
-      "aprender"
-    ],
-    "imagen": "img/estadistica.jpg",
-    "url": "https://estadistica-9madheayvfbwktizomxstz.streamlit.app/",
-    "estado": "activa",
-    "tipo": "web",
-    "instalar": "estadistica/",
-    "icono_app": "estadistica/icon-192.png",
-    "abrir": "estadistica/",
-    "icono_img": "img/iconos/estadistica.png"
-  },
-  {
     "id": "finanzas",
     "titulo": "Finanzas personales",
     "icono": "euro",
