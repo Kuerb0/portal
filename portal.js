@@ -63,8 +63,9 @@ function tarjeta(w, i) {
   const dispositivos = ["pc", "movil"].filter(x => (w.descargas || []).some(d => dispositivo(d) === x));
   const queApp = dispositivos.length === 2 ? "App de escritorio y de móvil" : dispositivos[0] === "movil" ? "App de móvil" : "App de escritorio";
   const insignia = w.tipo === "app" ? `<span class="estado repo plataformas">${(dispositivos.length ? dispositivos : ["pc"]).map(x => svg(x, 15)).join("")} ${queApp}</span>` : estado;
-  a.innerHTML = `<div class="marco" aria-hidden="true">
-      <div class="barra"><i></i><i></i><i></i><span>${esc(dominio(w.url))}</span></div>
+  a.style.viewTransitionName = "t-" + w.id;                      // para que, al ampliar una, las demás se deslicen a su sitio
+  a.innerHTML = `<div class="marco" role="button" tabindex="0" aria-expanded="false" aria-label="Ampliar la vista previa de ${esc(w.titulo)}">
+      <div class="barra" aria-hidden="true"><i></i><i></i><i></i><span>${esc(dominio(w.url))}</span></div>
       <div class="vista">${miniatura}</div>
     </div>
     <div class="cuerpo">
@@ -99,6 +100,43 @@ if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
     document.querySelectorAll(".galeria").forEach(g => { if (!g.dataset.sobre && !g.dataset.pausa) mostrar(g, +(g.dataset.i || 0) + 1); });
   }, 3500);
 }
+
+// Ampliar una tarjeta: clic en su marco. Pasa a ser la primera de su sección y ocupa toda la fila; las demás se recolocan debajo.
+// Otro clic en el marco (o Escape) la devuelve a su sitio.
+function conTransicion(f) {
+  if (document.startViewTransition && !matchMedia("(prefers-reduced-motion: reduce)").matches) return document.startViewTransition(f).finished;
+  f(); return Promise.resolve();
+}
+function encoger(t) {
+  t.classList.remove("ampliada");
+  t.querySelector(".marco").setAttribute("aria-expanded", "false");
+  if (t._marca) { t._marca.replaceWith(t); t._marca = null; }
+}
+function ampliar(t) {
+  const abierta = rejilla.querySelector(".tarjeta.ampliada");
+  const nueva = abierta !== t;
+  conTransicion(() => {
+    if (abierta) encoger(abierta);
+    if (!nueva) return;
+    t._marca = document.createComment("");
+    t.replaceWith(t._marca);
+    let s = t._marca.previousElementSibling;
+    while (s && !s.classList.contains("seccion")) s = s.previousElementSibling;
+    if (s) s.after(t); else rejilla.prepend(t);
+    t.classList.add("ampliada");
+    t.querySelector(".marco").setAttribute("aria-expanded", "true");
+  }).then(() => { if (nueva) t.scrollIntoView({ behavior: "smooth", block: "nearest" }); });
+}
+document.addEventListener("click", e => {
+  const m = e.target.closest(".marco");
+  if (!m || e.target.closest(".puntos button")) return;
+  ampliar(m.closest(".tarjeta"));
+});
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") { const t = rejilla.querySelector(".tarjeta.ampliada"); if (t) ampliar(t); return; }
+  const m = e.target.closest && e.target.closest(".marco");
+  if (m && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); ampliar(m.closest(".tarjeta")); }
+});
 
 function titulo(texto) {
   const h = document.createElement("h2");
