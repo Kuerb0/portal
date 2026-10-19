@@ -83,12 +83,13 @@
     "icono": "avion",
     "icono_img": "img/iconos/viajes.png",
     "tipo": "app",
-    "descripcion": "App de escritorio para Windows que descarga y compara precios de vuelos, hoteles y trenes desde Madrid: resumen, buscador, favoritos, evolución, calendario, mapa, maletas y gestión de datos. Se ejecuta en tu propio equipo.",
+    "descripcion": "App de escritorio (Windows) y de móvil (Android) que descarga y compara precios de vuelos y hoteles desde el aeropuerto que elijas (y trenes desde Madrid): eliges origen, destinos, fechas y días de viaje, y ves resumen, buscador, favoritos, alertas de precio, evolución, calendario, mapa y más. Se ejecuta en tu propio equipo o móvil.",
     "etiquetas": [
       "app",
       "viajes",
       "vuelos",
-      "Windows"
+      "Windows",
+      "Android"
     ],
     "imagen": "img/galeria/viajes-app-1.jpg",
     "url": "",
@@ -102,27 +103,25 @@
     "descargas": [
       {
         "texto": "Instalador",
-        "archivo": "https://github.com/Kuerb0/descargas/releases/download/viajes-v1.7.0/Viajes-1.7.0-Instalador.exe"
+        "archivo": "https://github.com/Kuerb0/descargas/releases/download/viajes-v2.0.0/Viajes-2.0.0-Instalador.exe"
       },
       {
         "texto": "Instalador móvil",
-        "archivo": "vuelos/",
-        "pagina": true,
+        "archivo": "https://github.com/Kuerb0/descargas/releases/download/viajes-v2.0.0/Viajes-2.0.0-Movil.apk",
         "dispositivo": "movil"
       }
     ],
     "flujograma": "flujogramas/viajes.svg",
     "guia": {
-      "requisitos": "Windows 10 u 11 e internet para descargar los precios. No hace falta tener Python: el programa lleva el suyo dentro (unos 150 MB).",
+      "requisitos": "Windows 10 u 11 (el programa lleva su propio Python, unos 150 MB) o un móvil Android reciente (WebView 137 o más). Internet para descargar los precios.",
       "pasos": [
-        "Descarga el Instalador (.exe) y ábrelo: sale una ventana que te deja elegir la carpeta y los accesos directos. Si Windows avisa, pulsa «Más información → Ejecutar de todas formas».",
-        "Cuando acabe, abre la app desde el acceso directo del Escritorio: sale una ventana y un icono en la bandeja.",
-        "Elige origen, destinos y fechas y descarga los precios de vuelos, hoteles y trenes desde Madrid.",
-        "Compara en Resumen, Buscador, Favoritos, Evolución, Calendario y Mapa.",
-        "Para una versión nueva, ejecuta el instalador nuevo: se instala encima y respeta tus descargas y ajustes.",
-        "En el móvil: pulsa «Instalador móvil» (abre la web de Viajes) y elige «Instalar app» o «Añadir a pantalla de inicio»."
+        "En Windows, descarga el Instalador (.exe) y ábrelo: eliges la carpeta y los accesos directos. Si Windows avisa, pulsa «Más información → Ejecutar de todas formas».",
+        "En Android, descarga el Instalador móvil (.apk), ábrelo y permite instalar apps de origen desconocido. Empieza sin datos: la primera vez descarga los precios desde «Descargas».",
+        "Al abrir la app sale «Tu búsqueda»: elige el aeropuerto de origen, hasta 10 destinos, las fechas, los días de viaje y las personas. Solo se cargan esos destinos y fechas.",
+        "Descarga los precios desde «Descargas» y compara en Resumen, Buscador, Favoritos, Alertas, Evolución, Calendario y Mapa. Puedes cambiar la búsqueda desde el menú.",
+        "Para una versión nueva, ejecuta el instalador nuevo: se instala encima y respeta tus descargas y ajustes. Los trenes solo están disponibles saliendo de Madrid."
       ],
-      "datos": "Tus descargas y ajustes se quedan en la carpeta de la app; no se envían a ningún sitio. Para quitarlo, usa «Aplicaciones» de Windows (queda registrado un desinstalador); tus datos se guardan en una carpeta «Viajes_datos» junto a la del programa."
+      "datos": "Tus descargas y ajustes se quedan en tu equipo o móvil; no se envían a ningún sitio. En Windows, para quitarlo usa «Aplicaciones» (queda registrado un desinstalador); tus datos se guardan en una carpeta «Viajes_datos» junto a la del programa."
     }
   },
   {
