@@ -172,6 +172,17 @@ Las notas no se envían a ningún sitio y no hay cuenta. Si instalas el programa
 
 Al actualizar con el instalador nuevo se conservan las notas. Para quitar la app, usa «Aplicaciones» de Windows: el instalador deja registrado un desinstalador.
 
+## Unión con el Calendario
+
+Post-It y Calendario se pasan las citas por una carpeta común, `AgendaCompartida`. No hace falta cuenta ni internet.
+
+- **De Post-It al Calendario.** Cualquier línea con hora (`18:30`, `10:00-11:30`, `a las 9`, `19h`) aparece en el Calendario como un evento. La fecha sale de la cabecera de arriba («Martes 20/10»), de una fecha dentro de la línea (`22/10`), de las palabras `hoy`, `mañana` o un día de la semana, y si no hay ninguna, del primer día en que escribiste la línea. Una línea con la casilla marcada sale en el Calendario con ✓.
+- **Del Calendario a Post-It.** Los eventos de los próximos 7 días se apuntan en una nota llamada «Agenda del Calendario», que se rellena sola y es de solo lectura. Si la cierras, vuelve con «Mostrar todas».
+- **Qué carpeta usa.** Al arrancar busca una carpeta `AgendaCompartida` junto a la app, en OneDrive o en Documentos, y si no hay ninguna la crea junto a la app. Para elegir otra, clic derecho en el icono de la bandeja y «Carpeta compartida con el Calendario…». Si la carpeta está en OneDrive, las citas viajan entre tus ordenadores. Hay que elegir la misma carpeta en las dos apps.
+- **Cada equipo escribe su fichero** (`notas-NOMBRE.json` y `agenda-NOMBRE.json`), así que OneDrive no crea copias en conflicto.
+
+Un cambio tarda unos segundos en llegar al otro lado.
+
 ## Problemas frecuentes
 
 | Qué pasa | Qué hacer |
@@ -185,6 +196,6 @@ Al actualizar con el instalador nuevo se conservan las notas. Para quitar la app
 
 ## Versiones y créditos
 
-Versión 1.0.1. Cambia respecto a la 1.0.0: el cursor del texto se ve ahora sobre cualquier fondo (una I blanca con contorno negro), porque con las notas oscuras o translúcidas parecía desaparecer.
+Versión 1.1.0. Nuevo respecto a la 1.0.1: la unión con el Calendario (ver «Unión con el Calendario»). Versión 1.0.1. Cambia respecto a la 1.0.0: el cursor del texto se ve ahora sobre cualquier fondo (una I blanca con contorno negro), porque con las notas oscuras o translúcidas parecía desaparecer.
 
 Post-It está hecha con Electron (Chromium y Node.js). El código es de Mario (Kuerb0).

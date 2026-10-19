@@ -193,6 +193,15 @@ Sirven para ver cuántos días faltan para algo que te importa. Hay dos formas:
 
 Desde la versión 2.0.1, las cuentas atrás y el evento fijado siguen al evento si lo mueves en el calendario. La app lo reconoce por su identificador: tras cada actualización, si el evento ha cambiado de día, la cuenta atrás cambia con él. En una serie repetida, solo sigue al evento si el más cercano es uno y se ve claro (a menos de una semana). Si el evento se borra o sale de los días que se descargan, la cuenta se queda como estaba.
 
+## Unión con Post-It
+
+Calendario y Post-It se pasan las citas por una carpeta común, `AgendaCompartida`, sin cuentas ni internet.
+
+- **De Post-It al Calendario.** Las líneas de tus notas que llevan hora (`18:30`, `10:00-11:30`, `a las 9`) salen aquí como eventos amarillos. Si la línea tiene la casilla marcada, el título empieza por ✓. Se actualizan cada 15 segundos, y no se pueden mover ni editar desde aquí: se cambian en la nota.
+- **Del Calendario a Post-It.** Los eventos de los próximos 14 días se escriben en la carpeta y Post-It los muestra en su nota «Agenda del Calendario».
+- **Qué carpeta usa.** Busca una carpeta `AgendaCompartida` junto a la app, en OneDrive o en Documentos, y si no hay ninguna la crea. Para cambiarla: Panel de control › Sistema › Post-It › «Cambiar carpeta compartida». Debe ser la misma que use Post-It. En la misma sección puedes apagar la unión.
+- Lo que viene de Post-It no se devuelve a Post-It, así que nada se repite.
+
 ## El Panel de control
 
 Se abre con el botón ⚙ o con clic derecho y «Panel de control…». Tiene ocho pestañas:
@@ -206,7 +215,7 @@ Se abre con el botón ⚙ o con clic derecho y «Panel de control…». Tiene oc
 | Correo | La bandeja y la gestión de las reglas de Outlook: activar, desactivar, ejecutar ahora y eliminar. |
 | Eventos | Los próximos 30 días con buscador y filtro por calendario, y listas de solapes y de eventos repetidos. El menú `⋯` de cada fila permite ir a su día, editar, abrir en Outlook, posponer o eliminar. |
 | Cuenta atrás | Los eventos a los que quieres contarles los días (ver «Cuentas atrás»). |
-| Sistema | Arranque con Windows, perfiles, copia de la configuración, carpetas y dónde se abre cada panel. |
+| Sistema | Arranque con Windows, perfiles, la unión con Post-It, copia de la configuración, carpetas y dónde se abre cada panel. |
 
 Los paneles (control, paleta, correo, hábitos, cumpleaños, plantillas y tareas permanentes) pueden ir en una ventana aparte o anclados a la izquierda o a la derecha del widget, siguiéndolo cuando se mueve.
 
@@ -258,6 +267,8 @@ Nada se envía a ningún sitio. Si compartes la carpeta del programa, no incluya
 | `atajo_global` | Atajo para mostrar u ocultar, por ejemplo `"ctrl+shift+k"`. |
 | `crear_con` | Con qué se crean los eventos: `"auto"`, `"nuevo"` o `"outlook"`. |
 | `escala` | Tamaño general, de 0.7 a 2.0. |
+| `sincronizar_postit` | `true` o `false`: une las notas de Post-It con el Calendario. |
+| `carpeta_compartida` | Carpeta que comparte con Post-It (vacía = la detecta). |
 
 ## Si algo va mal
 
@@ -275,6 +286,6 @@ Nada se envía a ningún sitio. Si compartes la carpeta del programa, no incluya
 
 ## Versiones y créditos
 
-**2.0.1**: las cuentas atrás y el evento fijado siguen al evento cuando se mueve en el calendario. **2.0**: alarmas por evento, sonido de los avisos, modo «solo en este escritorio virtual» y la raya blanca de inicio de semana.
+**2.1.0**: unión con Post-It por una carpeta compartida (ver «Unión con Post-It»). **2.0.1**: las cuentas atrás y el evento fijado siguen al evento cuando se mueve en el calendario. **2.0**: alarmas por evento, sonido de los avisos, modo «solo en este escritorio virtual» y la raya blanca de inicio de semana.
 
 Calendario es software libre bajo la licencia GNU GPL v3: puedes usarlo, estudiarlo, modificarlo y compartirlo, y las versiones modificadas que publiques deben seguir siendo libres bajo la misma licencia. El código es de Mario (Kuerb0).

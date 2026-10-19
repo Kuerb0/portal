@@ -158,7 +158,7 @@
     "descargas": [
       {
         "texto": "Instalador",
-        "archivo": "https://github.com/Kuerb0/descargas/releases/download/calendario-v2.0.1/Calendario-2.0.1-Instalador.exe"
+        "archivo": "https://github.com/Kuerb0/descargas/releases/download/calendario-v2.1.0/Calendario-2.1.0-Instalador.exe"
       }
     ],
     "flujograma": "flujogramas/calendario.svg",
@@ -253,7 +253,7 @@
     "descargas": [
       {
         "texto": "Instalador",
-        "archivo": "https://github.com/Kuerb0/descargas/releases/download/postit-v1.0.1/PostIt-1.0.1-Instalador.exe"
+        "archivo": "https://github.com/Kuerb0/descargas/releases/download/postit-v1.1.0/PostIt-1.1.0-Instalador.exe"
       }
     ],
     "flujograma": "flujogramas/post-it.svg",
