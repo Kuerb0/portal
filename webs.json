@@ -88,6 +88,10 @@
         "texto": "Instalador móvil",
         "archivo": "https://github.com/Kuerb0/descargas/releases/download/viajes-v2.0.0/Viajes-2.0.0-Movil.apk",
         "dispositivo": "movil"
+      },
+      {
+        "texto": "Tráiler (vídeo)",
+        "archivo": "https://github.com/Kuerb0/descargas/releases/download/viajes-v2.0.0/Viajes-2.0-Trailer.mp4"
       }
     ],
     "flujograma": "flujogramas/viajes.svg",
