@@ -294,7 +294,7 @@
   },
   {
     "id": "logeador",
-    "titulo": "Logeador",
+    "titulo": "Administrador de Tareas+",
     "icono": "grafico",
     "tipo": "app",
     "descripcion": "Registro del uso del PC: CPU, memoria, entrada/salida y GPU de cada programa a lo largo del tiempo, con gráficos, distribución por programa y estadísticas.",
@@ -304,21 +304,25 @@
       "Windows",
       "Python"
     ],
-    "imagen": "img/logeador.jpg",
+    "imagenes": [
+      "img/logeador-1.jpg",
+      "img/logeador-2.jpg",
+      "img/logeador-3.jpg"
+    ],
     "url": "",
     "estado": "activa",
     "icono_img": "img/iconos/logeador.png",
     "descargas": [
       {
         "texto": "Instalador",
-        "archivo": "https://github.com/Kuerb0/descargas/releases/download/logeador-v1.3.0/Logeador-1.3.0-Instalador.exe"
+        "archivo": "https://github.com/Kuerb0/descargas/releases/download/logeador-v1.4.0/AdministradorTareas-1.4.0-Instalador.exe"
       }
     ],
     "guia": {
       "requisitos": "Windows 10 u 11. No hace falta tener Python ni internet: el programa lleva todo dentro.",
       "pasos": [
         "Descarga el Instalador (.exe) y ábrelo: sale una ventana que te deja elegir la carpeta y los accesos directos. Si Windows avisa, pulsa «Más información → Ejecutar de todas formas».",
-        "Abre Logeador desde el acceso directo del Escritorio: empieza a registrar enseguida.",
+        "Abre Administrador de Tareas+ desde el acceso directo del Escritorio: empieza a registrar enseguida.",
         "En Procesos ves cada programa con su CPU, RAM, entrada/salida y GPU; elige el rango de tiempo y cada cuánto se registra.",
         "En Distribución y Estadísticas ves qué programas pesan más y cómo evolucionan.",
         "Para una versión nueva, ejecuta el instalador nuevo: se instala encima y conserva tu registro."
