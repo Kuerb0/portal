@@ -75,7 +75,6 @@ main{max-width:72rem;margin:0 auto;padding:1.6rem 1.2rem 3rem}
 .mas p{margin:.3rem 0 .2rem;font-size:.9rem;color:var(--suave)}
 .resumen{margin:.3rem 0 0;font-size:.9rem;line-height:1.45;color:var(--suave);display:-webkit-box;-webkit-line-clamp:3;line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;min-height:calc(3 * 1.45em)}
 .pie-tarjeta{display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-top:.3rem}
-.boton::after{content:"";position:absolute;inset:0;z-index:1}
 .boton{color:var(--acento);text-decoration:none;display:inline-flex;align-items:center;gap:.3rem;font-weight:600;color:var(--acento)}
 .boton svg{transition:transform .2s ease}
 .tarjeta.viva:hover .boton svg{transform:translateX(3px)}
