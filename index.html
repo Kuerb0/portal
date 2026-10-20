@@ -34,10 +34,18 @@
 </header>
 
 <main id="contenido" tabindex="-1">
-  <div class="buscador"><input id="buscar" type="search" placeholder="Buscar una web…" aria-label="Buscar una web"></div>
-  <p id="contador" class="contador" aria-live="polite"></p>
+  <div class="barra-buscar">
+    <div class="buscador">
+      <input id="buscar" type="search" placeholder="Buscar: vuelos, Excel, notas…" aria-label="Buscar proyectos" aria-keyshortcuts="/">
+      <kbd aria-hidden="true">/</kbd>
+    </div>
+    <div class="filtros" role="group" aria-label="Filtrar">
+      <button type="button" data-f="" aria-pressed="true">Todo</button><button type="button" data-f="web" aria-pressed="false">Web</button><button type="button" data-f="windows" aria-pressed="false">Windows</button><button type="button" data-f="android" aria-pressed="false">Android</button><button type="button" data-f="video" aria-pressed="false">Con vídeo</button>
+    </div>
+    <p id="contador" class="contador" aria-live="polite"></p>
+  </div>
   <div id="rejilla" class="grupos"></div>
-  <p id="vacio" class="vacio" hidden>Ninguna web coincide con la búsqueda.</p>
+  <div id="vacio" class="vacio" hidden><p id="vacio-texto"></p><button type="button" id="ver-todo" class="boton sec">Ver todos los proyectos</button></div>
 
   <section id="instalar" class="instalar" aria-labelledby="t-instalar">
     <h2 id="t-instalar" class="seccion">Instálame</h2>

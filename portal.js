@@ -204,20 +204,67 @@ function seccion(id, lista) {
   return s;
 }
 
+// Búsqueda sin tildes ni mayúsculas en título, descripción, resumen, plataforma y etiquetas; cada palabra tiene que estar.
+const normal = s => String(s).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+const plataformas = w => ["pc", "movil"].filter(x => (w.descargas || []).some(d => plataforma(d) === x)).map(x => NOMBRE[x]);
+const FILTROS = {
+  web: w => w.tipo === "web",
+  windows: w => plataformas(w).includes("Windows"),
+  android: w => plataformas(w).includes("Android"),
+  video: w => (w.descargas || []).some(d => /\.(mp4|webm)$/i.test(d.archivo)),
+};
+let filtro = "";
+function coincide(w, palabras) {
+  const texto = normal([w.titulo, w.descripcion, w.resumen, w.tipo, ...plataformas(w), ...(w.etiquetas || [])].join(" "));
+  return palabras.every(p => texto.includes(p));
+}
+
+// El estado va en la dirección (#q=vuelos&f=android) para poder compartirlo. Los enlaces a secciones (#apps) no lo tocan.
+function leerURL() {
+  if (!location.hash.includes("=")) return;
+  const h = new URLSearchParams(location.hash.slice(1));
+  buscar.value = h.get("q") || "";
+  filtro = FILTROS[h.get("f")] ? h.get("f") : "";
+}
+function guardarURL() {
+  const h = new URLSearchParams();
+  if (buscar.value.trim()) h.set("q", buscar.value.trim());
+  if (filtro) h.set("f", filtro);
+  const s = h.toString();
+  if (s || location.hash.includes("=")) history.replaceState(null, "", s ? "#" + s : location.pathname + location.search);
+}
+
 function pintar() {
-  const q = buscar.value.trim().toLowerCase();
-  const ver = webs.filter(w => !q || [w.titulo, w.descripcion].join(" ").toLowerCase().includes(q));
+  const q = buscar.value.trim(), palabras = normal(q).split(/\s+/).filter(Boolean);
+  const ver = webs.filter(w => (!filtro || FILTROS[filtro](w)) && coincide(w, palabras));
   const grupos = {};
   ver.forEach(w => (grupos[w.seccion] ||= []).push(w));
   const ids = [...new Set([...Object.keys(SECCIONES), ...Object.keys(grupos)])].filter(id => grupos[id]);
   rejilla.replaceChildren(...ids.map(id => seccion(id, grupos[id])));
+  document.querySelectorAll(".filtros button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.f === filtro)));
+  const nombreFiltro = filtro && document.querySelector(`.filtros [data-f="${filtro}"]`).textContent;
   vacio.hidden = ver.length > 0;
-  contador.textContent = q ? `${ver.length} ${ver.length === 1 ? "resultado" : "resultados"}` : `${webs.length} proyectos`;
+  document.getElementById("vacio-texto").textContent = `No hay ningún proyecto${q ? ` con «${q}»` : ""}${filtro ? ` en «${nombreFiltro}»` : ""}. `
+    + "Prueba con otra palabra (por ejemplo, vuelos, Excel o notas) o mira todos.";
+  contador.textContent = q || filtro ? `${ver.length} ${ver.length === 1 ? "resultado" : "resultados"}` : `${webs.length} proyectos`;
+  guardarURL();
 }
 
-fetch("webs.json").then(r => r.json()).then(d => { webs = d.sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0)); pintar(); pintarApps(); })
+fetch("webs.json").then(r => r.json()).then(d => { webs = d.sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0)); leerURL(); pintar(); pintarApps(); })
   .catch(() => { rejilla.textContent = "No se han podido cargar las webs."; });
 buscar.addEventListener("input", pintar);
+addEventListener("hashchange", () => { if (location.hash.includes("=")) { leerURL(); pintar(); } });
+document.querySelector(".filtros").addEventListener("click", e => {
+  const b = e.target.closest("button");
+  if (b) { filtro = b.dataset.f; pintar(); }
+});
+document.getElementById("ver-todo").addEventListener("click", () => { buscar.value = ""; filtro = ""; pintar(); buscar.focus(); });
+document.addEventListener("keydown", e => {          // «/» lleva al buscador
+  if (e.key === "/" && !e.ctrlKey && !e.metaKey && !e.altKey && !e.target.closest("input, textarea, select, [contenteditable]")) {
+    e.preventDefault();
+    buscar.focus();
+  }
+});
 
 // tema claro u oscuro: el del sistema, y se recuerda lo que se elija
 const raiz = document.documentElement;
