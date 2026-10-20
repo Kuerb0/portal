@@ -1,5 +1,5 @@
 // Dibuja una tarjeta con miniatura por cada web de webs.json. Para añadir una web basta con añadirla a ese fichero
-// (y una captura en img/, o varias en «imagenes» para una galería que va cambiando; «descargas»: lista de {texto, archivo} con botones de descarga, ficheros en descargas/; «flujograma»: un SVG de flujogramas/ que se despliega en la tarjeta; «guia»: ruta de un PDF en guias/ para el botón «Guía (PDF)»). Sin url, la tarjeta sale como «En preparación». «icono» es el nombre de uno de ICONOS (o «icono_img»: el icono propio del proyecto, una imagen).
+// (y una captura en img/ con su copia .webp, o varias en «imagenes» para una galería; «descargas»: lista de {texto, archivo, bytes} que enlaza a las Releases; «flujograma»: un SVG de flujogramas/ para el botón «Esquema»; «guia»: un PDF de guias/ para el botón «Guía»). El README explica todos los campos.
 const rejilla = document.getElementById("rejilla");
 const vacio = document.getElementById("vacio");
 const contador = document.getElementById("contador");

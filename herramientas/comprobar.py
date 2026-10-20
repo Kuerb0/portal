@@ -24,15 +24,9 @@ PESADO = 200 * 1024
 OBLIGATORIOS = ["id", "titulo", "tipo", "seccion", "orden", "icono", "descripcion", "resumen", "estado"]
 TIPOS = {"web", "app", "repo"}
 RUTAS = ["imagen", "guia", "flujograma", "icono_img", "icono_app", "instalar", "abrir"]
-# ponytail: ficheros viejos de descargas/ a la espera de que Mario decida qué hacer con ellos; vaciar cuando se resuelva
-PENDIENTES = {"descargas/Atlas 1.15.1 - Instalador.bat", "descargas/Atlas 1.15.1 - Actualizar.bat",
-              "descargas/Calendario 2.0 - Actualizar.bat", "descargas/Calendario 2.0 - Instalador.exe",
-              "descargas/Viajes 1.7.0 - Actualizar.bat", "descargas/Viajes 1.7.0 - Instalador.exe",
-              "descargas/Planificador 1.3.0 - Actualizar.bat", "descargas/Planificador 1.3.0 - Instalador.exe",
-              "descargas/Post-It 1.0.0 - Instalador.exe"}
 RELEASE = re.compile(r"https://github\.com/([^/]+/[^/]+)/releases/download/([^/]+)/(.+)")
 
-errores, avisos = [], []
+errores = []
 
 
 def css(texto):
@@ -133,7 +127,7 @@ def pesados_sin_uso():
     corpus = "\n".join(p.read_text(encoding="utf-8", errors="ignore") for p in textos)
     for f in ficheros:
         if f and (RAIZ / f).is_file() and (RAIZ / f).stat().st_size > PESADO and Path(f).name not in corpus:
-            (avisos if f in PENDIENTES else errores).append(f"{f}: {(RAIZ / f).stat().st_size // 1024} KB y nadie lo usa")
+            errores.append(f"{f}: {(RAIZ / f).stat().st_size // 1024} KB y nadie lo usa")
 
 
 def main():
@@ -145,8 +139,6 @@ def main():
     pesados_sin_uso()
     if not rapido:
         releases(urls)
-    for a in avisos:
-        print("aviso:", a)
     if errores:
         print("FALLA:\n  " + "\n  ".join(errores))
         sys.exit(1)
