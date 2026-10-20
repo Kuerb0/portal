@@ -119,6 +119,8 @@
         "bytes": 10761466
       }
     ],
+    "novedades": "Ahora también para Android. Al empezar eliges origen, destinos y fechas, y la app solo carga eso. Trae paletas de color, buscador (Ctrl+K) y alertas de precio.",
+    "requisitos": "En Android hace falta un móvil reciente (WebView 137 o más). Los trenes solo salen desde Madrid.",
     "flujograma": "flujogramas/viajes.svg",
     "guia": "guias/viajes-app.pdf",
     "orden": 40
@@ -163,6 +165,7 @@
         "bytes": 15880626
       }
     ],
+    "novedades": "Interfaz nueva, con ventana propia en Windows y app para Android. Se instala encima de la anterior y conserva tu perfil de riesgo y tus ajustes.",
     "flujograma": "flujogramas/planificador.svg",
     "guia": "guias/finanzas-app.pdf",
     "orden": 50
@@ -245,6 +248,7 @@
         "bytes": 39208448
       }
     ],
+    "novedades": "Se une con Post-It: las líneas con hora de tus notas salen como eventos, y los eventos de los próximos 14 días aparecen en una nota.",
     "flujograma": "flujogramas/calendario.svg",
     "guia": "guias/calendario.pdf",
     "orden": 70
@@ -299,6 +303,7 @@
         "bytes": 164080640
       }
     ],
+    "requisitos": "No hace falta tener Python ni internet: lo lleva todo dentro (unos 160 MB).",
     "flujograma": "flujogramas/atlas.svg",
     "guia": "guias/atlas.pdf",
     "orden": 80
@@ -336,6 +341,7 @@
         "bytes": 43046912
       }
     ],
+    "novedades": "Logeador pasa a llamarse Administrador de Tareas+. Se instala encima de la versión anterior y conserva tu registro.",
     "guia": "guias/logeador.pdf",
     "orden": 90
   },
@@ -365,6 +371,7 @@
         "bytes": 11426816
       }
     ],
+    "requisitos": "No hace falta tener Python ni internet.",
     "flujograma": "flujogramas/apagador.svg",
     "guia": "guias/apagador.pdf",
     "orden": 100
@@ -395,6 +402,7 @@
         "bytes": 158206976
       }
     ],
+    "novedades": "Se une con el Calendario: las líneas con hora de tus notas salen como eventos, y una nota nueva muestra tu agenda de los próximos 7 días.",
     "flujograma": "flujogramas/post-it.svg",
     "guia": "guias/post-it.pdf",
     "orden": 110

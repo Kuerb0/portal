@@ -14,13 +14,14 @@
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="estilo.css">
+<script>try { var t = localStorage.getItem("tema"); if (t === "claro" || t === "oscuro") document.documentElement.dataset.tema = t; } catch (e) {}</script>
 </head>
 <body>
 <a class="saltar" href="#contenido">Saltar al contenido</a>
 <canvas id="fondo" aria-hidden="true"></canvas>
 <header class="cabecera">
-  <button id="tema" class="tema" type="button" title="Cambiar entre tema claro y oscuro" aria-label="Cambiar entre tema claro y oscuro">
-    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18V4c4.41 0 8 3.59 8 8s-3.59 8-8 8z"/></svg>
+  <button id="tema" class="tema" type="button" title="Automático, claro u oscuro">
+    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18V4c4.41 0 8 3.59 8 8s-3.59 8-8 8z"/></svg><span class="oculto">Tema: </span><span>Auto</span>
   </button>
   <a class="perfil" href="https://github.com/Kuerb0" target="_blank" rel="noopener" aria-label="Perfil de GitHub">
     <img class="avatar" src="https://github.com/Kuerb0.png?size=200" alt="Foto de perfil" width="104" height="104" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'avatar sin',textContent:'M'}))">

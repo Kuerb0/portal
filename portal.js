@@ -27,6 +27,8 @@ const ICONOS = {
   libro: "M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z",
   ampliar: "M21 11V3h-8l3.29 3.29-10 10L3 13v8h8l-3.29-3.29 10-10z",
   video: "M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z",
+  pausa: "M6 19h4V5H6v14zm8-14v14h4V5h-4z",
+  play: "M8 5v14l11-7z",
   flecha: "M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z",
 };
 
@@ -56,9 +58,10 @@ const esRepo = w => w.tipo === "repo" || (w.tipo === "app" && /github\.com/.test
 
 function miniatura(w) {
   const fotos = w.imagenes && w.imagenes.length ? w.imagenes : w.imagen ? [w.imagen] : [];
-  if (fotos.length > 1) return `<div class="galeria">${fotos.map((s, k) => `<img class="${k ? "" : "on"}" src="${esc(s)}" alt="Vista previa ${k + 1} de ${esc(w.titulo)}" loading="lazy">`).join("")}
-      <div class="puntos">${fotos.map((_, k) => `<button type="button" class="${k ? "" : "on"}" aria-label="Ver captura ${k + 1}"></button>`).join("")}</div></div>`;
-  if (fotos.length) return `<img src="${esc(fotos[0])}" alt="Vista previa de ${esc(w.titulo)}" loading="lazy">`;
+  const img = (s, k, extra) => `<img${extra} src="${esc(s)}" alt="Vista previa${fotos.length > 1 ? " " + (k + 1) : ""} de ${esc(w.titulo)}" width="640" height="360" loading="lazy" decoding="async">`;
+  if (fotos.length > 1) return `<div class="galeria">${fotos.map((s, k) => img(s, k, ` class="${k ? "" : "on"}"`)).join("")}
+      <div class="puntos"><button type="button" class="pausa" aria-pressed="false" aria-label="Pausar el paso de capturas">${svg("pausa", 14)}</button>${fotos.map((_, k) => `<button type="button" data-k="${k}" class="${k ? "" : "on"}" aria-label="Ver captura ${k + 1}"></button>`).join("")}</div></div>`;
+  if (fotos.length) return img(fotos[0], 0, "");
   return `<div class="sin-imagen" aria-hidden="true">${svg(w.icono, 56)}</div>`;
 }
 
@@ -100,6 +103,20 @@ function secundarias(w) {
   return b.join("");
 }
 
+// Lo que se ve al ampliar la tarjeta: la descripción completa, novedades, requisitos y enlaces a la Release y al repositorio.
+function detalle(w) {
+  const rel = (w.descargas || []).map(d => d.archivo.match(/^https:\/\/github\.com\/([^/]+\/[^/]+)\/releases\/download\/([^/]+)\//)).find(Boolean);
+  const repo = esRepo(w) ? w.url : rel && rel[1] !== "Kuerb0/descargas" ? `https://github.com/${rel[1]}` : "";
+  const enlaces = [rel && `<a href="https://github.com/${rel[1]}/releases/tag/${rel[2]}" target="_blank" rel="noopener">Notas de la versión ${esc(w.version || "")}</a>`,
+                   repo && `<a href="${esc(repo)}" target="_blank" rel="noopener">Código en GitHub</a>`].filter(Boolean);
+  return `<div class="detalle" id="d-${esc(w.id)}">
+      <p>${esc(w.descripcion)}</p>
+      ${w.novedades ? `<h4>Novedades${w.version ? " de la " + esc(w.version) : ""}</h4><p>${esc(w.novedades)}</p>` : ""}
+      ${w.requisitos ? `<h4>Requisitos</h4><p>${esc(w.requisitos)}</p>` : ""}
+      ${enlaces.length ? `<p class="enlaces-detalle">${enlaces.join("")}</p>` : ""}
+    </div>`;
+}
+
 function panelFlujo(w) {
   return w.flujograma ? `<div class="panel-flujo" hidden><div class="visor-mini"><img alt="Flujograma de ${esc(w.titulo)}" data-src="${esc(w.flujograma)}"></div>
       <div class="barra-flujo"><span>Desplázate para ver el resto</span><button type="button" data-ampliar="${esc(w.flujograma)}" data-titulo="${esc(w.titulo)}">Ampliar ${svg("ampliar", 16)}</button></div></div>` : "";
@@ -111,14 +128,17 @@ function tarjeta(w, i) {
   a.style.animationDelay = `${i * 80}ms`;
   a.style.viewTransitionName = "t-" + w.id;                      // para que, al ampliar una, las demás se deslicen a su sitio
   const icono = w.icono_img ? `<img src="${esc(w.icono_img)}" alt="" width="36" height="36" loading="lazy">` : svg(w.icono, 22);
-  a.innerHTML = `<div class="marco" role="button" tabindex="0" aria-expanded="false" aria-label="Ampliar la vista previa de ${esc(w.titulo)}">
+  a.innerHTML = `<div class="marco">
       ${barra(w)}
-      <div class="vista">${miniatura(w)}</div>
+      <div class="vista">${miniatura(w)}
+        <button type="button" class="pista" aria-expanded="false" aria-controls="d-${esc(w.id)}">${svg("ampliar", 16)}<span class="t-ampliar">Ampliar</span><span class="t-reducir">Reducir</span><span class="oculto"> la vista previa de ${esc(w.titulo)}</span></button>
+      </div>
     </div>
     <div class="cuerpo">
       <div class="titulo"><span class="ico${w.icono_img ? " propio" : ""}" aria-hidden="true">${icono}</span><h3>${esc(w.titulo)}</h3></div>
       <p class="resumen">${esc(w.resumen || "")}</p>
       <div class="insignia">${insignia(w)}</div>
+      ${detalle(w)}
       <div class="acciones">
         <div class="principales">${principal(w)}</div>
         <div class="secundarias">${secundarias(w)}</div>
@@ -128,35 +148,46 @@ function tarjeta(w, i) {
   return a;
 }
 
-// Galería de capturas: cambia sola cada pocos segundos (se pausa al pasar el ratón o si el sistema pide menos movimiento).
+// Galería de capturas: cambia sola cada pocos segundos. Se para con su botón de pausa, al pasar el ratón, con el foco dentro,
+// en pantallas táctiles y si el sistema pide menos movimiento.
 function mostrar(g, k) {
-  const fotos = [...g.querySelectorAll("img")], pts = [...g.querySelectorAll(".puntos button")];
+  const fotos = [...g.querySelectorAll("img")], pts = [...g.querySelectorAll(".puntos [data-k]")];
   g.dataset.i = k = (k + fotos.length) % fotos.length;
   fotos.forEach((f, j) => f.classList.toggle("on", j === k));
   pts.forEach((p, j) => p.classList.toggle("on", j === k));
 }
 document.addEventListener("click", e => {
   const p = e.target.closest(".galeria .puntos button");
-  if (p) { const g = p.closest(".galeria"); mostrar(g, [...p.parentNode.children].indexOf(p)); g.dataset.pausa = "1"; }
+  if (!p) return;
+  const g = p.closest(".galeria");
+  if (p.dataset.k) mostrar(g, +p.dataset.k);
+  const parar = p.dataset.k !== undefined || !g.dataset.pausa;
+  if (parar) g.dataset.pausa = "1"; else delete g.dataset.pausa;
+  const b = g.querySelector(".pausa");
+  b.setAttribute("aria-pressed", String(parar));
+  b.setAttribute("aria-label", parar ? "Seguir pasando capturas" : "Pausar el paso de capturas");
+  b.innerHTML = svg(parar ? "play" : "pausa", 14);
 });
 document.addEventListener("mouseover", e => { const g = e.target.closest(".galeria"); if (g) g.dataset.sobre = "1"; });
 document.addEventListener("mouseout", e => { const g = e.target.closest(".galeria"); if (g && !g.contains(e.relatedTarget)) delete g.dataset.sobre; });
-if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+document.addEventListener("focusin", e => { const g = e.target.closest(".marco")?.querySelector(".galeria"); if (g) g.dataset.foco = "1"; });
+document.addEventListener("focusout", e => { const g = e.target.closest(".marco")?.querySelector(".galeria"); if (g) delete g.dataset.foco; });
+if (!matchMedia("(prefers-reduced-motion: reduce), (pointer: coarse)").matches) {
   setInterval(() => {
     if (document.hidden) return;
-    document.querySelectorAll(".galeria").forEach(g => { if (!g.dataset.sobre && !g.dataset.pausa) mostrar(g, +(g.dataset.i || 0) + 1); });
+    document.querySelectorAll(".galeria").forEach(g => { if (!g.dataset.sobre && !g.dataset.pausa && !g.dataset.foco) mostrar(g, +(g.dataset.i || 0) + 1); });
   }, 3500);
 }
 
 // Ampliar una tarjeta: clic en su marco. Pasa a ser la primera de su sección y ocupa toda la fila; las demás se recolocan debajo.
 // Otro clic en el marco (o Escape) la devuelve a su sitio.
 function conTransicion(f) {
-  if (document.startViewTransition && !matchMedia("(prefers-reduced-motion: reduce)").matches) return document.startViewTransition(f).finished;
+  if (document.startViewTransition && !matchMedia("(prefers-reduced-motion: reduce)").matches) return document.startViewTransition(f).finished.catch(() => {});      // si el navegador la salta (pestaña oculta), el cambio se hace igual
   f(); return Promise.resolve();
 }
 function encoger(t) {
   t.classList.remove("ampliada");
-  t.querySelector(".marco").setAttribute("aria-expanded", "false");
+  t.querySelector(".pista").setAttribute("aria-expanded", "false");
   const li = t.parentElement;
   if (li._marca) { li._marca.replaceWith(li); li._marca = null; }
 }
@@ -171,18 +202,18 @@ function ampliar(t) {
     li.replaceWith(li._marca);
     li._marca.parentElement.prepend(li);
     t.classList.add("ampliada");
-    t.querySelector(".marco").setAttribute("aria-expanded", "true");
+    t.querySelector(".pista").setAttribute("aria-expanded", "true");
   }).then(() => { if (nueva) t.scrollIntoView({ behavior: "smooth", block: "nearest" }); });
 }
 document.addEventListener("click", e => {
   const m = e.target.closest(".marco");
-  if (!m || e.target.closest(".puntos button")) return;
+  if (!m || e.target.closest(".puntos")) return;
   ampliar(m.closest(".tarjeta"));
 });
 document.addEventListener("keydown", e => {
-  if (e.key === "Escape") { const t = rejilla.querySelector(".tarjeta.ampliada"); if (t) ampliar(t); return; }
-  const m = e.target.closest && e.target.closest(".marco");
-  if (m && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); ampliar(m.closest(".tarjeta")); }
+  if (e.key !== "Escape" || visor.classList.contains("on")) return;          // con el visor abierto, Escape solo cierra el visor
+  const t = rejilla.querySelector(".tarjeta.ampliada");
+  if (t) { ampliar(t); t.querySelector(".pista").focus(); }
 });
 
 // Secciones en el orden en que salen. La sección y el orden de cada tarjeta vienen de webs.json («seccion», «orden»);
@@ -260,24 +291,30 @@ document.querySelector(".filtros").addEventListener("click", e => {
 });
 document.getElementById("ver-todo").addEventListener("click", () => { buscar.value = ""; filtro = ""; pintar(); buscar.focus(); });
 document.addEventListener("keydown", e => {          // «/» lleva al buscador
-  if (e.key === "/" && !e.ctrlKey && !e.metaKey && !e.altKey && !e.target.closest("input, textarea, select, [contenteditable]")) {
+  if (e.key === "/" && !e.ctrlKey && !e.metaKey && !e.altKey && !e.target.closest?.("input, textarea, select, [contenteditable]")) {
     e.preventDefault();
     buscar.focus();
   }
 });
 
-// tema claro u oscuro: el del sistema, y se recuerda lo que se elija
-const raiz = document.documentElement;
-const guardado = (() => { try { return localStorage.getItem("tema"); } catch (e) { return null; } })();
-function ponerTema(t) {          // la barra del navegador del móvil (theme-color) sigue al tema elegido
-  raiz.dataset.tema = t;
-  document.querySelectorAll('meta[name="theme-color"]').forEach(m => { m.content = t === "oscuro" ? "#0e1320" : "#f4f6fb"; });
+// Tema: automático (el del sistema), claro u oscuro. Se recuerda lo que se elija; index.html lo aplica antes de pintar.
+const raiz = document.documentElement, botonTema = document.getElementById("tema");
+const TEMAS = { "": "Auto", claro: "Claro", oscuro: "Oscuro" };
+function ponerTema(t) {
+  if (t) raiz.dataset.tema = t; else delete raiz.dataset.tema;
+  document.querySelectorAll('meta[name="theme-color"]').forEach(m => {          // la barra del navegador del móvil sigue al tema
+    m.content = (t ? t === "oscuro" : m.media.includes("dark")) ? "#0e1320" : "#f4f6fb";
+  });
+  botonTema.querySelector("span:last-child").textContent = TEMAS[t];
 }
-if (guardado) ponerTema(guardado);
-document.getElementById("tema").addEventListener("click", () => {
-  const oscuro = raiz.dataset.tema ? raiz.dataset.tema === "oscuro" : matchMedia("(prefers-color-scheme: dark)").matches;
-  ponerTema(oscuro ? "claro" : "oscuro");
-  try { localStorage.setItem("tema", raiz.dataset.tema); } catch (e) { /* sin almacenamiento: no pasa nada */ }
+const guardado = (() => { try { return localStorage.getItem("tema"); } catch (e) { return null; } })();
+ponerTema(TEMAS[guardado] ? guardado : "");
+botonTema.addEventListener("click", () => {
+  const otro = matchMedia("(prefers-color-scheme: dark)").matches ? "claro" : "oscuro";      // de automático se pasa al contrario del que se ve
+  const orden = ["", otro, otro === "claro" ? "oscuro" : "claro"];
+  const t = orden[(orden.indexOf(raiz.dataset.tema || "") + 1) % 3];
+  ponerTema(t);
+  try { if (t) localStorage.setItem("tema", t); else localStorage.removeItem("tema"); } catch (e) { /* sin almacenamiento: no pasa nada */ }
 });
 
 // ---- sección «Instálame»: botón de instalar el portal, ayuda según el aparato y una ficha por cada web instalable
@@ -324,6 +361,7 @@ function abrirVisor(url, titulo, opener) {
   document.getElementById("visor-abrir").href = url;
   vimg.alt = "Flujograma de " + titulo;
   visor.classList.add("on"); document.body.style.overflow = "hidden";
+  document.querySelectorAll("body > :not(#visor)").forEach(el => { el.inert = true; });
   if (vimg.getAttribute("src") === url && vimg.complete) ajustar();
   else { vimg.onload = ajustar; vimg.src = url; }
   document.getElementById("visor-cerrar").focus();
@@ -331,6 +369,7 @@ function abrirVisor(url, titulo, opener) {
 function cerrarVisor() {
   if (!visor.classList.contains("on")) return;
   visor.classList.remove("on"); document.body.style.overflow = "";
+  document.querySelectorAll("body > :not(#visor)").forEach(el => { el.inert = false; });
   if (volver) volver.focus();
 }
 document.addEventListener("click", e => {
