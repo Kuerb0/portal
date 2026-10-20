@@ -113,6 +113,12 @@ def main():
             time.sleep(0.3)
             png = edge.cmd("Page.captureScreenshot", format="png")["data"]
             (salida / f"{nombre}.png").write_bytes(base64.b64decode(png))
+            # el botón de tema cambia los colores (y se deja como estaba para la vista siguiente)
+            if not valor(edge, """(() => { const bg = () => getComputedStyle(document.body).backgroundColor, antes = bg();
+                document.getElementById('tema').click(); const cambia = bg() !== antes;
+                delete document.documentElement.dataset.tema; localStorage.removeItem('tema'); return cambia; })()"""):
+                mal.append("el botón de tema no cambia los colores")
+                fallos.append(f"{nombre}: el botón de tema no cambia los colores")
             print(f"{nombre}: {'bien' if not mal else ', '.join(mal)}")
     finally:
         edge.cerrar()

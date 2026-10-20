@@ -211,10 +211,14 @@ buscar.addEventListener("input", pintar);
 // tema claro u oscuro: el del sistema, y se recuerda lo que se elija
 const raiz = document.documentElement;
 const guardado = (() => { try { return localStorage.getItem("tema"); } catch (e) { return null; } })();
-if (guardado) raiz.dataset.tema = guardado;
+function ponerTema(t) {          // la barra del navegador del móvil (theme-color) sigue al tema elegido
+  raiz.dataset.tema = t;
+  document.querySelectorAll('meta[name="theme-color"]').forEach(m => { m.content = t === "oscuro" ? "#0e1320" : "#f4f6fb"; });
+}
+if (guardado) ponerTema(guardado);
 document.getElementById("tema").addEventListener("click", () => {
   const oscuro = raiz.dataset.tema ? raiz.dataset.tema === "oscuro" : matchMedia("(prefers-color-scheme: dark)").matches;
-  raiz.dataset.tema = oscuro ? "claro" : "oscuro";
+  ponerTema(oscuro ? "claro" : "oscuro");
   try { localStorage.setItem("tema", raiz.dataset.tema); } catch (e) { /* sin almacenamiento: no pasa nada */ }
 });
 

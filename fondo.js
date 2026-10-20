@@ -10,11 +10,11 @@
   let ancho = 0, alto = 0, puntos = [], color = [123, 155, 240], oscuro = true, cuadro = 0;
   const puntero = { x: -1e4, y: -1e4 };
 
-  function leerTema() {
-    const css = getComputedStyle(document.documentElement);
-    const hex = css.getPropertyValue("--acento").trim().replace("#", "");
-    if (hex.length === 6) color = [0, 2, 4].map(i => parseInt(hex.slice(i, i + 2), 16));
-    oscuro = css.getPropertyValue("--fondo").trim().toLowerCase() < "#80";   // los fondos oscuros empiezan por 0 o 1
+  function leerTema() {          // los colores se leen ya resueltos (las variables usan light-dark())
+    lienzo.style.color = "var(--acento)";
+    color = getComputedStyle(lienzo).color.match(/[\d.]+/g).slice(0, 3).map(Number);
+    const [r, g, b] = getComputedStyle(document.body).backgroundColor.match(/[\d.]+/g).map(Number);
+    oscuro = r + g + b < 384;
   }
 
   function ajustar() {
