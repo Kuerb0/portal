@@ -2,6 +2,7 @@
 // (y una captura en img/, o varias en «imagenes» para una galería que va cambiando; «descargas»: lista de {texto, archivo} con botones de descarga, ficheros en descargas/; «flujograma»: un SVG de flujogramas/ que se despliega en la tarjeta; «guia»: ruta de un PDF en guias/ para el botón «Guía (PDF)»). Sin url, la tarjeta sale como «En preparación». «icono» es el nombre de uno de ICONOS (o «icono_img»: el icono propio del proyecto, una imagen).
 const rejilla = document.getElementById("rejilla");
 const vacio = document.getElementById("vacio");
+const contador = document.getElementById("contador");
 const buscar = document.getElementById("buscar");
 let webs = [];
 
@@ -115,7 +116,7 @@ function tarjeta(w, i) {
       <div class="vista">${miniatura(w)}</div>
     </div>
     <div class="cuerpo">
-      <div class="titulo"><span class="ico${w.icono_img ? " propio" : ""}" aria-hidden="true">${icono}</span><h2>${esc(w.titulo)}</h2></div>
+      <div class="titulo"><span class="ico${w.icono_img ? " propio" : ""}" aria-hidden="true">${icono}</span><h3>${esc(w.titulo)}</h3></div>
       <p class="resumen">${esc(w.resumen || "")}</p>
       <div class="insignia">${insignia(w)}</div>
       <div class="acciones">
@@ -156,7 +157,8 @@ function conTransicion(f) {
 function encoger(t) {
   t.classList.remove("ampliada");
   t.querySelector(".marco").setAttribute("aria-expanded", "false");
-  if (t._marca) { t._marca.replaceWith(t); t._marca = null; }
+  const li = t.parentElement;
+  if (li._marca) { li._marca.replaceWith(li); li._marca = null; }
 }
 function ampliar(t) {
   const abierta = rejilla.querySelector(".tarjeta.ampliada");
@@ -164,11 +166,10 @@ function ampliar(t) {
   conTransicion(() => {
     if (abierta) encoger(abierta);
     if (!nueva) return;
-    t._marca = document.createComment("");
-    t.replaceWith(t._marca);
-    let s = t._marca.previousElementSibling;
-    while (s && !s.classList.contains("seccion")) s = s.previousElementSibling;
-    if (s) s.after(t); else rejilla.prepend(t);
+    const li = t.parentElement;
+    li._marca = document.createComment("");
+    li.replaceWith(li._marca);
+    li._marca.parentElement.prepend(li);
     t.classList.add("ampliada");
     t.querySelector(".marco").setAttribute("aria-expanded", "true");
   }).then(() => { if (nueva) t.scrollIntoView({ behavior: "smooth", block: "nearest" }); });
@@ -184,27 +185,37 @@ document.addEventListener("keydown", e => {
   if (m && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); ampliar(m.closest(".tarjeta")); }
 });
 
-function titulo(texto) {
-  const h = document.createElement("h2");
-  h.className = "seccion";
-  h.textContent = texto;
-  return h;
+// Secciones en el orden en que salen. La sección y el orden de cada tarjeta vienen de webs.json («seccion», «orden»);
+// una sección que no esté aquí sale al final con su id como título.
+const SECCIONES = {
+  webs: { titulo: "Webs interactivas" },
+  apps: { titulo: "Apps (Windows y Android)",
+          nota: "Windows puede avisar al abrir un instalador porque no está firmado: pulsa «Más información» y luego «Ejecutar de todas formas»." },
+  github: { titulo: "Proyectos en GitHub" },
+};
+
+function seccion(id, lista) {
+  const s = document.createElement("section"), info = SECCIONES[id] || { titulo: id };
+  s.className = "grupo";
+  s.id = id;
+  s.setAttribute("aria-labelledby", "t-" + id);
+  s.innerHTML = `<h2 class="seccion" id="t-${esc(id)}">${esc(info.titulo)}</h2>${info.nota ? `<p class="nota">${esc(info.nota)}</p>` : ""}<ul class="rejilla"></ul>`;
+  s.querySelector("ul").append(...lista.map((w, i) => { const li = document.createElement("li"); li.append(tarjeta(w, i)); return li; }));
+  return s;
 }
 
 function pintar() {
   const q = buscar.value.trim().toLowerCase();
   const ver = webs.filter(w => !q || [w.titulo, w.descripcion].join(" ").toLowerCase().includes(q));
-  const sitios = ver.filter(w => w.tipo !== "repo" && w.tipo !== "app"), apps = ver.filter(w => w.tipo === "app"), repos = ver.filter(w => w.tipo === "repo");
-  const nodos = [];
-  if (sitios.length && (apps.length || repos.length)) nodos.push(titulo("Webs interactivas"));
-  nodos.push(...sitios.map(tarjeta));
-  if (apps.length) nodos.push(titulo("Apps de escritorio"), ...apps.map(tarjeta));
-  if (repos.length) nodos.push(titulo("Proyectos en GitHub"), ...repos.map(tarjeta));
-  rejilla.replaceChildren(...nodos);
+  const grupos = {};
+  ver.forEach(w => (grupos[w.seccion] ||= []).push(w));
+  const ids = [...new Set([...Object.keys(SECCIONES), ...Object.keys(grupos)])].filter(id => grupos[id]);
+  rejilla.replaceChildren(...ids.map(id => seccion(id, grupos[id])));
   vacio.hidden = ver.length > 0;
+  contador.textContent = q ? `${ver.length} ${ver.length === 1 ? "resultado" : "resultados"}` : `${webs.length} proyectos`;
 }
 
-fetch("webs.json").then(r => r.json()).then(d => { webs = d; pintar(); pintarApps(); })
+fetch("webs.json").then(r => r.json()).then(d => { webs = d.sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0)); pintar(); pintarApps(); })
   .catch(() => { rejilla.textContent = "No se han podido cargar las webs."; });
 buscar.addEventListener("input", pintar);
 

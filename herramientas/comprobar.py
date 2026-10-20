@@ -21,7 +21,7 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parent.parent
 MAX_RESUMEN = 130
 PESADO = 200 * 1024
-OBLIGATORIOS = ["id", "titulo", "tipo", "icono", "descripcion", "resumen", "estado"]
+OBLIGATORIOS = ["id", "titulo", "tipo", "seccion", "orden", "icono", "descripcion", "resumen", "estado"]
 TIPOS = {"web", "app", "repo"}
 RUTAS = ["imagen", "guia", "flujograma", "icono_img", "icono_app", "instalar", "abrir"]
 # ponytail: ficheros viejos de descargas/ a la espera de que Mario decida qué hacer con ellos; vaciar cuando se resuelva

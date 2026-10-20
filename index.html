@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
 <canvas id="fondo" aria-hidden="true"></canvas>
 <header class="cabecera">
   <button id="tema" class="tema" type="button" title="Cambiar entre tema claro y oscuro" aria-label="Cambiar entre tema claro y oscuro">
@@ -27,11 +28,15 @@
   <h1>Mario</h1>
   <p class="lema">Sin datos, solo eres otra persona más dando su opinión.</p>
   <p class="enlaces"><a href="https://github.com/Kuerb0" target="_blank" rel="noopener">GitHub · Kuerb0</a></p>
+  <nav class="secciones" aria-label="Secciones">
+    <a href="#webs">Webs</a><a href="#apps">Apps</a><a href="#github">GitHub</a><a href="#instalar">Instálame</a>
+  </nav>
 </header>
 
-<main>
+<main id="contenido" tabindex="-1">
   <div class="buscador"><input id="buscar" type="search" placeholder="Buscar una web…" aria-label="Buscar una web"></div>
-  <section id="rejilla" class="rejilla" aria-live="polite"></section>
+  <p id="contador" class="contador" aria-live="polite"></p>
+  <div id="rejilla" class="grupos"></div>
   <p id="vacio" class="vacio" hidden>Ninguna web coincide con la búsqueda.</p>
 
   <section id="instalar" class="instalar" aria-labelledby="t-instalar">

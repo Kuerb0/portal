@@ -3,6 +3,7 @@
 Página central, estática, donde están todas las webs. Siempre encendida (las apps de Streamlit se duermen; esta no).
 
 - `webs.json`: una entrada por web (título, icono —nombre de uno de los de `ICONOS` en `portal.js`: avion, grafico, euro, funciones, codigo, apps, calendario, apagar, nota—, descripción (la larga: no se ve en la tarjeta, solo sirve para la búsqueda), `resumen` (tres líneas sencillas bajo el título), `url` y `estado`). **Para añadir una web, solo se edita este fichero.** Si `url` está vacío (y no es una app), la tarjeta sale como «En preparación».
+  - `seccion` (`webs`, `apps` o `github`; los títulos y la nota de cada sección están en `SECCIONES`, en `portal.js`) y `orden` (número: las tarjetas salen de menor a mayor; de 10 en 10 para poder meter una entre dos).
   - Apps: `version` (sale en la barra de ventana de la miniatura y en el botón de descarga) y `descargas`, una lista de `{texto, archivo, bytes}`. Los `.exe`/`.bat`/`.msi` y los `.apk` son la acción principal («Descargar para Windows», «Android»), con versión y tamaño (`bytes`, el de la Release: `gh release view <etiqueta> -R Kuerb0/descargas --json assets`). Lo demás (el tráiler) sale como botón secundario con su `texto`.
   - Orden de cada tarjeta: miniatura, título, resumen, insignia (solo si hay algo que decir) y acciones abajo: la principal rellena y las secundarias (Tráiler, Esquema, Guía, GitHub) con borde fino.
 - `index.html`, `estilo.css`, `portal.js`: la página (buscador, tema claro/oscuro, tarjetas). Sin dependencias ni paso de compilación.

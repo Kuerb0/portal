@@ -42,16 +42,26 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--acento);outline-off
 .tema{position:absolute;top:1rem;right:1rem;display:grid;place-items:center;border:1px solid var(--borde);background:var(--tarjeta);color:var(--suave);border-radius:999px;width:2.4rem;height:2.4rem;cursor:pointer;transition:color .2s,border-color .2s}
 .tema:hover{color:var(--acento);border-color:var(--acento)}
 
+.secciones{display:flex;flex-wrap:wrap;justify-content:center;gap:.2rem 1.1rem;margin:.6rem 0 0;font-size:.95rem}
+.secciones a{padding:.2rem .1rem;color:var(--suave);text-decoration:none}
+.secciones a:hover{color:var(--acento)}
+.saltar{position:absolute;top:-4rem;left:1rem;z-index:60;padding:.5rem 1rem;border-radius:var(--r-m);background:var(--acento);color:var(--sobre-acento);font-weight:600;text-decoration:none}
+.saltar:focus{top:1rem}
+
 /* ---- buscador */
+main:focus{outline:none}
 main{max-width:72rem;margin:0 auto;padding:1.6rem 1.2rem 3rem}
 .buscador{margin:0 auto .8rem;max-width:28rem}
 .buscador input{width:100%;padding:.7rem 1rem;border-radius:var(--r-l);border:1px solid var(--borde);background:var(--tarjeta);color:var(--texto);font-size:1rem}
 .buscador input:focus{outline:2px solid var(--acento);outline-offset:1px}
-.aviso{display:flex;align-items:center;justify-content:center;gap:.4rem;margin:0 auto 1.8rem;max-width:40rem;text-align:center;font-size:.85rem;color:var(--suave)}
-.aviso svg{flex:none}
+.contador{margin:0 0 1.2rem;text-align:center;font-size:.85rem;color:var(--suave)}
+.nota{margin:-.4rem 0 1rem;font-size:.85rem;color:var(--suave)}
 
 /* ---- rejilla y tarjetas */
-.rejilla{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(20rem,100%),1fr));gap:1.5rem}
+.rejilla{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(20rem,100%),1fr));gap:1.5rem;margin:0;padding:0;list-style:none}
+.rejilla>li{display:flex;min-width:0}
+.rejilla>li>.tarjeta{flex:1}
+.rejilla>li:has(.ampliada){grid-column:1/-1}
 .tarjeta{position:relative;display:flex;flex-direction:column;overflow:hidden;border-radius:var(--r-l);background:var(--tarjeta);border:1px solid var(--borde);box-shadow:var(--sombra);color:inherit;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;animation:entra .5s ease both}
 .tarjeta.viva:hover,.tarjeta.viva:focus-within{transform:translateY(-3px);border-color:var(--acento);box-shadow:0 10px 24px rgba(30,40,70,.16)}
 .tarjeta.apagada{opacity:.75}
@@ -61,7 +71,7 @@ main{max-width:72rem;margin:0 auto;padding:1.6rem 1.2rem 3rem}
 .barra i:nth-child(2){background:#ffbd2e}.barra i:nth-child(3){background:#28c941}
 .barra span{margin-left:.5rem;flex:1;font-size:.7rem;color:var(--suave);background:var(--tarjeta);border-radius:var(--r-s);padding:.1rem .6rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .barra.ventana span{background:none;margin:0 2.2rem 0 0;text-align:center;font-weight:600}
-.tarjeta.ampliada{grid-column:1/-1;flex-direction:row;align-items:flex-start;border-color:var(--acento)}
+.tarjeta.ampliada{flex-direction:row;align-items:flex-start;border-color:var(--acento)}
 .tarjeta.ampliada .marco{flex:1.9 1 0;min-width:0;margin:1.1rem;cursor:zoom-out}
 .tarjeta.ampliada .cuerpo{flex:1 1 0;min-width:17rem}
 @media (max-width:899px){.tarjeta.ampliada{flex-direction:column}.tarjeta.ampliada .marco{margin:.9rem .9rem 0}}
@@ -86,8 +96,10 @@ main{max-width:72rem;margin:0 auto;padding:1.6rem 1.2rem 3rem}
 .ico{flex:none;display:grid;place-items:center;width:2.2rem;height:2.2rem;border-radius:var(--r-m);background:var(--tinte);color:var(--acento)}
 .ico.propio{background:none}
 .ico.propio img{width:100%;height:100%;border-radius:var(--r-m);object-fit:cover}
-.cuerpo h2{margin:0;font-size:1.15rem;line-height:1.25;flex:1}
-.seccion{grid-column:1/-1;display:flex;align-items:center;gap:.8rem;margin:.6rem 0 -.3rem;font-size:1rem;font-weight:650;color:var(--suave)}
+.cuerpo h3{margin:0;font-size:1.15rem;line-height:1.25;flex:1}
+.grupo{scroll-margin-top:1rem}
+.seccion{display:flex;align-items:center;gap:.8rem;margin:2.2rem 0 1rem;font-size:1rem;font-weight:650;color:var(--suave)}
+.grupo:first-child .seccion{margin-top:0}
 .seccion::after{content:"";flex:1;height:1px;background:var(--borde)}
 .resumen{margin:0;font-size:.9rem;line-height:1.45;color:var(--suave);display:-webkit-box;-webkit-line-clamp:3;line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;min-height:calc(3 * 1.45em)}
 .insignia{display:flex;align-items:center;min-height:1.6rem}

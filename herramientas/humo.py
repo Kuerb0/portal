@@ -49,13 +49,13 @@ COMPROBAR = """(() => {
           const r = document.createRange(); r.selectNodeContents(t);
           return new Set([...r.getClientRects()].map(x => Math.round(x.top))).size > 1;
         })))
-      .map(b => b.closest('.tarjeta').querySelector('h2').textContent + ': ' + b.textContent.trim()),
+      .map(b => b.closest('.tarjeta').querySelector('h3').textContent + ': ' + b.textContent.trim()),
     desalineadas: (() => {          // en cada fila, título, resumen, insignia y acciones a la misma altura
       const filas = {};
       document.querySelectorAll('.tarjeta:not(.ampliada)').forEach(t => (filas[Math.round(t.offsetTop)] ||= []).push(t));
-      return Object.values(filas).filter(f => f.length > 1 && ['h2', '.resumen', '.insignia', '.acciones'].some(sel =>
+      return Object.values(filas).filter(f => f.length > 1 && ['h3', '.resumen', '.insignia', '.acciones'].some(sel =>
         new Set(f.map(t => (e => e ? Math.round(e.getBoundingClientRect().top) : 'falta')(t.querySelector(sel)))).size > 1))
-        .map(f => f.map(t => t.querySelector('h2').textContent).join(' / '));
+        .map(f => f.map(t => t.querySelector('h3').textContent).join(' / '));
     })(),
   };
 })()"""
