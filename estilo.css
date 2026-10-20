@@ -220,3 +220,11 @@ main{max-width:72rem;margin:0 auto;padding:1.6rem 1.2rem 3rem}
 .sin-datos a{color:var(--acento);font-weight:600}
 .tarjeta.sin-entrada{animation:none}
 #rejilla:empty{min-height:100vh}   /* mientras llegan las tarjetas, Instálame y el pie esperan fuera de la vista: no saltan */
+
+/* ---- páginas sueltas: 404 e índice de guías */
+.no-existe,.guias-indice{max-width:40rem;margin:0 auto;padding:3rem 1.2rem}
+.no-existe .buscador{margin:1.5rem 0;max-width:none}
+.guias-indice ul{margin:1.5rem 0 0;padding:0;list-style:none;display:grid;gap:.5rem}
+.guias-indice li{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.2rem 1rem;padding:.75rem 1rem;border:1px solid var(--borde);border-radius:var(--r-m);background:var(--tarjeta)}
+.guias-indice li a,.guias-indice>p>a{color:var(--acento);font-weight:600}
+.guias-indice li span{color:var(--suave);font-size:.9rem}

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Página no encontrada · Mario</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" href="/portal/icon-192.png">
+<link rel="stylesheet" href="/portal/estilo.css">
+</head>
+<body>
+<main class="no-existe">
+  <h1>Esta página no existe</h1>
+  <p>Puede que el enlace sea antiguo o tenga una errata. Busca lo que querías o vuelve al portal.</p>
+  <p id="pista-guia" hidden>La guía del Logeador se llama ahora <a href="/portal/guias/administrador-tareas.pdf">Administrador de Tareas+ (PDF)</a>.</p>
+  <form class="buscador" action="/portal/" method="get" role="search">
+    <input type="search" name="q" placeholder="Buscar: vuelos, Excel, notas…" aria-label="Buscar proyectos">
+  </form>
+  <p><a class="boton prin" href="/portal/">Volver al portal</a></p>
+</main>
+<script>
+  // los enlaces viejos a la guía del Logeador llevan a la nueva
+  if (/logeador/i.test(location.pathname)) document.getElementById("pista-guia").hidden = false;
+</script>
+</body>
+</html>

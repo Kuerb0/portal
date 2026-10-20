@@ -65,3 +65,9 @@ Las tarjetas piden `img/<nombre>.webp` y usan el `.jpg` de respaldo (`<picture>`
 ## Sin red y sin JavaScript
 
 `sw.js` sirve «red primero» y guarda cada respuesta buena, así que la página abre sin conexión con lo último que se vio y los cambios llegan solos: no hace falta subir `V` al publicar (solo para tirar la copia entera). Si no se puede cargar `webs.json`, o no hay JavaScript, salen enlaces directos a las tres webs y al GitHub.
+
+## Páginas sueltas
+
+- `404.html`: la que da GitHub Pages para una dirección que no existe, con buscador (manda a `/portal/?q=…`) y vuelta al portal. Si la dirección lleva «logeador», enlaza a la guía nueva de Administrador de Tareas+.
+- `guias/index.html`: la lista de las 12 guías con páginas y tamaño. La rehace `python guias/construir.py` al terminar; `python guias/construir.py --indice` solo rehace la lista.
+- `sitemap.xml`: el portal y el índice de guías, para darlo de alta a mano en Search Console si se quiere. No hay `robots.txt`: los buscadores solo lo leen en la raíz del dominio (`kuerb0.github.io/robots.txt`), que no es este repositorio.

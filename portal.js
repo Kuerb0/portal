@@ -253,8 +253,8 @@ function coincide(w, palabras) {
 
 // El estado va en la dirección (#q=vuelos&f=android) para poder compartirlo. Los enlaces a secciones (#apps) no lo tocan.
 function leerURL() {
-  if (!location.hash.includes("=")) return;
-  const h = new URLSearchParams(location.hash.slice(1));
+  const h = new URLSearchParams(location.hash.includes("=") ? location.hash.slice(1) : location.search);
+  if (!h.has("q") && !h.has("f")) return;
   buscar.value = h.get("q") || "";
   filtro = FILTROS[h.get("f")] ? h.get("f") : "";
 }
@@ -263,7 +263,7 @@ function guardarURL() {
   if (buscar.value.trim()) h.set("q", buscar.value.trim());
   if (filtro) h.set("f", filtro);
   const s = h.toString();
-  if (s || location.hash.includes("=")) history.replaceState(null, "", s ? "#" + s : location.pathname + location.search);
+  if (s || location.hash.includes("=") || location.search) history.replaceState(null, "", location.pathname + (s ? "#" + s : ""));
 }
 
 function pintar() {

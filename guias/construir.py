@@ -1,6 +1,7 @@
 """Genera las guías en PDF del portal: guias/src/<id>.md -> guias/<id>.pdf (portada, índice con números de página y el contenido).
 
 Uso: python guias/construir.py [id ...]        (sin ids: todas las que haya en guias/src/)
+     python guias/construir.py --indice      (solo rehace guias/index.html, la lista de guías)
 
 El Markdown empieza con unas líneas «clave: valor» (titulo, subtitulo, version, icono, color) y una línea en blanco.
 Las imágenes se escriben ![pie](img/galeria/x.jpg) con la ruta relativa a la raíz del portal.
@@ -219,11 +220,49 @@ def construir(id_, edge):
     print(f"{id_}: {len(doc)} páginas, {len(lista)} apartados, {salida.stat().st_size / 1024:.0f} KB")
 
 
+def indice():
+    """guias/index.html: la lista de las guías, en el orden del portal, con su número de páginas y su tamaño."""
+    webs = sorted(json.loads((RAIZ / "webs.json").read_text(encoding="utf-8")), key=lambda w: w.get("orden", 0))
+    filas = []
+    for w in webs:
+        pdf = RAIZ / w["guia"] if w.get("guia") else None
+        if pdf and pdf.is_file():
+            with fitz.open(pdf) as d:
+                n = len(d)
+            mb = f"{pdf.stat().st_size / 1e6:.1f}".replace(".", ",")
+            filas.append(f'    <li><a href="{html.escape(pdf.name)}">{html.escape(w["titulo"])}</a><span>{n} páginas · {mb} MB</span></li>')
+    (RAIZ / "guias" / "index.html").write_text(f"""<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Guías en PDF · Mario</title>
+<meta name="description" content="Las guías completas en PDF de las webs y apps del portal de Mario.">
+<link rel="icon" type="image/png" href="../icon-192.png">
+<link rel="stylesheet" href="../estilo.css">
+</head>
+<body>
+<main class="guias-indice">
+  <p><a href="../">← Volver al portal</a></p>
+  <h1>Guías en PDF</h1>
+  <p>Cada guía explica una web o una app de principio a fin, con capturas e índice. Se abren en el navegador.</p>
+  <ul>
+{chr(10).join(filas)}
+  </ul>
+</main>
+</body>
+</html>
+""", encoding="utf-8", newline="\n")
+    print(f"guias/index.html: {len(filas)} guías")
+
+
 if __name__ == "__main__":
-    ids = sys.argv[1:] or sorted(p.stem for p in SRC.glob("*.md"))
-    edge = Edge()
-    try:
-        for i in ids:
-            construir(i, edge)
-    finally:
-        edge.cerrar()
+    ids = [a for a in sys.argv[1:] if a != "--indice"]
+    if "--indice" not in sys.argv[1:] or ids:
+        edge = Edge()
+        try:
+            for i in ids or sorted(p.stem for p in SRC.glob("*.md")):
+                construir(i, edge)
+        finally:
+            edge.cerrar()
+    indice()
