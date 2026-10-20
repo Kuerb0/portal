@@ -4,7 +4,7 @@ const rejilla = document.getElementById("rejilla");
 const vacio = document.getElementById("vacio");
 const contador = document.getElementById("contador");
 const buscar = document.getElementById("buscar");
-let webs = [];
+let webs = [], yaPintado = false;
 
 // Iconos Material de 24x24 (relleno). Un nombre desconocido usa «apps».
 const ICONOS = {
@@ -58,7 +58,7 @@ const esRepo = w => w.tipo === "repo" || (w.tipo === "app" && /github\.com/.test
 
 function miniatura(w) {
   const fotos = w.imagenes && w.imagenes.length ? w.imagenes : w.imagen ? [w.imagen] : [];
-  const img = (s, k, extra) => `<img${extra} src="${esc(s)}" alt="Vista previa${fotos.length > 1 ? " " + (k + 1) : ""} de ${esc(w.titulo)}" width="640" height="360" loading="lazy" decoding="async">`;
+  const img = (s, k, extra) => `<picture><source srcset="${esc(s.replace(/\.jpg$/, ".webp"))}" type="image/webp"><img${extra} src="${esc(s)}" alt="Vista previa${fotos.length > 1 ? " " + (k + 1) : ""} de ${esc(w.titulo)}" width="640" height="360" loading="lazy" decoding="async"></picture>`;
   if (fotos.length > 1) return `<div class="galeria">${fotos.map((s, k) => img(s, k, ` class="${k ? "" : "on"}"`)).join("")}
       <div class="puntos"><button type="button" class="pausa" aria-pressed="false" aria-label="Pausar el paso de capturas">${svg("pausa", 14)}</button>${fotos.map((_, k) => `<button type="button" data-k="${k}" class="${k ? "" : "on"}" aria-label="Ver captura ${k + 1}"></button>`).join("")}</div></div>`;
   if (fotos.length) return img(fotos[0], 0, "");
@@ -125,7 +125,8 @@ function panelFlujo(w) {
 function tarjeta(w, i) {
   const a = document.createElement("article");
   a.className = "tarjeta " + (w.url || w.tipo === "app" ? "viva" : "apagada");
-  a.style.animationDelay = `${i * 80}ms`;
+  if (yaPintado) a.classList.add("sin-entrada");                    // al buscar o filtrar, las tarjetas salen sin animación
+  else a.style.animationDelay = `${Math.min(i, 4) * 50}ms`;           // la primera vez, como mucho 200 ms de espera
   a.style.viewTransitionName = "t-" + w.id;                      // para que, al ampliar una, las demás se deslicen a su sitio
   const icono = w.icono_img ? `<img src="${esc(w.icono_img)}" alt="" width="36" height="36" loading="lazy">` : svg(w.icono, 22);
   a.innerHTML = `<div class="marco">
@@ -279,15 +280,32 @@ function pintar() {
     + "Prueba con otra palabra (por ejemplo, vuelos, Excel o notas) o mira todos.";
   contador.textContent = q || filtro ? `${ver.length} ${ver.length === 1 ? "resultado" : "resultados"}` : `${webs.length} proyectos`;
   guardarURL();
+  yaPintado = true;
 }
 
-fetch("webs.json").then(r => {
-  const fecha = new Date(r.headers.get("last-modified") || NaN);         // la fecha del último cambio de webs.json
-  if (!isNaN(fecha)) document.getElementById("actualizado").textContent = `Última actualización: ${fecha.toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" })}.`;
-  return r.json();
-}).then(d => {
-  document.getElementById("recuento").textContent = `${d.length} proyectos`; webs = d.sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0)); leerURL(); pintar(); pintarApps(); })
-  .catch(() => { rejilla.textContent = "No se han podido cargar las webs."; });
+// Carga webs.json. Si falla (sin red y sin copia guardada), se ven enlaces directos y un botón para reintentar.
+const sinDatos = document.getElementById("sin-datos");
+function cargar() {
+  sinDatos.hidden = true;
+  fetch("webs.json").then(r => {
+    if (!r.ok) throw new Error(r.status);
+    const fecha = new Date(r.headers.get("last-modified") || NaN);       // la fecha del último cambio de webs.json
+    if (!isNaN(fecha)) document.getElementById("actualizado").textContent = `Última actualización: ${fecha.toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" })}.`;
+    return r.json();
+  }).then(d => {
+    document.getElementById("recuento").textContent = `${d.length} proyectos`;
+    webs = d.sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0));
+    leerURL(); pintar(); pintarApps(); prioridad();
+  }).catch(() => { sinDatos.hidden = false; });
+}
+cargar();
+document.getElementById("reintentar").addEventListener("click", cargar);
+
+// La primera captura visible se pide antes que el resto (es la que más tarda en verse).
+function prioridad() {
+  const im = rejilla.querySelector(".vista img");
+  if (im) { im.loading = "eager"; im.fetchPriority = "high"; }
+}
 buscar.addEventListener("input", pintar);
 addEventListener("hashchange", () => { if (location.hash.includes("=")) { leerURL(); pintar(); } });
 document.querySelector(".filtros").addEventListener("click", e => {
@@ -344,6 +362,9 @@ function pintarInstalar() {
     : "Pulsa una ficha: se abre la página de esa web con su botón para instalarla.";
 }
 pintarInstalar();
+const instDetalles = document.getElementById("inst-detalles");
+if (matchMedia("(pointer: coarse)").matches) instDetalles.open = true;
+document.querySelector('.secciones a[href="#instalar"]').addEventListener("click", () => { instDetalles.open = true; });
 
 if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
 

@@ -57,3 +57,11 @@ La prueba de humo (`python herramientas/humo.py [etiqueta]`) sirve la carpeta en
 ## Imagen para compartir
 
 `img/og.jpg` (1200×630) es la que sale al compartir el portal en redes y mensajería. Se hace con `python herramientas/og.py` (cuervo, título, recuento de proyectos y cuatro capturas, fotografiados con Edge sin ventana). Volver a hacerla si cambian las capturas o el número de proyectos.
+
+## Capturas en WebP
+
+Las tarjetas piden `img/<nombre>.webp` y usan el `.jpg` de respaldo (`<picture>`). Tras añadir o cambiar una captura, `python herramientas/webp.py` hace su WebP (pesan la mitad); `comprobar.py` avisa si falta alguna.
+
+## Sin red y sin JavaScript
+
+`sw.js` sirve «red primero» y guarda cada respuesta buena, así que la página abre sin conexión con lo último que se vio y los cambios llegan solos: no hace falta subir `V` al publicar (solo para tirar la copia entera). Si no se puede cargar `webs.json`, o no hay JavaScript, salen enlaces directos a las tres webs y al GitHub.

@@ -6,7 +6,7 @@
 Falla (código 1) si:
 - estilo.css tiene llaves sin cerrar o una sección («/* ---- …») ha quedado dentro de otra regla (p. ej. un @media sin cerrar);
 - webs.json no es válido, le falta un campo obligatorio, un id se repite, un resumen pasa de 130 caracteres,
-  una ruta (imagen, guía, flujograma, icono, descarga local) no existe, o una descarga de una Release no existe o
+  una ruta (imagen, guía, flujograma, icono, descarga local) no existe, a una captura le falta su copia .webp, o una descarga de una Release no existe o
   su tamaño no coincide con «bytes» (lo mira con `gh release view`);
 - una <img> de index.html o portal.js no tiene alt;
 - hay un fichero de más de 200 KB en el repositorio al que no se refiere nadie;
@@ -113,6 +113,9 @@ def webs():
                 if f.is_file() and d.get("bytes") and f.stat().st_size != d["bytes"]:
                     errores.append(f"{d['archivo']}: «bytes» dice {d['bytes']} y pesa {f.stat().st_size}")
         errores.extend(f"{nombre}: no existe {r}" for r in rutas if not (RAIZ / r).exists())
+        capturas = [w["imagen"]] if w.get("imagen") else []
+        errores.extend(f"{nombre}: falta {c[:-4]}.webp (python herramientas/webp.py)" for c in capturas + w.get("imagenes", [])
+                       if c.endswith(".jpg") and not (RAIZ / c).with_suffix(".webp").exists())
     return datos, urls
 
 

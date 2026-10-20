@@ -1,5 +1,7 @@
 // Guarda el portal para que abra aunque no haya red. Red primero (así llegan los cambios); caché si no hay conexión.
 // Todas las apps comparten dominio: cada una borra solo las cachés con su prefijo.
+// Como es «red primero» y cada respuesta buena se guarda, los cambios llegan solos: no hace falta subir V al publicar.
+// Súbela solo para tirar la copia entera (p. ej. si se quita un fichero grande que no debe quedar guardado).
 const V = "portal-v4";
 const ARCHIVOS = ["./", "index.html", "estilo.css", "portal.js", "fondo.js", "instalar.js", "webs.json",
                   "icon-192.png", "icon-512.png", "apple-touch-icon.png"];

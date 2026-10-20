@@ -50,15 +50,33 @@
     <div class="filtros" role="group" aria-label="Filtrar">
       <button type="button" data-f="" aria-pressed="true">Todo</button><button type="button" data-f="web" aria-pressed="false">Web</button><button type="button" data-f="windows" aria-pressed="false">Windows</button><button type="button" data-f="android" aria-pressed="false">Android</button><button type="button" data-f="video" aria-pressed="false">Con vídeo</button>
     </div>
-    <p id="contador" class="contador" aria-live="polite"></p>
+    <p id="contador" class="contador" aria-live="polite">12 proyectos</p>
   </div>
   <div id="rejilla" class="grupos"></div>
+  <noscript><style>#sin-datos{display:block!important}#sin-datos-texto,#reintentar{display:none}</style>
+    <p class="sin-datos">Sin JavaScript no se pueden mostrar las tarjetas. Estos son los enlaces directos:</p></noscript>
+  <div id="sin-datos" class="sin-datos" hidden>
+    <p id="sin-datos-texto">No se han podido cargar los proyectos. Comprueba la conexión y vuelve a intentarlo, o entra directamente:</p>
+    <button type="button" id="reintentar" class="boton prin">Volver a intentarlo</button>
+    <ul>
+      <li><a href="https://kuerb0-viajes-pyapp-web-iufxrb.streamlit.app/">Vuelos, hoteles y trenes</a></li>
+      <li><a href="https://planificador-financiero-ebptettnct3wpthqbtssct.streamlit.app/">Finanzas personales</a></li>
+      <li><a href="https://kuerb0.github.io/comidas/">Comidas</a></li>
+      <li><a href="https://github.com/Kuerb0">Las apps y su código, en GitHub</a></li>
+    </ul>
+  </div>
   <div id="vacio" class="vacio" hidden><p id="vacio-texto"></p><button type="button" id="ver-todo" class="boton sec">Ver todos los proyectos</button></div>
 
   <section id="instalar" class="instalar" aria-labelledby="t-instalar">
-    <h2 id="t-instalar" class="seccion">Instálame</h2>
-    <p class="inst-intro">Añade el portal y tus webs a la pantalla de inicio del móvil: se abren como una app, a pantalla completa y sin la barra del navegador.</p>
-    <p id="inst-estado" class="inst-estado"></p>
+    <details id="inst-detalles">
+    <summary><h2 id="t-instalar" class="seccion">Instálame en el móvil</h2></summary>
+    <div class="inst-cabeza">
+      <div>
+        <p class="inst-intro">Las webs y este portal se instalan desde el navegador y se abren como una app, a pantalla completa y sin barra. Las apps de Android se descargan aparte, como archivo APK, con el botón «Android» de su tarjeta.</p>
+        <p id="inst-estado" class="inst-estado"></p>
+      </div>
+      <figure class="inst-qr"><img src="img/qr-portal.svg" alt="Código QR con la dirección del portal" width="132" height="132"><figcaption>¿Estás en el ordenador? Escanéalo con el móvil para abrir el portal allí.</figcaption></figure>
+    </div>
     <div class="inst-pasos">
       <div id="pasos-android">
         <h3>Android (Chrome)</h3>
@@ -79,6 +97,7 @@
     </div>
     <h3 class="inst-sub">Instala cada web (y este portal) como una app</h3>
     <ul id="inst-apps" class="inst-apps"></ul>
+    </details>
   </section>
 </main>
 

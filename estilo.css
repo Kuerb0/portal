@@ -97,7 +97,7 @@ main{max-width:72rem;margin:0 auto;padding:1.6rem 1.2rem 3rem}
 /* ---- miniatura (captura o galería) */
 .vista{aspect-ratio:16/9;overflow:hidden;background:var(--tarjeta)}
 .vista img{display:block;width:100%;height:100%;object-fit:cover;object-position:top left;transition:transform .5s ease}
-.tarjeta.viva:hover .vista>img{transform:scale(1.02)}
+.tarjeta.viva:hover .vista>picture>img{transform:scale(1.02)}
 .galeria{position:relative;width:100%;height:100%}
 .galeria img{position:absolute;inset:0;opacity:0;transition:opacity .7s ease}
 .galeria img.on{opacity:1}
@@ -150,7 +150,15 @@ main{max-width:72rem;margin:0 auto;padding:1.6rem 1.2rem 3rem}
 
 /* ---- sección «Instálame» */
 .instalar{margin-top:2.6rem;padding:1.4rem 1.4rem 1.6rem;border:1px solid var(--borde);border-radius:var(--r-l);background:var(--tarjeta);box-shadow:var(--sombra)}
-.instalar .seccion{margin:0 0 .6rem;font-size:1.25rem;color:var(--texto)}
+.instalar .seccion{display:inline;margin:0;font-size:1.25rem;color:var(--texto)}
+.instalar summary{cursor:pointer;padding:.2rem 0}
+.instalar details[open] summary{margin-bottom:.8rem}
+.inst-cabeza{display:flex;gap:1.5rem;align-items:flex-start;margin-bottom:1rem}
+.inst-cabeza>div{flex:1}
+.inst-qr{flex:none;width:132px;margin:0;text-align:center;font-size:.8rem;color:var(--suave)}
+.inst-qr img{display:block;border-radius:var(--r-m);border:1px solid var(--borde)}
+.inst-qr figcaption{margin-top:.4rem}
+@media (pointer:coarse){.inst-qr{display:none}}   /* en el móvil no hace falta escanear nada */
 .inst-intro{margin:0 0 1rem;color:var(--suave)}
 .inst-estado{margin:0;font-size:.92rem;color:var(--suave)}
 .inst-pasos{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1rem;margin-bottom:1.4rem}
@@ -160,7 +168,7 @@ main{max-width:72rem;margin:0 auto;padding:1.6rem 1.2rem 3rem}
 .inst-pasos ol{margin:0;padding-left:1.2rem;color:var(--suave);font-size:.93rem}
 .inst-pasos li{margin:.2rem 0}
 .inst-pasos strong{color:var(--texto)}
-.inst-apps{display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:.8rem;margin:0;padding:0;list-style:none}
+.inst-apps{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:.8rem;margin:0;padding:0;list-style:none}
 .inst-app{display:flex;align-items:center;gap:.8rem;padding:.7rem .9rem;border:1px solid var(--borde);border-radius:var(--r-l);color:inherit;text-decoration:none;background:var(--fondo);transition:border-color .2s,transform .2s}
 .inst-app:hover,.inst-app:focus-visible{border-color:var(--acento);transform:translateY(-2px)}
 .inst-app img{border-radius:var(--r-m);flex:none}
@@ -205,3 +213,10 @@ main{max-width:72rem;margin:0 auto;padding:1.6rem 1.2rem 3rem}
 
 /* ---- móvil: miniatura más baja */
 @media (max-width:600px){.vista{aspect-ratio:2/1}}
+
+/* ---- sin datos (sin red ni copia guardada) o sin JavaScript: enlaces directos */
+.sin-datos{max-width:32rem;margin:1rem auto 2rem;text-align:center;color:var(--suave)}
+.sin-datos ul{margin:1rem 0 0;padding:0;list-style:none;display:grid;gap:.5rem}
+.sin-datos a{color:var(--acento);font-weight:600}
+.tarjeta.sin-entrada{animation:none}
+#rejilla:empty{min-height:100vh}   /* mientras llegan las tarjetas, Instálame y el pie esperan fuera de la vista: no saltan */
