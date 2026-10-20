@@ -47,7 +47,7 @@ No se conecta a tu banco ni guarda cuentas, contraseñas o movimientos. No te re
 
 ## Abrirla y usarla
 
-La dirección es la del botón «Abrir» del portal. Esta web vive en un servicio gratuito que la duerme cuando lleva un rato sin visitas: la primera vez que entras puede tardar hasta medio minuto en despertar. Después va con normalidad. También se puede instalar como app desde el navegador («Instalar» o «Añadir a pantalla de inicio»).
+La dirección es la del botón «Abrir la web» del portal. Esta web vive en un servicio gratuito que la duerme cuando lleva un rato sin visitas: la primera vez que entras puede tardar hasta medio minuto en despertar. Después va con normalidad. También se puede instalar como app desde el navegador («Instalar» o «Añadir a pantalla de inicio»).
 
 ### La pantalla
 

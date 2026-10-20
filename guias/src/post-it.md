@@ -22,7 +22,7 @@ Lo que hace:
 
 ## Instalación
 
-1. Descarga el instalador desde el botón «Instalador» del portal (unos 160 MB, porque lleva su propio motor).
+1. Descarga el instalador desde el botón «Descargar para Windows» del portal (unos 160 MB, porque lleva su propio motor).
 2. Ábrelo. Si Windows avisa de que no conoce al editor, pulsa «Más información» y luego «Ejecutar de todas formas».
 3. Elige la carpeta y los accesos directos.
 4. Al terminar se crea el acceso directo «Post-it» y la app arranca.

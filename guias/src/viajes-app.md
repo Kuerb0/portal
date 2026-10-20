@@ -26,7 +26,7 @@ Funciona en Windows y en Android. Todo se queda en tu equipo o en tu móvil: los
 
 ### En Windows
 
-1. Descarga el instalador (`Viajes-2.0.0-Instalador.exe`, unos 120 MB) desde el botón «Instalador» del portal.
+1. Descarga el instalador (`Viajes-2.0.0-Instalador.exe`, unos 120 MB) desde el botón «Windows» del portal.
 2. Ábrelo. Si Windows avisa de que no conoce al editor, pulsa «Más información» y luego «Ejecutar de todas formas».
 3. Elige la carpeta y los accesos directos.
 4. Abre Viajes desde el acceso directo.
@@ -35,7 +35,7 @@ El programa lleva su propio Python con todas las librerías: no hace falta insta
 
 ### En Android
 
-1. Descarga `Viajes-2.0.0-Movil.apk` desde el botón «Instalador móvil» del portal.
+1. Descarga `Viajes-2.0.0-Movil.apk` desde el botón «Android» del portal.
 2. Ábrelo y permite instalar apps de origen desconocido cuando Android te lo pida.
 3. Necesitas un móvil Android reciente (WebView 137 o superior).
 

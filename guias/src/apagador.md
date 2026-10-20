@@ -17,7 +17,7 @@ Es una ventana pequeña con dos formas de programar el apagado, una cuenta atrá
 
 ## Instalación
 
-1. Descarga el instalador desde el botón «Instalador» del portal.
+1. Descarga el instalador desde el botón «Descargar para Windows» del portal.
 2. Ábrelo. Si Windows avisa de que no conoce al editor, pulsa «Más información» y luego «Ejecutar de todas formas».
 3. Elige la carpeta y los accesos directos que quieras.
 4. Abre el Apagador desde el acceso directo.

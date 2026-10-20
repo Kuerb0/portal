@@ -38,7 +38,7 @@ No se conecta a tu banco ni guarda cuentas, contraseñas o movimientos. No te re
 
 ### En Windows
 
-1. Descarga el instalador (`FinanzasPersonales-2.0.0-Instalador.exe`, unos 90 MB) desde el botón «Instalador» del portal.
+1. Descarga el instalador (`FinanzasPersonales-2.0.0-Instalador.exe`, unos 90 MB) desde el botón «Windows» del portal.
 2. Ábrelo. Si Windows avisa de que no conoce al editor, pulsa «Más información» y luego «Ejecutar de todas formas».
 3. Elige la carpeta y si quieres acceso directo en el Escritorio y en el menú Inicio.
 4. Al terminar, abre Finanzas Personales desde el acceso directo.
@@ -47,7 +47,7 @@ No necesitas instalar Python ni nada más: el programa lleva el suyo dentro (ocu
 
 ### En Android
 
-1. Descarga `FinanzasPersonales-2.0.0-Movil.apk` desde el botón «Instalador móvil» del portal.
+1. Descarga `FinanzasPersonales-2.0.0-Movil.apk` desde el botón «Android» del portal.
 2. Ábrelo. Android te pedirá permiso para instalar apps de esa fuente.
 3. La primera vez tarda un poco más en arrancar porque prepara los cálculos; las siguientes veces es rápido.
 

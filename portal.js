@@ -25,6 +25,7 @@ const ICONOS = {
   chevron: "M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z",
   libro: "M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z",
   ampliar: "M21 11V3h-8l3.29 3.29-10 10L3 13v8h8l-3.29-3.29 10-10z",
+  video: "M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z",
   flecha: "M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z",
 };
 
@@ -40,41 +41,88 @@ function dominio(url) {
   try {
     const u = new URL(url);
     return u.host === "github.com" || u.host.endsWith(".github.io") ? u.host + u.pathname.replace(/\/$/, "") : u.host;   // en GitHub se ve la ruta
-  } catch (e) { return "próximamente"; }
+  } catch (e) { return ""; }
+}
+
+// Windows (.exe, .bat, .msi), Android (.apk) o nada (vídeos y demás)
+function plataforma(d) {
+  const f = d.archivo.toLowerCase().split("?")[0];
+  return f.endsWith(".apk") ? "movil" : /\.(exe|bat|msi)$/.test(f) ? "pc" : "";
+}
+const NOMBRE = { pc: "Windows", movil: "Android" };
+const megas = b => b ? `${Math.max(1, Math.round(b / 1e6))} MB` : "";
+const esRepo = w => w.tipo === "repo" || (w.tipo === "app" && /github\.com/.test(w.url || ""));   // proyecto de GitHub: se enlaza el repositorio
+
+function miniatura(w) {
+  const fotos = w.imagenes && w.imagenes.length ? w.imagenes : w.imagen ? [w.imagen] : [];
+  if (fotos.length > 1) return `<div class="galeria">${fotos.map((s, k) => `<img class="${k ? "" : "on"}" src="${esc(s)}" alt="Vista previa ${k + 1} de ${esc(w.titulo)}" loading="lazy">`).join("")}
+      <div class="puntos">${fotos.map((_, k) => `<button type="button" class="${k ? "" : "on"}" aria-label="Ver captura ${k + 1}"></button>`).join("")}</div></div>`;
+  if (fotos.length) return `<img src="${esc(fotos[0])}" alt="Vista previa de ${esc(w.titulo)}" loading="lazy">`;
+  return `<div class="sin-imagen" aria-hidden="true">${svg(w.icono, 56)}</div>`;
+}
+
+// Las apps llevan barra de ventana (nombre y versión); las webs, barra de navegador con su dirección.
+function barra(w) {
+  const texto = w.tipo === "app" ? `${w.titulo.replace(/\s*\(App\)$/, "")} ${w.version || ""}` : w.url ? dominio(w.url) : "En preparación";
+  return `<div class="barra${w.tipo === "app" ? " ventana" : ""}" aria-hidden="true"><i></i><i></i><i></i><span>${esc(texto.trim())}</span></div>`;
+}
+
+// Una línea solo cuando hay algo que decir.
+function insignia(w) {
+  if (!w.url && w.tipo !== "app") return `<span class="estado">En preparación</span>`;
+  if (w.tipo === "repo") return `<span class="estado">Repositorio</span>`;
+  if (w.tipo === "app") {
+    const p = ["pc", "movil"].filter(x => (w.descargas || []).some(d => plataforma(d) === x));
+    return `<span class="estado">${p.map(x => svg(x, 14)).join("")} ${p.length === 2 ? "Windows y Android" : "Solo " + NOMBRE[p[0] || "pc"]}</span>`;
+  }
+  if (/streamlit\.app/.test(w.url)) return `<span class="estado">Puede tardar 30 s en abrir</span>`;
+  return "";
+}
+
+const enlaceDescarga = (d, clase, html) => `<a class="${clase}" href="${esc(d.archivo)}" download="${esc(d.archivo.split("/").pop())}">${html}</a>`;
+
+// La acción principal: descargar (apps), abrir (webs) o ver en GitHub (repositorios).
+function principal(w) {
+  const bajar = (w.descargas || []).filter(d => plataforma(d));
+  if (bajar.length) return bajar.map(d => enlaceDescarga(d, "boton prin",
+    `${svg("descarga", 18)}<span>${bajar.length > 1 ? NOMBRE[plataforma(d)] : "Descargar para " + NOMBRE[plataforma(d)]}<small>${[w.version, megas(d.bytes)].filter(Boolean).join(" · ")}</small></span>`)).join("");
+  if (!w.url) return "";
+  const repo = esRepo(w);
+  return `<a class="boton prin" href="${esc(w.abrir || w.url)}" target="_blank" rel="noopener">${repo ? svg("codigo", 18) + "Ver en GitHub" : "Abrir la web " + svg("flecha", 18)}</a>`;
+}
+
+function secundarias(w) {
+  const b = (w.descargas || []).filter(d => !plataforma(d)).map(d => enlaceDescarga(d, "boton sec", `${svg("video", 16)}${esc(d.texto)}`));
+  if (w.flujograma) b.push(`<button type="button" class="boton sec" data-panel="flujo" aria-expanded="false" aria-label="Esquema de cómo funciona ${esc(w.titulo)}">${svg("arbol", 16)}Esquema</button>`);
+  if (w.guia) b.push(`<a class="boton sec" href="${esc(w.guia)}" target="_blank" rel="noopener" aria-label="Guía en PDF de ${esc(w.titulo)}">${svg("libro", 16)}Guía</a>`);
+  if (w.tipo === "app" && esRepo(w)) b.push(`<a class="boton sec" href="${esc(w.url)}" target="_blank" rel="noopener" aria-label="Código de ${esc(w.titulo)} en GitHub">${svg("codigo", 16)}GitHub</a>`);
+  return b.join("");
+}
+
+function panelFlujo(w) {
+  return w.flujograma ? `<div class="panel-flujo" hidden><div class="visor-mini"><img alt="Flujograma de ${esc(w.titulo)}" data-src="${esc(w.flujograma)}"></div>
+      <div class="barra-flujo"><span>Desplázate para ver el resto</span><button type="button" data-ampliar="${esc(w.flujograma)}" data-titulo="${esc(w.titulo)}">Ampliar ${svg("ampliar", 16)}</button></div></div>` : "";
 }
 
 function tarjeta(w, i) {
   const a = document.createElement("article");
   a.className = "tarjeta " + (w.url || w.tipo === "app" ? "viva" : "apagada");
   a.style.animationDelay = `${i * 80}ms`;
-  const fotos = (w.imagenes && w.imagenes.length ? w.imagenes : w.imagen ? [w.imagen] : []);
-  const miniatura = fotos.length > 1
-    ? `<div class="galeria">${fotos.map((s, k) => `<img class="${k ? "" : "on"}" src="${esc(s)}" alt="Vista previa ${k + 1} de ${esc(w.titulo)}" loading="lazy">`).join("")}
-        <div class="puntos">${fotos.map((_, k) => `<button type="button" class="${k ? "" : "on"}" aria-label="Ver captura ${k + 1}"></button>`).join("")}</div></div>`
-    : fotos.length
-    ? `<img src="${esc(fotos[0])}" alt="Vista previa de ${esc(w.titulo)}" loading="lazy">`
-    : `<div class="sin-imagen" aria-hidden="true">${svg(w.icono, 56)}</div>`;
-  const destino = w.abrir || w.url;       // «abrir»: la tarjeta lleva al envoltorio instalable; «url» sigue siendo la web de verdad (barra de direcciones)
-  const repo = w.tipo === "repo" || (w.tipo === "app" && /github\.com/.test(w.url || ""));           // un proyecto de GitHub: se enlaza el repositorio, no una web
-  const estado = !w.url ? `<span class="estado">En preparación</span>`
-    : repo ? `<span class="estado repo">Repositorio</span>` : `<span class="estado activa">Activa</span>`;
-  // escritorio (.exe, .bat) o móvil (.apk), según lo que se pueda descargar
-  const dispositivo = d => { if (d.dispositivo) return d.dispositivo; const f = d.archivo.toLowerCase().split("?")[0]; return f.endsWith(".apk") ? "movil" : [".exe", ".bat", ".msi"].some(x => f.endsWith(x)) ? "pc" : ""; };   // vídeos y demás: sin icono de equipo
-  const dispositivos = ["pc", "movil"].filter(x => (w.descargas || []).some(d => dispositivo(d) === x));
-  const queApp = dispositivos.length === 2 ? "App de escritorio y de móvil" : dispositivos[0] === "movil" ? "App de móvil" : "App de escritorio";
-  const insignia = w.tipo === "app" ? `<span class="estado repo plataformas">${(dispositivos.length ? dispositivos : ["pc"]).map(x => svg(x, 15)).join("")} ${queApp}</span>` : estado;
   a.style.viewTransitionName = "t-" + w.id;                      // para que, al ampliar una, las demás se deslicen a su sitio
+  const icono = w.icono_img ? `<img src="${esc(w.icono_img)}" alt="" width="36" height="36" loading="lazy">` : svg(w.icono, 22);
   a.innerHTML = `<div class="marco" role="button" tabindex="0" aria-expanded="false" aria-label="Ampliar la vista previa de ${esc(w.titulo)}">
-      <div class="barra" aria-hidden="true"><i></i><i></i><i></i><span>${esc(dominio(w.url))}</span></div>
-      <div class="vista">${miniatura}</div>
+      ${barra(w)}
+      <div class="vista">${miniatura(w)}</div>
     </div>
     <div class="cuerpo">
-      <div class="titulo"><span class="ico${w.icono_img ? " propio" : ""}" aria-hidden="true">${w.icono_img ? `<img src="${esc(w.icono_img)}" alt="" width="36" height="36" loading="lazy">` : svg(w.icono, 22)}</span><h2>${esc(w.titulo)}</h2></div>
-      ${(w.descargas || []).length || w.flujograma || w.guia ? `<div class="descargas">${(w.descargas || []).map(d => `<a class="boton sec" href="${esc(d.archivo)}" ${d.pagina ? `target="_blank" rel="noopener" title="Abre la web: ahí sale «Instalar» o «Añadir a pantalla de inicio»"` : `download="${esc(d.archivo.split("/").pop())}" title="Windows puede avisar al abrirlo porque el fichero no está firmado (Más información → Ejecutar de todas formas)"`}><span class="par">${svg("descarga", 18)}${dispositivo(d) ? svg(dispositivo(d), 18) : ""}</span> ${esc(d.texto)}</a>`).join("")}${w.flujograma ? `<button type="button" class="boton sec flujo" data-panel="flujo" aria-expanded="false" title="Esquema de cómo funciona la app">${svg("arbol", 18)} Flujograma</button>` : ""}${w.guia ? `<a class="boton sec" href="${esc(w.guia)}" target="_blank" rel="noopener" title="Documentación completa en PDF, con índice">${svg("libro", 18)} Guía (PDF)</a>` : ""}</div>` : ""}
-      ${w.flujograma ? `<div class="panel-flujo" hidden><div class="visor-mini"><img alt="Flujograma de ${esc(w.titulo)}" data-src="${esc(w.flujograma)}"></div>
-        <div class="barra-flujo"><span>Desplázate para ver el resto</span><button type="button" data-ampliar="${esc(w.flujograma)}" data-titulo="${esc(w.titulo)}">Ampliar ${svg("ampliar", 16)}</button></div></div>` : ""}
-      <div class="pie-tarjeta">${w.url ? `<a class="boton" href="${esc(destino)}" target="_blank" rel="noopener" aria-label="${repo ? "Ver en GitHub" : "Abrir"}: ${esc(w.titulo)}">${repo ? "Ver en GitHub" : "Abrir"} ${svg("flecha", 18)}</a>` : ""}${insignia}</div>
-      ${w.resumen ? `<p class="resumen">${esc(w.resumen)}</p>` : ""}
+      <div class="titulo"><span class="ico${w.icono_img ? " propio" : ""}" aria-hidden="true">${icono}</span><h2>${esc(w.titulo)}</h2></div>
+      <p class="resumen">${esc(w.resumen || "")}</p>
+      <div class="insignia">${insignia(w)}</div>
+      <div class="acciones">
+        <div class="principales">${principal(w)}</div>
+        <div class="secundarias">${secundarias(w)}</div>
+      </div>
+      ${panelFlujo(w)}
     </div>`;
   return a;
 }

@@ -1,6 +1,6 @@
-:root{--fondo:#f4f6fb;--tarjeta:#ffffff;--texto:#1b2230;--suave:#5b6577;--borde:#dde3ee;--acento:#3f5a99;--acento2:#5b7fd1;--sombra:0 4px 14px rgba(30,40,70,.07);--marco:#e9edf6;--ok:#1f7a45;--ok-fondo:rgba(31,122,69,.12);--tinte:rgba(63,90,153,.12)}
-@media (prefers-color-scheme:dark){:root:not([data-tema="claro"]){--fondo:#0e1320;--tarjeta:#171e30;--texto:#e8ecf5;--suave:#9aa6bf;--borde:#27314a;--acento:#7b9bf0;--acento2:#a5bbff;--sombra:0 4px 14px rgba(0,0,0,.35);--marco:#222c45;--ok:#5fd08d;--ok-fondo:rgba(95,208,141,.14);--tinte:rgba(123,155,240,.16)}}
-:root[data-tema="oscuro"]{--fondo:#0e1320;--tarjeta:#171e30;--texto:#e8ecf5;--suave:#9aa6bf;--borde:#27314a;--acento:#7b9bf0;--acento2:#a5bbff;--sombra:0 4px 14px rgba(0,0,0,.35);--marco:#222c45;--ok:#5fd08d;--ok-fondo:rgba(95,208,141,.14);--tinte:rgba(123,155,240,.16)}
+:root{--fondo:#f4f6fb;--tarjeta:#ffffff;--texto:#1b2230;--suave:#5b6577;--borde:#dde3ee;--acento:#3f5a99;--acento2:#5b7fd1;--sombra:0 4px 14px rgba(30,40,70,.07);--marco:#e9edf6;--ok:#1f7a45;--ok-fondo:rgba(31,122,69,.12);--tinte:rgba(63,90,153,.12);--sobre-acento:#ffffff}
+@media (prefers-color-scheme:dark){:root:not([data-tema="claro"]){--fondo:#0e1320;--tarjeta:#171e30;--texto:#e8ecf5;--suave:#9aa6bf;--borde:#27314a;--acento:#7b9bf0;--acento2:#a5bbff;--sombra:0 4px 14px rgba(0,0,0,.35);--marco:#222c45;--ok:#5fd08d;--ok-fondo:rgba(95,208,141,.14);--tinte:rgba(123,155,240,.16);--sobre-acento:#0e1320}}
+:root[data-tema="oscuro"]{--fondo:#0e1320;--tarjeta:#171e30;--texto:#e8ecf5;--suave:#9aa6bf;--borde:#27314a;--acento:#7b9bf0;--acento2:#a5bbff;--sombra:0 4px 14px rgba(0,0,0,.35);--marco:#222c45;--ok:#5fd08d;--ok-fondo:rgba(95,208,141,.14);--tinte:rgba(123,155,240,.16);--sobre-acento:#0e1320}
 *{box-sizing:border-box}
 body{margin:0;background:var(--fondo);color:var(--texto);font-family:"Segoe UI",system-ui,-apple-system,sans-serif;line-height:1.5}
 #fondo{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
@@ -34,6 +34,7 @@ main{max-width:72rem;margin:0 auto;padding:1.6rem 1.2rem 3rem}
 .barra i{width:.55rem;height:.55rem;border-radius:50%;background:#ff6159}
 .barra i:nth-child(2){background:#ffbd2e}.barra i:nth-child(3){background:#28c941}
 .barra span{margin-left:.5rem;flex:1;font-size:.7rem;color:var(--suave);background:var(--tarjeta);border-radius:6px;padding:.1rem .6rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.barra.ventana span{background:none;margin:0 2.2rem 0 0;text-align:center;font-weight:600}
 .tarjeta.ampliada{grid-column:1/-1;flex-direction:row;align-items:flex-start;border-color:var(--acento)}
 .tarjeta.ampliada .marco{flex:1.9 1 0;min-width:0;margin:1.1rem;cursor:zoom-out}
 .tarjeta.ampliada .cuerpo{flex:1 1 0;min-width:17rem}
@@ -46,11 +47,6 @@ main{max-width:72rem;margin:0 auto;padding:1.6rem 1.2rem 3rem}
 .galeria{position:relative;width:100%;height:100%}
 .galeria img{position:absolute;inset:0;opacity:0;transition:opacity .7s ease}
 .galeria img.on{opacity:1}
-.descargas{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.5rem;margin-top:.1rem}
-.descargas .boton.sec{justify-content:center;min-width:0;text-align:center}
-.boton.sec{position:relative;z-index:2;padding:.25rem .7rem;border-radius:8px;font-size:.85rem;background:transparent;border:1px solid var(--acento);color:var(--acento)}
-.boton.sec::after{content:none}
-.boton.sec:hover{background:var(--tinte)}
 .puntos{position:absolute;left:0;right:0;bottom:.45rem;display:flex;justify-content:center;gap:.4rem}
 .puntos button{width:.5rem;height:.5rem;padding:0;border:0;border-radius:50%;background:#ffffff66;cursor:pointer;box-shadow:0 0 0 1px #0006}
 .puntos button.on{background:#fff}
@@ -61,17 +57,24 @@ main{max-width:72rem;margin:0 auto;padding:1.6rem 1.2rem 3rem}
 .ico.propio{background:none}
 .ico.propio img{width:100%;height:100%;border-radius:9px;object-fit:cover}
 .cuerpo h2{margin:0;font-size:1.15rem;line-height:1.25;flex:1}
-.estado{flex:none;font-size:.7rem;font-weight:600;padding:.15rem .55rem;border-radius:999px;background:var(--marco);color:var(--suave)}
 .seccion{grid-column:1/-1;display:flex;align-items:center;gap:.8rem;margin:.6rem 0 -.3rem;font-size:1rem;font-weight:650;color:var(--suave)}
 .seccion::after{content:"";flex:1;height:1px;background:var(--borde)}
-.estado.repo{background:var(--tinte);color:var(--acento)}
-.estado.activa{background:var(--ok-fondo);color:var(--ok)}
-.cuerpo>.titulo+*{margin-top:auto}
-.resumen{margin:.3rem 0 0;font-size:.9rem;line-height:1.45;color:var(--suave);display:-webkit-box;-webkit-line-clamp:3;line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;min-height:calc(3 * 1.45em)}
-.pie-tarjeta{display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-top:.3rem}
-.boton{color:var(--acento);text-decoration:none;display:inline-flex;align-items:center;gap:.3rem;font-weight:600;color:var(--acento)}
-.boton svg{transition:transform .2s ease}
-.tarjeta.viva:hover .boton svg{transform:translateX(3px)}
+.resumen{margin:0;font-size:.9rem;line-height:1.45;color:var(--suave);display:-webkit-box;-webkit-line-clamp:3;line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;min-height:calc(3 * 1.45em)}
+.insignia{display:flex;align-items:center;min-height:1.6rem}
+.estado{display:inline-flex;align-items:center;gap:.3rem;font-size:.75rem;font-weight:600;padding:.15rem .6rem;border-radius:999px;background:var(--marco);color:var(--suave)}
+.estado svg{flex:none}
+/* acciones: la principal rellena con el acento; las secundarias, con borde fino. Ancladas abajo e iguales en todas las tarjetas */
+.acciones{display:grid;gap:.5rem;margin-top:auto}
+.principales{display:flex;gap:.5rem}
+.secundarias{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.4rem;min-height:2.25rem}
+.boton{position:relative;z-index:2;display:inline-flex;align-items:center;justify-content:center;gap:.4rem;min-width:0;font:inherit;font-weight:600;text-decoration:none;white-space:nowrap;cursor:pointer;border-radius:10px}
+.boton svg{flex:none}
+.boton.prin{flex:1;min-height:3rem;padding:.35rem .8rem;background:var(--acento);border:1px solid var(--acento);color:var(--sobre-acento)}
+.boton.prin:hover{background:var(--acento2);border-color:var(--acento2)}
+.boton.prin span{display:flex;flex-direction:column;align-items:flex-start;min-width:0;line-height:1.2}
+.boton.prin small{font-size:.75rem;font-weight:500}
+.boton.sec{gap:.3rem;min-height:2.25rem;padding:.25rem .3rem;font-size:.85rem;background:transparent;border:1px solid var(--borde);color:var(--texto)}
+.boton.sec:hover,.boton.sec[aria-expanded=true]{border-color:var(--acento);color:var(--acento);background:var(--tinte)}
 .vacio,.pie{text-align:center;color:var(--suave)}
 .pie{padding:1.5rem 1rem 2.5rem;font-size:.9rem}
 @keyframes entra{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
@@ -99,8 +102,6 @@ main{max-width:72rem;margin:0 auto;padding:1.6rem 1.2rem 3rem}
 .inst-app svg{flex:none;color:var(--acento)}
 
 /* ---- flujograma de las apps de escritorio (se despliega en la tarjeta y se amplía en un visor) */
-button.boton.sec{font:inherit;font-size:.85rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:.3rem}
-.boton.sec[aria-expanded=true]{background:var(--tinte)}
 .panel-flujo{position:relative;z-index:2;border:1px solid var(--borde);border-radius:10px;overflow:hidden;background:#fff}
 .panel-flujo[hidden]{display:none}
 .visor-mini{height:13rem;overflow:auto;background:#fff}
@@ -117,10 +118,3 @@ button.boton.sec{font:inherit;font-size:.85rem;font-weight:600;cursor:pointer;di
 .lienzo.arrastra{cursor:grabbing}
 .lienzo img{position:absolute;left:0;top:0;transform-origin:0 0;user-select:none;-webkit-user-drag:none;max-width:none}
 .visor-modal footer{padding:.4rem 1rem;background:var(--tarjeta);border-top:1px solid var(--borde);font-size:.8rem;color:var(--suave)}
-.boton.sec .par{display:inline-flex;flex:none;flex-wrap:nowrap;align-items:center;gap:.2rem}
-.boton.sec .par svg{flex:none}
-.estado.plataformas{display:inline-flex;align-items:center;gap:.25rem}
-.estado.plataformas svg{flex:none}
-
-/* un botón que se queda solo en la última fila de la rejilla de dos columnas ocupa todo el ancho */
-.descargas>:last-child:nth-child(odd){grid-column:1/-1}

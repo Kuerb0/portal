@@ -23,7 +23,7 @@ Lo que hace:
 
 ## Instalación
 
-1. Descarga el instalador desde el botón «Instalador» del portal.
+1. Descarga el instalador desde el botón «Descargar para Windows» del portal.
 2. Ábrelo. Si Windows avisa de que no conoce al editor, pulsa «Más información» y luego «Ejecutar de todas formas».
 3. Elige la carpeta y los accesos directos que quieras.
 4. Se abre el asistente de configuración. Cuando lo guardes, aparece el widget en el escritorio.

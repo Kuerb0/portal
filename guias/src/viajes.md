@@ -21,7 +21,7 @@ Esta web es la versión ligera. La app Viajes (para Windows y Android) hace más
 
 ## Abrirla
 
-La dirección es la del botón «Abrir» del portal. Esta web vive en un servicio gratuito que la duerme cuando lleva un rato sin visitas: la primera vez que entras puede tardar hasta medio minuto en despertar. Después va con normalidad.
+La dirección es la del botón «Abrir la web» del portal. Esta web vive en un servicio gratuito que la duerme cuando lleva un rato sin visitas: la primera vez que entras puede tardar hasta medio minuto en despertar. Después va con normalidad.
 
 La web se puede instalar como app en el móvil o el ordenador («Añadir a pantalla de inicio» o «Instalar») y se abre en su propia ventana.
 

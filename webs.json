@@ -47,6 +47,7 @@
   {
     "id": "viajes-app",
     "titulo": "Viajes (App)",
+    "version": "2.0.0",
     "icono": "avion",
     "icono_img": "img/iconos/viajes.png",
     "tipo": "app",
@@ -63,17 +64,19 @@
     ],
     "descargas": [
       {
-        "texto": "Instalador",
-        "archivo": "https://github.com/Kuerb0/descargas/releases/download/viajes-v2.0.0/Viajes-2.0.0-Instalador.exe"
+        "texto": "Windows",
+        "archivo": "https://github.com/Kuerb0/descargas/releases/download/viajes-v2.0.0/Viajes-2.0.0-Instalador.exe",
+        "bytes": 118611968
       },
       {
-        "texto": "Instalador móvil",
+        "texto": "Android",
         "archivo": "https://github.com/Kuerb0/descargas/releases/download/viajes-v2.0.0/Viajes-2.0.0-Movil.apk",
-        "dispositivo": "movil"
+        "bytes": 16855034
       },
       {
-        "texto": "Tráiler (vídeo)",
-        "archivo": "https://github.com/Kuerb0/descargas/releases/download/viajes-v2.0.0/Viajes-2.0-Trailer.mp4"
+        "texto": "Tráiler",
+        "archivo": "https://github.com/Kuerb0/descargas/releases/download/viajes-v2.0.0/Viajes-2.0-Trailer.mp4",
+        "bytes": 10761466
       }
     ],
     "flujograma": "flujogramas/viajes.svg",
@@ -82,6 +85,7 @@
   {
     "id": "finanzas-app",
     "titulo": "Finanzas Personales (App)",
+    "version": "2.0.0",
     "icono": "euro",
     "icono_img": "img/iconos/finanzas.png",
     "tipo": "app",
@@ -98,13 +102,14 @@
     ],
     "descargas": [
       {
-        "texto": "Instalador",
-        "archivo": "https://github.com/Kuerb0/descargas/releases/download/finanzas-v2.0.0/FinanzasPersonales-2.0.0-Instalador.exe"
+        "texto": "Windows",
+        "archivo": "https://github.com/Kuerb0/descargas/releases/download/finanzas-v2.0.0/FinanzasPersonales-2.0.0-Instalador.exe",
+        "bytes": 89966592
       },
       {
-        "texto": "Instalador móvil",
+        "texto": "Android",
         "archivo": "https://github.com/Kuerb0/descargas/releases/download/finanzas-v2.0.0/FinanzasPersonales-2.0.0-Movil.apk",
-        "dispositivo": "movil"
+        "bytes": 15880626
       }
     ],
     "flujograma": "flujogramas/planificador.svg",
@@ -113,6 +118,7 @@
   {
     "id": "estadistica-app",
     "titulo": "Estadística (App)",
+    "version": "1.0.0",
     "icono": "grafico",
     "icono_img": "img/iconos/estadistica-app.png",
     "tipo": "app",
@@ -129,16 +135,19 @@
     ],
     "descargas": [
       {
-        "texto": "Instalador",
-        "archivo": "descargas/Estadistica 1.0.0 - Instalador.exe"
+        "texto": "Windows",
+        "archivo": "descargas/Estadistica 1.0.0 - Instalador.exe",
+        "bytes": 77758976
       },
       {
-        "texto": "Instalador móvil",
-        "archivo": "descargas/Estadistica 1.0.0 - Instalador movil.apk"
+        "texto": "Android",
+        "archivo": "descargas/Estadistica 1.0.0 - Instalador movil.apk",
+        "bytes": 4534401
       },
       {
-        "texto": "Tráiler (vídeo)",
-        "archivo": "descargas/Estadistica 1.0 - Trailer.mp4"
+        "texto": "Tráiler",
+        "archivo": "descargas/Estadistica 1.0 - Trailer.mp4",
+        "bytes": 12721905
       }
     ],
     "flujograma": "flujogramas/estadistica-app.svg",
@@ -147,6 +156,7 @@
   {
     "id": "calendario",
     "titulo": "Calendario",
+    "version": "2.1.0",
     "icono": "calendario",
     "tipo": "app",
     "descripcion": "Widget de calendario de Outlook para el escritorio de Windows: rejilla por horas, lista o mes completo, avisos y alarmas con sonido por evento, festivos, correo en el widget y opción de mostrarlo solo en un escritorio virtual. Software libre (GPL-3.0).",
@@ -157,8 +167,9 @@
     "icono_img": "img/iconos/calendario.png",
     "descargas": [
       {
-        "texto": "Instalador",
-        "archivo": "https://github.com/Kuerb0/descargas/releases/download/calendario-v2.1.0/Calendario-2.1.0-Instalador.exe"
+        "texto": "Windows",
+        "archivo": "https://github.com/Kuerb0/descargas/releases/download/calendario-v2.1.0/Calendario-2.1.0-Instalador.exe",
+        "bytes": 39208448
       }
     ],
     "flujograma": "flujogramas/calendario.svg",
@@ -179,6 +190,7 @@
   {
     "id": "atlas",
     "titulo": "Atlas del conocimiento",
+    "version": "1.15.1",
     "icono": "arbol",
     "tipo": "app",
     "descripcion": "Árbol de funciones de estadística, actuarial, finanzas y aprendizaje automático (más de 300), con un visor 3D en forma de galaxias, demos interactivas y una guía para aprender desde cero. Para Windows.",
@@ -189,8 +201,9 @@
     "icono_img": "img/iconos/atlas.png",
     "descargas": [
       {
-        "texto": "Instalador",
-        "archivo": "https://github.com/Kuerb0/Atlas-del-Conocimiento-App/releases/download/v1.15.1/Atlas-1.15.1-Instalador.exe"
+        "texto": "Windows",
+        "archivo": "https://github.com/Kuerb0/Atlas-del-Conocimiento-App/releases/download/v1.15.1/Atlas-1.15.1-Instalador.exe",
+        "bytes": 164080640
       }
     ],
     "flujograma": "flujogramas/atlas.svg",
@@ -199,6 +212,7 @@
   {
     "id": "logeador",
     "titulo": "Administrador de Tareas+",
+    "version": "1.4.0",
     "icono": "grafico",
     "tipo": "app",
     "descripcion": "Registro del uso del PC: CPU, memoria, entrada/salida y GPU de cada programa a lo largo del tiempo, con gráficos, distribución por programa y estadísticas.",
@@ -213,8 +227,9 @@
     "icono_img": "img/iconos/logeador.png",
     "descargas": [
       {
-        "texto": "Instalador",
-        "archivo": "https://github.com/Kuerb0/descargas/releases/download/logeador-v1.4.0/AdministradorTareas-1.4.0-Instalador.exe"
+        "texto": "Windows",
+        "archivo": "https://github.com/Kuerb0/descargas/releases/download/logeador-v1.4.0/AdministradorTareas-1.4.0-Instalador.exe",
+        "bytes": 43046912
       }
     ],
     "guia": "guias/logeador.pdf"
@@ -222,6 +237,7 @@
   {
     "id": "apagador",
     "titulo": "Apagador",
+    "version": "1.0.0",
     "icono": "apagar",
     "tipo": "app",
     "descripcion": "Programador de apagado de Windows: elige una duración en minutos o una hora exacta, con cuenta atrás y opción de cancelar en cualquier momento.",
@@ -232,8 +248,9 @@
     "icono_img": "img/iconos/apagador.png",
     "descargas": [
       {
-        "texto": "Instalador",
-        "archivo": "https://github.com/Kuerb0/Apagador-App/releases/download/v1.0.0/Apagador-1.0.0-Instalador.exe"
+        "texto": "Windows",
+        "archivo": "https://github.com/Kuerb0/Apagador-App/releases/download/v1.0.0/Apagador-1.0.0-Instalador.exe",
+        "bytes": 11426816
       }
     ],
     "flujograma": "flujogramas/apagador.svg",
@@ -242,6 +259,7 @@
   {
     "id": "post-it",
     "titulo": "Post-It",
+    "version": "1.1.0",
     "icono": "nota",
     "tipo": "app",
     "descripcion": "Notas adhesivas de escritorio para Windows: tareas repetibles, posición y translucidez a elección, líneas periódicas por fechas y modo columnas.",
@@ -252,8 +270,9 @@
     "icono_img": "img/iconos/post-it.png",
     "descargas": [
       {
-        "texto": "Instalador",
-        "archivo": "https://github.com/Kuerb0/descargas/releases/download/postit-v1.1.0/PostIt-1.1.0-Instalador.exe"
+        "texto": "Windows",
+        "archivo": "https://github.com/Kuerb0/descargas/releases/download/postit-v1.1.0/PostIt-1.1.0-Instalador.exe",
+        "bytes": 158206976
       }
     ],
     "flujograma": "flujogramas/post-it.svg",

@@ -21,7 +21,7 @@ Sirve para tres cosas:
 
 ## Instalación
 
-1. Descarga el instalador desde el botón «Instalador» del portal (unos 160 MB).
+1. Descarga el instalador desde el botón «Descargar para Windows» del portal (unos 160 MB).
 2. Ábrelo. Si Windows avisa de que no conoce al editor, pulsa «Más información» y luego «Ejecutar de todas formas».
 3. Elige la carpeta y los accesos directos. Evita las carpetas sincronizadas (OneDrive, Dropbox): Python y las librerías son miles de ficheros y la sincronización los ralentiza.
 4. Abre el Atlas desde el acceso directo del Escritorio.

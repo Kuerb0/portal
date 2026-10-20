@@ -40,7 +40,7 @@ La app calcula con scipy y statsmodels dentro de tu equipo. No sube nada a inter
 
 ### En Windows
 
-1. Descarga el instalador desde el botón «Instalador» del portal.
+1. Descarga el instalador desde el botón «Windows» del portal.
 2. Ábrelo. Si Windows avisa de que no conoce al editor, pulsa «Más información» y luego «Ejecutar de todas formas».
 3. Elige la carpeta y los accesos directos que quieras.
 4. Abre Estadística desde el acceso directo del Escritorio.
@@ -49,7 +49,7 @@ No hace falta tener Python ni conexión a internet: el programa lleva todo dentr
 
 ### En Android
 
-Descarga el «Instalador móvil» (`.apk`), ábrelo y permite instalar apps de origen desconocido. La primera vez necesita internet para descargar Python y las librerías de cálculo; después funciona sin conexión.
+Descarga el instalador de Android (`.apk`) con el botón «Android» del portal, ábrelo y permite instalar apps de origen desconocido. La primera vez necesita internet para descargar Python y las librerías de cálculo; después funciona sin conexión.
 
 ## Recorrido por la pantalla
 
