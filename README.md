@@ -53,3 +53,7 @@ La prueba de humo (`python herramientas/humo.py [etiqueta]`) sirve la carpeta en
 ## Colores
 
 `estilo.css` tiene un solo juego de variables al principio: cada color es `light-dark(claro, oscuro)` y lo elige `color-scheme` (el del sistema o, si se ha pulsado el botón de tema, `data-tema` en `<html>`). Radios: `--r-s`, `--r-m` y `--r-l`. `fondo.js` lee los colores ya resueltos, así que no hace falta tocarlo al cambiar la paleta.
+
+## Imagen para compartir
+
+`img/og.jpg` (1200×630) es la que sale al compartir el portal en redes y mensajería. Se hace con `python herramientas/og.py` (cuervo, título, recuento de proyectos y cuatro capturas, fotografiados con Edge sin ventana). Volver a hacerla si cambian las capturas o el número de proyectos.

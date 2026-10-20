@@ -1,7 +1,7 @@
 titulo: Administrador de Tareas+
 subtitulo: Un registro del uso del PC, programa a programa, a lo largo del tiempo
 version: 1.4.0
-icono: img/iconos/logeador.png
+icono: img/iconos/administrador-tareas.png
 color: #0e8f9c
 color_oscuro: #0a6b75
 
@@ -11,7 +11,7 @@ El Administrador de Tareas de Windows te dice qué está pasando ahora. Administ
 
 Antes se llamaba Logeador. Ahora se llama Administrador de Tareas+, aunque por dentro algunas cosas (la carpeta de datos, el nombre del archivo del programa) conservan el nombre antiguo para que al actualizar no se pierda tu historial.
 
-![Pestaña Procesos](img/logeador-1.jpg)
+![Pestaña Procesos](img/administrador-tareas-1.jpg)
 
 Mide cuatro cosas por programa:
 
@@ -56,7 +56,7 @@ Todo lo que cambies aquí se recuerda al volver a abrir.
 
 A la izquierda, una tabla con todos los programas que hay en marcha ahora, con su CPU, RAM, E/S, GPU y número de instancias. Se actualiza cada 5 segundos. A la derecha, la evolución en el tiempo de lo que selecciones.
 
-![Procesos: tabla en vivo y gráficos](img/logeador-1.jpg)
+![Procesos: tabla en vivo y gráficos](img/administrador-tareas-1.jpg)
 
 ### Qué es una fila
 
@@ -80,7 +80,7 @@ Cada programa recibe un color la primera vez que sale en un gráfico, y lo conse
 
 Responde a «¿quién consume qué?». Dibuja, para cada medida, una gráfica apilada: cada programa es una banda de su color y el alto total es lo que consume el sistema.
 
-![Distribución](img/logeador-2.jpg)
+![Distribución](img/administrador-tareas-2.jpg)
 
 - **Procesos mostrados**: 5, 8, 12 o 20. Los programas que consumen más en el periodo salen con su propia banda; el resto se suma en una banda gris llamada «Otros».
 - **Normalizar al 100 %**: en vez de valores absolutos, cada instante se reparte entre el 0 y el 100 %. Sirve para ver quién pesa más en cada momento aunque el total suba y baje.
@@ -92,7 +92,7 @@ El orden de las bandas es el del total del periodo, de mayor a menor, y es el mi
 
 Una tabla con los números de cada programa durante el rango elegido.
 
-![Estadísticas](img/logeador-3.jpg)
+![Estadísticas](img/administrador-tareas-3.jpg)
 
 | Columna | Qué es |
 |---|---|

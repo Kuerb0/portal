@@ -4,7 +4,7 @@
     "titulo": "Vuelos, hoteles y trenes",
     "icono": "avion",
     "descripcion": "Elige origen, destinos y fechas y compara vuelos, hoteles y trenes de todos los días: mapa con tarjetas, gráficos de precios y una barra de filtros.",
-    "resumen": "Eliges de dónde sales, a dónde vas y cuándo. Te enseña los vuelos, hoteles y trenes más baratos en mapas y gráficos.",
+    "resumen": "Compara vuelos, hoteles y trenes desde la ciudad y las fechas que elijas, con mapas y gráficos de precios.",
     "etiquetas": [
       "vuelos",
       "hoteles",
@@ -30,7 +30,7 @@
     "titulo": "Finanzas personales",
     "icono": "euro",
     "descripcion": "Planificador financiero: hipoteca, cartera de inversión con Monte Carlo, comparador, ahorro, asignación de activos y test de tolerancia al riesgo.",
-    "resumen": "Calcula la cuota de una hipoteca y cuánto podría crecer tu dinero invertido. Un test te dice cuánto riesgo aguantas.",
+    "resumen": "Calcula la cuota de tu hipoteca y cuánto podría crecer lo que inviertes. Un test te dice cuánto riesgo aguantas.",
     "etiquetas": [
       "hipoteca",
       "inversión",
@@ -59,7 +59,7 @@
     "tipo": "web",
     "seccion": "webs",
     "descripcion": "Planificador de platos de comida y cena con ingredientes, cantidades y alérgenos.",
-    "resumen": "Organizas qué comes y qué cenas cada día. Cada plato lleva sus ingredientes, cantidades y alérgenos.",
+    "resumen": "Organiza qué comes y qué cenas cada día. Cada plato lleva sus ingredientes, cantidades y alérgenos.",
     "etiquetas": [
       "menú",
       "recetas",
@@ -84,7 +84,7 @@
     "tipo": "app",
     "seccion": "apps",
     "descripcion": "App de escritorio (Windows) y de móvil (Android) que descarga y compara precios de vuelos y hoteles desde el aeropuerto que elijas (y trenes desde Madrid): eliges origen, destinos, fechas y días de viaje, y ves resumen, buscador, favoritos, alertas de precio, evolución, calendario, mapa y más. Se ejecuta en tu propio equipo o móvil.",
-    "resumen": "Baja precios de vuelos, hoteles y trenes desde tu aeropuerto, los compara y te avisa si alguno baja de tu precio.",
+    "resumen": "Descarga precios de vuelos, hoteles y trenes desde tu aeropuerto, los compara y te avisa si alguno baja de tu precio.",
     "etiquetas": [
       "vuelos",
       "hoteles",
@@ -134,7 +134,7 @@
     "tipo": "app",
     "seccion": "apps",
     "descripcion": "App para Windows y Android del planificador financiero, con la interfaz nueva (la de Estadística y Viajes): hipoteca, cartera con Monte Carlo, comparador, mercado, plazos y riesgo, ahorrador, asignador y test de riesgo.",
-    "resumen": "El planificador financiero para Windows y Android: hipoteca, inversión, ahorro y un test de riesgo. Todo queda en tu equipo.",
+    "resumen": "Lleva el planificador financiero a Windows y Android: hipoteca, inversión y ahorro. Tus datos se quedan en tu equipo.",
     "etiquetas": [
       "hipoteca",
       "inversión",
@@ -179,7 +179,7 @@
     "tipo": "app",
     "seccion": "apps",
     "descripcion": "App de escritorio para Windows para aprender y usar estadística viéndola moverse: 23 distribuciones, contrastes, regresiones (de la lineal a la binomial negativa) con el algoritmo animado, Bayes, clasificación, supervivencia, clustering, reservas IBNR, buscador global y 11 paletas. Con código en Python, R y SAS. Se ejecuta en tu propio equipo.",
-    "resumen": "Aprendes estadística viendo cómo se mueve: distribuciones, regresiones y más, con el código en Python, R y SAS.",
+    "resumen": "Enseña estadística viéndola moverse: distribuciones, regresiones y más, con el código en Python, R y SAS.",
     "etiquetas": [
       "distribuciones",
       "regresión",
@@ -228,7 +228,7 @@
     "tipo": "app",
     "seccion": "apps",
     "descripcion": "Widget de calendario de Outlook para el escritorio de Windows: rejilla por horas, lista o mes completo, avisos y alarmas con sonido por evento, festivos, correo en el widget y opción de mostrarlo solo en un escritorio virtual. Software libre (GPL-3.0).",
-    "resumen": "Pone tu calendario de Outlook en el escritorio de Windows, por horas, en lista o por mes, y avisa de cada evento.",
+    "resumen": "Pone tu calendario de Outlook en el escritorio de Windows, por horas, en lista o por mes, y te avisa de cada evento.",
     "etiquetas": [
       "Outlook",
       "agenda",
@@ -260,7 +260,7 @@
     "tipo": "repo",
     "seccion": "github",
     "descripcion": "Libro de Excel para practicar funciones avanzadas (FILTRAR, ORDENARPOR, ÚNICOS, búsquedas y operaciones con tablas), con unos 160.000 registros de precios de vuelos como datos de práctica y una guía en presentación.",
-    "resumen": "Un libro de Excel para practicar funciones avanzadas como FILTRAR u ORDENARPOR, con 160.000 precios de vuelos.",
+    "resumen": "Te deja practicar funciones avanzadas de Excel, como FILTRAR u ORDENARPOR, con 160.000 precios de vuelos.",
     "etiquetas": [
       "hoja de cálculo",
       "fórmulas",
@@ -283,7 +283,7 @@
     "tipo": "app",
     "seccion": "apps",
     "descripcion": "Árbol de funciones de estadística, actuarial, finanzas y aprendizaje automático (más de 300), con un visor 3D en forma de galaxias, demos interactivas y una guía para aprender desde cero. Para Windows.",
-    "resumen": "Un mapa 3D de más de 300 funciones de estadística, actuarial y finanzas, con demos para probarlas.",
+    "resumen": "Reúne más de 300 funciones de estadística, actuarial y finanzas en un mapa 3D, con demos para probarlas.",
     "etiquetas": [
       "3D",
       "actuarial",
@@ -309,14 +309,14 @@
     "orden": 80
   },
   {
-    "id": "logeador",
+    "id": "administrador-tareas",
     "titulo": "Administrador de Tareas+",
     "version": "1.4.0",
     "icono": "grafico",
     "tipo": "app",
     "seccion": "apps",
     "descripcion": "Registro del uso del PC: CPU, memoria, entrada/salida y GPU de cada programa a lo largo del tiempo, con gráficos, distribución por programa y estadísticas.",
-    "resumen": "Anota cuánto usa cada programa de tu PC (procesador, memoria, disco y gráfica) y lo enseña en gráficos.",
+    "resumen": "Anota cuánto procesador, memoria, disco y gráfica usa cada programa de tu PC y te lo enseña en gráficos.",
     "etiquetas": [
       "CPU",
       "memoria",
@@ -327,13 +327,13 @@
       "Logeador"
     ],
     "imagenes": [
-      "img/logeador-1.jpg",
-      "img/logeador-2.jpg",
-      "img/logeador-3.jpg"
+      "img/administrador-tareas-1.jpg",
+      "img/administrador-tareas-2.jpg",
+      "img/administrador-tareas-3.jpg"
     ],
     "url": "",
     "estado": "activa",
-    "icono_img": "img/iconos/logeador.png",
+    "icono_img": "img/iconos/administrador-tareas.png",
     "descargas": [
       {
         "texto": "Windows",
@@ -342,7 +342,7 @@
       }
     ],
     "novedades": "Logeador pasa a llamarse Administrador de Tareas+. Se instala encima de la versión anterior y conserva tu registro.",
-    "guia": "guias/logeador.pdf",
+    "guia": "guias/administrador-tareas.pdf",
     "orden": 90
   },
   {
@@ -384,7 +384,7 @@
     "tipo": "app",
     "seccion": "apps",
     "descripcion": "Notas adhesivas de escritorio para Windows: tareas repetibles, posición y translucidez a elección, líneas periódicas por fechas y modo columnas.",
-    "resumen": "Notas adhesivas para el escritorio de Windows: se pueden mover, hacer translúcidas y repetir como tareas.",
+    "resumen": "Pone notas adhesivas en el escritorio de Windows. Puedes moverlas, hacerlas translúcidas y repetirlas como tareas.",
     "etiquetas": [
       "notas",
       "tareas",

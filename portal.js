@@ -281,7 +281,12 @@ function pintar() {
   guardarURL();
 }
 
-fetch("webs.json").then(r => r.json()).then(d => { webs = d.sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0)); leerURL(); pintar(); pintarApps(); })
+fetch("webs.json").then(r => {
+  const fecha = new Date(r.headers.get("last-modified") || NaN);         // la fecha del último cambio de webs.json
+  if (!isNaN(fecha)) document.getElementById("actualizado").textContent = `Última actualización: ${fecha.toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" })}.`;
+  return r.json();
+}).then(d => {
+  document.getElementById("recuento").textContent = `${d.length} proyectos`; webs = d.sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0)); leerURL(); pintar(); pintarApps(); })
   .catch(() => { rejilla.textContent = "No se han podido cargar las webs."; });
 buscar.addEventListener("input", pintar);
 addEventListener("hashchange", () => { if (location.hash.includes("=")) { leerURL(); pintar(); } });
