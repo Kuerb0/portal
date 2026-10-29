@@ -19,7 +19,7 @@ RAIZ = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(RAIZ / "guias"))
 from construir import Edge  # noqa: E402
 
-TARJETAS = 12
+TARJETAS = 13
 VISTAS = [  # nombre, ancho, alto, tema, movimiento reducido, móvil (táctil)
     ("1400-oscuro", 1400, 900, "dark", False, False),
     ("1400-claro", 1400, 900, "light", False, False),

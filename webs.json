@@ -406,5 +406,36 @@
     "flujograma": "flujogramas/post-it.svg",
     "guia": "guias/post-it.pdf",
     "orden": 110
+  },
+  {
+    "id": "clawd",
+    "titulo": "Clawd",
+    "version": "1.0.0",
+    "icono": "apps",
+    "tipo": "app",
+    "seccion": "apps",
+    "descripcion": "Mascotas de escritorio para Windows: un muñeco por cada sesión de Claude Code, paseando sobre la barra de tareas con el nombre del chat. Anda si trabaja, se queda quieto si no hay actividad, salta con «?» si te pide permiso y muestra «!» cuando termina. Cuantos más tokens gasta un chat, más grande es. Clic abre ese chat y clic derecho abre el menú.",
+    "resumen": "Un muñeco por cada chat de Claude Code sobre la barra de tareas: anda si trabaja, salta si te pide permiso y avisa al terminar.",
+    "etiquetas": [
+      "Claude Code",
+      "mascota",
+      "barra de tareas",
+      "chats",
+      "permisos",
+      "Python"
+    ],
+    "imagen": "img/clawd.jpg",
+    "url": "",
+    "estado": "activa",
+    "descargas": [
+      {
+        "texto": "Windows",
+        "archivo": "https://github.com/Kuerb0/descargas/releases/download/clawd-v1.0.0/Clawd-1.0.0-Instalador.bat",
+        "bytes": 65796
+      }
+    ],
+    "novedades": "Primera versión publicada. Arranca con el PC y avisa con un sonido cuando un chat pasa a necesitarte.",
+    "requisitos": "Windows y Python 3 con tkinter (si falta, el instalador intenta instalarlo con winget). Lee tus chats locales de Claude Code en ~/.claude/projects.",
+    "orden": 115
   }
 ]

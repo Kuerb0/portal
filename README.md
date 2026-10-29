@@ -48,7 +48,7 @@ python herramientas/comprobar.py
 
 Falla si `estilo.css` tiene llaves sin cerrar o una sección (`/* ---- …`) ha quedado dentro de otra regla (como pasó con la regla `prefers-reduced-motion` cortada), si `webs.json` no es válido o le falta un campo, si un resumen pasa de 130 caracteres, si una ruta no existe, si una descarga no está en su Release o su tamaño no coincide con `bytes` (usa `gh`), si una `<img>` no tiene `alt` o si hay un fichero de más de 200 KB al que no se refiere nadie. Después pasa la prueba de humo. Con `--rapido` solo mira los ficheros (sin red ni navegador).
 
-La prueba de humo (`python herramientas/humo.py [etiqueta]`) sirve la carpeta en local, abre la página con Edge sin ventana a 1400 px (oscuro, claro y con movimiento reducido), 768 px y 375 px, y falla si hay desbordamiento horizontal, si no salen las 12 tarjetas, si algún botón se parte o se corta, si una fila de tarjetas no alinea título, resumen, insignia y acciones, si «Instálame» pierde el borde o si el visor de flujogramas se ve. Deja capturas de página entera en `herramientas/capturas/<etiqueta>/` (fuera de git).
+La prueba de humo (`python herramientas/humo.py [etiqueta]`) sirve la carpeta en local, abre la página con Edge sin ventana a 1400 px (oscuro, claro y con movimiento reducido), 768 px y 375 px, y falla si hay desbordamiento horizontal, si no salen las 13 tarjetas, si algún botón se parte o se corta, si una fila de tarjetas no alinea título, resumen, insignia y acciones, si «Instálame» pierde el borde o si el visor de flujogramas se ve. Deja capturas de página entera en `herramientas/capturas/<etiqueta>/` (fuera de git).
 
 ## Colores
 
