@@ -78,7 +78,7 @@
   {
     "id": "viajes-app",
     "titulo": "Viajes (App)",
-    "version": "2.0.0",
+    "version": "2.7.2",
     "icono": "avion",
     "icono_img": "img/iconos/viajes.png",
     "tipo": "app",
@@ -105,8 +105,8 @@
     "descargas": [
       {
         "texto": "Windows",
-        "archivo": "https://github.com/Kuerb0/descargas/releases/download/viajes-v2.0.0/Viajes-2.0.0-Instalador.exe",
-        "bytes": 118611968
+        "archivo": "https://github.com/Kuerb0/descargas/releases/download/viajes-v2.7.2/Viajes-2.7.2-Instalador.exe",
+        "bytes": 120940544
       },
       {
         "texto": "Android",
@@ -119,7 +119,7 @@
         "bytes": 5566103
       }
     ],
-    "novedades": "Ahora también para Android. Al empezar eliges origen, destinos y fechas, y la app solo carga eso. Trae paletas de color, buscador (Ctrl+K) y alertas de precio.",
+    "novedades": "Antelación de vuelos y hoteles (subir, bajar o igual, con tramos), pestaña Turisteo con sitios por destino y descarga sutil desde la bandeja. Se instala encima de la anterior. El Android sigue en la 2.0.0.",
     "requisitos": "En Android hace falta un móvil reciente (WebView 137 o más). Los trenes solo salen desde Madrid.",
     "flujograma": "flujogramas/viajes.svg",
     "guia": "guias/viajes-app.pdf",
@@ -223,7 +223,7 @@
   {
     "id": "calendario",
     "titulo": "Calendario",
-    "version": "2.1.0",
+    "version": "2.3.1",
     "icono": "calendario",
     "tipo": "app",
     "seccion": "apps",
@@ -244,11 +244,11 @@
     "descargas": [
       {
         "texto": "Windows",
-        "archivo": "https://github.com/Kuerb0/descargas/releases/download/calendario-v2.1.0/Calendario-2.1.0-Instalador.exe",
-        "bytes": 39208448
+        "archivo": "https://github.com/Kuerb0/descargas/releases/download/calendario-v2.3.1/Calendario-2.3.1-Instalador.exe",
+        "bytes": 38285312
       }
     ],
-    "novedades": "Se une con Post-It: las líneas con hora de tus notas salen como eventos, y los eventos de los próximos 14 días aparecen en una nota.",
+    "novedades": "Se une con Post-It (agenda compartida de 7 días atrás a 31 adelante). Con el .exe, tu configuración y perfiles viven en OneDrive\\Calendario\\datos y se comparten entre equipos.",
     "flujograma": "flujogramas/calendario.svg",
     "guia": "guias/calendario.pdf",
     "orden": 70
@@ -379,7 +379,7 @@
   {
     "id": "post-it",
     "titulo": "Post-It",
-    "version": "1.1.0",
+    "version": "1.12.0",
     "icono": "nota",
     "tipo": "app",
     "seccion": "apps",
@@ -398,11 +398,11 @@
     "descargas": [
       {
         "texto": "Windows",
-        "archivo": "https://github.com/Kuerb0/descargas/releases/download/postit-v1.1.0/PostIt-1.1.0-Instalador.exe",
-        "bytes": 158206976
+        "archivo": "https://github.com/Kuerb0/descargas/releases/download/postit-v1.12.0/PostIt-1.12.0-Instalador.exe",
+        "bytes": 158218752
       }
     ],
-    "novedades": "Se une con el Calendario: las líneas con hora de tus notas salen como eventos, y una nota nueva muestra tu agenda de los próximos 7 días.",
+    "novedades": "Alarmas que suenan con la nota cerrada, carpetas ordenadas por fecha, días que faltan junto a cada fecha y lanzador visual. Las notas unidas al Calendario ven sus eventos hasta 120 días por delante.",
     "flujograma": "flujogramas/post-it.svg",
     "guia": "guias/post-it.pdf",
     "orden": 110
