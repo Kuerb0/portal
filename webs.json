@@ -379,7 +379,7 @@
   {
     "id": "post-it",
     "titulo": "Post-It",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "icono": "nota",
     "tipo": "app",
     "seccion": "apps",
@@ -398,11 +398,11 @@
     "descargas": [
       {
         "texto": "Windows",
-        "archivo": "https://github.com/Kuerb0/descargas/releases/download/postit-v2.0.1/PostIt-2.0.1-Instalador.exe",
+        "archivo": "https://github.com/Kuerb0/descargas/releases/download/postit-v2.0.2/PostIt-2.0.2-Instalador.exe",
         "bytes": 271872
       }
     ],
-    "novedades": "Instalador con asistente: sincronización opcional de las notas en una carpeta de OneDrive aparte de la del programa y calendario por Outlook clásico o enlace ICS (con prueba). Si ya hay una versión instalada ofrece Actualizar o Reinstalar, nunca instala en la raíz de una unidad y limpia accesos rotos. Notas fusionadas sin copias en conflicto, colores de etiquetas, nota de bienvenida, ayuda F1 ampliada y aviso de versión nueva.",
+    "novedades": "Los eventos del calendario llevan un icono nuevo (hoja blanca con la cabecera del color de su etiqueta) y sin el borde oscuro. Instalador con asistente y sincronización opcional de las notas en una carpeta de OneDrive aparte de la del programa; calendario por Outlook clásico o enlace ICS. Ofrece Actualizar o Reinstalar, nunca instala en la raíz de una unidad y limpia accesos rotos. Notas fusionadas sin copias en conflicto, nota de bienvenida, ayuda F1 ampliada y aviso de versión nueva.",
     "flujograma": "flujogramas/post-it.svg",
     "guia": "guias/post-it.pdf",
     "orden": 110
