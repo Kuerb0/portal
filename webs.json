@@ -410,7 +410,7 @@
   {
     "id": "clawd",
     "titulo": "Clawd",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "icono": "apps",
     "tipo": "app",
     "seccion": "apps",
@@ -430,11 +430,11 @@
     "descargas": [
       {
         "texto": "Windows",
-        "archivo": "https://github.com/Kuerb0/descargas/releases/download/clawd-v1.0.0/Clawd-1.0.0-Instalador.bat",
-        "bytes": 65796
+        "archivo": "https://github.com/Kuerb0/descargas/releases/download/clawd-v1.0.1/Clawd-1.0.1-Instalador.bat",
+        "bytes": 67773
       }
     ],
-    "novedades": "Primera versión publicada. Arranca con el PC y avisa con un sonido cuando un chat pasa a necesitarte.",
+    "novedades": "Ya no se cierran en silencio con rutas largas (sesiones sin carpeta) ni con el Python de la Microsoft Store: se instala en la carpeta Clawd de tu usuario y cierra los Clawd abiertos al actualizar. Si algo falla o no encuentra sesiones, sale un Clawd rojo con el texto del error y el detalle queda en clawd.log. Encuentra los chats de la app de escritorio también en %APPDATA%/Claude y en la versión de la Store.",
     "requisitos": "Windows y Python 3 con tkinter (si falta, el instalador intenta instalarlo con winget). Lee tus chats locales de Claude Code en ~/.claude/projects.",
     "orden": 115
   }
