@@ -223,7 +223,7 @@
   {
     "id": "calendario",
     "titulo": "Calendario",
-    "version": "2.4.0",
+    "version": "2.4.1",
     "icono": "calendario",
     "tipo": "app",
     "seccion": "apps",
@@ -244,7 +244,7 @@
     "descargas": [
       {
         "texto": "Windows",
-        "archivo": "https://github.com/Kuerb0/descargas/releases/download/calendario-v2.4.0/Calendario-2.4.0-Instalador.exe",
+        "archivo": "https://github.com/Kuerb0/descargas/releases/download/calendario-v2.4.1/Calendario-2.4.1-Instalador.exe",
         "bytes": 317440
       }
     ],
