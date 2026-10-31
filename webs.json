@@ -410,7 +410,7 @@
   {
     "id": "clawd",
     "titulo": "Clawd",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "icono": "apps",
     "tipo": "app",
     "seccion": "apps",
@@ -430,11 +430,11 @@
     "descargas": [
       {
         "texto": "Windows",
-        "archivo": "https://github.com/Kuerb0/descargas/releases/download/clawd-v1.1.0/Clawd-1.1.0-Instalador.bat",
-        "bytes": 71993
+        "archivo": "https://github.com/Kuerb0/descargas/releases/download/clawd-v1.2.0/Clawd-1.2.0-Instalador.bat",
+        "bytes": 73528
       }
     ],
-    "novedades": "Icono en la bandeja (abajo a la derecha, junto al reloj): clic para esconder o mostrar los Clawd y, con clic derecho, un menú con Reiniciar. Sale nada más arrancar y un vigilante reinicia las mascotas solas si se atascan. Incluye lo de la 1.0.1: rutas largas, Python de la Microsoft Store y un Clawd rojo con el texto del error si algo falla.",
+    "novedades": "Arrancan con el PC por defecto: el instalador activa el inicio automático (aunque Windows lo tuviera desactivado) y se puede desactivar con clic derecho en el icono de la bandeja, casilla Arrancar con el PC. Incluye el icono de la bandeja con Reiniciar, el vigilante que reinicia las mascotas si se atascan y el Clawd rojo con el texto del error.",
     "requisitos": "Windows y Python 3 con tkinter (si falta, el instalador intenta instalarlo con winget). Lee tus chats locales de Claude Code en ~/.claude/projects.",
     "orden": 115
   }
