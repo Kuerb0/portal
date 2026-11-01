@@ -441,7 +441,7 @@
   {
       "id": "consumo",
       "titulo": "Consumo",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "icono": "grafico",
       "tipo": "app",
       "seccion": "apps",
@@ -462,11 +462,11 @@
       "descargas": [
           {
               "texto": "Windows",
-              "archivo": "https://github.com/Kuerb0/descargas/releases/download/consumo-v1.1.0/Consumo-1.1.0-Instalador.bat",
+              "archivo": "https://github.com/Kuerb0/descargas/releases/download/consumo-v1.2.0/Consumo-1.2.0-Instalador.bat",
               "bytes": 15415
           }
       ],
-      "novedades": "Nuevo arco verde grisáceo en el anillo semanal con lo que se estima que gastarás en el resto de la semana, al ritmo medio de lo que llevas. El instalador descarga Consumo.exe, lo pone en el inicio de Windows e instala el plugin que lee tus límites.",
+      "novedades": "Icono en la bandeja, junto al reloj, para ocultar o mostrar la pestaña y salir. Lo que gastarás hoy sale en verde grisáceo y el resto de la semana en gris. El instalador descarga Consumo.exe, lo pone en el inicio de Windows e instala el plugin que lee tus límites.",
       "requisitos": "Windows y Claude Code (el plugin uso-consumo escribe tus límites en ~/.claude/statusbar; el instalador lo añade si «claude» está en el PATH). No envía nada a ningún sitio.",
       "orden": 120
   }
