@@ -2,7 +2,7 @@
 
 Sirve la carpeta en local, carga la página en varias vistas (ancho, tema, movimiento reducido), guarda una captura
 de página entera de cada una en herramientas/capturas/<etiqueta>/ y comprueba lo básico:
-sin desbordamiento horizontal, 12 tarjetas, ningún botón partido o cortado, filas alineadas, la sección «Instálame» con borde y el visor de flujogramas oculto.
+sin desbordamiento horizontal, 14 tarjetas, ningún botón partido o cortado, filas alineadas, la sección «Instálame» con borde y el visor de flujogramas oculto.
 
     python herramientas/humo.py [etiqueta]        # etiqueta por defecto: «ultima»
 
@@ -19,7 +19,7 @@ RAIZ = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(RAIZ / "guias"))
 from construir import Edge  # noqa: E402
 
-TARJETAS = 13
+TARJETAS = 14
 VISTAS = [  # nombre, ancho, alto, tema, movimiento reducido, móvil (táctil)
     ("1400-oscuro", 1400, 900, "dark", False, False),
     ("1400-claro", 1400, 900, "light", False, False),

@@ -437,5 +437,37 @@
     "novedades": "Avisan cuando te hacen una pregunta: el Clawd salta con un ? grande, igual que el !, y suena un chillido más grave que el de terminar o pedir permiso. Incluye el arranque con el PC por defecto, el icono de la bandeja con Reiniciar, el vigilante que reinicia las mascotas si se atascan y el Clawd rojo con el texto del error.",
     "requisitos": "Windows y Python 3 con tkinter (si falta, el instalador intenta instalarlo con winget). Lee tus chats locales de Claude Code en ~/.claude/projects.",
     "orden": 115
+  },
+  {
+      "id": "consumo",
+      "titulo": "Consumo",
+      "version": "1.1.0",
+      "icono": "grafico",
+      "tipo": "app",
+      "seccion": "apps",
+      "descripcion": "Pestaña de escritorio para Windows con el consumo de Claude: un anillo semanal y otro de 5 h, arriba en el centro de la pantalla. Se ve un borde fino mientras Claude está abierto y, al poner el ratón encima, se despliega la tarjeta con lo gastado, lo que se estima que gastarás hoy y en el resto de la semana, y cuándo se reinicia el límite. Con un plugin de Claude que vuelca tus límites y, si usas OneDrive, junta los datos de todos tus equipos.",
+      "resumen": "Una pestañita con el consumo de Claude: lo gastado, lo que gastarás hoy y el resto de la semana, y cuándo se reinicia el límite.",
+      "etiquetas": [
+          "Claude",
+          "consumo",
+          "límite",
+          "semanal",
+          "tokens",
+          "plugin",
+          "Python"
+      ],
+      "imagen": "img/consumo.jpg",
+      "url": "",
+      "estado": "activa",
+      "descargas": [
+          {
+              "texto": "Windows",
+              "archivo": "https://github.com/Kuerb0/descargas/releases/download/consumo-v1.1.0/Consumo-1.1.0-Instalador.bat",
+              "bytes": 15415
+          }
+      ],
+      "novedades": "Nuevo arco verde grisáceo en el anillo semanal con lo que se estima que gastarás en el resto de la semana, al ritmo medio de lo que llevas. El instalador descarga Consumo.exe, lo pone en el inicio de Windows e instala el plugin que lee tus límites.",
+      "requisitos": "Windows y Claude Code (el plugin uso-consumo escribe tus límites en ~/.claude/statusbar; el instalador lo añade si «claude» está en el PATH). No envía nada a ningún sitio.",
+      "orden": 120
   }
 ]
