@@ -441,7 +441,7 @@
   {
       "id": "consumo",
       "titulo": "Consumo",
-      "version": "1.2.1",
+      "version": "1.3.0",
       "icono": "grafico",
       "tipo": "app",
       "seccion": "apps",
@@ -462,11 +462,11 @@
       "descargas": [
           {
               "texto": "Windows",
-              "archivo": "https://github.com/Kuerb0/descargas/releases/download/consumo-v1.2.1/Consumo-1.2.1-Instalador.bat",
+              "archivo": "https://github.com/Kuerb0/descargas/releases/download/consumo-v1.3.0/Consumo-1.3.0-Instalador.bat",
               "bytes": 15415
           }
       ],
-      "novedades": "Al desplegar la tarjeta el dibujo entra en tres pasos: gastado, hoy y resto de la semana. Icono en la bandeja, junto al reloj, para ocultar o mostrar la pestaña y salir. Lo que gastarás hoy sale en verde grisáceo y el resto de la semana en gris. El instalador descarga Consumo.exe, lo pone en el inicio de Windows e instala el plugin que lee tus límites.",
+      "novedades": "Barra verde, amarilla o roja oscura según vayas de ritmo y de riesgo, con lo de hoy más grisáceo y el resto de la semana en gris, y una barrita blanca al final de cada tramo. Estima con medias móviles de los días y ventanas anteriores, para no pasarse justo al cambiar de día. La tarjeta baja desde arriba, dibuja los anillos y sube al esconderse. El instalador descarga Consumo.exe, lo pone en el inicio de Windows e instala el plugin que lee tus límites.",
       "requisitos": "Windows y Claude Code (el plugin uso-consumo escribe tus límites en ~/.claude/statusbar; el instalador lo añade si «claude» está en el PATH). No envía nada a ningún sitio.",
       "orden": 120
   }
