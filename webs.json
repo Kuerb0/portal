@@ -441,7 +441,7 @@
   {
       "id": "consumo",
       "titulo": "Consumo",
-      "version": "1.4.0",
+      "version": "1.5.0",
       "icono": "grafico",
       "tipo": "app",
       "seccion": "apps",
@@ -462,11 +462,11 @@
       "descargas": [
           {
               "texto": "Windows",
-              "archivo": "https://github.com/Kuerb0/descargas/releases/download/consumo-v1.4.0/Consumo-1.4.0-Instalador.bat",
-              "bytes": 13453
+              "archivo": "https://github.com/Kuerb0/descargas/releases/download/consumo-v1.5.0/Consumo-1.5.0-Instalador.bat",
+              "bytes": 13562
           }
       ],
-      "novedades": "Avisa cuando hay una versión nueva: una ventanita abajo a la derecha con Actualizar y Luego (y una entrada en el menú de la bandeja) que baja el instalador, cambia el .exe y el plugin y lo abre otra vez, sin tocar tu historial. Sin red no hace nada. Incluye la barra verde, amarilla o roja según el ritmo, las medias móviles y las animaciones de la tarjeta.",
+      "novedades": "Avisa cuando hay una versión nueva: una ventanita abajo a la derecha con Actualizar y Luego (y una entrada en el menú de la bandeja) que baja el instalador, cambia el .exe y el plugin y lo abre otra vez, sin tocar tu historial. Sin red no hace nada. Incluye la barra verde, amarilla o roja según el ritmo, las medias móviles y las animaciones de la tarjeta. La 1.5.0 dibuja el exceso sobre el 100 % de la estimación semanal como un arco rojo por fuera del anillo y dice qué día te quedarías sin límite.",
       "requisitos": "Windows y Claude Code (el plugin uso-consumo escribe tus límites en ~/.claude/statusbar; el instalador lo añade si «claude» está en el PATH). No envía nada a ningún sitio.",
       "orden": 120
   }
