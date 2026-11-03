@@ -223,7 +223,7 @@
   {
     "id": "calendario",
     "titulo": "Calendario",
-    "version": "2.4.1",
+    "version": "2.5.0",
     "icono": "calendario",
     "tipo": "app",
     "seccion": "apps",
@@ -244,11 +244,11 @@
     "descargas": [
       {
         "texto": "Windows",
-        "archivo": "https://github.com/Kuerb0/descargas/releases/download/calendario-v2.4.1/Calendario-2.4.1-Instalador.exe",
-        "bytes": 317440
+        "archivo": "https://github.com/Kuerb0/descargas/releases/download/calendario-v2.5.0/Calendario-2.5.0-Instalador.exe",
+        "bytes": 318976
       }
     ],
-    "novedades": "Instalador con asistente: carpeta de instalación y, aparte, carpeta de sincronización opcional en OneDrive (la misma que usa Post-It). Si ya está instalado ofrece Actualizar o Reinstalar, nunca instala en la raíz de una unidad y limpia accesos rotos. La configuración y los perfiles se comparten entre equipos sin copias en conflicto, aviso de versión nueva y ventana de ayuda y atajos.",
+    "novedades": "El icono de la bandeja activa o quita el arranque con Windows y abre la carpeta de sincronización (la misma que Post-It), además de buscar actualizaciones. Instalador con asistente: carpeta de instalación y, aparte, carpeta de sincronización opcional en OneDrive (la misma que usa Post-It). Si ya está instalado ofrece Actualizar o Reinstalar, nunca instala en la raíz de una unidad y limpia accesos rotos. La configuración y los perfiles se comparten entre equipos sin copias en conflicto, aviso de versión nueva y ventana de ayuda y atajos.",
     "flujograma": "flujogramas/calendario.svg",
     "guia": "guias/calendario.pdf",
     "orden": 70
@@ -410,7 +410,7 @@
   {
     "id": "clawd",
     "titulo": "Clawd",
-    "version": "1.3.0",
+    "version": "1.4.0",
     "icono": "apps",
     "tipo": "app",
     "seccion": "apps",
@@ -430,18 +430,18 @@
     "descargas": [
       {
         "texto": "Windows",
-        "archivo": "https://github.com/Kuerb0/descargas/releases/download/clawd-v1.3.0/Clawd-1.3.0-Instalador.bat",
-        "bytes": 78469
+        "archivo": "https://github.com/Kuerb0/descargas/releases/download/clawd-v1.4.0/Clawd-1.4.0-Instalador.bat",
+        "bytes": 80175
       }
     ],
-    "novedades": "Avisa cuando hay una versión nueva: un aviso discreto sobre la barra de tareas con Actualizar y Luego (y una entrada en el menú de la bandeja) que baja el instalador, reinicia los Clawd y conserva tu ropa y tus ajustes. Sin red no hace nada. Incluye los avisos de pregunta con ? grande, el arranque con el PC, el icono de la bandeja con Reiniciar y el vigilante que reinicia las mascotas si se atascan.",
+    "novedades": "El icono de la bandeja busca actualizaciones a mano y deja elegir la carpeta de sincronización donde viven tu ropa y tus ajustes (una de OneDrive común hace que tus equipos compartan el aspecto). Una actualización respeta si quitaste el arranque con el PC. Avisa cuando hay una versión nueva: un aviso discreto sobre la barra de tareas con Actualizar y Luego (y una entrada en el menú de la bandeja) que baja el instalador, reinicia los Clawd y conserva tu ropa y tus ajustes. Sin red no hace nada. Incluye los avisos de pregunta con ? grande, el arranque con el PC, el icono de la bandeja con Reiniciar y el vigilante que reinicia las mascotas si se atascan.",
     "requisitos": "Windows y Python 3 con tkinter (si falta, el instalador intenta instalarlo con winget). Lee tus chats locales de Claude Code en ~/.claude/projects.",
     "orden": 115
   },
   {
       "id": "consumo",
       "titulo": "Consumo",
-      "version": "1.5.0",
+      "version": "1.6.0",
       "icono": "grafico",
       "tipo": "app",
       "seccion": "apps",
@@ -462,11 +462,11 @@
       "descargas": [
           {
               "texto": "Windows",
-              "archivo": "https://github.com/Kuerb0/descargas/releases/download/consumo-v1.5.0/Consumo-1.5.0-Instalador.bat",
-              "bytes": 13562
+              "archivo": "https://github.com/Kuerb0/descargas/releases/download/consumo-v1.6.0/Consumo-1.6.0-Instalador.bat",
+              "bytes": 13669
           }
       ],
-      "novedades": "Avisa cuando hay una versión nueva: una ventanita abajo a la derecha con Actualizar y Luego (y una entrada en el menú de la bandeja) que baja el instalador, cambia el .exe y el plugin y lo abre otra vez, sin tocar tu historial. Sin red no hace nada. Incluye la barra verde, amarilla o roja según el ritmo, las medias móviles y las animaciones de la tarjeta. La 1.5.0 dibuja el exceso sobre el 100 % de la estimación semanal como un arco rojo por fuera del anillo y dice qué día te quedarías sin límite.",
+      "novedades": "El icono de la bandeja busca actualizaciones a mano, activa o quita el arranque con Windows y deja cambiar la carpeta de sincronización de tus equipos. Una actualización respeta lo que hayas elegido. Avisa cuando hay una versión nueva: una ventanita abajo a la derecha con Actualizar y Luego (y una entrada en el menú de la bandeja) que baja el instalador, cambia el .exe y el plugin y lo abre otra vez, sin tocar tu historial. Sin red no hace nada. Incluye la barra verde, amarilla o roja según el ritmo, las medias móviles y las animaciones de la tarjeta. La 1.5.0 dibuja el exceso sobre el 100 % de la estimación semanal como un arco rojo por fuera del anillo y dice qué día te quedarías sin límite.",
       "requisitos": "Windows y Claude Code (el plugin uso-consumo escribe tus límites en ~/.claude/statusbar; el instalador lo añade si «claude» está en el PATH). No envía nada a ningún sitio.",
       "orden": 120
   }
