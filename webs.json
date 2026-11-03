@@ -463,7 +463,7 @@
           {
               "texto": "Windows",
               "archivo": "https://github.com/Kuerb0/descargas/releases/download/consumo-v1.6.0/Consumo-1.6.0-Instalador.bat",
-              "bytes": 13669
+              "bytes": 13781
           }
       ],
       "novedades": "El icono de la bandeja busca actualizaciones a mano, activa o quita el arranque con Windows y deja cambiar la carpeta de sincronización de tus equipos. Una actualización respeta lo que hayas elegido. Avisa cuando hay una versión nueva: una ventanita abajo a la derecha con Actualizar y Luego (y una entrada en el menú de la bandeja) que baja el instalador, cambia el .exe y el plugin y lo abre otra vez, sin tocar tu historial. Sin red no hace nada. Incluye la barra verde, amarilla o roja según el ritmo, las medias móviles y las animaciones de la tarjeta. La 1.5.0 dibuja el exceso sobre el 100 % de la estimación semanal como un arco rojo por fuera del anillo y dice qué día te quedarías sin límite.",
