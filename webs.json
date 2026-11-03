@@ -379,7 +379,7 @@
   {
     "id": "post-it",
     "titulo": "Post-It",
-    "version": "2.2.0",
+    "version": "2.2.1",
     "icono": "nota",
     "tipo": "app",
     "seccion": "apps",
@@ -398,11 +398,11 @@
     "descargas": [
       {
         "texto": "Windows",
-        "archivo": "https://github.com/Kuerb0/descargas/releases/download/postit-v2.2.0/PostIt-2.2.0-Instalador.exe",
-        "bytes": 280064
+        "archivo": "https://github.com/Kuerb0/descargas/releases/download/postit-v2.2.1/PostIt-2.2.1-Instalador.exe",
+        "bytes": 280576
       }
     ],
-    "novedades": "Borra notas desde el lanzador (botón 🗑 o clic derecho sobre ellas) y, si quieres, borra solos los días anteriores a hoy de una nota (botón de calendario con ✕, por nota y con confirmación). Tablas tipo Excel dentro de las notas (Ctrl+Shift+T): columnas de texto, fecha y días faltantes, con la fila coloreada según los días que quedan y ajustes por tabla. Los eventos del calendario llevan un icono con el color de su etiqueta. Instalador con asistente y sincronización opcional de las notas en una carpeta de OneDrive aparte de la del programa; calendario por Outlook clásico o enlace ICS. Ofrece Actualizar o Reinstalar, nunca instala en la raíz de una unidad y limpia accesos rotos. Notas fusionadas sin copias en conflicto, nota de bienvenida, ayuda F1 ampliada y aviso de versión nueva. La 2.1.1 renueva el acceso del Escritorio al instalar y deja elegir desde la bandeja si arranca con Windows.",
+    "novedades": "Cada nota tiene botón de maximizar/restaurar, también con doble clic en la barra. Borra notas desde el lanzador (botón 🗑 o clic derecho sobre ellas) y, si quieres, borra solos los días anteriores a hoy de una nota (botón de calendario con ✕, por nota y con confirmación). Tablas tipo Excel dentro de las notas (Ctrl+Shift+T): columnas de texto, fecha y días faltantes, con la fila coloreada según los días que quedan y ajustes por tabla. Los eventos del calendario llevan un icono con el color de su etiqueta. Instalador con asistente y sincronización opcional de las notas en una carpeta de OneDrive aparte de la del programa; calendario por Outlook clásico o enlace ICS. Ofrece Actualizar o Reinstalar, nunca instala en la raíz de una unidad y limpia accesos rotos. Notas fusionadas sin copias en conflicto, nota de bienvenida, ayuda F1 ampliada y aviso de versión nueva. La 2.1.1 renueva el acceso del Escritorio al instalar y deja elegir desde la bandeja si arranca con Windows.",
     "flujograma": "flujogramas/post-it.svg",
     "guia": "guias/post-it.pdf",
     "orden": 110
