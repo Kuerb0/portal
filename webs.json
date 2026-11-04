@@ -410,11 +410,11 @@
   {
     "id": "clawd",
     "titulo": "Clawd",
-    "version": "1.4.1",
+    "version": "2.4.1",
     "icono": "apps",
     "tipo": "app",
     "seccion": "apps",
-    "descripcion": "Mascotas de escritorio para Windows: un muñeco por cada sesión de Claude Code, paseando sobre la barra de tareas con el nombre del chat. Anda si trabaja, se queda quieto si no hay actividad, salta con «?» si te pide permiso o te hace una pregunta (cada aviso con su sonido) y muestra «!» cuando termina. Cuantos más tokens gasta un chat, más grande es. Clic abre ese chat y clic derecho abre el menú.",
+    "descripcion": "Mascotas de escritorio para Windows: un muñeco por cada sesión de Claude Code, paseando sobre la barra de tareas con el nombre del chat y lo que está haciendo justo debajo. Se gira al andar y, según lo que hace Claude, saca su objeto animado: portátil con código o terminal, lupa, pluma, tablilla, archivador, impresora, ventana de navegador, git, paquetes, tests... Sin actividad se queda de frente, respira y mira a los lados; salta con «?» si te pide permiso o te hace una pregunta (cada aviso con su sonido) y muestra «!» cuando termina. Cuantos más tokens gasta un chat, más grande es (con tamaño mínimo y máximo desde la bandeja). Clic abre ese chat y clic derecho abre el menú.",
     "resumen": "Un muñeco por cada chat de Claude Code en la barra de tareas: anda si trabaja, salta si te pregunta algo y avisa al terminar.",
     "etiquetas": [
       "Claude Code",
@@ -430,12 +430,12 @@
     "descargas": [
       {
         "texto": "Windows",
-        "archivo": "https://github.com/Kuerb0/descargas/releases/download/clawd-v1.4.1/Clawd-1.4.1-Instalador.bat",
-        "bytes": 91811,
-        "sha256": "40777551f730f479256b3a9972822a271d33833a88157c60fc6c18c31da2789c"
+        "archivo": "https://github.com/Kuerb0/descargas/releases/download/clawd-v2.4.1/Clawd-2.4.1-Instalador.bat",
+        "bytes": 132679,
+        "sha256": "8f9b49630e7bf8542bd85ef12002c39d3215e93e68430cec9b6a192562549e38"
       }
     ],
-    "novedades": "El icono de la bandeja busca actualizaciones a mano y deja elegir la carpeta de sincronización donde viven tu ropa y tus ajustes (una de OneDrive común hace que tus equipos compartan el aspecto). Una actualización respeta si quitaste el arranque con el PC. Avisa cuando hay una versión nueva: un aviso discreto sobre la barra de tareas con Actualizar y Luego (y una entrada en el menú de la bandeja) que baja el instalador, reinicia los Clawd y conserva tu ropa y tus ajustes. Sin red no hace nada. Incluye los avisos de pregunta con ? grande, el arranque con el PC, el icono de la bandeja con Reiniciar y el vigilante que reinicia las mascotas si se atascan. La 1.4.1 arregla el cuelgue con historiales grandes (la franja en negro y «Python no responde») y actualiza sin consola, con barra de progreso, comprobando la descarga y volviendo a la versión anterior si la nueva no arranca.",
+    "novedades": "El Clawd nuevo, de 3/4: se gira al andar y tiene 15 acciones, cada una con su objeto animado (portátil, lupa, impresora, archivador...), y distingue lo que hace Bash por intención (git, tests, explorar, instalar...). Sin actividad se queda de frente: respira, parpadea, mira a los lados y se estira. El nombre y lo que hace van encima, sin tocar al Clawd. Tamaño mínimo y máximo desde el icono de la bandeja y un modo demo (Demo-Clawd.bat) para repasar actividades, ropa y colores. Arregla que en la barra de tareas se viera el escritorio a través de los ojos de algunas poses. Incluye todo lo de la 1.4: avisos de versión nueva con Actualizar, carpeta de sincronización de la ropa, arranque con el PC y vigilante que reinicia las mascotas si se atascan.",
     "requisitos": "Windows y Python 3 con tkinter (si falta, el instalador intenta instalarlo con winget). Lee tus chats locales de Claude Code en ~/.claude/projects.",
     "orden": 115
   },
