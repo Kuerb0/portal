@@ -410,7 +410,7 @@
   {
     "id": "clawd",
     "titulo": "Clawd",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "icono": "apps",
     "tipo": "app",
     "seccion": "apps",
@@ -430,12 +430,12 @@
     "descargas": [
       {
         "texto": "Windows",
-        "archivo": "https://github.com/Kuerb0/descargas/releases/download/clawd-v3.0.0/Clawd-3.0.0-Instalador.bat",
-        "bytes": 132711,
-        "sha256": "d004b8de19ef4c0f06a220c67e714dd8eaa62bcc219baae527306bd369ca5945"
+        "archivo": "https://github.com/Kuerb0/descargas/releases/download/clawd-v3.0.1/Clawd-3.0.1-Instalador.bat",
+        "bytes": 135935,
+        "sha256": "356da7c2e56ed87caf4241e7146c747db003d0a816694366ce46f21c55e05098"
       }
     ],
-    "novedades": "El Clawd nuevo, de 3/4: se gira al andar y tiene 15 acciones, cada una con su objeto animado (portátil, lupa, impresora, archivador...), y distingue lo que hace Bash por intención (git, tests, explorar, instalar...). Sin actividad se queda de frente: respira, parpadea, mira a los lados y se estira. El nombre y lo que hace van encima, sin tocar al Clawd, y ya no se repite la etiqueta de al lado. Tamaño mínimo y máximo desde el icono de la bandeja y un modo demo (Demo-Clawd.bat) para repasar actividades, ropa y colores. Arregla que en la barra de tareas se viera el escritorio a través de los ojos de algunas poses. Incluye todo lo de la 1.4: avisos de versión nueva con Actualizar, carpeta de sincronización de la ropa, arranque con el PC y vigilante que reinicia las mascotas si se atascan.",
+    "novedades": "Al terminar una tarea el Clawd mira al frente y salta con la exclamación; después espera sentado, sin inclinarse como si fuera a hacer una actividad. El monóculo se coloca sobre el ojo en cualquier postura. El Clawd de 3/4 tiene 15 acciones, cada una con su objeto animado (portátil, lupa, impresora, archivador...), distingue lo que hace Bash por intención (git, tests, explorar, instalar...) y, sin actividad, se queda de frente: respira, parpadea, mira a los lados y se estira. El nombre y lo que hace van encima, sin tocar al Clawd. Tamaño mínimo y máximo desde el icono de la bandeja y un modo demo (Demo-Clawd.bat) para repasar actividades, ropa y colores. Incluye todo lo de la 1.4: avisos de versión nueva con Actualizar, carpeta de sincronización de la ropa, arranque con el PC y vigilante que reinicia las mascotas si se atascan.",
     "requisitos": "Windows y Python 3 con tkinter (si falta, el instalador intenta instalarlo con winget). Lee tus chats locales de Claude Code en ~/.claude/projects.",
     "orden": 115
   },
