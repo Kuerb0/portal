@@ -223,7 +223,7 @@
   {
     "id": "calendario",
     "titulo": "Calendario",
-    "version": "2.5.0",
+    "version": "2.5.1",
     "icono": "calendario",
     "tipo": "app",
     "seccion": "apps",
@@ -244,11 +244,11 @@
     "descargas": [
       {
         "texto": "Windows",
-        "archivo": "https://github.com/Kuerb0/descargas/releases/download/calendario-v2.5.0/Calendario-2.5.0-Instalador.exe",
-        "bytes": 318976
+        "archivo": "https://github.com/Kuerb0/descargas/releases/download/calendario-v2.5.1/Calendario-2.5.1-Instalador.exe",
+        "bytes": 321024
       }
     ],
-    "novedades": "El icono de la bandeja activa o quita el arranque con Windows y abre la carpeta de sincronización (la misma que Post-It), además de buscar actualizaciones. Instalador con asistente: carpeta de instalación y, aparte, carpeta de sincronización opcional en OneDrive (la misma que usa Post-It). Si ya está instalado ofrece Actualizar o Reinstalar, nunca instala en la raíz de una unidad y limpia accesos rotos. La configuración y los perfiles se comparten entre equipos sin copias en conflicto, aviso de versión nueva y ventana de ayuda y atajos.",
+    "novedades": "El icono de la bandeja activa o quita el arranque con Windows y abre la carpeta de sincronización (la misma que Post-It), además de buscar actualizaciones. Instalador con asistente: carpeta de instalación y, aparte, carpeta de sincronización opcional en OneDrive (la misma que usa Post-It). Si ya está instalado ofrece Actualizar o Reinstalar, nunca instala en la raíz de una unidad y limpia accesos rotos. La configuración y los perfiles se comparten entre equipos sin copias en conflicto, aviso de versión nueva y ventana de ayuda y atajos. La 2.5.1 actualiza sin asistente: cierra el Calendario, actualiza con una barra de progreso, comprueba la descarga y, si la nueva versión no arranca, vuelve a la anterior.",
     "flujograma": "flujogramas/calendario.svg",
     "guia": "guias/calendario.pdf",
     "orden": 70
@@ -379,7 +379,7 @@
   {
     "id": "post-it",
     "titulo": "Post-It",
-    "version": "2.2.1",
+    "version": "2.3.0",
     "icono": "nota",
     "tipo": "app",
     "seccion": "apps",
@@ -398,11 +398,11 @@
     "descargas": [
       {
         "texto": "Windows",
-        "archivo": "https://github.com/Kuerb0/descargas/releases/download/postit-v2.2.1/PostIt-2.2.1-Instalador.exe",
-        "bytes": 280576
+        "archivo": "https://github.com/Kuerb0/descargas/releases/download/postit-v2.3.0/PostIt-2.3.0-Instalador.exe",
+        "bytes": 284672
       }
     ],
-    "novedades": "Cada nota tiene botón de maximizar/restaurar, también con doble clic en la barra. Borra notas desde el lanzador (botón 🗑 o clic derecho sobre ellas) y, si quieres, borra solos los días anteriores a hoy de una nota (botón de calendario con ✕, por nota y con confirmación). Tablas tipo Excel dentro de las notas (Ctrl+Shift+T): columnas de texto, fecha y días faltantes, con la fila coloreada según los días que quedan y ajustes por tabla. Los eventos del calendario llevan un icono con el color de su etiqueta. Instalador con asistente y sincronización opcional de las notas en una carpeta de OneDrive aparte de la del programa; calendario por Outlook clásico o enlace ICS. Ofrece Actualizar o Reinstalar, nunca instala en la raíz de una unidad y limpia accesos rotos. Notas fusionadas sin copias en conflicto, nota de bienvenida, ayuda F1 ampliada y aviso de versión nueva. La 2.1.1 renueva el acceso del Escritorio al instalar y deja elegir desde la bandeja si arranca con Windows.",
+    "novedades": "Cada nota tiene botón de maximizar/restaurar, también con doble clic en la barra. Borra notas desde el lanzador (botón 🗑 o clic derecho sobre ellas) y, si quieres, borra solos los días anteriores a hoy de una nota (botón de calendario con ✕, por nota y con confirmación). Tablas tipo Excel dentro de las notas (Ctrl+Shift+T): columnas de texto, fecha y días faltantes, con la fila coloreada según los días que quedan y ajustes por tabla. Los eventos del calendario llevan un icono con el color de su etiqueta. Instalador con asistente y sincronización opcional de las notas en una carpeta de OneDrive aparte de la del programa; calendario por Outlook clásico o enlace ICS. Ofrece Actualizar o Reinstalar, nunca instala en la raíz de una unidad y limpia accesos rotos. Notas fusionadas sin copias en conflicto, nota de bienvenida, ayuda F1 ampliada y aviso de versión nueva. La 2.1.1 renueva el acceso del Escritorio al instalar y deja elegir desde la bandeja si arranca con Windows. La 2.3.0 añade el color del texto (botón A de la barra de formato) y arregla los iconos de tamaño de letra y de tabla de eventos; actualizar ya no abre asistente: cierra la app, actualiza con una barra de progreso, comprueba la descarga y, si la nueva versión no arranca, vuelve a la anterior.",
     "flujograma": "flujogramas/post-it.svg",
     "guia": "guias/post-it.pdf",
     "orden": 110
@@ -410,7 +410,7 @@
   {
     "id": "clawd",
     "titulo": "Clawd",
-    "version": "1.4.0",
+    "version": "1.4.1",
     "icono": "apps",
     "tipo": "app",
     "seccion": "apps",
@@ -430,11 +430,12 @@
     "descargas": [
       {
         "texto": "Windows",
-        "archivo": "https://github.com/Kuerb0/descargas/releases/download/clawd-v1.4.0/Clawd-1.4.0-Instalador.bat",
-        "bytes": 80175
+        "archivo": "https://github.com/Kuerb0/descargas/releases/download/clawd-v1.4.1/Clawd-1.4.1-Instalador.bat",
+        "bytes": 91811,
+        "sha256": "40777551f730f479256b3a9972822a271d33833a88157c60fc6c18c31da2789c"
       }
     ],
-    "novedades": "El icono de la bandeja busca actualizaciones a mano y deja elegir la carpeta de sincronización donde viven tu ropa y tus ajustes (una de OneDrive común hace que tus equipos compartan el aspecto). Una actualización respeta si quitaste el arranque con el PC. Avisa cuando hay una versión nueva: un aviso discreto sobre la barra de tareas con Actualizar y Luego (y una entrada en el menú de la bandeja) que baja el instalador, reinicia los Clawd y conserva tu ropa y tus ajustes. Sin red no hace nada. Incluye los avisos de pregunta con ? grande, el arranque con el PC, el icono de la bandeja con Reiniciar y el vigilante que reinicia las mascotas si se atascan.",
+    "novedades": "El icono de la bandeja busca actualizaciones a mano y deja elegir la carpeta de sincronización donde viven tu ropa y tus ajustes (una de OneDrive común hace que tus equipos compartan el aspecto). Una actualización respeta si quitaste el arranque con el PC. Avisa cuando hay una versión nueva: un aviso discreto sobre la barra de tareas con Actualizar y Luego (y una entrada en el menú de la bandeja) que baja el instalador, reinicia los Clawd y conserva tu ropa y tus ajustes. Sin red no hace nada. Incluye los avisos de pregunta con ? grande, el arranque con el PC, el icono de la bandeja con Reiniciar y el vigilante que reinicia las mascotas si se atascan. La 1.4.1 arregla el cuelgue con historiales grandes (la franja en negro y «Python no responde») y actualiza sin consola, con barra de progreso, comprobando la descarga y volviendo a la versión anterior si la nueva no arranca.",
     "requisitos": "Windows y Python 3 con tkinter (si falta, el instalador intenta instalarlo con winget). Lee tus chats locales de Claude Code en ~/.claude/projects.",
     "orden": 115
   },
@@ -463,10 +464,10 @@
           {
               "texto": "Windows",
               "archivo": "https://github.com/Kuerb0/descargas/releases/download/consumo-v1.6.0/Consumo-1.6.0-Instalador.bat",
-              "bytes": 13781
+              "bytes": 21634
           }
       ],
-      "novedades": "El icono de la bandeja busca actualizaciones a mano, activa o quita el arranque con Windows y deja cambiar la carpeta de sincronización de tus equipos. Una actualización respeta lo que hayas elegido. Avisa cuando hay una versión nueva: una ventanita abajo a la derecha con Actualizar y Luego (y una entrada en el menú de la bandeja) que baja el instalador, cambia el .exe y el plugin y lo abre otra vez, sin tocar tu historial. Sin red no hace nada. Incluye la barra verde, amarilla o roja según el ritmo, las medias móviles y las animaciones de la tarjeta. La 1.5.0 dibuja el exceso sobre el 100 % de la estimación semanal como un arco rojo por fuera del anillo y dice qué día te quedarías sin límite.",
+      "novedades": "El icono de la bandeja busca actualizaciones a mano, activa o quita el arranque con Windows y deja cambiar la carpeta de sincronización de tus equipos. Una actualización respeta lo que hayas elegido. Avisa cuando hay una versión nueva: una ventanita abajo a la derecha con Actualizar y Luego (y una entrada en el menú de la bandeja) que baja el instalador, cambia el .exe y el plugin y lo abre otra vez, sin tocar tu historial. Sin red no hace nada. Incluye la barra verde, amarilla o roja según el ritmo, las medias móviles y las animaciones de la tarjeta. La 1.5.0 dibuja el exceso sobre el 100 % de la estimación semanal como un arco rojo por fuera del anillo y dice qué día te quedarías sin límite. El instalador actualiza sin consola, con barra de progreso, comprueba el Consumo.exe que descarga y vuelve al anterior si el nuevo no arranca.",
       "requisitos": "Windows y Claude Code (el plugin uso-consumo escribe tus límites en ~/.claude/statusbar; el instalador lo añade si «claude» está en el PATH). No envía nada a ningún sitio.",
       "orden": 120
   }
