@@ -447,7 +447,7 @@
   {
       "id": "consumo",
       "titulo": "Consumo",
-      "version": "1.7.0",
+      "version": "1.7.1",
       "icono": "grafico",
       "tipo": "app",
       "seccion": "apps",
@@ -468,11 +468,11 @@
       "descargas": [
           {
               "texto": "Windows",
-              "archivo": "https://github.com/Kuerb0/descargas/releases/download/consumo-v1.7.0/Consumo-1.7.0-Instalador.bat",
-              "bytes": 22041
+              "archivo": "https://github.com/Kuerb0/descargas/releases/download/consumo-v1.7.1/Consumo-1.7.1-Instalador.bat",
+              "bytes": 22548
           }
       ],
-      "novedades": "Un arco de 10 casillas de contexto sobre los anillos: una por sesión de Claude Code, con su % dentro, que pasa de verde a rojo según se llena el contexto; un clic abre ese chat. Si no llegan datos, Consumo comprueba solo por qué (plugin sin instalar o desactivado, sin claude) y puede instalar el plugin; el instalador también lo verifica. El icono de la bandeja busca actualizaciones a mano, activa o quita el arranque con Windows y deja cambiar la carpeta de sincronización de tus equipos. Una actualización respeta lo que hayas elegido. Avisa cuando hay una versión nueva: una ventanita abajo a la derecha con Actualizar y Luego (y una entrada en el menú de la bandeja) que baja el instalador, cambia el .exe y el plugin y lo abre otra vez, sin tocar tu historial. Sin red no hace nada. Incluye la barra verde, amarilla o roja según el ritmo, las medias móviles y las animaciones de la tarjeta. La 1.5.0 dibuja el exceso sobre el 100 % de la estimación semanal como un arco rojo por fuera del anillo y dice qué día te quedarías sin límite. El instalador actualiza sin consola, con barra de progreso, comprueba el Consumo.exe que descarga y vuelve al anterior si el nuevo no arranca.",
+      "novedades": "La 1.7.1 arregla el instalador y la app: espera hasta 30 s a que arranque en vez de volver atrás a los 6 s, no deja el plugin a medias si hay marcha atrás, reabre Consumo si algo falla con la consola visible, guarda el historial de forma atómica y el desinstalador quita también el plugin. Un arco de 10 casillas de contexto sobre los anillos: una por sesión de Claude Code, con su % dentro, que pasa de verde a rojo según se llena el contexto; un clic abre ese chat. Si no llegan datos, Consumo comprueba solo por qué (plugin sin instalar o desactivado, sin claude) y puede instalar el plugin; el instalador también lo verifica. El icono de la bandeja busca actualizaciones a mano, activa o quita el arranque con Windows y deja cambiar la carpeta de sincronización de tus equipos. Una actualización respeta lo que hayas elegido. Avisa cuando hay una versión nueva: una ventanita abajo a la derecha con Actualizar y Luego (y una entrada en el menú de la bandeja) que baja el instalador, cambia el .exe y el plugin y lo abre otra vez, sin tocar tu historial. Sin red no hace nada. Incluye la barra verde, amarilla o roja según el ritmo, las medias móviles y las animaciones de la tarjeta. La 1.5.0 dibuja el exceso sobre el 100 % de la estimación semanal como un arco rojo por fuera del anillo y dice qué día te quedarías sin límite. El instalador actualiza sin consola, con barra de progreso, comprueba el Consumo.exe que descarga y vuelve al anterior si el nuevo no arranca.",
       "requisitos": "Windows y Claude Code (el plugin uso-consumo escribe tus límites en ~/.claude/statusbar; el instalador lo añade si «claude» está en el PATH). No envía nada a ningún sitio.",
       "orden": 120
   }
