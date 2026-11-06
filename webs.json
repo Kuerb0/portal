@@ -451,8 +451,8 @@
       "icono": "grafico",
       "tipo": "app",
       "seccion": "apps",
-      "descripcion": "Pestaña de escritorio para Windows con el consumo de Claude: un anillo semanal y otro de 5 h, arriba en el centro de la pantalla. Se ve un borde fino mientras Claude está abierto y, al poner el ratón encima, se despliega la tarjeta con lo gastado, lo que se estima que gastarás hoy y en el resto de la semana, y cuándo se reinicia el límite. Con un plugin de Claude que vuelca tus límites y, si usas OneDrive, junta los datos de todos tus equipos.",
-      "resumen": "Una pestañita con el consumo de Claude: lo gastado, lo que gastarás hoy y el resto de la semana, y cuándo se reinicia el límite.",
+      "descripcion": "Pestaña de escritorio para Windows con el consumo de Claude, arriba en el centro de la pantalla. Se ve un borde fino mientras Claude está abierto y, al poner el ratón encima, se despliega la tarjeta: los anillos de la semana y de 5 h con lo que se estima que gastarás hoy y cuándo se reinicia el límite, el ritmo de la semana, y cómo se reparte tu consumo por equipo, por proyecto y sesión, por modelo y por tipo de tarea, con el contexto de cada sesión y el consumo por hora. El Modo Editar permite mover las columnas y cambiar el estilo, el ancho y el alto de cada gráfico. Con un plugin de Claude que vuelca tus límites y, si usas OneDrive, junta los datos de todos tus equipos.",
+      "resumen": "Una pestañita con el consumo de Claude: lo gastado, el ritmo de la semana y cómo se reparte por proyecto, equipo, modelo y tarea.",
       "etiquetas": [
           "Claude",
           "consumo",
