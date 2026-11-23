@@ -486,5 +486,37 @@
     "requisitos": "Windows y Claude Code (el plugin uso-consumo escribe tus límites en ~/.claude/statusbar; el instalador lo añade si «claude» está en el PATH). No envía nada a ningún sitio.",
     "flujograma": "flujogramas/consumo.svg",
     "orden": 120
+  },
+  {
+    "id": "gestoralarmas",
+    "titulo": "Gestor de alarmas",
+    "version": "1.0.1",
+    "icono": "apps",
+    "icono_img": "img/iconos/gestor-alarmas.png",
+    "tipo": "app",
+    "seccion": "apps",
+    "descripcion": "Cuentas atrás, alarmas y cronómetros siempre a la vista en una esquina del escritorio de Windows, en un panel transparente que no estorba al ratón. Ctrl+Alt+A crea una alarma desde cualquier sitio y Ctrl+Alt+D descarta la que suena. Trae también las alarmas de Post-It y los eventos de Outlook, y las alarmas a fecha y hora se crean en tu calendario de Outlook. Alarmas recurrentes, arranque con Windows y aviso de versión nueva.",
+    "resumen": "Cuentas atrás, alarmas y cronómetros siempre a la vista en el escritorio, unidos a Post-It y Outlook.",
+    "etiquetas": [
+      "alarmas",
+      "cuenta atrás",
+      "cronómetro",
+      "Outlook",
+      "Post-It",
+      "escritorio"
+    ],
+    "url": "",
+    "estado": "activa",
+    "descargas": [
+      {
+        "texto": "Windows",
+        "archivo": "https://github.com/Kuerb0/descargas/releases/download/gestoralarmas-v1.0.1/GestorAlarmas-1.0.1-Instalador.exe",
+        "bytes": 158571520,
+        "sha256": "f10dd3814de4824cbf03f7f9657ff02ce537642416162bfd90c7d7f70f4fe4cd"
+      }
+    ],
+    "novedades": "Gestor de alarmas 1.0.1: avisa de las versiones nuevas y se actualiza solo (cierra, actualiza y vuelve a abrir, sin perder tus alarmas). Puente con Post-It y Outlook y alarmas recurrentes.",
+    "requisitos": "Windows. Para el puente con Outlook, Outlook clásico.",
+    "orden": 125
   }
 ]
