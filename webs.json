@@ -415,7 +415,7 @@
   {
     "id": "clawd",
     "titulo": "Clawd",
-    "version": "3.2.1",
+    "version": "3.2.2",
     "icono": "apps",
     "tipo": "app",
     "seccion": "apps",
@@ -435,9 +435,9 @@
     "descargas": [
       {
         "texto": "Windows",
-        "archivo": "https://github.com/Kuerb0/descargas/releases/download/clawd-v3.2.1/Clawd-3.2.1-Instalador.bat",
-        "bytes": 154739,
-        "sha256": "0f6c8ce81b55f89e28e6605ec0dd1099106ded9442708f904dfc2fa4a4af471a"
+        "archivo": "https://github.com/Kuerb0/descargas/releases/download/clawd-v3.2.2/Clawd-3.2.2-Instalador.bat",
+        "bytes": 159063,
+        "sha256": "0c43f90748ab4930dc167e5ccfefb91710822b8cc01f3243319df331e47ec21c"
       },
       {
         "texto": "Tráiler",
@@ -445,7 +445,7 @@
         "bytes": 3396558
       }
     ],
-    "novedades": "Más separación entre cada Clawd y sus ayudantes, ajustable en «Separación de ayudantes» (icono de la bandeja o clic derecho). Cada acción tiene su postura (sentado con el portátil en el regazo, git subiendo commits a la nube con los brazos en alto...) y el cuerpo se mueve según lo que hace; los cambios entre acciones y estados ya no van a tirones. Los subagentes salen como ayudantes con su objeto y, al terminar, el Clawd absorbe su coste y crece. Clic en un Clawd le quita el «?» y el «!». Al dormirse, el Clawd se tumba y se arropa con una manta del color de su accesorio, que sube de los pies al pecho y respira con él. El icono del proyecto sale del cuerpo y va pequeño junto al nombre y la acción. Al terminar una tarea mira al frente y salta con la exclamación; después espera sentado. El monóculo se coloca sobre el ojo en cualquier postura. El Clawd de 3/4 tiene 15 acciones, cada una con su objeto animado (portátil, lupa, impresora, archivador...), distingue lo que hace Bash por intención y, sin actividad, se queda de frente: respira, parpadea, mira a los lados y se estira. Tamaño mínimo y máximo desde el icono de la bandeja y un modo demo (Demo-Clawd.bat) para repasarlo todo. Incluye todo lo de la 1.4: avisos de versión nueva con Actualizar, carpeta de sincronización de la ropa, arranque con el PC y vigilante que reinicia las mascotas si se atascan.",
+    "novedades": "Clawd 3.2.2: se dibujan de forma más fluida y gastan menos procesador (con Pillow); con la franja escondida no se dibuja nada; con una app a pantalla completa solo se esconden si está en su mismo monitor. Más separación entre cada Clawd y sus ayudantes, ajustable en «Separación de ayudantes» (icono de la bandeja o clic derecho). Cada acción tiene su postura (sentado con el portátil en el regazo, git subiendo commits a la nube con los brazos en alto...) y el cuerpo se mueve según lo que hace; los cambios entre acciones y estados ya no van a tirones. Los subagentes salen como ayudantes con su objeto y, al terminar, el Clawd absorbe su coste y crece. Clic en un Clawd le quita el «?» y el «!». Al dormirse, el Clawd se tumba y se arropa con una manta del color de su accesorio, que sube de los pies al pecho y respira con él. El icono del proyecto sale del cuerpo y va pequeño junto al nombre y la acción. Al terminar una tarea mira al frente y salta con la exclamación; después espera sentado. El monóculo se coloca sobre el ojo en cualquier postura. El Clawd de 3/4 tiene 15 acciones, cada una con su objeto animado (portátil, lupa, impresora, archivador...), distingue lo que hace Bash por intención y, sin actividad, se queda de frente: respira, parpadea, mira a los lados y se estira. Tamaño mínimo y máximo desde el icono de la bandeja y un modo demo (Demo-Clawd.bat) para repasarlo todo. Incluye todo lo de la 1.4: avisos de versión nueva con Actualizar, carpeta de sincronización de la ropa, arranque con el PC y vigilante que reinicia las mascotas si se atascan.",
     "requisitos": "Windows y Python 3 con tkinter (si falta, el instalador intenta instalarlo con winget). Lee tus chats locales de Claude Code en ~/.claude/projects.",
     "orden": 115
   },
