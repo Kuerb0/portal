@@ -489,33 +489,35 @@
   },
   {
     "id": "gestoralarmas",
-    "titulo": "Gestor de alarmas",
-    "version": "1.0.3",
+    "titulo": "Gestor-Alarma",
+    "version": "1.10.0",
     "icono": "apps",
     "icono_img": "img/iconos/gestor-alarmas.png",
     "tipo": "app",
     "seccion": "apps",
-    "descripcion": "Cuentas atrás, alarmas y cronómetros siempre a la vista en una esquina del escritorio de Windows, en un panel transparente que no estorba al ratón. Ctrl+Alt+A crea una alarma desde cualquier sitio y Ctrl+Alt+D descarta la que suena. Trae también las alarmas de Post-It y los eventos de Outlook, y las alarmas a fecha y hora se crean en tu calendario de Outlook. Alarmas recurrentes, arranque con Windows y aviso de versión nueva.",
-    "resumen": "Cuentas atrás, alarmas y cronómetros siempre a la vista en el escritorio, unidos a Post-It y Outlook.",
+    "descripcion": "Panel lateral para Windows que se despliega al llevar el ratón al borde derecho, con alarmas, cuentas atrás y cronómetros, agenda de Outlook y Post-It, tiempo, sistema y notas, y widgets de escritorio en cristal que se quedan donde los dejas. Ctrl+Alt+P abre el panel, Ctrl+Alt+A crea una alarma, Ctrl+Alt+D descarta la que suena, Ctrl+Alt+H oculta las fichas y Ctrl+Alt+J esconde los widgets a la vez que los de Consumo y Bancos. Arranque con Windows y actualización automática.",
+    "resumen": "Panel lateral con alarmas, agenda de Outlook y Post-It y widgets de escritorio que se esconden con Ctrl+Alt+J.",
     "etiquetas": [
       "alarmas",
       "cuenta atrás",
       "cronómetro",
       "Outlook",
       "Post-It",
-      "escritorio"
+      "escritorio",
+      "widgets",
+      "panel"
     ],
     "url": "",
     "estado": "activa",
     "descargas": [
       {
         "texto": "Windows",
-        "archivo": "https://github.com/Kuerb0/descargas/releases/download/gestoralarmas-v1.0.3/GestorAlarmas-1.0.3-Instalador.exe",
-        "bytes": 158572544,
-        "sha256": "1c56acd589f92135808eefd5405c2c80108d1d052cc1fb279d3de68ecb1815bc"
+        "archivo": "https://github.com/Kuerb0/Gestor-Alarma/releases/download/v1.10.0/GestorAlarma.1.10.0.-.Instalador.exe",
+        "bytes": 158877184,
+        "sha256": "211625e0a932ead234d91962837e7d451b1abb53d92595f0edfd048296048821"
       }
     ],
-    "novedades": "Gestor de alarmas 1.0.3: Ctrl+Alt+J esconde o devuelve a la vez el panel de fichas y los widgets de Consumo y Bancos. Gestor de alarmas 1.0.2: Ctrl+Alt+J esconde o devuelve el panel de fichas. Gestor de alarmas 1.0.1: avisa de las versiones nuevas y se actualiza solo (cierra, actualiza y vuelve a abrir, sin perder tus alarmas). Puente con Post-It y Outlook y alarmas recurrentes.",
+    "novedades": "Gestor-Alarma 1.10.0: esta entrada pasa a ser Gestor-Alarma, el panel lateral con widgets de escritorio (sustituye al antiguo Gestor de alarmas 1.0). Ctrl+Alt+J esconde o devuelve sus widgets a la vez que los de Consumo y Bancos; también desde la bandeja. Gestor de alarmas 1.0.3: Ctrl+Alt+J esconde o devuelve a la vez el panel de fichas y los widgets de Consumo y Bancos. Gestor de alarmas 1.0.2: Ctrl+Alt+J esconde o devuelve el panel de fichas. Gestor de alarmas 1.0.1: avisa de las versiones nuevas y se actualiza solo (cierra, actualiza y vuelve a abrir, sin perder tus alarmas). Puente con Post-It y Outlook y alarmas recurrentes.",
     "requisitos": "Windows. Para el puente con Outlook, Outlook clásico.",
     "orden": 125
   }
